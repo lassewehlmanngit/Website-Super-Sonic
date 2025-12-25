@@ -1,0 +1,105 @@
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: none;
+  }
+
+  .animate-snow,
+  .animate-swing,
+  .animate-elastic-drop,
+  .animate-curtain-up,
+  .animate-fade-in-up,
+  .animate-marquee {
+    animation: none !important;
+  }
+}
+
+/* Scroll Reveal Base State */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+/* Scroll Reveal Active State */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger Delays */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* --- CUSTOM ANIMATIONS --- */
+
+/* 1. Snow Animation - Movement Only (Opacity handled by component) */
+@keyframes snow {
+  0% { transform: translateY(-10vh); }
+  100% { transform: translateY(110vh); }
+}
+.animate-snow {
+  animation: snow 10s linear infinite;
+  will-change: transform;
+}
+
+/* 2. Ornament Swing */
+@keyframes swing {
+  0%, 100% { transform: rotate(5deg); }
+  50% { transform: rotate(-5deg); }
+}
+.animate-swing {
+  animation: swing 4s ease-in-out infinite;
+}
+
+/* 3. Ornament Elastic Entry */
+@keyframes elastic-drop {
+  0% { transform: translateY(-300px); }
+  40% { transform: translateY(20px); }
+  60% { transform: translateY(-10px); }
+  80% { transform: translateY(5px); }
+  100% { transform: translateY(0); }
+}
+.animate-elastic-drop {
+  animation: elastic-drop 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 4. Christmas Loader Curtain Up */
+@keyframes curtain-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+.animate-curtain-up {
+  animation: curtain-up 1s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+/* 5. Fade In Up (General UI) */
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 6. Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Novartum | Enterprise Rigor x Startup Velocity</title>
+    <meta name="description" content="High-performance digital product design bridging AI speed and enterprise engineering." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'paper': '#F3F3F3',
+              'void': '#050505',
+              'sonic-orange': '#FF4D00',
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+            animation: {
+              'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'marquee': 'marquee 40s linear infinite',
+              'snow': 'snow 10s linear infinite',
+              'swing': 'swing 4s ease-in-out infinite',
+              'elastic-drop': 'elastic-drop 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+              'curtain-up': 'curtain-up 1s cubic-bezier(0.76, 0, 0.24, 1) forwards',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(30px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              marquee: {
+                '0%': { transform: 'translateX(0)' },
+                '100%': { transform: 'translateX(-50%)' },
+              },
+              snow: {
+                '0%': { transform: 'translateY(-10vh)' },
+                '100%': { transform: 'translateY(110vh)' },
+              },
+              swing: {
+                '0%, 100%': { transform: 'rotate(5deg)' },
+                '50%': { transform: 'rotate(-5deg)' },
+              },
+              'elastic-drop': {
+                '0%': { transform: 'translateY(-300px)' },
+                '40%': { transform: 'translateY(20px)' },
+                '60%': { transform: 'translateY(-10px)' },
+                '80%': { transform: 'translateY(5px)' },
+                '100%': { transform: 'translateY(0)' },
+              },
+              'curtain-up': {
+                '0%': { transform: 'translateY(0)' },
+                '100%': { transform: 'translateY(-100%)' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background-color: #F3F3F3;
+        color: #050505;
+      }
+      /* Selection Color Update */
+      ::selection {
+        background-color: #FF4D00;
+        color: white;
+      }
+      /* Hide scrollbar for clean look */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #F3F3F3; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ccc; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #999; 
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.1",
+    "@google/genai": "https://esm.sh/@google/genai@^1.33.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>
