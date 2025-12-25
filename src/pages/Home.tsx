@@ -5,6 +5,7 @@ import { Button } from '../components/ui/Button';
 import { LiveProcess } from '../components/features/LiveProcess';
 import { VisualVelocityTimeline } from '../components/features/VisualVelocityTimeline';
 import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
+import { SEO } from '../components/SEO';
 
 interface HomeProps {
   lang: 'de' | 'en';
@@ -39,6 +40,13 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
 
   return (
     <div className="bg-paper relative">
+      <SEO 
+        title={isDe ? "Super Sonic Prototypes | High-End Web & Software Design" : "Super Sonic Prototypes | High-End Web & Software Design"}
+        description={isDe 
+          ? "Keine Templates mehr. Ich baue digitale Assets, die Ihr Geschäft voranbringen. Schnell, sicher und Ihr Eigentum."
+          : "Stop buying templates. I build digital assets that grow your business. Fast, safe, and yours forever."}
+        lang={lang}
+      />
       
       {/* 1. HERO SECTION (Dark Void) */}
       <section className="min-h-screen bg-void pt-40 pb-20 px-4 md:px-12 flex flex-col justify-between relative overflow-hidden rounded-b-[3rem]">
@@ -47,7 +55,7 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
         <ChristmasBalls />
 
         {/* Abstract Background Element (extra subtle glow for accessibility) */}
-        <div className="absolute -top-0 right-0 w-[620px] h-[620px] bg-white opacity-[0.006] rounded-full blur-[150px] -translate-y-1/4 translate-x-1/2 pointer-events-none animate-fade-in-up duration-1000"></div>
+        <div className="absolute -top-0 right-0 w-[120px] h-[120px] md:w-[620px] md:h-[620px] bg-white opacity-[0.002] md:opacity-[0.006] rounded-full blur-[40px] md:blur-[150px] -translate-y-1/4 translate-x-1/2 pointer-events-none animate-fade-in-up duration-1000"></div>
 
         <div className="max-w-[90rem] mx-auto w-full relative z-10">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 border-b border-white/10 pb-12 reveal delay-100">

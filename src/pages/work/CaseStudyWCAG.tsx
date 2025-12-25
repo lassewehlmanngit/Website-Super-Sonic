@@ -1,5 +1,6 @@
 import React from 'react';
 import { WCAGTool } from '../WCAGTool';
+import { SEO } from '../../components/SEO';
 
 interface Props { lang: 'de' | 'en'; }
 
@@ -8,6 +9,16 @@ export const CaseStudyWCAG: React.FC<Props> = ({ lang }) => {
 
   return (
     <div className="min-h-screen bg-black pt-32 pb-20">
+      <SEO 
+        title={isDe 
+          ? "WCAG AI Optimizer | Case Study | Super Sonic Prototypes" 
+          : "WCAG AI Optimizer | Case Study | Super Sonic Prototypes"}
+        description={isDe
+          ? "Manuelle WCAG-Audits sind teuer und langsam. Ein AI-Agent, der nicht nur Fehler findet, sondern React-Code semantisch umschreibt."
+          : "Manual WCAG audits are expensive and slow. An AI agent that doesn't just find errors but semantically rewrites React code."}
+        lang={lang}
+        path={`/${isDe ? 'de' : 'en'}/work/wcag-tool`}
+      />
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Intro */}

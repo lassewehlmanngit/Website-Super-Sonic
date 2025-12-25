@@ -14,6 +14,7 @@ import { Legal } from './pages/Legal';
 import { StartProject } from './pages/StartProject';
 import { CaseStudyWCAG } from './pages/work/CaseStudyWCAG';
 import { CaseStudySchema } from './pages/work/CaseStudySchema';
+import KeystaticAdmin from './pages/KeystaticAdmin';
 
 // Seasonal Imports
 import { ChristmasLoader } from './components/seasonal/ChristmasLoader';
@@ -53,6 +54,9 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/de" replace />} />
+
+        {/* Keystatic Admin - No Layout */}
+        <Route path="/admin" element={<KeystaticAdmin />} />
 
         {/* German Routes */}
         <Route path="/de" element={<Layout />}>

@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Environment variables
+.env
+.env.local
+.env.*.local
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,3 +27,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+    VITE_KEYSTATIC_GITHUB_REPO_OWNER=lassewehlmanngit
+    VITE_KEYSTATIC_GITHUB_REPO_NAME=super-sonic-prototypes
+    VITE_UMAMI_WEBSITE_ID=...
+    VITE_UMAMI_SRC=...

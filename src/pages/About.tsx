@@ -1,6 +1,7 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
+import { SEO } from '../components/SEO';
 
 interface Props { lang: 'de' | 'en'; }
 
@@ -9,6 +10,16 @@ export const About: React.FC<Props> = ({ lang }) => {
 
   return (
     <div className="bg-paper min-h-screen">
+      <SEO 
+        title={isDe 
+          ? "Über Mich | 10 Jahre Erfahrung + AI Power | Super Sonic Prototypes" 
+          : "About | 10 Years Experience + AI Power | Super Sonic Prototypes"}
+        description={isDe
+          ? "Ich habe Systeme für VW und Allianz gebaut. Ich nutze KI für Geschwindigkeit und meine Erfahrung für Sicherheit. Sie bekommen das Beste aus beiden Welten."
+          : "I built systems for VW and Allianz. I use AI for speed, and my experience for safety. You get the best of both worlds."}
+        lang={lang}
+        path={`/${isDe ? 'de' : 'en'}/about`}
+      />
       <section className="bg-void pt-40 pb-24 px-4 md:px-12 rounded-b-[3rem] relative overflow-hidden">
           <ChristmasBalls />
           <div className="max-w-[90rem] mx-auto relative z-10">

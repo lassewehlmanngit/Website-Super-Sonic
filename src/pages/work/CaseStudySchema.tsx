@@ -1,5 +1,6 @@
 import React from 'react';
 import { SchemaGenerator } from '../SchemaGenerator';
+import { SEO } from '../../components/SEO';
 
 interface Props { lang: 'de' | 'en'; }
 
@@ -8,6 +9,16 @@ export const CaseStudySchema: React.FC<Props> = ({ lang }) => {
 
   return (
     <div className="min-h-screen bg-black pt-32 pb-20">
+      <SEO 
+        title={isDe 
+          ? "Schema Generator | Case Study | Super Sonic Prototypes" 
+          : "Schema Generator | Case Study | Super Sonic Prototypes"}
+        description={isDe
+          ? "Rich Snippets erhöhen die Klickrate drastisch. Ein Tool, das valides JSON-LD Schema basierend auf unstrukturiertem Input generiert."
+          : "Rich Snippets increase CTR dramatically. A tool that generates valid JSON-LD schema based on unstructured input."}
+        lang={lang}
+        path={`/${isDe ? 'de' : 'en'}/work/schema-generator`}
+      />
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Intro */}

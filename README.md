@@ -1,20 +1,39 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Super Sonic Prototypes
 
-# Run and deploy your AI Studio app
+This project is built with React, Vite, and Tailwind CSS. It uses Keystatic CMS for content management and is hosted on Render.
 
-This contains everything you need to run your app locally.
+## Setup & Deployment
 
-View your app in AI Studio: https://ai.studio/apps/drive/1QhfZ5lHmJz9Ym8pcHp10M8NctYlZ2VyQ
+See [RENDER_SETUP.md](./RENDER_SETUP.md) for detailed instructions on deploying to Render and configuring Keystatic.
 
-## Run Locally
+## Development
 
-**Prerequisites:**  Node.js
+1.  Install dependencies:
+    ```bash
+    npm install
+    ```
 
+2.  Start the development server:
+    ```bash
+    npm run dev
+    ```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+3.  Access the CMS Admin:
+    ```
+    http://localhost:3000/admin
+    ```
+
+## Features
+
+-   **Keystatic CMS**: Manage Posts, Pages, and Projects.
+    -   Local mode (default): Content stored in `src/content`.
+    -   GitHub mode (production): Content stored in GitHub repo.
+-   **Render Hosting**: Static site hosting with SPA support.
+
+## Project Structure
+
+-   `src/content`: CMS content (Markdown/JSON)
+-   `src/components`: React components
+-   `src/pages`: Route components
+-   `keystatic.config.ts`: CMS schema configuration
+-   `render.yaml`: Render deployment configuration

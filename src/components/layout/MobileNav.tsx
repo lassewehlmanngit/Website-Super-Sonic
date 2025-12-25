@@ -20,6 +20,12 @@ export const MobileNav: React.FC = () => {
   // Helper to close menu
   const close = () => setIsOpen(false);
 
+  // Language switcher helper
+  const switchLang = (lang: string) => {
+    const path = location.pathname;
+    return lang === 'en' ? path.replace('/de', '/en') : path.replace('/en', '/de');
+  };
+
   return (
     <>
       {/* Floating Bottom Bar (Thumb Zone) */}
@@ -62,6 +68,25 @@ export const MobileNav: React.FC = () => {
         className={`fixed bottom-0 left-0 right-0 bg-paper z-40 rounded-t-[2rem] p-6 pb-32 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] md:hidden ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}
       >
          <div className="w-12 h-1 bg-zinc-300 rounded-full mx-auto mb-8"></div>
+         
+         {/* Language Switcher */}
+         <div className="flex items-center justify-center gap-6 mb-6 pb-6 border-b border-zinc-200">
+            <Link 
+              to={switchLang('de')} 
+              onClick={close}
+              className={`text-sm font-mono font-bold transition-colors ${isDe ? 'text-black underline decoration-2 underline-offset-4 decoration-sonic-orange' : 'text-zinc-400 hover:text-black'}`}
+            >
+              DE
+            </Link>
+            <div className="w-px h-4 bg-zinc-300"></div>
+            <Link 
+              to={switchLang('en')} 
+              onClick={close}
+              className={`text-sm font-mono font-bold transition-colors ${!isDe ? 'text-black underline decoration-2 underline-offset-4 decoration-sonic-orange' : 'text-zinc-400 hover:text-black'}`}
+            >
+              EN
+            </Link>
+         </div>
          
          <div className="grid gap-2">
             <div className="text-xs font-mono text-zinc-400 uppercase tracking-widest mb-4 ml-2">Navigation</div>

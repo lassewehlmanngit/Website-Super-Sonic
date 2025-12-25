@@ -4,6 +4,7 @@ import { Button } from '../components/ui/Button';
 import { ComparisonTable } from '../components/features/ComparisonTable';
 import { TechStackMatrix } from '../components/features/TechStackMatrix';
 import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
+import { SEO } from '../components/SEO';
 import { Link } from 'react-router-dom';
 
 interface Props { lang: 'de' | 'en'; }
@@ -66,6 +67,16 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
 
   return (
     <div className="bg-paper min-h-screen">
+      <SEO 
+        title={isDe 
+          ? "Web Design | High-Performance Websites | Super Sonic Prototypes" 
+          : "Web Design | High-Performance Websites | Super Sonic Prototypes"}
+        description={isDe
+          ? "Ihr Marketing-Team muss schnell sein. Ihre Webseite bremst sie aus. Wir bauen die schnellsten Websites mit Core Web Vitals 100 und visuellem CMS."
+          : "Your marketing team needs to move fast. Your website is slowing them down. We build the fastest websites with Core Web Vitals 100 and visual CMS."}
+        lang={lang}
+        path={`/${isDe ? 'de' : 'en'}/web-design`}
+      />
       
       {/* 1. HERO (Void) */}
       <section className="bg-void pt-40 pb-20 px-4 md:px-12 rounded-b-[3rem] text-white relative overflow-hidden">

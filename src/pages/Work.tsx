@@ -3,6 +3,7 @@ import { ArrowUpRight, Wrench, Briefcase, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
+import { SEO } from '../components/SEO';
 
 interface Props { lang: 'de' | 'en'; }
 
@@ -52,6 +53,16 @@ export const Work: React.FC<Props> = ({ lang }) => {
 
   return (
     <div className="bg-paper min-h-screen">
+      <SEO 
+        title={isDe 
+          ? "Arbeiten | Case Studies & Projekte | Super Sonic Prototypes" 
+          : "Work | Case Studies & Projects | Super Sonic Prototypes"}
+        description={isDe
+          ? "Echte Kundenprojekte, interne Tools und KI-Experimente. Von VW bis zu innovativen AI-Tools."
+          : "Real client projects, internal tools, and AI experiments. From VW to innovative AI tools."}
+        lang={lang}
+        path={`/${isDe ? 'de' : 'en'}/work`}
+      />
       {/* Hero */}
       <section className="bg-void pt-40 pb-20 px-4 md:px-12 rounded-b-[3rem] mb-12 relative overflow-hidden">
           <ChristmasBalls />

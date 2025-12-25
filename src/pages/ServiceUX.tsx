@@ -4,6 +4,7 @@ import { Button } from '../components/ui/Button';
 import { SAMCalculator } from '../components/features/SAMCalculator';
 import { Link } from 'react-router-dom';
 import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
+import { SEO } from '../components/SEO';
 
 interface Props { lang: 'de' | 'en'; }
 
@@ -12,6 +13,16 @@ export const ServiceUX: React.FC<Props> = ({ lang }) => {
 
   return (
     <div className="bg-paper min-h-screen">
+      <SEO 
+        title={isDe 
+          ? "UX Design | Conversion-Optimierung & User Research | Super Sonic Prototypes" 
+          : "UX Design | Conversion Optimization & User Research | Super Sonic Prototypes"}
+        description={isDe
+          ? "Hübsch reicht nicht. Wir optimieren Ihre Nutzerführung datenbasiert, damit aus Besuchern Kunden werden. Keine Annahmen, nur Strategie."
+          : "Pretty isn't enough. We optimize your user flows based on data to turn visitors into customers. No assumptions, just strategy."}
+        lang={lang}
+        path={`/${isDe ? 'de' : 'en'}/ux-design`}
+      />
       
       {/* 1. HERO (Void) */}
       <section className="bg-void pt-40 pb-20 px-4 md:px-12 rounded-b-[3rem] text-white relative overflow-hidden">

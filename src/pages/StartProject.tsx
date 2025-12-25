@@ -3,6 +3,7 @@ import { ProjectScopeTool } from '../components/features/ProjectScopeTool';
 import { Calendar, Cpu, ArrowRight, ArrowLeft, Mail, Clock } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
+import { SEO } from '../components/SEO';
 
 interface Props { lang: 'de' | 'en'; }
 
@@ -21,6 +22,16 @@ export const StartProject: React.FC<Props> = ({ lang }) => {
 
   return (
     <div className="bg-paper min-h-screen pt-32 pb-20 px-4 md:px-12 relative overflow-hidden">
+      <SEO 
+        title={isDe 
+          ? "Projekt Starten | Konfigurator & Beratung | Super Sonic Prototypes" 
+          : "Start Project | Configurator & Consulting | Super Sonic Prototypes"}
+        description={isDe
+          ? "Wählen Sie Ihren Weg. Starten Sie direkt mit dem Konfigurator oder lassen Sie uns persönlich sprechen. 15 Minuten kostenlose Strategieberatung."
+          : "Choose your path. Start directly with the engine or let's talk strategy first. 15 minutes free strategy consultation."}
+        lang={lang}
+        path={`/${isDe ? 'de' : 'en'}/start`}
+      />
       <ChristmasBalls />
       <div className="max-w-7xl mx-auto relative z-10">
         

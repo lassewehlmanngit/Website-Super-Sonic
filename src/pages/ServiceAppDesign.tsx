@@ -4,6 +4,7 @@ import { Button } from '../components/ui/Button';
 import { MagicToggle } from '../components/features/MagicToggle';
 import { Link } from 'react-router-dom';
 import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
+import { SEO } from '../components/SEO';
 
 interface Props { lang: 'de' | 'en'; }
 
@@ -12,6 +13,16 @@ export const ServiceAppDesign: React.FC<Props> = ({ lang }) => {
 
   return (
     <div className="bg-paper min-h-screen">
+      <SEO 
+        title={isDe 
+          ? "Software Design | Enterprise Software & SaaS | Super Sonic Prototypes" 
+          : "Software Design | Enterprise Software & SaaS | Super Sonic Prototypes"}
+        description={isDe
+          ? "Bauen Sie keine Slide-Decks. Bauen Sie echte Software. Wir verwandeln komplexe Datenmodelle in intuitive Interfaces, die Ihre Teams lieben werden."
+          : "Don't build slide decks. Build software. We transform complex data models into intuitive interfaces your teams will love."}
+        lang={lang}
+        path={`/${isDe ? 'de' : 'en'}/app-design`}
+      />
       
       {/* 1. HERO (Void) */}
       <section className="bg-void pt-40 pb-20 px-4 md:px-12 rounded-b-[3rem] text-white relative overflow-hidden">
