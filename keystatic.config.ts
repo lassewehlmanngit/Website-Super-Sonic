@@ -18,6 +18,30 @@ const storage =
 export default config({
   storage,
   collections: {
+    faqs: collection({
+      label: 'FAQs',
+      slugField: 'question',
+      path: 'src/content/faqs/*',
+      schema: {
+        question: fields.text({ label: 'Question' }),
+        answer: fields.document({
+            label: 'Answer',
+            formatting: true,
+            dividers: true,
+            links: true,
+        }),
+        category: fields.select({
+            label: 'Category',
+            options: [
+                { label: 'General', value: 'general' },
+                { label: 'Web Design', value: 'web-design' },
+                { label: 'MVP / App', value: 'app' },
+                { label: 'UX Design', value: 'ux' },
+            ],
+            defaultValue: 'general'
+        })
+      }
+    }),
     posts: collection({
       label: 'Posts',
       slugField: 'title',

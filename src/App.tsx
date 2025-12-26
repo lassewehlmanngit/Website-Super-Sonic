@@ -10,7 +10,9 @@ import { ServiceWebDesign } from './pages/ServiceWebDesign';
 import { ServiceUX } from './pages/ServiceUX';
 import { Work } from './pages/Work';
 import { About } from './pages/About';
-import { Legal } from './pages/Legal';
+import { Impressum } from './pages/Impressum';
+import { Privacy } from './pages/Privacy';
+import { BusinessFacts } from './pages/BusinessFacts';
 import { StartProject } from './pages/StartProject';
 import { CaseStudyWCAG } from './pages/work/CaseStudyWCAG';
 import { CaseStudySchema } from './pages/work/CaseStudySchema';
@@ -19,8 +21,6 @@ import KeystaticAdmin from './pages/KeystaticAdmin';
 // Seasonal Imports
 import { ChristmasLoader } from './components/seasonal/ChristmasLoader';
 import { SnowOverlay } from './components/seasonal/SnowOverlay';
-import { ChristmasBalls } from './components/seasonal/ChristmasBalls';
-
 import { WinterVillage } from './components/seasonal/WinterVillage';
 
 const Layout = () => {
@@ -55,8 +55,13 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/de" replace />} />
 
-        {/* Keystatic Admin - No Layout */}
-        <Route path="/admin" element={<KeystaticAdmin />} />
+        {/* Keystatic Admin */}
+        <Route path="/keystatic/*" element={<KeystaticAdmin />} />
+
+        {/* Global Pages */}
+        <Route path="/business-facts" element={<Layout />}>
+           <Route index element={<BusinessFacts />} />
+        </Route>
 
         {/* German Routes */}
         <Route path="/de" element={<Layout />}>
@@ -69,8 +74,8 @@ const App: React.FC = () => {
           <Route path="work/schema-generator" element={<CaseStudySchema lang="de" />} />
           <Route path="about" element={<About lang="de" />} />
           <Route path="start" element={<StartProject lang="de" />} />
-          <Route path="impressum" element={<Legal lang="de" type="impressum" />} />
-          <Route path="datenschutz" element={<Legal lang="de" type="privacy" />} />
+          <Route path="impressum" element={<Impressum />} />
+          <Route path="datenschutz" element={<Privacy />} />
         </Route>
 
         {/* English Routes */}
@@ -84,8 +89,8 @@ const App: React.FC = () => {
           <Route path="work/schema-generator" element={<CaseStudySchema lang="en" />} />
           <Route path="about" element={<About lang="en" />} />
           <Route path="start" element={<StartProject lang="en" />} />
-          <Route path="impressum" element={<Legal lang="en" type="impressum" />} />
-          <Route path="privacy" element={<Legal lang="en" type="privacy" />} />
+          <Route path="impressum" element={<Impressum />} />
+          <Route path="privacy" element={<Privacy />} />
         </Route>
       </Routes>
     </Router>

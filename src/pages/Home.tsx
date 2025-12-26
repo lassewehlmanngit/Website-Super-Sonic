@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import { Database, Zap, Globe, Smartphone, MousePointerClick, ArrowUpRight, ArrowRight, Layout, Code } from 'lucide-react';
+import { Database, Zap, Globe, Smartphone, MousePointerClick, ArrowUpRight, ArrowRight, Layout, Code, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { LiveProcess } from '../components/features/LiveProcess';
 import { VisualVelocityTimeline } from '../components/features/VisualVelocityTimeline';
 import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
 import { SEO } from '../components/SEO';
+import { FAQSection } from '../components/features/FAQSection';
+import { useCMSContent } from '../lib/cms';
 
 interface HomeProps {
   lang: 'de' | 'en';
@@ -14,6 +16,32 @@ interface HomeProps {
 export const Home: React.FC<HomeProps> = ({ lang }) => {
   const isDe = lang === 'de';
   const observerRef = useRef<IntersectionObserver | null>(null);
+
+  // Example of CMS Usage - Fetching FAQs
+  // In production, this would fetch from the generated content files
+  const { data: cmsFaqs, loading } = useCMSContent('faqs', 'home');
+
+  // Fallback if loading or error, otherwise use CMS data
+  const faqs = (cmsFaqs && isDe) ? cmsFaqs : [
+      {
+          question: isDe ? "Gehört der Code wirklich mir?" : "Do I really own the code?",
+          answer: isDe
+            ? "Ja. Zu 100%. Sie erhalten Zugriff auf das GitHub Repository. Keine versteckten Klauseln."
+            : "Yes. 100%. You get full access to the GitHub repository. No hidden clauses."
+      },
+      {
+          question: isDe ? "Kann ich Texte selbst ändern?" : "Can I edit text myself?",
+          answer: isDe
+            ? "Ja. Wir integrieren ein Headless CMS (Keystatic/Sanity). Sie können Texte und Bilder ändern, ohne den Code zu berühren."
+            : "Yes. We integrate a Headless CMS (Keystatic/Sanity). You can edit text and images without touching the code."
+      },
+      {
+          question: isDe ? "Warum keine WordPress Templates?" : "Why no WordPress templates?",
+          answer: isDe
+            ? "Templates sind langsam, unsicher und schwer zu warten. Wir bauen Assets, die skalieren und Ihnen gehören."
+            : "Templates are slow, insecure, and hard to maintain. We build assets that scale and belong to you."
+      }
+  ];
 
   useEffect(() => {
     // Initialize Scroll Observer
@@ -41,20 +69,19 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
   return (
     <div className="bg-paper relative">
       <SEO 
-        title={isDe ? "Super Sonic Prototypes | High-End Web & Software Design" : "Super Sonic Prototypes | High-End Web & Software Design"}
+        title={isDe ? "Super Sonic Prototypes | Webseiten & MVPs als Firmeneigentum" : "Super Sonic Prototypes | Websites & MVPs as Company Assets"}
         description={isDe 
-          ? "Keine Templates mehr. Ich baue digitale Assets, die Ihr Geschäft voranbringen. Schnell, sicher und Ihr Eigentum."
-          : "Stop buying templates. I build digital assets that grow your business. Fast, safe, and yours forever."}
+          ? "Schluss mit Baukasten-Abos. Ich entwickle blitzschnelle Software-Assets, die Ihnen gehören. React, Next.js, AI-Accelerated."
+          : "Stop renting your tech stack. I build fast, custom software assets that you own. React, Next.js, AI-Accelerated."}
         lang={lang}
       />
       
       {/* 1. HERO SECTION (Dark Void) */}
       <section className="min-h-screen bg-void pt-40 pb-20 px-4 md:px-12 flex flex-col justify-between relative overflow-hidden rounded-b-[3rem]">
         
-        {/* Christmas Decorations */}
         <ChristmasBalls />
 
-        {/* Abstract Background Element (extra subtle glow for accessibility) */}
+        {/* Abstract Background Element */}
         <div className="absolute -top-0 right-0 w-[120px] h-[120px] md:w-[620px] md:h-[620px] bg-white opacity-[0.002] md:opacity-[0.006] rounded-full blur-[40px] md:blur-[150px] -translate-y-1/4 translate-x-1/2 pointer-events-none animate-fade-in-up duration-1000"></div>
 
         <div className="max-w-[90rem] mx-auto w-full relative z-10">
@@ -68,24 +95,43 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
                </div>
             </div>
 
-            <h1 className="text-white text-[12vw] md:text-[9vw] lg:text-[7vw] leading-[0.8] font-bold tracking-tighter mb-12 reveal delay-200">
-              <span className="block">WEBSITES</span>
-              <span className="block text-zinc-600">ARE DEAD.</span>
-              <span className="block text-sonic-orange">BUILD ASSETS.</span>
+            <h1 className="text-white text-[10vw] md:text-[8vw] lg:text-[6vw] leading-[0.9] font-bold tracking-tighter mb-12 reveal delay-200 uppercase">
+              {isDe
+               ? <>WEBSEITEN SIND <br/><span className="text-zinc-600">SCHNEE VON GESTERN.</span><br/><span className="text-sonic-orange">BAUEN WIR ASSETS.</span></>
+               : <>WEBSITES ARE <br/><span className="text-zinc-600">DEAD.</span><br/><span className="text-sonic-orange">BUILD ASSETS.</span></>
+              }
             </h1>
 
             <div className="flex flex-col md:flex-row gap-12 md:gap-32 items-start reveal delay-300">
                <div className="max-w-xl">
-                  <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed font-light">
+                  <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed font-light mb-8">
                       {isDe 
-                      ? "Keine Templates mehr. Ich baue digitale Assets, die Ihr Geschäft voranbringen. Schnell, sicher und Ihr Eigentum."
-                      : "Stop buying templates. I build digital assets that grow your business. Fast, safe, and yours forever."}
+                      ? "Schluss mit WordPress-Updates und Baukasten-Abos. Ich entwickle blitzschnelle, maßgeschneiderte Software-Assets, die Ihnen gehören. 100% Quellcode-Übergabe."
+                      : "Stop renting your tech stack. I build fast, custom software assets that you own. 100% Source Code Handover. Engineered with AI Speed, secured by human expertise."}
                   </p>
+
+                  {/* TRUST SECTION: No Lock In */}
+                  <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10 mb-8">
+                      <div className="p-2 bg-green-500/10 rounded-lg text-green-500">
+                          <ShieldCheck size={24} />
+                      </div>
+                      <div>
+                          <h4 className="text-white font-bold text-sm mb-1">
+                              {isDe ? "Unabhängigkeits-Garantie" : "Independence Guarantee"}
+                          </h4>
+                          <p className="text-zinc-500 text-sm">
+                              {isDe
+                               ? "Sie erhalten das volle Urheberrecht und den Source Code (GitHub). Sie sind an keine Agentur gebunden."
+                               : "You receive full copyright and source code (GitHub). You are not tied to any agency."}
+                          </p>
+                      </div>
+                  </div>
+
                </div>
                <div className="flex gap-4">
                   <Link to={isDe ? "/de/start" : "/en/start"}>
                       <Button size="lg" variant="white" className="hover:scale-105 transition-transform duration-300">
-                          {isDe ? "Projekt Starten" : "Start Project"} <ArrowRight className="ml-2" size={20} />
+                          {isDe ? "Projekt kalkulieren" : "Calculate Project"} <ArrowRight className="ml-2" size={20} />
                       </Button>
                   </Link>
                </div>
@@ -121,18 +167,18 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
           <div className="flex flex-col md:flex-row justify-between items-end mb-20 reveal">
               <h2 className="text-6xl md:text-8xl font-bold text-black tracking-tighter leading-[0.9]">
                   {isDe ? "MEINE" : "MY"} <br />
-                  <span className="text-zinc-400">{isDe ? "LEISTUNGEN" : "SERVICES"}.</span>
+                  <span className="text-zinc-400">{isDe ? "PRODUKTE" : "PRODUCTS"}.</span>
               </h2>
               <div className="max-w-sm mt-8 md:mt-0">
                   <p className="text-zinc-500 text-lg leading-relaxed">
-                     {isDe ? "Wählen Sie Ihren Pfad. Spezialisiert auf Geschwindigkeit und Qualität." : "Specialized in speed and quality. Choose your path."}
+                     {isDe ? "Kein Stundenlohn. Festpreise für echte Assets." : "No hourly billing. Fixed prices for real assets."}
                   </p>
               </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               
-              {/* Card 1: Web Architecture (Neutral) */}
+              {/* Card 1: Web Architecture (The Marketing Asset) */}
               <Link to={isDe ? "/de/web-design" : "/en/web-design"} className="group bg-white rounded-[2.5rem] p-10 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out flex flex-col justify-between h-[500px] border border-black/5 reveal delay-100">
                   <div className="flex justify-between items-start">
                       <div className="w-16 h-16 bg-zinc-50 rounded-2xl flex items-center justify-center text-sonic-orange group-hover:scale-110 transition-transform duration-500">
@@ -144,17 +190,17 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
                   </div>
                   
                   <div>
-                      <h3 className="text-4xl font-bold text-black mb-4 tracking-tight">
-                        {isDe ? "Webseiten, die verkaufen." : "Websites that Sell."}
+                      <h3 className="text-3xl font-bold text-black mb-4 tracking-tight">
+                        {isDe ? "The Marketing Asset" : "The Marketing Asset"}
                       </h3>
                       <div className="h-px w-12 bg-zinc-200 my-6 group-hover:w-full transition-all duration-700"></div>
                       <p className="text-zinc-500 leading-relaxed text-lg">
-                          {isDe ? "Google liebt schnelle Seiten. Wir bauen die schnellsten." : "Google loves fast sites. We build the fastest."}
+                          {isDe ? "High-Performance Website. Un-hackbar. Ihr Eigentum." : "High-Performance Website. Un-hackable. Yours."}
                       </p>
                   </div>
               </Link>
 
-              {/* Card 2: App Prototyping (HIGHLIGHT - Sonic Orange) */}
+              {/* Card 2: App Prototyping (The Validation MVP) */}
               <Link to={isDe ? "/de/app-design" : "/en/app-design"} className="group bg-sonic-orange rounded-[2.5rem] p-10 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out flex flex-col justify-between h-[500px] reveal delay-200">
                   <div className="flex justify-between items-start">
                       <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-sonic-orange group-hover:scale-110 transition-transform duration-500">
@@ -166,17 +212,17 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
                   </div>
                   
                   <div>
-                      <h3 className="text-4xl font-bold text-white mb-4 tracking-tight">
-                         {isDe ? "Apps in Tagen." : "Apps in Days."}
+                      <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">
+                         {isDe ? "The Validation MVP" : "The Validation MVP"}
                       </h3>
                       <div className="h-px w-12 bg-white/20 my-6 group-hover:w-full transition-all duration-700"></div>
                       <p className="text-white font-medium leading-relaxed text-lg">
-                          {isDe ? "Testen Sie Ihre Idee, bevor das Geld ausgeht." : "Test your idea before you run out of cash."}
+                          {isDe ? "Software Prototyp in 2-4 Wochen. Testen, bevor das Geld ausgeht." : "Software prototype in 2-4 weeks. Test before cash runs out."}
                       </p>
                   </div>
               </Link>
 
-              {/* Card 3: UX Engineering (Neutral) */}
+              {/* Card 3: UX Engineering (UX Audit & Rescue) */}
               <Link to={isDe ? "/de/ux-design" : "/en/ux-design"} className="group bg-white rounded-[2.5rem] p-10 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out flex flex-col justify-between h-[500px] border border-black/5 reveal delay-300">
                   <div className="flex justify-between items-start">
                       <div className="w-16 h-16 bg-zinc-50 rounded-2xl flex items-center justify-center text-sonic-orange group-hover:scale-110 transition-transform duration-500">
@@ -188,12 +234,12 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
                   </div>
                   
                   <div>
-                      <h3 className="text-4xl font-bold text-black mb-4 tracking-tight">
-                         {isDe ? "Design für Umsatz." : "Design for Money."}
+                      <h3 className="text-3xl font-bold text-black mb-4 tracking-tight">
+                         {isDe ? "UX Audit & Rescue" : "UX Audit & Rescue"}
                       </h3>
                       <div className="h-px w-12 bg-zinc-200 my-6 group-hover:w-full transition-all duration-700"></div>
                       <p className="text-zinc-500 leading-relaxed text-lg">
-                          {isDe ? "Wir finden die Löcher, wo Sie Kunden verlieren." : "We fix the leaks where you lose customers."}
+                          {isDe ? "Wir finden die Löcher im System, wo Sie Umsatz verlieren." : "We find the leaks where you lose revenue."}
                       </p>
                   </div>
               </Link>
@@ -247,7 +293,10 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
          </div>
       </section>
 
-      {/* 5. FINAL CTA */}
+      {/* 5. FAQ Section */}
+      <FAQSection faqs={faqs} title={isDe ? "Häufige Fragen" : "FAQ"} />
+
+      {/* 6. FINAL CTA */}
       <section className="py-40 px-4 md:px-12 bg-paper text-center">
          <div className="max-w-4xl mx-auto reveal">
              <h2 className="text-7xl md:text-9xl font-bold text-black mb-12 tracking-tighter leading-[0.85]">
