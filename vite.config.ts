@@ -47,9 +47,11 @@ export default defineConfig(({ mode }) => {
                 return;
               }
               
-              // Separate react-pdf into its own chunk (heavy library, only loaded on demand)
+              // Don't split react-pdf - it's only used in dynamically imported PDF components
+              // Splitting it causes circular dependency issues
+              // It will be included in the PDF component chunks automatically
               if (id.includes('@react-pdf/renderer') || id.includes('react-pdf')) {
-                return 'pdf-vendor';
+                return; // Keep with PDF component chunks
               }
               
               // Core React libraries - keep together to avoid initialization issues
