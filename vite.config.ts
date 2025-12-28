@@ -27,7 +27,9 @@ export default defineConfig(({ mode }) => {
       resolve: {
         alias: {
           '@': path.resolve(__dirname, '.'),
-        }
+        },
+        // Prevent automatic chunk splitting for react-pdf browser builds
+        conditions: ['import', 'module', 'browser', 'default'],
       },
       build: {
         // Enable minification
@@ -41,40 +43,39 @@ export default defineConfig(({ mode }) => {
         // Optimize chunk splitting
         rollupOptions: {
           output: {
+            // Disable automatic chunk splitting to prevent circular dependency issues
+            // Large dependencies like react-pdf and @keystatic will be bundled with their components
             manualChunks: (id) => {
-              // Only process node_modules
+              // Only process node_modules for vendor chunks
               if (!id.includes('node_modules')) {
-                return;
+                return; // App code stays with routes/components
               }
               
-              // Don't split react-pdf - it's only used in dynamically imported PDF components
-              // Splitting it causes circular dependency issues
-              // It will be included in the PDF component chunks automatically
-              if (id.includes('@react-pdf/renderer') || id.includes('react-pdf')) {
-                return; // Keep with PDF component chunks
+              // CRITICAL: Never split these - they cause circular dependency errors
+              // They will be bundled with the components/routes that dynamically import them
+              if (id.includes('@react-pdf/renderer') || 
+                  id.includes('react-pdf') || 
+                  id.includes('@react-pdf') ||
+                  id.includes('@keystatic')) {
+                return; // undefined = bundle with importing module
               }
               
-              // Core React libraries - keep together to avoid initialization issues
+              // Safe to split - these don't have circular dependencies
               if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
                 return 'react-vendor';
               }
               
-              // UI library
               if (id.includes('lucide-react')) {
                 return 'ui-vendor';
               }
               
-              // Don't split @keystatic - it's only used in lazy-loaded admin route
-              // Splitting it causes circular dependency issues
-              // It will be included in the KeystaticAdmin route chunk automatically
-              if (id.includes('@keystatic')) {
-                return; // Keep with route chunk
-              }
-              
-              // AI library
               if (id.includes('@google/genai')) {
                 return 'genai';
               }
+              
+              // For all other node_modules, return undefined to prevent auto-splitting
+              // This ensures problematic libraries stay with their consumers
+              return;
             },
             // Optimize chunk file names
             chunkFileNames: 'assets/js/[name]-[hash].js',
