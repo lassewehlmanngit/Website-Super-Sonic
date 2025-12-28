@@ -42,24 +42,36 @@ export default defineConfig(({ mode }) => {
         rollupOptions: {
           output: {
             manualChunks: (id) => {
-              // Separate react-pdf into its own chunk (heavy library)
+              // Only process node_modules
+              if (!id.includes('node_modules')) {
+                return;
+              }
+              
+              // Separate react-pdf into its own chunk (heavy library, only loaded on demand)
               if (id.includes('@react-pdf/renderer') || id.includes('react-pdf')) {
                 return 'pdf-vendor';
               }
-              // Separate vendor chunks
-              if (id.includes('node_modules')) {
-                if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
-                  return 'react-vendor';
-                }
-                if (id.includes('lucide-react')) {
-                  return 'ui-vendor';
-                }
-                if (id.includes('@keystatic')) {
-                  return 'cms-vendor';
-                }
-                if (id.includes('@google/genai')) {
-                  return 'genai';
-                }
+              
+              // Core React libraries - keep together to avoid initialization issues
+              if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+                return 'react-vendor';
+              }
+              
+              // UI library
+              if (id.includes('lucide-react')) {
+                return 'ui-vendor';
+              }
+              
+              // Don't split @keystatic - it's only used in lazy-loaded admin route
+              // Splitting it causes circular dependency issues
+              // It will be included in the KeystaticAdmin route chunk automatically
+              if (id.includes('@keystatic')) {
+                return; // Keep with route chunk
+              }
+              
+              // AI library
+              if (id.includes('@google/genai')) {
+                return 'genai';
               }
             },
             // Optimize chunk file names
