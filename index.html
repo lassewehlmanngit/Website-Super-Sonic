@@ -54,6 +54,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
+    <!-- Resource Hints for Critical JS Bundles -->
+    <!-- Note: Actual filenames with hashes are generated at build time -->
+    <!-- Vite will automatically inject modulepreload hints for entry chunks in production builds -->
+    <!-- For manual control, use vite-plugin-html or inject via build hooks -->
+    
     <!-- Preload critical font files directly -->
     <link rel="preload" href="https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin />
     
@@ -61,16 +66,53 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
     <style>
+      /* Critical CSS - Inlined for immediate rendering */
       body {
         background-color: #F3F3F3;
         color: #050505;
+        margin: 0;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      #root {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #F3F3F3;
+      }
+      /* Navigation critical styles - prevents layout shift */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+      }
+      /* Hero section basics - prevents FOUC */
+      main {
+        min-height: 100vh;
+        width: 100%;
+      }
+      /* Loading Skeleton - Shows immediately before React hydrates */
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      .loading-spinner {
+        width: 48px;
+        height: 48px;
+        border: 3px solid #FF4D00;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
       }
       /* Selection Color Update */
       ::selection {
         background-color: #FF4D00;
         color: white;
       }
-      /* Hide scrollbar for clean look */
+      /* Hide scrollbar for clean look - Non-critical, but included for consistency */
       ::-webkit-scrollbar {
         width: 8px;
       }
@@ -88,7 +130,10 @@
   <!-- REMOVED IMPORTMAP FOR PERFORMANCE -->
 </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Loading skeleton - React will replace this when it mounts -->
+      <div class="loading-spinner" aria-label="Loading"></div>
+    </div>
     <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

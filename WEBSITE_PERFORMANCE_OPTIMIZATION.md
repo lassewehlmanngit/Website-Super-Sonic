@@ -245,6 +245,129 @@ const Child = React.memo(({ value }) => <div>{value}</div>);
 
 ---
 
+## 9. Mobile Performance: Critical Path Optimization
+
+### The Problem: Mobile Network Constraints
+Mobile devices face unique challenges:
+1.  **Slow Networks**: 3G/4G throttling means even small delays compound (5.7s FCP on mobile vs. fast desktop).
+2.  **Limited CPU**: Mobile processors are slower, making JavaScript execution a bottleneck.
+3.  **Battery Constraints**: Heavy JavaScript drains battery faster.
+
+### The Solution: Mobile-First Optimizations
+
+#### A. Loading Skeleton (Immediate Visual Feedback)
+Show *something* immediately, even before React hydrates. This prevents the "blank white screen" that kills perceived performance.
+
+**Implementation:**
+```html
+<!-- index.html -->
+<body>
+  <div id="root">
+    <!-- Loading skeleton - React replaces this on mount -->
+    <div class="loading-spinner" aria-label="Loading"></div>
+  </div>
+  <style>
+    #root {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #F3F3F3;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .loading-spinner {
+      width: 48px;
+      height: 48px;
+      border: 3px solid #FF4D00;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+  </style>
+  <script type="module" src="/src/index.tsx"></script>
+</body>
+```
+
+#### B. Lazy Load Layout Components
+Navigation, Footer, and MobileNav are often loaded eagerly but aren't critical for initial render. Lazy load them.
+
+```tsx
+// src/App.tsx
+// BAD: Eager loading
+import { Navigation } from './components/layout/Navigation';
+
+// GOOD: Lazy loading
+const Navigation = lazy(() => 
+  import('./components/layout/Navigation').then(m => ({ default: m.Navigation }))
+);
+
+// In Layout component
+<Suspense fallback={null}>
+  <Navigation />
+  <MobileNav />
+</Suspense>
+```
+
+#### C. Critical CSS Inlining
+Inline the absolute minimum CSS needed for above-the-fold content. This prevents render-blocking.
+
+**What to Inline:**
+*   Body/root background colors
+*   Navigation positioning
+*   Hero section basics
+*   Loading spinner styles
+
+**What NOT to Inline:**
+*   Scrollbar styles
+*   Below-the-fold animations
+*   Complex component styles
+
+```html
+<style>
+  /* Critical CSS - Inlined for immediate rendering */
+  body {
+    background-color: #F3F3F3;
+    color: #050505;
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+  }
+  /* ... other critical styles ... */
+</style>
+```
+
+#### D. Resource Hints for Mobile
+On mobile, every millisecond counts. Use resource hints to start downloading critical assets earlier.
+
+```html
+<!-- Preconnect to external domains -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- Preload critical fonts -->
+<link rel="preload" href="..." as="font" type="font/woff2" crossorigin />
+
+<!-- Modulepreload for JS (Vite injects these automatically in production) -->
+<!-- For manual control, use vite-plugin-html -->
+```
+
+**Note:** Vite automatically injects `<link rel="modulepreload">` hints for entry chunks in production builds. For manual control, use `vite-plugin-html` or build hooks.
+
+#### E. Mobile Network Considerations
+*   **Target Bundle Size**: Aim for <200KB initial bundle (gzipped) on mobile.
+*   **Chunk Strategy**: Smaller chunks (20-30KB) load faster on 3G/4G than one large file.
+*   **Progressive Enhancement**: Core functionality should work even if JavaScript fails to load.
+
+---
+
 ## Summary Checklist
 
 | Area | Action | Impact |
@@ -257,5 +380,8 @@ const Child = React.memo(({ value }) => <div>{value}</div>);
 | **Fonts** | Add `display=swap` & `preconnect` | Low (Perceived Speed) |
 | **Images** | Use WebP & Explicit Width/Height | High (CLS / LCP) |
 | **State** | Memoize heavy computations | Medium (Interaction Speed) |
+| **Mobile** | Loading skeleton + Lazy layout | High (Mobile FCP/LCP) |
+| **Mobile** | Critical CSS inlining | High (Mobile FCP) |
+| **Mobile** | Resource hints & preload | Medium (Mobile Load Time) |
 
-Apply these techniques to turn a score of **56** into **95+**.
+Apply these techniques to turn a score of **56** into **95+** (desktop) and **75+** (mobile).
