@@ -2,7 +2,10 @@ import React from 'react';
 
 export const WinterVillage: React.FC = () => {
   return (
-    <div className="relative w-full overflow-hidden h-[300px] pointer-events-none z-10 select-none">
+    <div 
+      className="relative w-full overflow-hidden h-[300px] pointer-events-none z-10 select-none"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '300px' }}
+    >
       
       {/* Ground Snow */}
       <div className="absolute bottom-0 left-0 right-0 h-[60px] bg-white rounded-t-[50%] scale-x-150 translate-y-8 blur-sm opacity-80 z-10"></div>

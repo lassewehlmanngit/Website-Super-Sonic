@@ -3,9 +3,11 @@ import { useLocation } from 'react-router-dom';
 import { X, CheckCircle2, Rocket, Zap, Download, Loader2 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { LEAD_MAGNETS, LeadMagnet } from '../../lib/lead-magnets';
-import { pdf } from '@react-pdf/renderer';
-import { MVPProtocolPDF } from '../pdf/MVPProtocolPDF';
-import { ModernWebLawsPDF } from '../pdf/ModernWebLawsPDF';
+
+// Removed static imports of heavy PDF libraries
+// import { pdf } from '@react-pdf/renderer';
+// import { MVPProtocolPDF } from '../pdf/MVPProtocolPDF';
+// import { ModernWebLawsPDF } from '../pdf/ModernWebLawsPDF';
 
 export const ExitIntentModal: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,14 +35,15 @@ export const ExitIntentModal: React.FC = () => {
     return () => document.removeEventListener('mouseleave', handleMouseLeave);
   }, []);
 
-  const getModalContent = (): LeadMagnet & { icon: React.ElementType, pdfComponent: React.ReactElement } => {
+  // Return a string identifier instead of the component instance
+  const getModalContent = (): LeadMagnet & { icon: React.ElementType, pdfId: string } => {
     const path = location.pathname;
 
     if (path.includes('app-design')) {
         return {
             ...LEAD_MAGNETS['mvp-protocol'],
             icon: Rocket,
-            pdfComponent: <MVPProtocolPDF />
+            pdfId: 'mvp'
         };
     }
 
@@ -49,7 +52,7 @@ export const ExitIntentModal: React.FC = () => {
         return {
             ...LEAD_MAGNETS['modern-guide'],
             icon: Zap,
-            pdfComponent: <ModernWebLawsPDF />
+            pdfId: 'laws'
         };
     }
 
@@ -57,7 +60,7 @@ export const ExitIntentModal: React.FC = () => {
     return {
         ...LEAD_MAGNETS['modern-guide'],
         icon: Zap,
-        pdfComponent: <ModernWebLawsPDF />
+        pdfId: 'laws'
     };
   };
 
@@ -65,8 +68,22 @@ export const ExitIntentModal: React.FC = () => {
 
   const handleDownload = async () => {
     try {
+        // Dynamically import the heavy PDF renderer only when needed
+        const { pdf } = await import('@react-pdf/renderer');
+        
+        let PdfComponent;
+        
+        // Dynamically import the specific PDF document
+        if (content.pdfId === 'mvp') {
+           const module = await import('../pdf/MVPProtocolPDF');
+           PdfComponent = module.MVPProtocolPDF;
+        } else {
+           const module = await import('../pdf/ModernWebLawsPDF');
+           PdfComponent = module.ModernWebLawsPDF;
+        }
+
         // Generate PDF Blob on the fly
-        const blob = await pdf(content.pdfComponent).toBlob();
+        const blob = await pdf(<PdfComponent />).toBlob();
         const url = URL.createObjectURL(blob);
         
         const element = document.createElement('a');
@@ -89,10 +106,11 @@ export const ExitIntentModal: React.FC = () => {
     setStatus('loading');
 
     // Simulate network delay -> Then Generate PDF
+    // We start the download immediately after the "network request" finishes
     setTimeout(async () => {
         await handleDownload();
         setStatus('success');
-    }, 1500);
+    }, 100); // Reduced delay since we have async imports now
   };
 
   if (!isVisible) return null;

@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 export const SnowOverlay: React.FC = () => {
   // Generate random snowflakes
   const snowflakes = useMemo(() => {
-    return Array.from({ length: 75 }).map((_, i) => ({
+    return Array.from({ length: 30 }).map((_, i) => ({
       left: Math.random() * 100,
       animationDuration: 15 + Math.random() * 20, // 15-35s duration (slower/gentler)
       animationDelay: -(Math.random() * 20), // Start at random positions in the cycle
@@ -13,7 +13,7 @@ export const SnowOverlay: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden">
+    <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden" style={{ contain: 'layout style paint' }}>
       {/* Snowflakes */}
       {snowflakes.map((flake, i) => (
         <div

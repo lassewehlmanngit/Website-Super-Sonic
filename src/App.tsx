@@ -1,45 +1,71 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
 import { Navigation } from './components/layout/Navigation';
 import { MobileNav } from './components/layout/MobileNav';
 import { Footer } from './components/layout/Footer';
 import { ExitIntentModal } from './components/features/ExitIntentModal';
-import { Home } from './pages/Home';
-import { ServiceAppDesign } from './pages/ServiceAppDesign';
-import { ServiceWebDesign } from './pages/ServiceWebDesign';
-import { ServiceUX } from './pages/ServiceUX';
-import { Work } from './pages/Work';
-import { About } from './pages/About';
-import { Impressum } from './pages/Impressum';
-import { Privacy } from './pages/Privacy';
-import { BusinessFacts } from './pages/BusinessFacts';
-import { StartProject } from './pages/StartProject';
-import { CaseStudyWCAG } from './pages/work/CaseStudyWCAG';
-import { CaseStudySchema } from './pages/work/CaseStudySchema';
-import KeystaticAdmin from './pages/KeystaticAdmin';
 
-// Seasonal Imports
-import { SnowOverlay } from './components/seasonal/SnowOverlay';
-import { WinterVillage } from './components/seasonal/WinterVillage';
+// Lazy load all page components
+const Home = lazy(() => import('./pages/Home'));
+const ServiceAppDesign = lazy(() => import('./pages/ServiceAppDesign'));
+const ServiceWebDesign = lazy(() => import('./pages/ServiceWebDesign'));
+const ServiceUX = lazy(() => import('./pages/ServiceUX'));
+const Work = lazy(() => import('./pages/Work'));
+const About = lazy(() => import('./pages/About'));
+const Impressum = lazy(() => import('./pages/Impressum'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const BusinessFacts = lazy(() => import('./pages/BusinessFacts'));
+const StartProject = lazy(() => import('./pages/StartProject'));
+const CaseStudyWCAG = lazy(() => import('./pages/work/CaseStudyWCAG'));
+const CaseStudySchema = lazy(() => import('./pages/work/CaseStudySchema'));
+const KeystaticAdmin = lazy(() => import('./pages/KeystaticAdmin'));
+
+// Conditional seasonal imports
+const SnowOverlay = lazy(() => import('./components/seasonal/SnowOverlay').then(module => ({ default: module.SnowOverlay })));
+const WinterVillage = lazy(() => import('./components/seasonal/WinterVillage').then(module => ({ default: module.WinterVillage })));
+
+// Loading fallback component
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sonic-orange"></div>
+  </div>
+);
 
 const Layout = () => {
   const location = useLocation();
+  const [showSeasonal, setShowSeasonal] = React.useState(false);
 
   // Reset scroll on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
+  // Only load seasonal components during winter months
+  useEffect(() => {
+    const month = new Date().getMonth();
+    setShowSeasonal(month === 11 || month === 0 || month === 1); // Dec, Jan, Feb
+  }, []);
+
   return (
     <div className="min-h-screen bg-paper text-void font-sans selection:bg-black selection:text-white relative">
-      <SnowOverlay />
+      {showSeasonal && (
+        <Suspense fallback={null}>
+          <SnowOverlay />
+        </Suspense>
+      )}
       <Navigation />
       <MobileNav />
       <main>
-        <Outlet />
+        <Suspense fallback={<PageLoader />}>
+          <Outlet />
+        </Suspense>
       </main>
       <div className="bg-void relative overflow-hidden">
-        <WinterVillage />
+        {showSeasonal && (
+          <Suspense fallback={null}>
+            <WinterVillage />
+          </Suspense>
+        )}
         <Footer />
       </div>
       <ExitIntentModal />
@@ -54,7 +80,11 @@ const App: React.FC = () => {
         <Route path="/" element={<Navigate to="/de" replace />} />
 
         {/* Keystatic Admin */}
-        <Route path="/keystatic/*" element={<KeystaticAdmin />} />
+        <Route path="/keystatic/*" element={
+          <Suspense fallback={<PageLoader />}>
+            <KeystaticAdmin />
+          </Suspense>
+        } />
 
         {/* Global Pages */}
         <Route path="/business-facts" element={<Layout />}>
