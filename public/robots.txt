@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://supersonic.design/sitemap.xml
+
+# Disallow admin/internal pages if any
+Disallow: /admin/
+Disallow: /api/
+
