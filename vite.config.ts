@@ -2,6 +2,7 @@ import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
+import { deferCSS } from './vite-plugin-defer-css';
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
@@ -18,7 +19,7 @@ export default defineConfig(({ mode }) => {
           },
         },
       },
-      plugins: [react(), tailwindcss()],
+      plugins: [react(), tailwindcss(), deferCSS()],
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
@@ -40,12 +41,26 @@ export default defineConfig(({ mode }) => {
         // Optimize chunk splitting
         rollupOptions: {
           output: {
-            manualChunks: {
+            manualChunks: (id) => {
+              // Separate react-pdf into its own chunk (heavy library)
+              if (id.includes('@react-pdf/renderer') || id.includes('react-pdf')) {
+                return 'pdf-vendor';
+              }
               // Separate vendor chunks
-              'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-              'ui-vendor': ['lucide-react'],
-              'cms-vendor': ['@keystatic/core'],
-              'genai': ['@google/genai'],
+              if (id.includes('node_modules')) {
+                if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+                  return 'react-vendor';
+                }
+                if (id.includes('lucide-react')) {
+                  return 'ui-vendor';
+                }
+                if (id.includes('@keystatic')) {
+                  return 'cms-vendor';
+                }
+                if (id.includes('@google/genai')) {
+                  return 'genai';
+                }
+              }
             },
             // Optimize chunk file names
             chunkFileNames: 'assets/js/[name]-[hash].js',

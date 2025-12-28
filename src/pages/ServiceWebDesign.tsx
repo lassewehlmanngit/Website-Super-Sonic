@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { CheckCircle2, Globe, Server, Database, ShieldCheck, ArrowUpRight, Layout, Search, Zap, Lock, Languages, MousePointerClick } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { ComparisonTable } from '../components/features/ComparisonTable';
@@ -6,8 +6,10 @@ import { TechStackMatrix } from '../components/features/TechStackMatrix';
 import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
 import { SEO } from '../components/SEO';
 import { Link } from 'react-router-dom';
-import { TCOCalculator } from '../components/features/TCOCalculator';
 import { FAQSection } from '../components/features/FAQSection';
+
+// Lazy load calculator component (heavy, only needed when user scrolls to it)
+const TCOCalculator = lazy(() => import('../components/features/TCOCalculator').then(module => ({ default: module.TCOCalculator })));
 
 interface Props { lang: 'de' | 'en'; }
 
@@ -249,7 +251,9 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
 
          {/* Comparison Highlight */}
          <div className="mt-12 space-y-12">
-             <TCOCalculator lang={lang} />
+             <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sonic-orange"></div></div>}>
+                 <TCOCalculator lang={lang} />
+             </Suspense>
              <ComparisonTable lang={lang} />
          </div>
       </section>

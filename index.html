@@ -53,14 +53,17 @@
     <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Preconnect to own domain for faster asset loading -->
+    <link rel="preconnect" href="https://super-sonic-prototypes.onrender.com" crossorigin />
+    <link rel="dns-prefetch" href="https://super-sonic-prototypes.onrender.com" />
     
     <!-- Resource Hints for Critical JS Bundles -->
     <!-- Note: Actual filenames with hashes are generated at build time -->
     <!-- Vite will automatically inject modulepreload hints for entry chunks in production builds -->
     <!-- For manual control, use vite-plugin-html or inject via build hooks -->
     
-    <!-- Load fonts asynchronously -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+    <!-- Load fonts asynchronously with font-display: swap -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
     <style>
       /* Critical CSS - Inlined for immediate rendering */

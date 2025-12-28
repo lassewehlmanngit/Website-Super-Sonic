@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { MousePointerClick, TrendingUp, Lock, CheckCircle2, ArrowUpRight, Search, Layout, Zap, Eye, AlertCircle } from 'lucide-react';
 import { Button } from '../components/ui/Button';
-import { SAMCalculator } from '../components/features/SAMCalculator';
 import { Link } from 'react-router-dom';
 import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
 import { SEO } from '../components/SEO';
 import { FAQSection } from '../components/features/FAQSection';
+
+// Lazy load calculator component (heavy, only needed when user scrolls to it)
+const SAMCalculator = lazy(() => import('../components/features/SAMCalculator').then(module => ({ default: module.SAMCalculator })));
 
 interface Props { lang: 'de' | 'en'; }
 
@@ -238,7 +240,9 @@ export const ServiceUX: React.FC<Props> = ({ lang }) => {
                  <h2 className="text-4xl font-bold text-black mb-4">{isDe ? "Was kostet schlechte UX?" : "The Cost of Bad UX"}</h2>
                  <p className="text-zinc-500">{isDe ? "Rechnen Sie es selbst aus." : "Calculate it yourself."}</p>
              </div>
-             <SAMCalculator />
+             <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sonic-orange"></div></div>}>
+                 <SAMCalculator />
+             </Suspense>
           </div>
       </section>
 
