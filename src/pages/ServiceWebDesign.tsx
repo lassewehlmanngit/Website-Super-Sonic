@@ -174,8 +174,8 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
                   Super Sonic Web Architecture
              </div>
              <h1 className="text-[10vw] leading-[0.85] font-bold tracking-tighter mb-12">
-                THE MARKETING <br/>
-                <span className="text-sonic-orange">ASSET.</span>
+                OWN YOUR WEBSITE. <br/>
+                <span className="text-sonic-orange">100% FUTURE PROOF.</span>
              </h1>
              <p className="text-xl text-zinc-400 max-w-2xl leading-relaxed font-light mb-12">
                 {isDe 

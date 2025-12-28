@@ -51,7 +51,7 @@ export const Navigation: React.FC = () => {
 
   const links = [
     { de: 'Web Design', en: 'Web Design', path: 'web-design' },
-    { de: 'App Design', en: 'App Design', path: 'app-design' },
+    { de: 'Software Design', en: 'Software Design', path: 'app-design' },
     { de: 'UX Design', en: 'UX Design', path: 'ux-design' },
     { de: 'Arbeiten', en: 'Work', path: 'work' },
     { de: 'Über Mich', en: 'About', path: 'about' },

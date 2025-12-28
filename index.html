@@ -74,10 +74,14 @@
       }
       #root {
         min-height: 100vh;
+        background-color: #F3F3F3;
+      }
+      /* App Loader Wrapper - Only for initial loading state */
+      .app-loader {
+        min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #F3F3F3;
       }
       /* Navigation critical styles - prevents layout shift */
       nav {
@@ -86,6 +90,21 @@
         left: 0;
         right: 0;
         z-index: 50;
+      }
+      /* Mobile Navigation Critical Styles */
+      @media (max-width: 768px) {
+        /* Matches fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-sm */
+        .mobile-nav-bar {
+          position: fixed;
+          bottom: 1.5rem;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 50;
+          width: 90%;
+          max-width: 24rem;
+          /* Basic box to reserve space */
+          height: 60px; /* Approximate height */
+        }
       }
       /* Hero section basics - prevents FOUC */
       main {
@@ -129,7 +148,9 @@
   <body>
     <div id="root">
       <!-- Loading skeleton - React will replace this when it mounts -->
-      <div class="loading-spinner" aria-label="Loading"></div>
+      <div class="app-loader">
+        <div class="loading-spinner" aria-label="Loading"></div>
+      </div>
     </div>
     <script type="module" src="/src/index.tsx"></script>
   </body>

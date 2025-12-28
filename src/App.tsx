@@ -2,24 +2,22 @@ import React, { useEffect, Suspense, lazy } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
 import { Navigation } from './components/layout/Navigation';
 import { MobileNav } from './components/layout/MobileNav';
+import { Footer } from './components/layout/Footer';
 import { ExitIntentModal } from './components/features/ExitIntentModal';
 
-// Lazy load Footer since it's below the fold and not critical for initial render
-const Footer = lazy(() => import('./components/layout/Footer').then(module => ({ default: module.Footer })));
-
 // Lazy load all page components
-const Home = lazy(() => import('./pages/Home'));
-const ServiceAppDesign = lazy(() => import('./pages/ServiceAppDesign'));
-const ServiceWebDesign = lazy(() => import('./pages/ServiceWebDesign'));
-const ServiceUX = lazy(() => import('./pages/ServiceUX'));
-const Work = lazy(() => import('./pages/Work'));
-const About = lazy(() => import('./pages/About'));
-const Impressum = lazy(() => import('./pages/Impressum'));
-const Privacy = lazy(() => import('./pages/Privacy'));
-const BusinessFacts = lazy(() => import('./pages/BusinessFacts'));
-const StartProject = lazy(() => import('./pages/StartProject'));
-const CaseStudyWCAG = lazy(() => import('./pages/work/CaseStudyWCAG'));
-const CaseStudySchema = lazy(() => import('./pages/work/CaseStudySchema'));
+const Home = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
+const ServiceAppDesign = lazy(() => import('./pages/ServiceAppDesign').then(module => ({ default: module.ServiceAppDesign })));
+const ServiceWebDesign = lazy(() => import('./pages/ServiceWebDesign').then(module => ({ default: module.ServiceWebDesign })));
+const ServiceUX = lazy(() => import('./pages/ServiceUX').then(module => ({ default: module.ServiceUX })));
+const Work = lazy(() => import('./pages/Work').then(module => ({ default: module.Work })));
+const About = lazy(() => import('./pages/About').then(module => ({ default: module.About })));
+const Impressum = lazy(() => import('./pages/Impressum').then(module => ({ default: module.Impressum })));
+const Privacy = lazy(() => import('./pages/Privacy').then(module => ({ default: module.Privacy })));
+const BusinessFacts = lazy(() => import('./pages/BusinessFacts').then(module => ({ default: module.BusinessFacts })));
+const StartProject = lazy(() => import('./pages/StartProject').then(module => ({ default: module.StartProject })));
+const CaseStudyWCAG = lazy(() => import('./pages/work/CaseStudyWCAG').then(module => ({ default: module.CaseStudyWCAG })));
+const CaseStudySchema = lazy(() => import('./pages/work/CaseStudySchema').then(module => ({ default: module.CaseStudySchema })));
 const KeystaticAdmin = lazy(() => import('./pages/KeystaticAdmin'));
 
 // Conditional seasonal imports
@@ -68,9 +66,7 @@ const Layout = () => {
             <WinterVillage />
           </Suspense>
         )}
-        <Suspense fallback={null}>
-          <Footer />
-        </Suspense>
+        <Footer />
       </div>
       <ExitIntentModal />
     </div>

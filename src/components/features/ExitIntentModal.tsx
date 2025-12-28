@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { X, CheckCircle2, Rocket, Zap, Download, Loader2 } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { LEAD_MAGNETS, LeadMagnet } from '../../lib/lead-magnets';
+import { LEAD_MAGNETS, LEAD_MAGNETS_DE, LeadMagnet } from '../../lib/lead-magnets';
 
 // Removed static imports of heavy PDF libraries
 // import { pdf } from '@react-pdf/renderer';
@@ -14,6 +14,10 @@ export const ExitIntentModal: React.FC = () => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
   const location = useLocation();
+
+  // Language Detection
+  const isDe = location.pathname.startsWith('/de');
+  const lang = isDe ? 'de' : 'en';
 
   useEffect(() => {
     // Unique key for this version ensures it works again for you (clears previous session block)
@@ -38,10 +42,11 @@ export const ExitIntentModal: React.FC = () => {
   // Return a string identifier instead of the component instance
   const getModalContent = (): LeadMagnet & { icon: React.ElementType, pdfId: string } => {
     const path = location.pathname;
+    const magnets = isDe ? LEAD_MAGNETS_DE : LEAD_MAGNETS;
 
     if (path.includes('app-design')) {
         return {
-            ...LEAD_MAGNETS['mvp-protocol'],
+            ...magnets['mvp-protocol'],
             icon: Rocket,
             pdfId: 'mvp'
         };
@@ -50,7 +55,7 @@ export const ExitIntentModal: React.FC = () => {
     // Web-design and Home both use Modern Web Laws
     if (path.includes('web-design')) {
         return {
-            ...LEAD_MAGNETS['modern-guide'],
+            ...magnets['modern-guide'],
             icon: Zap,
             pdfId: 'laws'
         };
@@ -58,7 +63,7 @@ export const ExitIntentModal: React.FC = () => {
 
     // Default / Home
     return {
-        ...LEAD_MAGNETS['modern-guide'],
+        ...magnets['modern-guide'],
         icon: Zap,
         pdfId: 'laws'
     };
@@ -83,7 +88,8 @@ export const ExitIntentModal: React.FC = () => {
         }
 
         // Generate PDF Blob on the fly
-        const blob = await pdf(<PdfComponent />).toBlob();
+        // Pass the language as a prop to the PDF component
+        const blob = await pdf(<PdfComponent lang={lang} />).toBlob();
         const url = URL.createObjectURL(blob);
         
         const element = document.createElement('a');
@@ -138,13 +144,13 @@ export const ExitIntentModal: React.FC = () => {
                     <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6">
                         <CheckCircle2 size={32} />
                     </div>
-                    <h2 className="text-2xl font-bold text-black mb-2">Check your downloads!</h2>
+                    <h2 className="text-2xl font-bold text-black mb-2">{isDe ? "Prüfen Sie Ihre Downloads!" : "Check your downloads!"}</h2>
                     <p className="text-zinc-500 text-sm mb-8 max-w-xs">
-                        We've started the download for <strong>{content.filename.replace('.txt', '.pdf')}</strong>.
+                        {isDe ? "Wir haben den Download gestartet für" : "We've started the download for"} <strong>{content.filename.replace('.txt', '.pdf')}</strong>.
                     </p>
                     <Button variant="primary" onClick={handleDownload} className="gap-2">
                         <Download size={16} />
-                        Download Again
+                        {isDe ? "Erneut herunterladen" : "Download Again"}
                     </Button>
                 </div>
             ) : (
@@ -176,7 +182,7 @@ export const ExitIntentModal: React.FC = () => {
                         <div className="flex gap-3">
                             <input 
                                 type="email" 
-                                placeholder="Enter your email" 
+                                placeholder={isDe ? "Geben Sie Ihre E-Mail ein" : "Enter your email"} 
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
@@ -193,7 +199,9 @@ export const ExitIntentModal: React.FC = () => {
                         </div>
                     </form>
                     <p className="text-[10px] text-zinc-400 mt-4 text-center">
-                        We respect your inbox. No spam, just engineering rigor.
+                        {isDe 
+                            ? "Wir respektieren Ihren Posteingang. Kein Spam, nur technisches Know-how." 
+                            : "We respect your inbox. No spam, just engineering rigor."}
                     </p>
                 </>
             )}

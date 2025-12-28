@@ -44,7 +44,7 @@ export default config({
             options: [
                 { label: 'Home', value: 'home' },
                 { label: 'Web Design', value: 'web-design' },
-                { label: 'App Design / MVP', value: 'app-design' },
+                { label: 'Software Design / MVP', value: 'app-design' },
                 { label: 'UX Design', value: 'ux-design' },
                 { label: 'About', value: 'about' },
                 { label: 'All Pages', value: 'all' },
@@ -122,7 +122,7 @@ export default config({
           label: 'Category',
           options: [
             { label: 'Web Design', value: 'web-design' },
-            { label: 'App Design', value: 'app-design' },
+            { label: 'Software Design', value: 'app-design' },
             { label: 'UX Design', value: 'ux-design' },
             { label: 'Prototyping', value: 'prototyping' },
           ],
