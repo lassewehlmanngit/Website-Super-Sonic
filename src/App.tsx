@@ -1,10 +1,10 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Navigation } from './components/layout/Navigation';
+import { MobileNav } from './components/layout/MobileNav';
 import { ExitIntentModal } from './components/features/ExitIntentModal';
 
-// Lazy load layout components to reduce initial bundle size
-const Navigation = lazy(() => import('./components/layout/Navigation').then(module => ({ default: module.Navigation })));
-const MobileNav = lazy(() => import('./components/layout/MobileNav').then(module => ({ default: module.MobileNav })));
+// Lazy load Footer since it's below the fold and not critical for initial render
 const Footer = lazy(() => import('./components/layout/Footer').then(module => ({ default: module.Footer })));
 
 // Lazy load all page components
@@ -55,10 +55,8 @@ const Layout = () => {
           <SnowOverlay />
         </Suspense>
       )}
-      <Suspense fallback={null}>
-        <Navigation />
-        <MobileNav />
-      </Suspense>
+      <Navigation />
+      <MobileNav />
       <main>
         <Suspense fallback={<PageLoader />}>
           <Outlet />
