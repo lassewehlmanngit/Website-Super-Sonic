@@ -25,10 +25,10 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
   // Fallback if loading or error, otherwise use CMS data
   const faqs = (cmsFaqs && isDe) ? cmsFaqs : [
       {
-          question: isDe ? "Wer besitzt den Quellcode nach der Entwicklung?" : "Who owns the source code after development?",
+          question: isDe ? "Wem gehört meine Website, nachdem ihr sie gebaut habt?" : "Who owns my website after you build it?",
           answer: isDe
-            ? "Sie besitzen den Quellcode zu 100%. Sie erhalten Zugriff auf das GitHub Repository. Keine versteckten Klauseln. Sie können den Code jederzeit an einen anderen Entwickler geben oder selbst weiterentwickeln."
-            : "You own the source code 100%. You get full access to the GitHub repository. No hidden clauses. You can give the code to any developer anytime or develop it further yourself."
+            ? "Dir. 100%.\n\nDenk daran wie beim Hauskauf. Nachdem du uns bezahlt hast, geben wir dir die Schlüssel. Die Website gehört dir.\n\nWir legen den ganzen Code in einen sicheren Ordner online (genannt GitHub). Nur du kannst darauf zugreifen. Du kannst jeden Entwickler beauftragen, es zu ändern. Oder deine Firma mit der Website verkaufen.\n\nWir haben null Anspruch auf deine Website, nachdem wir sie übergeben haben."
+            : "You do. 100%.\n\nThink of it like buying a house. After you pay us, we give you the keys. The website is yours.\n\nWe put all the code in a secure folder online (called GitHub). Only you can access it. You can hire any developer to change it. Or sell your company with the website included.\n\nWe have zero claim on your website after we hand it over."
       },
       {
           question: isDe ? "Kann ich meine Website selbst bearbeiten ohne Programmierkenntnisse?" : "Can I edit my website myself without programming skills?",
@@ -37,10 +37,10 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
             : "Yes. We integrate a Headless CMS like Keystatic or Sanity. You can edit text and images without touching the code. As easy as WordPress, but faster and safer."
       },
       {
-          question: isDe ? "Was ist der Unterschied zwischen einer Custom Website und WordPress?" : "What's the difference between a custom website and WordPress?",
+          question: isDe ? "Warum nicht einfach WordPress nutzen?" : "Why not just use WordPress?",
           answer: isDe
-            ? "WordPress ist langsam, unsicher und schwer zu warten. Unsere Custom Websites sind schnell (100/100 Core Web Vitals), sicher und wartungsarm. Sie besitzen den Code. Keine monatlichen Plugin-Kosten. Keine Sicherheits-Updates nötig."
-            : "WordPress is slow, insecure, and hard to maintain. Our custom websites are fast (100/100 Core Web Vitals), secure, and low maintenance. You own the code. No monthly plugin costs. No security updates needed."
+            ? "WordPress ist wie eine Wohnung mieten. Unsere Websites sind wie ein Haus besitzen.\n\nMit WordPress:\n• Du zahlst für immer (€50-200/Monat)\n• Plugins brechen nach Updates\n• Hacker zielen darauf ab (es sind 43% aller Websites)\n• Langsames Laden = Leute gehen = verlorenes Geld\n\nMit uns:\n• Du zahlst einmal\n• Nichts bricht (keine Plugins)\n• Individuell gebaut = schwer zu hacken\n• Schnelles Laden = Leute bleiben = mehr Geld\n\nHier ist der echte Unterschied: Eine WordPress-Site braucht 3-5 Sekunden zum Laden. Unsere braucht 0,8 Sekunden. Google machte eine Studie: Jede Sekunde Verzögerung kostet dich 20% deiner Besucher."
+            : "WordPress is like renting an apartment. Our websites are like owning a house.\n\nWith WordPress:\n• You pay forever (€50-200/month)\n• Plugins break after updates\n• Hackers target it (it's 43% of all websites)\n• Slow loading = people leave = lost money\n\nWith us:\n• You pay once\n• Nothing breaks (no plugins)\n• Custom-built = hard to hack\n• Fast loading = people stay = more money\n\nHere's the real difference: A WordPress site takes 3-5 seconds to load. Ours takes 0.8 seconds. Google did a study: Every second of delay costs you 20% of your visitors."
       },
       {
           question: isDe ? "Wie lange dauert es eine neue Website zu entwickeln?" : "How long does it take to develop a new website?",
@@ -55,10 +55,10 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
             : "Starting at €5,800 for a complete website (Starter package, ready in 72 hours). Fixed price. No monthly fees. You pay once and own the website forever. Larger projects on request."
       },
       {
-          question: isDe ? "Ist Code der mit KI geschrieben wurde sicher?" : "Is code written with AI secure?",
+          question: isDe ? "Ist KI-Code sicher? Wird er nicht kaputt gehen?" : "Is AI code safe? Won't it break?",
           answer: isDe
-            ? "Ja. Jede Zeile KI-generierten Codes wird von mir geprüft. Ich habe 10 Jahre Erfahrung mit Enterprise-Sicherheit (Allianz, Volkswagen, Novartis). Keine Halluzinationen. Keine unsicheren Codezeilen. Sie bekommen KI-Geschwindigkeit mit menschlicher Expertise."
-            : "Yes. Every line of AI-generated code is reviewed by me. I have 10 years of enterprise security experience (Allianz, Volkswagen, Novartis). No hallucinations. No insecure code lines. You get AI speed with human expertise."
+            ? "Hier ist die Wahrheit: KI schreibt Code schnell. Aber sie macht Fehler.\n\nDeshalb überprüfe ich jede einzelne Zeile. Ich habe 10 Jahre lang Software für Banken (Allianz) und Autofirmen (Volkswagen) gebaut. Ich weiß, was kaputtgeht und was nicht.\n\nDenk an KI wie an einen Junior-Entwickler, der 24/7 arbeitet. Sie ist schnell, braucht aber Aufsicht. Ich bin die Aufsicht.\n\nDu bekommst die Geschwindigkeit von KI + die Sicherheit menschlicher Erfahrung."
+            : "Here's the truth: AI writes code fast. But it makes mistakes.\n\nThat's why I check every single line. I've built software for banks (Allianz) and car companies (Volkswagen) for 10 years. I know what breaks and what doesn't.\n\nThink of AI like a junior developer who works 24/7. They're fast but need supervision. I'm the supervisor.\n\nYou get the speed of AI + the safety of human experience."
       },
       {
           question: isDe ? "Kann ich meine Website später erweitern oder ändern?" : "Can I extend or change my website later?",
@@ -102,22 +102,23 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
       <SEO 
         title={isDe ? "Super Sonic Prototypes | Webseiten & MVPs als Firmeneigentum" : "Super Sonic Prototypes | Websites & MVPs as Company Assets"}
         description={isDe 
-          ? "Schluss mit Baukasten-Abos. Ich entwickle blitzschnelle Software-Assets, die Ihnen gehören. React, Next.js, AI-Accelerated."
-          : "Stop renting your tech stack. I build fast, custom software assets that you own. React, Next.js, AI-Accelerated."}
+          ? "Die meisten Firmen mieten ihre Website von WordPress oder Webflow. Wir bauen deine. Sie gehört dir für immer. Keine monatlichen Kosten. Ab €5.800."
+          : "Most companies rent their website from WordPress or Webflow. We build yours. You own it forever. No monthly fees. Starting at €5,800."}
         lang={lang}
       />
       
       {/* 1. HERO SECTION (Dark Void) */}
-      <section className="min-h-screen bg-void pt-40 pb-20 px-4 md:px-12 flex flex-col justify-between relative overflow-hidden rounded-b-[3rem]">
+      <section className="min-h-screen bg-void pt-32 pb-20 px-4 md:px-12 flex flex-col justify-center relative overflow-hidden rounded-b-[3rem]">
         
         <ChristmasBalls />
 
         {/* Abstract Background Element */}
-        <div className="absolute -top-0 right-0 w-[120px] h-[120px] md:w-[620px] md:h-[620px] bg-white opacity-[0.002] md:opacity-[0.006] rounded-full blur-[40px] md:blur-[150px] -translate-y-1/4 translate-x-1/2 pointer-events-none animate-fade-in-up duration-1000"></div>
+        <div className="absolute -top-0 right-0 w-[120px] h-[120px] md:w-[620px] md:h-[620px] bg-white opacity-[0.001] md:opacity-[0.002] rounded-full blur-[40px] md:blur-[150px] -translate-y-1/4 translate-x-1/2 pointer-events-none animate-fade-in-up duration-1000"></div>
 
         <div className="max-w-[90rem] mx-auto w-full relative z-10">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 border-b border-white/10 pb-12 reveal delay-100">
-               <div className="font-mono text-zinc-500 text-xs uppercase tracking-[0.2em] mb-4 md:mb-0">
+            {/* Top Bar - Minimal */}
+            <div className="flex justify-between items-center mb-16 md:mb-24 reveal delay-100">
+               <div className="font-mono text-zinc-500 text-xs uppercase tracking-[0.2em]">
                   {isDe ? "Verfügbar für Q1 2025" : "Available for Q1 2025"}
                </div>
                <div className="text-right hidden md:block">
@@ -126,51 +127,63 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
                </div>
             </div>
 
-            <h1 className="text-white text-[10vw] md:text-[8vw] lg:text-[6vw] leading-[0.9] font-bold tracking-tighter mb-12 reveal delay-200 uppercase">
-              {isDe
-               ? <>WEBSEITEN & MVPS <br/><span className="text-zinc-600">ALS ECHTES</span><br/><span className="text-sonic-orange">FIRMENEIGENTUM.</span></>
-               : <>WEBSITES & MVPS <br/><span className="text-zinc-600">AS REAL</span><br/><span className="text-sonic-orange">COMPANY ASSETS.</span></>
-              }
-            </h1>
+            {/* Main Hero Grid - Asymmetric */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center reveal delay-200">
+              
+              {/* Left: Headline (Takes 7 columns) */}
+              <div className="lg:col-span-7 space-y-8">
+                  <h1 className="text-white text-[10vw] md:text-[8vw] lg:text-[6vw] leading-[0.9] font-bold tracking-tighter mb-12 uppercase">
+                    {isDe
+                     ? <>Deine Website. <br/><span className="text-zinc-600">Dein Code.</span><br/><span className="text-sonic-orange">Dein Eigentum.</span></>
+                     : <>Your website. <br/><span className="text-zinc-600">Your code.</span><br/><span className="text-sonic-orange">Your property.</span></>
+                    }
+                  </h1>
+              </div>
 
-            <div className="flex flex-col md:flex-row gap-12 md:gap-32 items-start reveal delay-300">
-               <div className="max-w-xl">
-                  <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed font-light mb-8">
+              {/* Right: Content + CTA (Takes 5 columns) */}
+              <div className="lg:col-span-5 space-y-8 reveal delay-300">
+                  {/* Subheadline - Compact */}
+                  <p className="text-xl md:text-2xl text-zinc-300 leading-relaxed font-light">
                       {isDe 
-                      ? "Schluss mit WordPress-Updates und Baukasten-Abos. Ich entwickle blitzschnelle, maßgeschneiderte Software-Assets, die Ihnen gehören. 100% Quellcode-Übergabe."
-                      : "Stop renting your tech stack. I build fast, custom software assets that you own. 100% Source Code Handover. Engineered with AI Speed, secured by human expertise."}
+                      ? "Einmal zahlen. Für immer besitzen. Keine monatlichen Gebühren. Kein Lock-in."
+                      : "Pay once. Own forever. No monthly fees. No lock-in."}
                   </p>
 
-                  {/* TRUST SECTION: No Lock In */}
-                  <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10 mb-8">
-                      <div className="p-2 bg-green-500/10 rounded-lg text-green-500">
-                          <ShieldCheck size={24} />
-                      </div>
-                      <div>
-                          <h4 className="text-white font-bold text-sm mb-1">
-                              {isDe ? "Unabhängigkeits-Garantie" : "Independence Guarantee"}
-                          </h4>
-                          <p className="text-zinc-500 text-sm">
-                              {isDe
-                               ? "Sie erhalten das volle Urheberrecht und den Source Code (GitHub). Sie sind an keine Agentur gebunden."
-                               : "You receive full copyright and source code (GitHub). You are not tied to any agency."}
-                          </p>
-                      </div>
+                  {/* CTA - Prominent */}
+                  <div>
+                      <Link to={isDe ? "/de/start" : "/en/start"}>
+                          <Button size="lg" variant="white" className="w-full md:w-auto group hover:scale-105 transition-transform duration-300">
+                              {isDe ? "Projekt kalkulieren" : "Calculate Project"} 
+                              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                          </Button>
+                      </Link>
                   </div>
-
-               </div>
-               <div className="flex gap-4">
-                  <Link to={isDe ? "/de/start" : "/en/start"}>
-                      <Button size="lg" variant="white" className="hover:scale-105 transition-transform duration-300">
-                          {isDe ? "Projekt kalkulieren" : "Calculate Project"} <ArrowRight className="ml-2" size={20} />
-                      </Button>
-                  </Link>
-               </div>
+              </div>
             </div>
+
+            {/* Trust Badge - Floating Below */}
+            <div className="mt-16 md:mt-24 flex justify-center reveal delay-400">
+                <div className="flex items-start gap-4 p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 max-w-2xl hover:bg-white/10 transition-all duration-300">
+                    <div className="p-3 bg-green-500/20 rounded-xl text-green-400 shrink-0">
+                        <ShieldCheck size={24} />
+                    </div>
+                    <div>
+                        <h4 className="text-white font-bold text-base mb-2">
+                            {isDe ? "Unabhängigkeits-Garantie" : "Independence Guarantee"}
+                        </h4>
+                        <p className="text-zinc-400 text-sm leading-relaxed">
+                            {isDe
+                             ? "Wir geben dir alles. Der Code liegt in deinem GitHub-Account. Wenn wir dir morgen nicht mehr gefallen, gehst du mit deiner Website. Keine Fragen."
+                             : "We give you everything. The code lives in your GitHub account. If you don't like us tomorrow, walk away with your website. No questions asked."}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         {/* Infinite Marquee */}
-        <div className="mt-24 pt-8 border-t border-white/10 overflow-hidden w-full reveal delay-500">
+        <div className="mt-32 pt-8 border-t border-white/10 overflow-hidden w-full reveal delay-600">
              <div className="flex whitespace-nowrap animate-marquee">
                 {/* Loop 1 */}
                 <div className="flex gap-16 md:gap-32 items-center mx-8 md:mx-16">
@@ -192,13 +205,50 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
         </div>
       </section>
 
+      {/* 1.1 COST EXPLAINER SECTION */}
+      <section className="bg-paper py-20 px-4 md:px-12 border-b border-zinc-200">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
+          
+          {/* Left: Number Block */}
+          <div className="md:col-span-1">
+            <div className="inline-flex flex-col items-start justify-center rounded-3xl bg-black text-white px-6 py-6 md:px-8 md:py-8 shadow-xl">
+              <span className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400 mb-3">
+                {isDe ? "Was du wirklich zahlst" : "What you really pay"}
+              </span>
+              <div className="text-4xl md:text-5xl font-bold leading-none mb-2">
+                €2.400
+              </div>
+              <span className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400">
+                {isDe ? "pro Jahr" : "per year"}
+              </span>
+            </div>
+          </div>
+
+          {/* Right: Text Block */}
+          <div className="md:col-span-2 space-y-4">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-black">
+              {isDe ? "Mieten vs. Besitzen" : "Renting vs. owning"}
+            </h2>
+            <p className="text-zinc-600 text-base md:text-lg leading-relaxed whitespace-pre-wrap">
+              {isDe
+                ? "Gerade zahlst du wahrscheinlich jeden Monat €50 an WordPress. Oder €200 an Webflow. Für immer.\n\nDas sind €2.400 pro Jahr für etwas, das dir nie gehören wird."
+                : "Right now you're probably paying €50 a month to WordPress. Or €200 to Webflow. Forever.\n\nThat's €2,400 per year for something you'll never own."}
+            </p>
+            <p className="text-zinc-900 text-base md:text-lg leading-relaxed font-medium">
+              {isDe
+                ? "Wir machen das anders. Du zahlst einmal. Wir bauen deine Website. Wir geben dir den Code. Sie gehört dir. Für immer."
+                : "We do it differently. You pay once. We build your website. We give you the code. It's yours. Forever."}
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* 2. SERVICES BENTO GRID (Paper Background) */}
       <section className="py-32 px-4 md:px-12 max-w-[95rem] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-20 reveal">
               <h2 className="text-6xl md:text-8xl font-bold text-black tracking-tighter leading-[0.9]">
-                  {isDe ? "MEINE" : "MY"} <br />
-                  <span className="text-zinc-400">{isDe ? "PRODUKTE" : "PRODUCTS"}.</span>
+                  {isDe ? "Drei Wege, wie" : "Three Ways"} <br />
+                  <span className="text-zinc-400">{isDe ? "wir dir helfen." : "We Help You."}</span>
               </h2>
               <div className="max-w-sm mt-8 md:mt-0">
                   <p className="text-zinc-500 text-lg leading-relaxed">
@@ -222,11 +272,11 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
                   
                   <div>
                       <h3 className="text-3xl font-bold text-black mb-4 tracking-tight">
-                        {isDe ? "The Marketing Asset" : "The Marketing Asset"}
+                        {isDe ? "Mehr Kunden gewinnen" : "Get More Customers"}
                       </h3>
                       <div className="h-px w-12 bg-zinc-200 my-6 group-hover:w-full transition-all duration-700"></div>
                       <p className="text-zinc-500 leading-relaxed text-lg">
-                          {isDe ? "High-Performance Website. Un-hackbar. Ihr Eigentum." : "High-Performance Website. Un-hackable. Yours."}
+                          {isDe ? "Eine schnelle Website, der die Leute vertrauen. Erscheint bei Google. Verwandelt Besucher in Käufer. Ab €5.800." : "A fast website that people trust. Shows up in Google. Turns visitors into buyers. Starting at €5,800."}
                       </p>
                   </div>
               </Link>
@@ -244,11 +294,11 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
                   
                   <div>
                       <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">
-                         {isDe ? "The Validation MVP" : "The Validation MVP"}
+                         {isDe ? "Teste deine Idee schnell" : "Test Your Idea Fast"}
                       </h3>
                       <div className="h-px w-12 bg-white/20 my-6 group-hover:w-full transition-all duration-700"></div>
                       <p className="text-white font-medium leading-relaxed text-lg">
-                          {isDe ? "Software Prototyp in 2-4 Wochen. Testen, bevor das Geld ausgeht." : "Software prototype in 2-4 weeks. Test before cash runs out."}
+                          {isDe ? "Eine funktionierende Version deiner Software in 2 Wochen. Zeige sie echten Kunden. Finde heraus, ob die Leute sie wollen, bevor du €100k ausgibst." : "A working version of your software in 2 weeks. Show it to real customers. Find out if people want it before you spend €100k."}
                       </p>
                   </div>
               </Link>
@@ -266,11 +316,11 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
                   
                   <div>
                       <h3 className="text-3xl font-bold text-black mb-4 tracking-tight">
-                         {isDe ? "UX Audit & Rescue" : "UX Audit & Rescue"}
+                         {isDe ? "Reparieren, warum Leute gehen" : "Fix Why People Leave"}
                       </h3>
                       <div className="h-px w-12 bg-zinc-200 my-6 group-hover:w-full transition-all duration-700"></div>
                       <p className="text-zinc-500 leading-relaxed text-lg">
-                          {isDe ? "Wir finden die Löcher im System, wo Sie Umsatz verlieren." : "We find the leaks where you lose revenue."}
+                          {isDe ? "Deine Website bekommt Besucher. Aber sie kaufen nicht. Wir finden genau, wo sie aufgeben. Dann reparieren wir es. Die meisten Kunden sehen 20-40% mehr Verkäufe." : "Your website gets visitors. But they don't buy. We find exactly where they give up. Then we fix it. Most clients see 20-40% more sales."}
                       </p>
                   </div>
               </Link>
@@ -285,12 +335,12 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
                       Velocity Matters
                   </div>
                   <h2 className="text-5xl md:text-6xl font-bold text-black mb-6 tracking-tight">
-                      {isDe ? "Wochen? Nein. Tage." : "Weeks? No. Days."}
+                      {isDe ? "Warum wir schneller sind als Agenturen." : "Why we're faster than agencies."}
                   </h2>
-                  <p className="text-xl text-zinc-500 leading-relaxed mb-8">
+                  <p className="text-xl text-zinc-500 leading-relaxed mb-8 whitespace-pre-wrap">
                       {isDe 
-                      ? "Die alte Agentur-Welt ist langsam. Ich nutze KI-Beschleunigung für den Code, damit wir uns auf die Architektur konzentrieren können." 
-                      : "The old agency world is slow. I use AI acceleration for the code, so we can focus on the architecture and strategy."}
+                      ? "Normale Agenturen haben 5 Leute in jedem Meeting. Sie rechnen €150 pro Stunde ab. Alles dauert Monate.\n\nWir nutzen KI für die langweiligen Teile. Repetitiven Code schreiben. Formatieren. Testen. Das bedeutet, du bekommst eine echte Person, die sich darauf konzentriert, dein Geschäft besser zu machen. Nicht aufs Tippen."
+                      : "Normal agencies have 5 people in every meeting. They bill €150 per hour. Everything takes months.\n\nWe use AI for the boring parts. Writing repetitive code. Formatting. Testing. That means you get a real person focused on making your business better. Not on typing."}
                   </p>
                   <ul className="space-y-4 mb-8">
                       <li className="flex items-center gap-4 text-black font-medium">

@@ -176,13 +176,14 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
                   Super Sonic Web Architecture
              </div>
              <h1 className="text-[10vw] leading-[0.85] font-bold tracking-tighter mb-12">
-                OWN YOUR WEBSITE. <br/>
-                <span className="text-sonic-orange">100% FUTURE PROOF.</span>
+                {isDe 
+                 ? "Eine Website, die dir Geld bringt."
+                 : "A website that makes you money."}
              </h1>
              <p className="text-xl text-zinc-400 max-w-2xl leading-relaxed font-light mb-12">
                 {isDe 
-                 ? "Steigern Sie Ihre Conversion Rate (Vorteil) mit einer Website, die 100/100 bei Core Web Vitals erreicht (Mechanismus). Sie besitzen den Code, keine monatlichen Gebühren (Risiko-Reversal)."
-                 : "Increase your conversion rate (Benefit) with a website that scores 100/100 on Core Web Vitals (Mechanism). You own the code, no monthly fees (Risk Reversal)."}
+                 ? "Schnell. Sieht gut aus. Leicht auf Google zu finden. Und sie gehört dir für immer."
+                 : "Fast. Looks good. Easy to find on Google. And it's yours forever."}
              </p>
              <Link to={isDe ? "/de/start" : "/en/start"}>
                 <Button size="lg" variant="white">
@@ -200,6 +201,15 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
             </h2>
              <p className="text-zinc-500 text-xl">
                  {isDe ? "Einmal zahlen. Für immer besitzen." : "Pay once. Own forever."}
+             </p>
+         </div>
+
+         <div className="max-w-2xl mx-auto text-center mb-16 space-y-4">
+             <h3 className="text-2xl font-bold text-black">{isDe ? "Was du zahlen wirst" : "What You'll Pay"}</h3>
+             <p className="text-zinc-500 leading-relaxed whitespace-pre-wrap">
+                 {isDe 
+                  ? "Die meisten Agenturen verlangen €15.000-50.000 für eine Website. Dann €2.000/Monat für 'Wartung.'\n\nWir verlangen €5.800. Einmal. Das beinhaltet alles, was du zum Starten brauchst.\n\nKeine monatlichen Gebühren. Keine Überraschungen. Kein 'oh, diese Funktion kostet extra.'"
+                  : "Most agencies charge €15,000-50,000 for a website. Then €2,000/month for 'maintenance.'\n\nWe charge €5,800. Once. That includes everything you need to get started.\n\nNo monthly fees. No surprises. No 'oh, that feature costs extra.'"}
              </p>
          </div>
 
@@ -278,9 +288,16 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
 
       {/* 4. TECH STACK */}
       <section className="px-4 md:px-12 pb-32 max-w-[90rem] mx-auto">
-        <h2 className="text-6xl font-bold text-black mb-16 tracking-tighter">
-              {isDe ? "DER MOTOR." : "THE ENGINE."}
+        <h2 className="text-6xl font-bold text-black mb-8 tracking-tighter">
+              {isDe ? "Womit wir bauen" : "What We Build With"}
         </h2>
+        <div className="max-w-3xl mb-16">
+            <p className="text-zinc-500 text-lg leading-relaxed whitespace-pre-wrap">
+                {isDe 
+                 ? "Wir nutzen moderne Tools, die schnell und zuverlässig sind:\n\nReact - Die gleiche Technologie, die Facebook und Netflix nutzen. Sehr schnell. Sehr stabil.\nTypeScript - Fängt Fehler ab, bevor deine Website live geht. Bedeutet weniger Bugs.\nTailwind CSS - Macht deine Website auf Handys, Tablets und Computern gut aussehend. Automatisch.\nSanity CMS - Du kannst deine Website selbst bearbeiten. Kein Coding nötig. Wie WordPress, aber schneller und sicherer.\n\nDu musst diese Tools nicht verstehen. Aber jeder Entwickler, den du später beauftragst, wird sie erkennen. Das ist wichtig."
+                 : "We use modern tools that are fast and reliable:\n\nReact - The same technology Facebook and Netflix use. Very fast. Very stable.\nTypeScript - Catches errors before your website goes live. Means fewer bugs.\nTailwind CSS - Makes your website look good on phones, tablets, and computers. Automatically.\nSanity CMS - You can edit your website yourself. No coding needed. Like WordPress but faster and safer.\n\nYou don't need to understand these tools. But any developer you hire later will recognize them. That's important."}
+            </p>
+        </div>
         <TechStackMatrix />
       </section>
       

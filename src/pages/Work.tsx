@@ -10,16 +10,17 @@ export const Work: React.FC<Props> = ({ lang }) => {
 
   const cases = [
     {
-      title: "Neobank Ventures",
+      title: isDe ? "Neobank für 20-Jährige" : "Neobank for 20-Somethings",
       category: "Fintech MVP",
       description: isDe
-        ? "Ein High-Frequency Trading Interface für Gen Z. Entwicklung eines voll funktionsfähigen React-Prototypen in 72 Stunden für das Seed-Funding Pitch Deck."
-        : "A High-Frequency Trading Interface for Gen Z. Development of a fully functional React prototype in 72 hours for the Seed Funding Pitch Deck.",
+        ? "Das Problem: Dieses Startup wollte eine Banking-App für junge Leute bauen. Sie hatten €4M bei Investoren zu sammeln. Aber Investoren wollten etwas Echtes sehen. Nicht nur Folien.\n\nWas wir gebaut haben: Einen funktionierenden Prototypen in 72 Stunden. Man konnte ein Konto erstellen. Eine Kreditkarte verknüpfen. Ausgaben verfolgen. Alle Kernfunktionen. Nicht poliert. Nicht perfekt. Aber echt.\n\nDas Ergebnis: Sie zeigten es Investoren am Montag. Bis Freitag hatten sie €4,2M zugesagt."
+        : "The Problem: This startup wanted to build a banking app for young people. They had €4M to raise from investors. But investors wanted to see something real. Not just slides.\n\nWhat We Built: A working prototype in 72 hours. You could create an account. Link a credit card. Track spending. All the core features. Not polished. Not perfect. But real.\n\nThe Result: They showed it to investors on Monday. By Friday, they had €4.2M committed.",
       tags: ["React", "Tailwind", "Real-Time Data", "MVP"],
       link: isDe ? "/de/work" : "/en/work",
       stats: [
-        { label: "Funding Raised", value: "$4.2M" },
-        { label: "Time to Build", value: "3 Weeks" }
+        { label: isDe ? "Baukosten" : "Cost to build", value: "€12,000" },
+        { label: isDe ? "Eingesammeltes Geld" : "Money raised", value: "€4.2M" },
+        { label: "ROI", value: "35,000%" }
       ]
     },
     {

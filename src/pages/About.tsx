@@ -23,22 +23,19 @@ export const About: React.FC<Props> = ({ lang }) => {
       <section className="bg-void pt-40 pb-24 px-4 md:px-12 rounded-b-[3rem] relative overflow-hidden">
           <ChristmasBalls />
           <div className="max-w-[90rem] mx-auto relative z-10">
-            <h1 className="text-white text-[8vw] leading-[0.9] font-bold tracking-tighter mb-12">
-                10 YEARS.<br/>
-                <span className="text-sonic-orange">{isDe ? "KEIN BULLSHIT." : "NO FLUFF."}</span>
+            <h1 className="text-white text-[6vw] leading-[0.9] font-bold tracking-tighter mb-6">
+                {isDe ? "Hallo. Ich bin die Person, die deine Website baut." : "Hi. I'm the person who will build your website."}
             </h1>
+            <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed font-light mb-12">
+                {isDe ? "Kein Team von 10 Leuten. Keine Agentur. Nur ich. Und ich mache das seit 10 Jahren." : "Not a team of 10. Not an agency. Just me. And I've been doing this for 10 years."}
+            </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div className="text-xl md:text-2xl text-zinc-400 leading-relaxed font-light space-y-8">
-                    <p>
+                    <p className="whitespace-pre-wrap">
                         {isDe 
-                        ? "Ich bin UX-Designer mit 10 Jahren Erfahrung. Ich war CEO einer Teemarke und E-Commerce-Firma in Japan. Ich habe Prozesse aufgebaut und Websites sowie Software für Allianz, Novartis, Volkswagen, Sparkasse, 123erfasst, BLVRD und mehrere deutsche Startups entwickelt."
-                        : "I'm a UX designer with 10 years of experience. I was CEO of a tea brand and e-commerce company in Japan. I built processes and designed websites and software for Allianz, Novartis, Volkswagen, Sparkasse, 123erfasst, BLVRD, and several German startups."}
-                    </p>
-                    <p>
-                        {isDe
-                        ? "Ich kombiniere KI mit meinem Wissen. Das gibt Ihnen das Beste aus beiden Welten: Geschwindigkeit und Qualität."
-                        : "I combine AI with my knowledge. This gives you the best of both worlds: speed and quality."}
+                        ? "Ich fing an, Websites zu bauen, als ich 23 war. Habe mir alles selbst beigebracht.\n\nDann wurde ich CEO. Führte eine Online-Teefirma in Japan. Lernte, wie es ist, sich um Geld zu sorgen. Etwas schnell gebaut zu brauchen. Keine Million Euro für eine Agentur zu haben.\n\nDanach arbeitete ich für die Großen. Banken. Autofirmen. Pharma. Lernte, wie sie Software bauen, die nicht kaputtgeht.\n\nJetzt helfe ich kleinen und mittleren Firmen, die gleiche Qualität zu bekommen wie die Großen. Aber ohne die Preise der Großen."
+                        : "I started building websites when I was 23. Taught myself everything.\n\nThen I became a CEO. Ran an online tea company in Japan. Learned what it's like to worry about money. To need something built fast. To not have a million euros for an agency.\n\nAfter that, I worked for the big guys. Banks. Car companies. Pharma. Learned how they build software that doesn't break.\n\nNow I help small and medium companies get the same quality the big guys get. But without the big guy prices."}
                     </p>
                     <div className="bg-white/5 border border-white/10 rounded-xl p-6 space-y-4">
                         <h3 className="text-white font-bold text-lg mb-4">

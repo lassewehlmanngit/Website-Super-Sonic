@@ -10,13 +10,13 @@ export const LiveProcess: React.FC<LiveProcessProps> = ({ isDe = true }) => {
     {
       icon: Search,
       title: isDe ? "1. Ziel & Start" : "1. Goal & Kickoff",
-      desc: isDe ? "Wir definieren das Ziel. Ich strukturiere das Projekt für die AI." : "We define the goal. I structure the project for the AI.",
+      desc: isDe ? "Was wir tun: Du sagst uns, was du brauchst. Wir stellen Fragen, bis wir dein Geschäft verstehen.\n\nWas du bekommst: Ein einfaches Dokument, das genau sagt, was wir bauen werden. Keine Überraschungen später." : "What we do: You tell us what you need. We ask questions until we understand your business.\n\nWhat you get: A simple document that says exactly what we'll build. No surprises later.",
       time: isDe ? "Tag 1" : "Day 1"
     },
     {
       icon: Zap,
       title: isDe ? "2. Der Entwurf" : "2. The Draft",
-      desc: isDe ? "Sie erhalten eine vollständige, funktionierende Version. Kein statisches Bild." : "You get a complete, functional version. Not a static image.",
+      desc: isDe ? "Was wir tun: Wir bauen eine funktionierende Version. Du kannst durchklicken. Auf deinem Handy testen.\n\nWas du bekommst: Eine echte Website, die du deinem Team zeigen kannst. Nicht nur Bilder in einem PDF." : "What we do: We build a working version. You can click through it. Test it on your phone.\n\nWhat you get: A real website you can show to your team. Not just pictures in a PDF.",
       time: isDe ? "Tag 3" : "Day 3"
     },
     {
@@ -68,7 +68,7 @@ export const LiveProcess: React.FC<LiveProcessProps> = ({ isDe = true }) => {
                       </div>
                   </div>
                   <h4 className="text-2xl font-bold text-white mb-3 group-hover:text-sonic-orange transition-colors">{step.title}</h4>
-                  <p className="text-zinc-400 text-sm leading-relaxed max-w-md ml-0">{step.desc}</p>
+                  <p className="text-zinc-400 text-sm leading-relaxed max-w-md ml-0 whitespace-pre-wrap">{step.desc}</p>
                 </div>
               </div>
 

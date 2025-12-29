@@ -25,7 +25,12 @@ export const Navigation: React.FC = () => {
     '/en/about',
   ];
 
-  const isDarkSection = darkHeroRoutes.some((route) => currentPath === route);
+  // Treat routes and their sub-paths as "dark" hero sections,
+  // so logo + links render in white on initial load (before scroll),
+  // even if the URL has a trailing slash or extra segments.
+  const isDarkSection = darkHeroRoutes.some((route) => {
+    return currentPath === route || currentPath.startsWith(`${route}/`);
+  });
 
   useEffect(() => {
     let ticking = false;

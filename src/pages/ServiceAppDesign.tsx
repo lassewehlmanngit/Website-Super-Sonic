@@ -133,14 +133,15 @@ export const ServiceAppDesign: React.FC<Props> = ({ lang }) => {
              <div className="font-mono text-zinc-500 text-xs uppercase tracking-[0.2em] mb-8">
                   Super Sonic Engineering
              </div>
-             <h1 className="text-[10vw] leading-[0.85] font-bold tracking-tighter mb-8">
-                GET YOUR SOFTWARE <br/>
-                <span className="text-sonic-orange">NEXT WEEK.</span>
-             </h1>
-             <p className="text-xl md:text-2xl text-zinc-400 max-w-3xl leading-relaxed font-light mb-12">
+             <h1 className="text-[6vw] leading-[0.9] font-bold tracking-tighter mb-8">
                 {isDe 
-                 ? "Wir bauen Ihre Software. Sie bekommen den Code. Er gehört Ihnen. Schnell und einfach."
-                 : "We build your software. You get the code. You own it forever. Fast and simple."}
+                 ? "Teste deine Software-Idee, bevor du €100k ausgibst"
+                 : "Test Your Software Idea Before Spending €100k"}
+             </h1>
+             <p className="text-xl md:text-2xl text-zinc-400 max-w-3xl leading-relaxed font-light mb-12 whitespace-pre-wrap">
+                {isDe 
+                 ? "Hier ist das Problem:\n\nDu hast eine Idee für Software. Vielleicht eine App. Vielleicht eine Web-Plattform.\n\nDu könntest Entwickler einstellen. €100.000 ausgeben. 12 Monate warten.\n\nDann herausfinden, dass niemand es will.\n\nOder du könntest das tun:\n\nWir bauen eine einfache Version in 2 Wochen. Nur die Kernfunktion. Das Ding, das deine Idee einzigartig macht.\n\nDu zeigst es echten potenziellen Kunden. Die lieben es entweder oder hassen es.\n\nWenn sie es lieben: Großartig. Jetzt weißt du, dass es sich lohnt, es richtig zu bauen.\n\nWenn sie es hassen: Auch großartig. Du hast gerade €100.000 gespart.\n\nDas nennt man ein MVP. Minimum Viable Product. So testen kluge Firmen Ideen."
+                 : "Here's the problem:\n\nYou have an idea for software. Maybe an app. Maybe a web platform.\n\nYou could hire developers. Spend €100,000. Wait 12 months.\n\nThen find out nobody wants it.\n\nOr you could do this:\n\nWe build a simple version in 2 weeks. Just the core feature. The thing that makes your idea unique.\n\nYou show it to real potential customers. They either love it or hate it.\n\nIf they love it: Great. Now you know it's worth building properly.\n\nIf they hate it: Also great. You just saved €100,000.\n\nThis is called an MVP. Minimum Viable Product. It's how smart companies test ideas."}
              </p>
              
              {/* Trust Badges */}

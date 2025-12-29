@@ -35,7 +35,7 @@ export const Footer: React.FC = () => {
              <div className="text-2xl font-bold tracking-tighter mb-4">Super Sonic.</div>
              <div className="text-zinc-500 text-sm max-w-xs leading-relaxed">
                © {new Date().getFullYear()} Super Sonic Prototypes Pte. Ltd.<br />
-               Building digital assets for the AI age.
+               {isDe ? "Einmal zahlen. Für immer besitzen." : "You pay once. You own it forever."}
              </div>
              {/* LocalBusiness Schema Helper */}
              <div className="hidden">

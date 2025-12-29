@@ -138,14 +138,13 @@ export const ServiceUX: React.FC<Props> = ({ lang }) => {
              <div className="font-mono text-zinc-500 text-xs uppercase tracking-[0.2em] mb-8">
                   Super Sonic Analysis
              </div>
-             <h1 className="text-[10vw] leading-[0.85] font-bold tracking-tighter mb-12">
-                UX AUDIT <br/>
-                <span className="text-sonic-orange">& RESCUE.</span>
+             <h1 className="text-[6vw] leading-[0.9] font-bold tracking-tighter mb-8">
+                {isDe ? "Lass mich raten:" : "Let me guess:"}
              </h1>
-             <p className="text-xl text-zinc-400 max-w-2xl leading-relaxed font-light mb-12">
+             <p className="text-xl md:text-2xl text-zinc-400 max-w-3xl leading-relaxed font-light mb-12 whitespace-pre-wrap">
                 {isDe 
-                 ? "Steigern Sie Ihre Conversion Rate um 20-40% (Vorteil) durch datenbasierte UX-Optimierung (Mechanismus). Wir implementieren die Lösungen, nicht nur Berichte (Risiko-Reversal)."
-                 : "Increase your conversion rate by 20-40% (Benefit) through data-driven UX optimization (Mechanism). We implement solutions, not just reports (Risk Reversal)."}
+                 ? "Deine Website bekommt 10.000 Besucher pro Monat.\n\nAber nur 50 von ihnen werden Kunden.\n\nDu weißt nicht, warum die anderen 9.950 gehen.\n\nDein Marketing-Team bringt Leute auf deine Website. Aber etwas auf der Website lässt sie gehen. Vielleicht ist der Checkout verwirrend. Vielleicht ist das Pricing nicht klar. Vielleicht erklärt die Homepage nicht, was du tust.\n\nDas kostet dich echtes Geld. Jeden Tag.\n\nDie meisten Firmen raten nur bei Lösungen. 'Vielleicht brauchen wir mehr Bilder?' 'Vielleicht sollte der Button größer sein?'\n\nWir raten nicht. Wir messen. Wir finden genau, wo die Leute aufgeben. Dann reparieren wir es.\n\nUnser durchschnittlicher Kunde sieht 30% mehr Conversions innerhalb von 4 Wochen."
+                 : "Your website gets 10,000 visitors per month.\n\nBut only 50 of them become customers.\n\nYou don't know why the other 9,950 leave.\n\nYour marketing team brings people to your website. But something on the website makes them leave. Maybe the checkout is confusing. Maybe the pricing isn't clear. Maybe the homepage doesn't explain what you do.\n\nThis is costing you real money. Every day.\n\nMost companies just guess at solutions. 'Maybe we need more pictures?' 'Maybe the button should be bigger?'\n\nWe don't guess. We measure. We find exactly where people give up. Then we fix it.\n\nOur average client sees 30% more conversions within 4 weeks."}
              </p>
              <Link to={isDe ? "/de/start" : "/en/start"}>
                 <Button size="lg" variant="white">
