@@ -1,7 +1,7 @@
 import React from 'react';
 import { Database, Layout, Lock, Zap } from 'lucide-react';
 
-export const TechStackMatrix: React.FC = () => {
+const TechStackMatrixComponent: React.FC = () => {
   const stack = [
     { category: "Frontend", items: ["React 19", "TypeScript", "Tailwind CSS", "Framer Motion"], icon: Layout },
     { category: "Backend / CMS", items: ["React Router (SPA)", "Sanity.io", "Supabase", "Cloud Functions"], icon: Database },
@@ -31,3 +31,6 @@ export const TechStackMatrix: React.FC = () => {
     </div>
   );
 };
+
+// Memoize to prevent unnecessary re-renders
+export const TechStackMatrix = React.memo(TechStackMatrixComponent);

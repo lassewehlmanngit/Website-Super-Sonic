@@ -29,11 +29,15 @@ export function resourceHints(): Plugin {
           }
         });
         
-        // Also find react-vendor chunk (critical for initial render)
+        // Also find vendor chunks (critical for initial render)
         Object.keys(bundle).forEach(key => {
           const chunk = bundle[key];
-          if (chunk.type === 'chunk' && chunk.fileName.includes('react-vendor')) {
-            jsChunks.push(chunk.fileName);
+          if (chunk.type === 'chunk') {
+            const fileName = chunk.fileName;
+            // Preload critical vendor chunks
+            if (fileName.includes('react-vendor') || fileName.includes('ui-vendor')) {
+              jsChunks.push(fileName);
+            }
           }
         });
         

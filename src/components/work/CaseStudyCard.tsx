@@ -14,7 +14,7 @@ interface CaseStudyProps {
   isLocked?: boolean;
 }
 
-export const CaseStudyCard: React.FC<CaseStudyProps> = ({
+const CaseStudyCardComponent: React.FC<CaseStudyProps> = ({
   title,
   category,
   description,
@@ -77,7 +77,15 @@ export const CaseStudyCard: React.FC<CaseStudyProps> = ({
           {/* Image Side (Abstract/Placeholder) */}
           <div className={`relative bg-zinc-900 overflow-hidden ${image ? '' : 'flex items-center justify-center'}`}>
               {image ? (
-                  <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <img 
+                    src={image} 
+                    alt={title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                    fetchPriority="low"
+                    width={500}
+                    height={500}
+                  />
               ) : (
                   // Abstract Generative Pattern Placeholder
                   <div className="w-full h-full relative p-12 flex flex-col items-center justify-center text-zinc-700 group-hover:text-zinc-600 transition-colors">
@@ -95,3 +103,6 @@ export const CaseStudyCard: React.FC<CaseStudyProps> = ({
     </Link>
   );
 };
+
+// Memoize to prevent unnecessary re-renders
+export const CaseStudyCard = React.memo(CaseStudyCardComponent);

@@ -39,6 +39,20 @@ export default defineConfig(({ mode }) => {
           compress: {
             drop_console: true, // Remove console.log in production
             drop_debugger: true,
+            pure_funcs: ['console.log', 'console.info', 'console.debug'], // Remove specific console functions
+            passes: 2, // Multiple passes for better compression
+            unsafe: true, // Enable unsafe optimizations
+            unsafe_comps: true, // Optimize comparisons
+            unsafe_math: true, // Optimize math expressions
+            unsafe_methods: true, // Optimize method calls
+            dead_code: true, // Remove dead code
+            unused: true, // Remove unused code
+          },
+          mangle: {
+            safari10: true, // Fix Safari 10 issues
+          },
+          format: {
+            comments: false, // Remove comments
           },
         },
         // Optimize chunk splitting
@@ -91,10 +105,17 @@ export default defineConfig(({ mode }) => {
         // Optimize CSS
         cssCodeSplit: true,
         cssMinify: true,
+        // Enable tree-shaking
+        treeshake: {
+          moduleSideEffects: false, // Assume no side effects for better tree-shaking
+          preset: 'smallest', // Most aggressive tree-shaking
+        },
       },
       // Optimize dependencies
       optimizeDeps: {
         include: ['react', 'react-dom', 'react-router-dom', 'lucide-react'],
+        // Exclude heavy dependencies that are already lazy-loaded
+        exclude: ['@react-pdf/renderer', '@keystatic/core'],
       },
     };
 });

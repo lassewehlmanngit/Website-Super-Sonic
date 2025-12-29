@@ -5,7 +5,7 @@ interface Props {
   lang?: 'de' | 'en';
 }
 
-export const ComparisonTable: React.FC<Props> = ({ lang = 'de' }) => {
+const ComparisonTableComponent: React.FC<Props> = ({ lang = 'de' }) => {
   const isDe = lang === 'de';
 
   const renderCell = (content: string | boolean | null, isHighlight: boolean = false) => {
@@ -303,3 +303,6 @@ export const ComparisonTable: React.FC<Props> = ({ lang = 'de' }) => {
     </div>
   );
 };
+
+// Memoize to prevent unnecessary re-renders
+export const ComparisonTable = React.memo(ComparisonTableComponent);

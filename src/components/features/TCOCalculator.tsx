@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { Button } from '../ui/Button';
 import { ArrowRight, Check, X, Clock, Zap, Hammer } from 'lucide-react';
 
@@ -12,33 +12,62 @@ export const TCOCalculator: React.FC<Props> = ({ lang }) => {
   const [years, setYears] = useState(5);
   const [traffic, setTraffic] = useState<'low' | 'medium' | 'high'>('medium');
   
-  // Fixed hourly rate assumption for calculation consistency
-  const hourlyRate = 100; 
+  // Memoize calculations to prevent recalculation on every render
+  const calculations = useMemo(() => {
+    // Fixed hourly rate assumption for calculation consistency
+    const hourlyRate = 100; 
 
-  // Estimated Development Hours (The "Manual Labor" Factor)
-  const agencyHours = 80;    // WordPress: Setup + Config + Plugins
-  const webflowHours = 120;  // Webflow: Manual pixel pushing + Interactions
-  const supersonicHours = 40; // Super Sonic: Code Reuse + Efficiency
+    // Estimated Development Hours (The "Manual Labor" Factor)
+    const agencyHours = 80;    // WordPress: Setup + Config + Plugins
+    const webflowHours = 120;  // Webflow: Manual pixel pushing + Interactions
+    const supersonicHours = 40; // Super Sonic: Code Reuse + Efficiency
 
-  // Costs
-  const agencyMaintenance = 150; // Monthly
-  const agencyPlugins = 100; // Yearly
-  
-  const webflowMonthly = traffic === 'high' ? 200 : 49; // Business vs Enterprise assumption
-  
-  const supersonicMonthly = 19; // Render Team
-  
-  // Setup Cost Calculation (Hours * Rate)
-  const agencySetup = agencyHours * hourlyRate;
-  const webflowSetup = webflowHours * hourlyRate;
-  const supersonicSetup = supersonicHours * hourlyRate; 
+    // Costs
+    const agencyMaintenance = 150; // Monthly
+    const agencyPlugins = 100; // Yearly
+    
+    const webflowMonthly = traffic === 'high' ? 200 : 49; // Business vs Enterprise assumption
+    
+    const supersonicMonthly = 19; // Render Team
+    
+    // Setup Cost Calculation (Hours * Rate)
+    const agencySetup = agencyHours * hourlyRate;
+    const webflowSetup = webflowHours * hourlyRate;
+    const supersonicSetup = supersonicHours * hourlyRate; 
 
-  // Calculations
-  const agencyTotal = agencySetup + (agencyMaintenance * 12 * years) + (agencyPlugins * years);
-  const webflowTotal = webflowSetup + (webflowMonthly * 12 * years);
-  const supersonicTotal = supersonicSetup + (supersonicMonthly * 12 * years);
+    // Calculations
+    const agencyTotal = agencySetup + (agencyMaintenance * 12 * years) + (agencyPlugins * years);
+    const webflowTotal = webflowSetup + (webflowMonthly * 12 * years);
+    const supersonicTotal = supersonicSetup + (supersonicMonthly * 12 * years);
 
-  const savings = agencyTotal - supersonicTotal;
+    const savings = agencyTotal - supersonicTotal;
+
+    return {
+      agencyHours,
+      webflowHours,
+      supersonicHours,
+      agencySetup,
+      webflowSetup,
+      supersonicSetup,
+      agencyMaintenance,
+      agencyPlugins,
+      webflowMonthly,
+      supersonicMonthly,
+      agencyTotal,
+      webflowTotal,
+      supersonicTotal,
+      savings
+    };
+  }, [years, traffic]);
+
+  // Memoize event handlers to prevent re-renders
+  const handleYearsChange = useCallback((y: number) => {
+    setYears(y);
+  }, []);
+
+  const handleTrafficChange = useCallback((t: 'low' | 'medium' | 'high') => {
+    setTraffic(t);
+  }, []);
 
   return (
     <div className="bg-white rounded-[2.5rem] p-8 md:p-12 border border-black/5 shadow-xl max-w-5xl mx-auto">
@@ -62,7 +91,7 @@ export const TCOCalculator: React.FC<Props> = ({ lang }) => {
                 {[1, 3, 5, 10].map(y => (
                     <button
                         key={y}
-                        onClick={() => setYears(y)}
+                        onClick={() => handleYearsChange(y)}
                         className={`w-10 h-10 rounded-full font-bold transition-all ${years === y ? 'bg-black text-white' : 'bg-zinc-100 text-zinc-400 hover:bg-zinc-200'}`}
                     >
                         {y}
@@ -81,7 +110,7 @@ export const TCOCalculator: React.FC<Props> = ({ lang }) => {
                 {(['low', 'medium', 'high'] as const).map(t => (
                     <button
                         key={t}
-                        onClick={() => setTraffic(t)}
+                        onClick={() => handleTrafficChange(t)}
                         className={`px-4 py-1 rounded-full text-sm font-bold transition-all uppercase ${traffic === t ? 'bg-white text-black shadow-sm' : 'text-zinc-400 hover:text-zinc-600'}`}
                     >
                         {t}
@@ -96,40 +125,40 @@ export const TCOCalculator: React.FC<Props> = ({ lang }) => {
           {/* 1. WordPress Agency */}
           <div className="p-8 rounded-3xl bg-zinc-50 border border-zinc-200 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
               <h4 className="font-bold text-xl text-zinc-600 mb-2">WordPress Agency</h4>
-              <div className="text-3xl font-bold text-zinc-400 mb-6">€{agencyTotal.toLocaleString()}</div>
+              <div className="text-3xl font-bold text-zinc-400 mb-6">€{calculations.agencyTotal.toLocaleString()}</div>
 
               <ul className="space-y-3 text-sm text-zinc-500 mb-8">
                   <li className="flex justify-between">
-                      <span>Setup ({agencyHours}h)</span>
-                      <span className="font-mono">€{agencySetup.toLocaleString()}</span>
+                      <span>Setup ({calculations.agencyHours}h)</span>
+                      <span className="font-mono">€{calculations.agencySetup.toLocaleString()}</span>
                   </li>
                   <li className="flex justify-between text-red-400">
                       <span>Maintenance ({years}y)</span>
-                      <span className="font-mono">€{(agencyMaintenance * 12 * years).toLocaleString()}</span>
+                      <span className="font-mono">€{(calculations.agencyMaintenance * 12 * years).toLocaleString()}</span>
                   </li>
                    <li className="flex justify-between text-red-400">
                       <span>Plugins ({years}y)</span>
-                      <span className="font-mono">€{(agencyPlugins * years).toLocaleString()}</span>
+                      <span className="font-mono">€{(calculations.agencyPlugins * years).toLocaleString()}</span>
                   </li>
               </ul>
               <div className="flex items-center gap-2 text-red-500 text-sm font-bold bg-red-50 px-3 py-2 rounded-lg">
-                  <Hammer size={16} /> Labor Intensive ({agencyHours}h)
+                  <Hammer size={16} /> Labor Intensive ({calculations.agencyHours}h)
               </div>
           </div>
 
           {/* 2. Webflow */}
            <div className="p-8 rounded-3xl bg-zinc-50 border border-zinc-200 opacity-80 hover:opacity-100 transition-all duration-500">
               <h4 className="font-bold text-xl text-zinc-600 mb-2">Webflow Agency</h4>
-              <div className="text-3xl font-bold text-zinc-400 mb-6">€{webflowTotal.toLocaleString()}</div>
+              <div className="text-3xl font-bold text-zinc-400 mb-6">€{calculations.webflowTotal.toLocaleString()}</div>
 
               <ul className="space-y-3 text-sm text-zinc-500 mb-8">
                   <li className="flex justify-between">
-                      <span>Setup ({webflowHours}h)</span>
-                      <span className="font-mono">€{webflowSetup.toLocaleString()}</span>
+                      <span>Setup ({calculations.webflowHours}h)</span>
+                      <span className="font-mono">€{calculations.webflowSetup.toLocaleString()}</span>
                   </li>
                   <li className="flex justify-between text-red-400">
                       <span>Subscription ({years}y)</span>
-                      <span className="font-mono">€{(webflowMonthly * 12 * years).toLocaleString()}</span>
+                      <span className="font-mono">€{(calculations.webflowMonthly * 12 * years).toLocaleString()}</span>
                   </li>
                    <li className="flex justify-between text-zinc-300">
                       <span>Maintenance</span>
@@ -137,7 +166,7 @@ export const TCOCalculator: React.FC<Props> = ({ lang }) => {
                   </li>
               </ul>
                <div className="flex items-center gap-2 text-orange-500 text-sm font-bold bg-orange-50 px-3 py-2 rounded-lg">
-                  <Hammer size={16} /> Very High Labor ({webflowHours}h)
+                  <Hammer size={16} /> Very High Labor ({calculations.webflowHours}h)
               </div>
           </div>
 
@@ -147,16 +176,16 @@ export const TCOCalculator: React.FC<Props> = ({ lang }) => {
                   RECOMMENDED
               </div>
               <h4 className="font-bold text-xl text-white mb-2">Super Sonic Asset</h4>
-              <div className="text-4xl font-bold text-white mb-6">€{supersonicTotal.toLocaleString()}</div>
+              <div className="text-4xl font-bold text-white mb-6">€{calculations.supersonicTotal.toLocaleString()}</div>
 
               <ul className="space-y-3 text-sm text-zinc-400 mb-8">
                   <li className="flex justify-between text-white">
-                      <span>Setup ({supersonicHours}h)</span>
-                      <span className="font-mono">€{supersonicSetup.toLocaleString()}</span>
+                      <span>Setup ({calculations.supersonicHours}h)</span>
+                      <span className="font-mono">€{calculations.supersonicSetup.toLocaleString()}</span>
                   </li>
                   <li className="flex justify-between text-green-400">
                       <span>Hosting ({years}y)</span>
-                      <span className="font-mono">€{(supersonicMonthly * 12 * years).toLocaleString()}</span>
+                      <span className="font-mono">€{(calculations.supersonicMonthly * 12 * years).toLocaleString()}</span>
                   </li>
                    <li className="flex justify-between text-green-400">
                       <span>Maintenance</span>
@@ -165,12 +194,12 @@ export const TCOCalculator: React.FC<Props> = ({ lang }) => {
               </ul>
 
               <div className="flex items-center gap-2 text-green-400 text-sm font-bold bg-green-900/30 px-3 py-2 rounded-lg border border-green-500/20 mb-4">
-                  <Zap size={16} /> Efficient Code ({supersonicHours}h)
+                  <Zap size={16} /> Efficient Code ({calculations.supersonicHours}h)
               </div>
 
               <div className="text-center">
                   <span className="text-xs text-zinc-500 uppercase tracking-widest">Total Savings</span>
-                  <div className="text-2xl font-bold text-sonic-orange">€{savings.toLocaleString()}</div>
+                  <div className="text-2xl font-bold text-sonic-orange">€{calculations.savings.toLocaleString()}</div>
               </div>
           </div>
 

@@ -1,23 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { Calculator, TrendingUp } from 'lucide-react';
 
 export const SAMCalculator: React.FC = () => {
   const [traffic, setTraffic] = useState<number>(5000);
   const [conversionRate, setConversionRate] = useState<number>(1.5);
   const [avgOrderValue, setAvgOrderValue] = useState<number>(150);
-  const [result, setResult] = useState({ current: 0, potential: 0, lift: 0 });
 
-  useEffect(() => {
+  // Memoize calculations to prevent recalculation on every render
+  const result = useMemo(() => {
     const current = traffic * (conversionRate / 100) * avgOrderValue;
     const optimizedCR = conversionRate * 1.35; 
     const potential = traffic * (optimizedCR / 100) * avgOrderValue;
     
-    setResult({
+    return {
       current: Math.round(current),
       potential: Math.round(potential),
       lift: Math.round(potential - current)
-    });
+    };
   }, [traffic, conversionRate, avgOrderValue]);
+
+  // Memoize event handlers to prevent re-renders
+  const handleTrafficChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setTraffic(Number(e.target.value));
+  }, []);
+
+  const handleConversionRateChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setConversionRate(Number(e.target.value));
+  }, []);
+
+  const handleAvgOrderValueChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setAvgOrderValue(Number(e.target.value));
+  }, []);
 
   return (
     <div className="w-full bg-white border border-black/5 p-10 rounded-[2.5rem] shadow-xl relative overflow-hidden">
@@ -46,7 +59,7 @@ export const SAMCalculator: React.FC = () => {
             max="100000" 
             step="1000" 
             value={traffic}
-            onChange={(e) => setTraffic(Number(e.target.value))}
+            onChange={handleTrafficChange}
             className="w-full h-2 bg-zinc-100 rounded-lg appearance-none cursor-pointer accent-sonic-orange"
           />
         </div>
@@ -57,7 +70,7 @@ export const SAMCalculator: React.FC = () => {
             <input 
                 type="number" 
                 value={conversionRate}
-                onChange={(e) => setConversionRate(Number(e.target.value))}
+                onChange={handleConversionRateChange}
                 className="w-full bg-zinc-50 border border-zinc-200 text-black px-4 py-3 rounded-xl focus:ring-2 focus:ring-sonic-orange outline-none font-mono"
             />
             </div>
@@ -67,7 +80,7 @@ export const SAMCalculator: React.FC = () => {
             <input 
                 type="number" 
                 value={avgOrderValue}
-                onChange={(e) => setAvgOrderValue(Number(e.target.value))}
+                onChange={handleAvgOrderValueChange}
                 className="w-full bg-zinc-50 border border-zinc-200 text-black px-4 py-3 rounded-xl focus:ring-2 focus:ring-sonic-orange outline-none font-mono"
             />
             </div>
