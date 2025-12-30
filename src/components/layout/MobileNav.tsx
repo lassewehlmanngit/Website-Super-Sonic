@@ -49,7 +49,7 @@ export const MobileNav: React.FC = () => {
           {/* 3. Primary CTA */}
           <Link to={isDe ? "/de/start" : "/en/start"} onClick={close}>
             <div className="bg-white text-black px-4 py-2 rounded-full text-xs font-bold hover:scale-105 transition-transform">
-                {isDe ? "Start" : "Start"}
+                {isDe ? "Projekt Starten" : "Start Project"}
             </div>
           </Link>
 

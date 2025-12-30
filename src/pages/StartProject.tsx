@@ -20,7 +20,7 @@ export const StartProject: React.FC<Props> = ({ lang }) => {
   };
 
   return (
-    <div className="bg-paper min-h-screen pt-32 pb-20 px-4 md:px-12 relative overflow-hidden">
+    <div className="bg-paper min-h-screen pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
       <SEO 
         title={isDe 
           ? "Projekt Starten | Konfigurator & Beratung | Super Sonic Prototypes" 
@@ -31,27 +31,27 @@ export const StartProject: React.FC<Props> = ({ lang }) => {
         lang={lang}
         path={`/${isDe ? 'de' : 'en'}/start`}
       />
-      <ChristmasBalls />
-      <div className="max-w-7xl mx-auto relative z-10">
+      {/* <ChristmasBalls /> */}
+      <div className="container-responsive max-w-7xl mx-auto relative z-10">
         
         {/* Header - Changes based on view */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-12">
             {view === 'configurator' && (
                 <button 
                     onClick={() => setView('selection')}
-                    className="mb-8 inline-flex items-center text-sm font-mono text-zinc-500 hover:text-black transition-colors"
+                    className="mb-6 md:mb-8 inline-flex items-center text-sm font-mono text-zinc-500 hover:text-black transition-colors"
                 >
                     <ArrowLeft size={16} className="mr-2" /> {isDe ? "Zurück zur Auswahl" : "Back to Selection"}
                 </button>
             )}
             
-            <h1 className="text-6xl md:text-8xl font-bold text-black mb-6 tracking-tighter animate-fade-in-up">
+            <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-black mb-4 md:mb-6 tracking-tighter animate-fade-in-up">
                 {view === 'selection' 
                     ? (isDe ? "Lass uns bauen." : "Let's build.") 
                     : (isDe ? "Konfiguration." : "Configuration.")}
             </h1>
             
-            <p className="text-xl text-zinc-500 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-100">
+            <p className="text-base md:text-lg lg:text-xl text-zinc-500 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-100">
                 {view === 'selection' ? (
                     isDe 
                     ? "Wählen Sie, wie Sie starten möchten:"
@@ -66,10 +66,10 @@ export const StartProject: React.FC<Props> = ({ lang }) => {
 
         {/* VIEW: SELECTION SPLIT */}
         {view === 'selection' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto animate-fade-in-up delay-200">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto animate-fade-in-up delay-200">
                 
                 {/* Option 1: Human / Booking */}
-                <div className="bg-white p-10 rounded-[2.5rem] border border-black/5 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group h-auto min-h-[500px]">
+                <div className="bg-white p-6 md:p-8 lg:p-10 rounded-[2rem] md:rounded-[2.5rem] border border-black/5 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group h-auto min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
                     <div>
                         <div className="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-sonic-orange mb-8 group-hover:scale-110 transition-transform">
                             <Calendar size={28} />
@@ -102,7 +102,7 @@ export const StartProject: React.FC<Props> = ({ lang }) => {
                 </div>
 
                 {/* Option 2: Machine / Configurator */}
-                <div className="bg-black p-10 rounded-[2.5rem] border border-zinc-800 shadow-xl hover:shadow-2xl hover:border-zinc-600 transition-all duration-300 flex flex-col justify-between group h-auto min-h-[500px]">
+                <div className="bg-black p-6 md:p-8 lg:p-10 rounded-[2rem] md:rounded-[2.5rem] border border-zinc-800 shadow-xl hover:shadow-2xl hover:border-zinc-600 transition-all duration-300 flex flex-col justify-between group h-auto min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">
                     <div>
                         <div className="w-14 h-14 bg-zinc-900 rounded-2xl flex items-center justify-center text-white mb-8 group-hover:scale-110 transition-transform border border-zinc-800">
                             <Cpu size={28} />

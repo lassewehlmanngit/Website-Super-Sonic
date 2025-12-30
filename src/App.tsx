@@ -6,8 +6,6 @@ const Navigation = lazy(() => import('./components/layout/Navigation').then(modu
 const MobileNav = lazy(() => import('./components/layout/MobileNav').then(module => ({ default: module.MobileNav })));
 const Footer = lazy(() => import('./components/layout/Footer').then(module => ({ default: module.Footer })));
 const ExitIntentPopup = lazy(() => import('./components/global/ExitIntentPopup').then(module => ({ default: module.ExitIntentPopup })));
-const TrustBar = lazy(() => import('./components/global/TrustBar').then(module => ({ default: module.TrustBar })));
-const StickyCTA = lazy(() => import('./components/global/StickyCTA').then(module => ({ default: module.StickyCTA })));
 
 // Lazy load all page components
 const Home = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
@@ -45,17 +43,12 @@ const Layout = () => {
   }, [location.pathname]);
 
   // Only load seasonal components during winter months
+  // Temporarily disabled all Christmas decorations
   useEffect(() => {
-    const month = new Date().getMonth();
-    setShowSeasonal(month === 11 || month === 0 || month === 1); // Dec, Jan, Feb
+    // const month = new Date().getMonth();
+    // setShowSeasonal(month === 11 || month === 0 || month === 1); // Dec, Jan, Feb
+    setShowSeasonal(false); // All Christmas decorations deactivated
   }, []);
-
-  const trustItems = [
-    { icon: "✓", text: "50+ Projekte" },
-    { icon: "⚡", text: "72h Durchschnitt" },
-    { icon: "🔒", text: "100% Code-Eigentum" },
-    { icon: "🇩🇪", text: "Frankfurt gehostet" }
-  ];
 
   return (
     <div className="min-h-screen bg-paper text-void font-sans selection:bg-black selection:text-white relative">
@@ -69,9 +62,6 @@ const Layout = () => {
       </Suspense>
       <Suspense fallback={null}>
         <MobileNav />
-      </Suspense>
-      <Suspense fallback={null}>
-        <TrustBar items={trustItems} />
       </Suspense>
       <main>
         <Suspense fallback={<PageLoader />}>
@@ -90,9 +80,6 @@ const Layout = () => {
       </div>
       <Suspense fallback={null}>
         <ExitIntentPopup />
-      </Suspense>
-      <Suspense fallback={null}>
-        <StickyCTA />
       </Suspense>
     </div>
   );

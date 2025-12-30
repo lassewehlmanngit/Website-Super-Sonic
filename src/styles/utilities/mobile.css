@@ -1,33 +1,50 @@
+/* Responsive Grid Utilities */
+.grid-responsive {
+  display: grid;
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+.grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+
 /* Comparison Table Mobile Fix */
 @media (max-width: 768px) {
   .cost-comparison {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     gap: 1rem;
   }
   
   .vs-divider {
     text-align: center;
     padding: 1rem 0;
+    order: 2;
   }
 }
 
-/* Grid Layouts Mobile Fix */
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+/* Fluid Card Heights */
+.card-responsive {
+  min-height: clamp(300px, 40vw, 500px);
+  height: auto;
 }
 
-@media (max-width: 1024px) {
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* Prevent Horizontal Scroll */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
-@media (max-width: 768px) {
-  .grid-3 {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
+/* Responsive Images */
+img {
+  max-width: 100%;
+  height: auto;
 }
 

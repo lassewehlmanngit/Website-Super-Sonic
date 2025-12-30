@@ -4,7 +4,7 @@ import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
 
 export const Privacy: React.FC = () => {
   return (
-    <div className="bg-paper min-h-screen pt-32 pb-20 px-4 md:px-12 relative overflow-hidden">
+    <div className="bg-paper min-h-screen pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
       <SEO
         title="Datenschutzerklärung | Super Sonic Prototypes"
         description="Informationen zur Datenverarbeitung und DSGVO-Konformität."
@@ -12,12 +12,12 @@ export const Privacy: React.FC = () => {
         path="/de/datenschutz"
       />
 
-      <ChristmasBalls />
+      {/* <ChristmasBalls /> */}
 
-      <div className="max-w-3xl mx-auto relative z-10">
-        <h1 className="text-4xl md:text-6xl font-bold text-black mb-12 tracking-tighter">Datenschutzerklärung</h1>
+      <div className="container-responsive max-w-3xl mx-auto relative z-10">
+        <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-black mb-8 md:mb-12 tracking-tighter">Datenschutzerklärung</h1>
 
-        <div className="space-y-8 text-zinc-600 leading-relaxed text-lg">
+        <div className="space-y-6 md:space-y-8 text-zinc-600 leading-relaxed text-base md:text-lg">
 
           <section>
             <h2 className="text-xl font-bold text-black mb-4">1. Datenschutz auf einen Blick</h2>

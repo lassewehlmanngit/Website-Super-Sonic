@@ -131,18 +131,18 @@ export const ServiceAppDesign: React.FC<Props> = ({ lang }) => {
       />
       
       {/* 1. HERO (Void) */}
-      <section className="bg-void pt-40 pb-20 px-4 md:px-12 rounded-b-[3rem] text-white relative overflow-hidden">
-          <ChristmasBalls />
-          <div className="max-w-[90rem] mx-auto relative z-10">
-             <div className="font-mono text-zinc-500 text-xs uppercase tracking-[0.2em] mb-8">
+      <section className="bg-void pt-40 md:pt-48 pb-16 md:pb-20 rounded-b-[2rem] md:rounded-b-[3rem] text-white relative overflow-hidden">
+          {/* <ChristmasBalls /> */}
+          <div className="container-responsive relative z-10">
+             <div className="font-mono text-zinc-500 text-xs uppercase tracking-[0.2em] mb-6 md:mb-8">
                   Super Sonic Engineering
              </div>
-             <h1 className="text-[6vw] leading-[0.9] font-bold tracking-tighter mb-8">
+             <h1 className="text-[clamp(2rem,6vw,4.5rem)] leading-[0.9] font-bold tracking-tighter mb-6 md:mb-8">
                 {isDe 
                  ? "Teste deine Software-Idee, bevor du €100k ausgibst"
                  : "Test Your Software Idea Before Spending €100k"}
              </h1>
-             <p className="text-xl md:text-2xl text-zinc-400 max-w-3xl leading-relaxed font-light mb-12 whitespace-pre-wrap">
+             <p className="text-base md:text-xl lg:text-2xl text-zinc-400 max-w-3xl leading-relaxed font-light mb-8 md:mb-12 whitespace-pre-wrap">
                 {isDe 
                  ? "Hier ist das Problem:\n\nDu hast eine Idee für Software. Vielleicht eine App. Vielleicht eine Web-Plattform.\n\nDu könntest Entwickler einstellen. €100.000 ausgeben. 12 Monate warten.\n\nDann herausfinden, dass niemand es will.\n\nOder du könntest das tun:\n\nWir bauen eine einfache Version in 2 Wochen. Nur die Kernfunktion. Das Ding, das deine Idee einzigartig macht.\n\nDu zeigst es echten potenziellen Kunden. Die lieben es entweder oder hassen es.\n\nWenn sie es lieben: Großartig. Jetzt weißt du, dass es sich lohnt, es richtig zu bauen.\n\nWenn sie es hassen: Auch großartig. Du hast gerade €100.000 gespart.\n\nDas nennt man ein MVP. Minimum Viable Product. So testen kluge Firmen Ideen."
                  : "Here's the problem:\n\nYou have an idea for software. Maybe an app. Maybe a web platform.\n\nYou could hire developers. Spend €100,000. Wait 12 months.\n\nThen find out nobody wants it.\n\nOr you could do this:\n\nWe build a simple version in 2 weeks. Just the core feature. The thing that makes your idea unique.\n\nYou show it to real potential customers. They either love it or hate it.\n\nIf they love it: Great. Now you know it's worth building properly.\n\nIf they hate it: Also great. You just saved €100,000.\n\nThis is called an MVP. Minimum Viable Product. It's how smart companies test ideas."}
@@ -175,17 +175,19 @@ export const ServiceAppDesign: React.FC<Props> = ({ lang }) => {
       <MVPProblem />
 
       {/* 2. PROCESS (Simple 3 Steps) */}
-      <section className="py-24 px-4 md:px-12 max-w-[90rem] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="py-12 md:py-20 lg:py-24">
+          <div className="container-responsive">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {processSteps.map((s, i) => (
-                  <div key={i} className="bg-white p-8 rounded-[2rem] border border-black/5 hover:shadow-lg transition-shadow">
-                      <div className="text-6xl font-bold text-black/5 mb-4">{s.step}</div>
-                      <h3 className="text-2xl font-bold text-black mb-3">{s.title}</h3>
-                      <p className="text-zinc-500 leading-relaxed">
+                  <div key={i} className="bg-white p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border border-black/5 hover:shadow-lg transition-shadow">
+                      <div className="text-4xl md:text-6xl font-bold text-black/5 mb-3 md:mb-4">{s.step}</div>
+                      <h3 className="text-xl md:text-2xl font-bold text-black mb-2 md:mb-3">{s.title}</h3>
+                      <p className="text-sm md:text-base text-zinc-500 leading-relaxed">
                           {s.desc}
                       </p>
                   </div>
               ))}
+          </div>
           </div>
       </section>
 
@@ -194,34 +196,38 @@ export const ServiceAppDesign: React.FC<Props> = ({ lang }) => {
       <AudienceSection perfectFor={audience.perfectFor} notFor={audience.notFor} />
 
       {/* 3. COMPARISON */}
-      <section className="py-12 px-4 md:px-12 max-w-[90rem] mx-auto">
-         <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold text-black mb-6 tracking-tighter">
+      <section className="py-8 md:py-12">
+         <div className="container-responsive">
+         <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-black mb-4 md:mb-6 tracking-tighter">
                 {isDe ? "WARUM SUPER SONIC?" : "WHY SUPER SONIC?"}
             </h2>
-            <p className="text-zinc-500 text-xl max-w-2xl mx-auto">
+            <p className="text-base md:text-lg lg:text-xl text-zinc-500 max-w-2xl mx-auto">
                 {isDe ? "Der süße Punkt zwischen teurer Agentur und begrenztem Baukasten." : "The sweet spot between expensive agency and limited site builder."}
             </p>
          </div>
          <SoftwareComparisonTable lang={lang} />
+         </div>
       </section>
 
       {/* 4. TECH STACK */}
-      <section className="py-24 px-4 md:px-12 max-w-[90rem] mx-auto">
-        <h2 className="text-5xl md:text-6xl font-bold text-black mb-16 tracking-tighter">
+      <section className="py-12 md:py-20 lg:py-24">
+        <div className="container-responsive">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-12 md:mb-16 tracking-tighter">
               {isDe ? "MODERN STACK." : "MODERN STACK."}
         </h2>
         <TechStackMatrix />
+        </div>
       </section>
 
       {/* 5. PRICING / OFFER */}
-      <section className="py-20 px-4 md:px-12 bg-black text-white rounded-[3rem] mx-4 md:mx-12 mb-32 relative overflow-hidden">
+      <section className="py-12 md:py-16 lg:py-20 bg-black text-white rounded-[2rem] md:rounded-[3rem] mb-16 md:mb-24 lg:mb-32 relative overflow-hidden">
          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-zinc-900 to-transparent opacity-50 pointer-events-none"></div>
-         <div className="max-w-4xl mx-auto text-center relative z-10">
-            <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tighter">
+         <div className="container-responsive max-w-4xl mx-auto text-center relative z-10">
+            <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-6 md:mb-8 tracking-tighter">
                 {isDe ? "BEREIT ZU STARTEN?" : "READY TO LAUNCH?"}
             </h2>
-            <p className="text-zinc-400 text-xl mb-12 max-w-2xl mx-auto">
+            <p className="text-base md:text-lg lg:text-xl text-zinc-400 mb-8 md:mb-12 max-w-2xl mx-auto">
                 {isDe 
                  ? "Holen Sie sich Ihre Software nächste Woche. Kein Risiko. Volle Kontrolle."
                  : "Get your software next week. No risk. Full control."}

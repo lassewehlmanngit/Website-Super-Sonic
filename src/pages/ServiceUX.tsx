@@ -197,16 +197,16 @@ export const ServiceUX: React.FC<Props> = ({ lang }) => {
       />
       
       {/* 1. HERO (Void) */}
-      <section className="bg-void pt-40 pb-20 px-4 md:px-12 rounded-b-[3rem] text-white relative overflow-hidden">
-          <ChristmasBalls />
-          <div className="max-w-[90rem] mx-auto relative z-10">
-             <div className="font-mono text-zinc-500 text-xs uppercase tracking-[0.2em] mb-8">
+      <section className="bg-void pt-40 md:pt-48 pb-16 md:pb-20 rounded-b-[2rem] md:rounded-b-[3rem] text-white relative overflow-hidden">
+          {/* <ChristmasBalls /> */}
+          <div className="container-responsive relative z-10">
+             <div className="font-mono text-zinc-500 text-xs uppercase tracking-[0.2em] mb-6 md:mb-8">
                   Super Sonic Analysis
              </div>
-             <h1 className="text-[6vw] leading-[0.9] font-bold tracking-tighter mb-8">
+             <h1 className="text-[clamp(2rem,6vw,4.5rem)] leading-[0.9] font-bold tracking-tighter mb-6 md:mb-8">
                 {isDe ? "Lass mich raten:" : "Let me guess:"}
              </h1>
-             <p className="text-xl md:text-2xl text-zinc-400 max-w-3xl leading-relaxed font-light mb-12 whitespace-pre-wrap">
+             <p className="text-base md:text-xl lg:text-2xl text-zinc-400 max-w-3xl leading-relaxed font-light mb-8 md:mb-12 whitespace-pre-wrap">
                 {isDe 
                  ? "Deine Website bekommt 10.000 Besucher pro Monat.\n\nAber nur 50 von ihnen werden Kunden.\n\nDu weißt nicht, warum die anderen 9.950 gehen.\n\nDein Marketing-Team bringt Leute auf deine Website. Aber etwas auf der Website lässt sie gehen. Vielleicht ist der Checkout verwirrend. Vielleicht ist das Pricing nicht klar. Vielleicht erklärt die Homepage nicht, was du tust.\n\nDas kostet dich echtes Geld. Jeden Tag.\n\nDie meisten Firmen raten nur bei Lösungen. 'Vielleicht brauchen wir mehr Bilder?' 'Vielleicht sollte der Button größer sein?'\n\nWir raten nicht. Wir messen. Wir finden genau, wo die Leute aufgeben. Dann reparieren wir es.\n\nUnser durchschnittlicher Kunde sieht 30% mehr Conversions innerhalb von 4 Wochen."
                  : "Your website gets 10,000 visitors per month.\n\nBut only 50 of them become customers.\n\nYou don't know why the other 9,950 leave.\n\nYour marketing team brings people to your website. But something on the website makes them leave. Maybe the checkout is confusing. Maybe the pricing isn't clear. Maybe the homepage doesn't explain what you do.\n\nThis is costing you real money. Every day.\n\nMost companies just guess at solutions. 'Maybe we need more pictures?' 'Maybe the button should be bigger?'\n\nWe don't guess. We measure. We find exactly where people give up. Then we fix it.\n\nOur average client sees 30% more conversions within 4 weeks."}
@@ -222,21 +222,22 @@ export const ServiceUX: React.FC<Props> = ({ lang }) => {
       <UXProblem />
 
       {/* 2. PRICING */}
-      <section className="py-32 px-4 md:px-12 max-w-[90rem] mx-auto">
-         <div className="text-center mb-16">
-            <h2 className="text-6xl font-bold text-black mb-6 tracking-tighter">
+      <section className="py-16 md:py-24 lg:py-32">
+         <div className="container-responsive">
+         <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 md:mb-6 tracking-tighter">
                 {isDe ? "INVESTMENT." : "INVESTMENT."}
             </h2>
-             <p className="text-zinc-500 text-xl">
+             <p className="text-base md:text-lg lg:text-xl text-zinc-500">
                  {isDe ? "Auf Anfrage. Wir besprechen Ihre Anforderungen." : "On request. We discuss your requirements."}
              </p>
          </div>
 
          <div className="max-w-2xl mx-auto">
-             <div className="p-10 rounded-[2.5rem] bg-white border border-black/5 hover:shadow-xl transition-shadow text-center">
-                 <h3 className="text-2xl font-bold text-black mb-4">{isDe ? "UX Audit & Rescue" : "UX Audit & Rescue"}</h3>
-                 <div className="text-4xl font-bold text-sonic-orange mb-8">{isDe ? "Auf Anfrage" : "On Request"}</div>
-                 <p className="text-zinc-600 mb-8">
+             <div className="p-6 md:p-8 lg:p-10 rounded-[2rem] md:rounded-[2.5rem] bg-white border border-black/5 hover:shadow-xl transition-shadow text-center">
+                 <h3 className="text-xl md:text-2xl font-bold text-black mb-3 md:mb-4">{isDe ? "UX Audit & Rescue" : "UX Audit & Rescue"}</h3>
+                 <div className="text-3xl md:text-4xl font-bold text-sonic-orange mb-6 md:mb-8">{isDe ? "Auf Anfrage" : "On Request"}</div>
+                 <p className="text-sm md:text-base text-zinc-600 mb-6 md:mb-8">
                      {isDe 
                       ? "Jedes Projekt ist anders. Wir besprechen Ihre Anforderungen in einem kostenlosen 15-Minuten-Call und erstellen Ihnen ein individuelles Angebot."
                       : "Every project is different. We discuss your requirements in a free 15-minute call and create a custom quote for you."}
@@ -253,17 +254,19 @@ export const ServiceUX: React.FC<Props> = ({ lang }) => {
                  </Link>
              </div>
          </div>
+         </div>
       </section>
 
       {/* 3. THE PROBLEM */}
-      <section className="py-32 px-4 md:px-12 max-w-[90rem] mx-auto">
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="py-16 md:py-24 lg:py-32">
+         <div className="container-responsive">
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
              <div className="col-span-1 md:col-span-2">
-                <h2 className="text-6xl font-bold text-black mb-8 tracking-tighter leading-[0.9]">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 md:mb-8 tracking-tighter leading-[0.9]">
                     {isDe ? "DAS UNSICHTBARE" : "THE INVISIBLE"} <br />
                     <span className="text-zinc-400">{isDe ? "PROBLEM." : "PROBLEM."}</span>
                 </h2>
-                <p className="text-xl text-zinc-500 leading-relaxed mb-8">
+                <p className="text-base md:text-lg lg:text-xl text-zinc-500 leading-relaxed mb-6 md:mb-8">
                     {isDe
                      ? "95% der Besucher kaufen nicht. Warum? Oft sind es kleine Reibungspunkte – unklare Buttons, zu viele Formularfelder oder fehlendes Vertrauen. Wir machen diese Probleme sichtbar."
                      : "95% of visitors don't buy. Why? Often it's small friction points—unclear buttons, too many form fields, or lack of trust. We make these problems visible."}
@@ -271,31 +274,34 @@ export const ServiceUX: React.FC<Props> = ({ lang }) => {
              </div>
 
              {/* Stat Card */}
-             <div className="bg-zinc-100 rounded-[2.5rem] p-8 flex flex-col justify-center items-center text-center">
-                 <AlertCircle size={48} className="text-red-500 mb-4" />
-                 <div className="text-5xl font-bold text-black mb-2">68%</div>
-                 <p className="text-zinc-500 text-sm">Average Cart Abandonment Rate</p>
+             <div className="bg-zinc-100 rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-8 flex flex-col justify-center items-center text-center">
+                 <AlertCircle size={40} className="md:w-12 md:h-12 text-red-500 mb-3 md:mb-4" />
+                 <div className="text-4xl md:text-5xl font-bold text-black mb-2">68%</div>
+                 <p className="text-zinc-500 text-xs md:text-sm">Average Cart Abandonment Rate</p>
              </div>
+         </div>
          </div>
       </section>
 
       {/* 4. CAPABILITIES GRID */}
-      <section className="px-4 md:px-12 pb-32 max-w-[90rem] mx-auto">
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-black p-12 rounded-[2.5rem] text-white">
-                <Eye className="text-white mb-6" size={32} />
-                <h3 className="text-2xl font-bold text-white mb-4">{isDe ? "Eye Tracking Analyse" : "Eye Tracking Analysis"}</h3>
-                <p className="text-zinc-400 text-lg leading-relaxed">
+      <section className="pb-16 md:pb-24 lg:pb-32">
+         <div className="container-responsive">
+         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <div className="bg-black p-8 md:p-10 lg:p-12 rounded-[2rem] md:rounded-[2.5rem] text-white">
+                <Eye className="text-white mb-4 md:mb-6 w-7 h-7 md:w-8 md:h-8" size={28} />
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">{isDe ? "Eye Tracking Analyse" : "Eye Tracking Analysis"}</h3>
+                <p className="text-base md:text-lg text-zinc-400 leading-relaxed">
                     {isDe ? "Wo schauen Ihre Nutzer wirklich hin? Wir simulieren Attention Maps, um die visuelle Hierarchie zu prüfen." : "Where do your users really look? We simulate attention maps to check visual hierarchy."}
                 </p>
             </div>
-            <div className="bg-white p-12 rounded-[2.5rem] border border-black/5">
-                <Layout className="text-black mb-6" size={32} />
-                <h3 className="text-2xl font-bold text-black mb-4">{isDe ? "Heuristische Analyse" : "Heuristic Analysis"}</h3>
-                <p className="text-zinc-500 text-lg leading-relaxed">
+            <div className="bg-white p-8 md:p-10 lg:p-12 rounded-[2rem] md:rounded-[2.5rem] border border-black/5">
+                <Layout className="text-black mb-4 md:mb-6 w-7 h-7 md:w-8 md:h-8" size={28} />
+                <h3 className="text-xl md:text-2xl font-bold text-black mb-3 md:mb-4">{isDe ? "Heuristische Analyse" : "Heuristic Analysis"}</h3>
+                <p className="text-base md:text-lg text-zinc-500 leading-relaxed">
                     {isDe ? "Wir prüfen Ihre Seite gegen die 10 Usability Heuristiken von Nielsen Norman. Systematisch und fundiert." : "We audit your site against the 10 Nielsen Norman usability heuristics. Systematic and grounded."}
                 </p>
             </div>
+         </div>
          </div>
       </section>
 
@@ -304,15 +310,17 @@ export const ServiceUX: React.FC<Props> = ({ lang }) => {
       <AudienceSection perfectFor={audience.perfectFor} notFor={audience.notFor} />
 
       {/* 5. ROI CALCULATOR (Lead Magnet) */}
-      <section className="px-4 md:px-12 pb-32 max-w-[90rem] mx-auto">
-          <div className="bg-zinc-50 rounded-[3rem] p-12 md:p-20 border border-zinc-200">
-             <div className="text-center mb-12">
-                 <h2 className="text-4xl font-bold text-black mb-4">{isDe ? "Was kostet schlechte UX?" : "The Cost of Bad UX"}</h2>
-                 <p className="text-zinc-500">{isDe ? "Rechnen Sie es selbst aus." : "Calculate it yourself."}</p>
+      <section className="pb-16 md:pb-24 lg:pb-32">
+          <div className="container-responsive">
+          <div className="bg-zinc-50 rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 lg:p-20 border border-zinc-200">
+             <div className="text-center mb-8 md:mb-12">
+                 <h2 className="text-3xl md:text-4xl font-bold text-black mb-3 md:mb-4">{isDe ? "Was kostet schlechte UX?" : "The Cost of Bad UX"}</h2>
+                 <p className="text-sm md:text-base text-zinc-500">{isDe ? "Rechnen Sie es selbst aus." : "Calculate it yourself."}</p>
              </div>
              <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sonic-orange"></div></div>}>
                  <SAMCalculator />
              </Suspense>
+          </div>
           </div>
       </section>
 
@@ -320,13 +328,15 @@ export const ServiceUX: React.FC<Props> = ({ lang }) => {
       <FAQSection faqs={faqs} title="FAQ: UX Audit" />
 
       {/* 7. CTA */}
-      <section className="py-20 px-4 md:px-12 bg-white border-t border-zinc-100 text-center">
-         <h2 className="text-4xl font-bold text-black mb-8 tracking-tight">
+      <section className="py-12 md:py-16 lg:py-20 bg-white border-t border-zinc-100 text-center">
+         <div className="container-responsive">
+         <h2 className="text-3xl md:text-4xl font-bold text-black mb-6 md:mb-8 tracking-tight">
              {isDe ? "Verlieren Sie kein Geld mehr." : "Stop losing money."}
          </h2>
          <Link to={isDe ? "/de/start" : "/en/start"}>
             <Button size="lg">{isDe ? "Audit Starten" : "Start Audit"}</Button>
          </Link>
+         </div>
       </section>
 
     </div>

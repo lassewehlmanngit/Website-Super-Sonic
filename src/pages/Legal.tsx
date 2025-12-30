@@ -4,7 +4,7 @@ interface Props { lang: 'de' | 'en'; type: 'impressum' | 'privacy'; }
 
 export const Legal: React.FC<Props> = ({ lang, type }) => {
   return (
-    <div className="bg-paper min-h-screen pt-32 pb-20 px-6">
+    <div className="bg-paper min-h-screen pt-40 md:pt-48 pb-20 px-6">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-4xl font-bold text-black mb-8 capitalize tracking-tight">
             {type === 'impressum' ? 'Impressum' : (lang === 'de' ? 'Datenschutz' : 'Privacy')}

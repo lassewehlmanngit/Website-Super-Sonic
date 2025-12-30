@@ -8,7 +8,7 @@ export const CaseStudyWCAG: React.FC<Props> = ({ lang }) => {
   const isDe = lang === 'de';
 
   return (
-    <div className="min-h-screen bg-black pt-32 pb-20">
+    <div className="min-h-screen bg-black pt-40 md:pt-48 pb-20">
       <SEO 
         title={isDe 
           ? "WCAG AI Optimizer | Case Study | Super Sonic Prototypes" 

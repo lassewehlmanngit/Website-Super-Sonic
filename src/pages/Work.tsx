@@ -77,7 +77,7 @@ export const Work: React.FC<Props> = ({ lang }) => {
   ];
 
   return (
-    <div className="bg-paper min-h-screen pt-32 pb-20 px-4 md:px-12 relative overflow-hidden">
+    <div className="bg-paper min-h-screen pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
       <SEO 
         title={isDe 
           ? "Selected Work | Case Studies | Super Sonic Prototypes"
@@ -89,15 +89,15 @@ export const Work: React.FC<Props> = ({ lang }) => {
         path={`/${isDe ? 'de' : 'en'}/work`}
       />
 
-      <ChristmasBalls />
+      {/* <ChristmasBalls /> */}
 
-      <div className="max-w-[90rem] mx-auto relative z-10">
-        <div className="mb-12">
-            <h1 className="text-6xl md:text-9xl font-bold text-black mb-12 tracking-tighter leading-[0.85]">
+      <div className="container-responsive relative z-10">
+        <div className="mb-8 md:mb-12">
+            <h1 className="text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-bold text-black mb-8 md:mb-12 tracking-tighter leading-[0.85]">
                 {isDe ? "AUSGEWÄHLTE" : "SELECTED"} <br />
                 <span className="text-zinc-300">{isDe ? "ARBEITEN." : "WORK."}</span>
             </h1>
-            <p className="text-xl text-zinc-500 max-w-2xl leading-relaxed mb-12">
+            <p className="text-base md:text-lg lg:text-xl text-zinc-500 max-w-2xl leading-relaxed mb-8 md:mb-12">
                 {isDe
                  ? "Software und Webseiten, die Business-Probleme lösen. Keine Platzhalter, echte Ergebnisse."
                  : "Software and websites that solve business problems. No placeholders, real results."}
@@ -108,7 +108,7 @@ export const Work: React.FC<Props> = ({ lang }) => {
 
         <FeaturedCase data={featuredCaseData} />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-20">
             {projects.map((project, index) => (
                 <ProjectCard key={index} data={project} />
             ))}

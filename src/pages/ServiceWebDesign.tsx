@@ -233,18 +233,18 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
       />
       
       {/* 1. HERO (Void) */}
-      <section className="bg-void pt-40 pb-20 px-4 md:px-12 rounded-b-[3rem] text-white relative overflow-hidden">
-          <ChristmasBalls />
-          <div className="max-w-[90rem] mx-auto relative z-10">
-             <div className="font-mono text-zinc-500 text-xs uppercase tracking-[0.2em] mb-8">
+      <section className="bg-void pt-40 md:pt-48 pb-16 md:pb-20 rounded-b-[2rem] md:rounded-b-[3rem] text-white relative overflow-hidden">
+          {/* <ChristmasBalls /> */}
+          <div className="container-responsive relative z-10">
+             <div className="font-mono text-zinc-500 text-xs uppercase tracking-[0.2em] mb-6 md:mb-8">
                   Super Sonic Web Architecture
              </div>
-             <h1 className="text-[10vw] leading-[0.85] font-bold tracking-tighter mb-12">
+             <h1 className="text-[clamp(2rem,10vw,6rem)] leading-[0.85] font-bold tracking-tighter mb-8 md:mb-12">
                 {isDe 
                  ? "Eine Website, die dir Geld bringt."
                  : "A website that makes you money."}
              </h1>
-             <p className="text-xl text-zinc-400 max-w-2xl leading-relaxed font-light mb-12">
+             <p className="text-lg md:text-xl text-zinc-400 max-w-2xl leading-relaxed font-light mb-8 md:mb-12">
                 {isDe 
                  ? "Schnell. Sieht gut aus. Leicht auf Google zu finden. Und sie gehört dir für immer."
                  : "Fast. Looks good. Easy to find on Google. And it's yours forever."}
@@ -260,34 +260,35 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
       <WebDesignProblem />
 
       {/* 2. PACKAGES (Pricing) */}
-      <section className="py-32 px-4 md:px-12 max-w-[90rem] mx-auto">
-         <div className="text-center mb-16">
-            <h2 className="text-6xl font-bold text-black mb-6 tracking-tighter">
+      <section className="py-16 md:py-24 lg:py-32">
+         <div className="container-responsive">
+         <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 md:mb-6 tracking-tighter">
                 {isDe ? "INVESTMENT." : "INVESTMENT."}
             </h2>
-             <p className="text-zinc-500 text-xl">
+             <p className="text-zinc-500 text-lg md:text-xl">
                  {isDe ? "Einmal zahlen. Für immer besitzen." : "Pay once. Own forever."}
              </p>
          </div>
 
-         <div className="max-w-2xl mx-auto text-center mb-16 space-y-4">
-             <h3 className="text-2xl font-bold text-black">{isDe ? "Was du zahlen wirst" : "What You'll Pay"}</h3>
-             <p className="text-zinc-500 leading-relaxed whitespace-pre-wrap">
+         <div className="max-w-2xl mx-auto text-center mb-12 md:mb-16 space-y-3 md:space-y-4">
+             <h3 className="text-xl md:text-2xl font-bold text-black">{isDe ? "Was du zahlen wirst" : "What You'll Pay"}</h3>
+             <p className="text-base md:text-lg text-zinc-500 leading-relaxed whitespace-pre-wrap">
                  {isDe 
                   ? "Die meisten Agenturen verlangen €15.000-50.000 für eine Website. Dann €2.000/Monat für 'Wartung.'\n\nWir verlangen €5.800. Einmal. Das beinhaltet alles, was du zum Starten brauchst.\n\nKeine monatlichen Gebühren. Keine Überraschungen. Kein 'oh, diese Funktion kostet extra.'"
                   : "Most agencies charge €15,000-50,000 for a website. Then €2,000/month for 'maintenance.'\n\nWe charge €5,800. Once. That includes everything you need to get started.\n\nNo monthly fees. No surprises. No 'oh, that feature costs extra.'"}
              </p>
          </div>
 
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
+         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-12 max-w-4xl mx-auto">
              {/* Starter Package */}
-             <div className="p-10 rounded-[2.5rem] bg-white border border-black/5 hover:shadow-xl transition-shadow relative">
-                 <div className="absolute top-0 right-0 bg-sonic-orange text-white text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-xl">
+             <div className="p-6 md:p-8 lg:p-10 rounded-[2rem] md:rounded-[2.5rem] bg-white border border-black/5 hover:shadow-xl transition-shadow relative">
+                 <div className="absolute top-0 right-0 bg-sonic-orange text-white text-xs font-bold px-2 md:px-3 py-1 rounded-bl-xl rounded-tr-xl">
                      {isDe ? "72 STUNDEN" : "72 HOURS"}
                  </div>
-                 <h3 className="text-2xl font-bold text-black mb-2">{isDe ? "Starter" : "Starter"}</h3>
-                 <div className="text-4xl font-bold text-sonic-orange mb-2">€5.800</div>
-                 <p className="text-sm text-zinc-500 mb-8">{isDe ? "Festpreis. Keine monatlichen Gebühren. Sie besitzen alles." : "Fixed price. No monthly fees. You own everything."}</p>
+                 <h3 className="text-xl md:text-2xl font-bold text-black mb-2">{isDe ? "Starter" : "Starter"}</h3>
+                 <div className="text-3xl md:text-4xl font-bold text-sonic-orange mb-2">€5.800</div>
+                 <p className="text-sm text-zinc-500 mb-6 md:mb-8">{isDe ? "Festpreis. Keine monatlichen Gebühren. Sie besitzen alles." : "Fixed price. No monthly fees. You own everything."}</p>
                  <ul className="space-y-4 mb-8 text-zinc-600">
                      <li className="flex items-center gap-2"><CheckCircle2 size={18} className="text-green-500"/> {isDe ? "Homepage" : "Homepage"}</li>
                      <li className="flex items-center gap-2"><CheckCircle2 size={18} className="text-green-500"/> {isDe ? "Eine Service-Seite" : "One service page"}</li>
@@ -306,10 +307,10 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
              </div>
 
              {/* Custom Package */}
-             <div className="p-10 rounded-[2.5rem] bg-black text-white border border-zinc-800 hover:shadow-xl transition-shadow">
-                 <h3 className="text-2xl font-bold text-white mb-2">{isDe ? "Individuell" : "Custom"}</h3>
-                 <div className="text-4xl font-bold text-white mb-2">{isDe ? "Auf Anfrage" : "On Request"}</div>
-                 <p className="text-sm text-zinc-400 mb-8">{isDe ? "Maßgeschneidert für Ihre Anforderungen." : "Tailored to your requirements."}</p>
+             <div className="p-6 md:p-8 lg:p-10 rounded-[2rem] md:rounded-[2.5rem] bg-black text-white border border-zinc-800 hover:shadow-xl transition-shadow">
+                 <h3 className="text-xl md:text-2xl font-bold text-white mb-2">{isDe ? "Individuell" : "Custom"}</h3>
+                 <div className="text-3xl md:text-4xl font-bold text-white mb-2">{isDe ? "Auf Anfrage" : "On Request"}</div>
+                 <p className="text-sm text-zinc-400 mb-6 md:mb-8">{isDe ? "Maßgeschneidert für Ihre Anforderungen." : "Tailored to your requirements."}</p>
                  <ul className="space-y-4 mb-8 text-zinc-300">
                      <li className="flex items-center gap-2"><CheckCircle2 size={18} className="text-green-400"/> {isDe ? "Unbegrenzte Seiten" : "Unlimited pages"}</li>
                      <li className="flex items-center gap-2"><CheckCircle2 size={18} className="text-green-400"/> {isDe ? "E-Commerce Integration" : "E-commerce integration"}</li>
@@ -332,41 +333,46 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
              </Suspense>
              <ComparisonTable lang={lang} />
          </div>
+         </div>
       </section>
 
       {/* 3. BENTO GRID FEATURES */}
-      <section className="px-4 md:px-12 pb-32 max-w-[90rem] mx-auto">
-          <h2 className="text-6xl font-bold text-black mb-16 tracking-tighter">
+      <section className="pb-16 md:pb-24 lg:pb-32">
+          <div className="container-responsive">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-12 md:mb-16 tracking-tighter">
               {isDe ? "SPECS." : "SPECS."}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {features.map((f, i) => (
-                    <div key={i} className="p-10 bg-white rounded-[2.5rem] hover:shadow-xl transition-all duration-300 group border border-black/5">
-                        <div className="w-12 h-12 bg-zinc-50 rounded-2xl flex items-center justify-center text-sonic-orange mb-6 group-hover:scale-110 transition-transform">
-                            <f.icon size={24} />
+                    <div key={i} className="p-6 md:p-8 lg:p-10 bg-white rounded-[2rem] md:rounded-[2.5rem] hover:shadow-xl transition-all duration-300 group border border-black/5">
+                        <div className="w-10 h-10 md:w-12 md:h-12 bg-zinc-50 rounded-2xl flex items-center justify-center text-sonic-orange mb-4 md:mb-6 group-hover:scale-110 transition-transform">
+                            <f.icon size={20} className="md:w-6 md:h-6" />
                         </div>
-                        <h3 className="text-xl font-bold text-black mb-4">{f.title}</h3>
-                        <p className="text-zinc-500 leading-relaxed">{f.desc}</p>
+                        <h3 className="text-lg md:text-xl font-bold text-black mb-3 md:mb-4">{f.title}</h3>
+                        <p className="text-sm md:text-base text-zinc-500 leading-relaxed">{f.desc}</p>
                     </div>
                 ))}
+          </div>
           </div>
       </section>
 
       <ExamplesSection examples={webExamples} />
 
       {/* 4. TECH STACK */}
-      <section className="px-4 md:px-12 pb-32 max-w-[90rem] mx-auto">
-        <h2 className="text-6xl font-bold text-black mb-8 tracking-tighter">
+      <section className="pb-16 md:pb-24 lg:pb-32">
+        <div className="container-responsive">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 md:mb-8 tracking-tighter">
               {isDe ? "Womit wir bauen" : "What We Build With"}
         </h2>
-        <div className="max-w-3xl mb-16">
-            <p className="text-zinc-500 text-lg leading-relaxed whitespace-pre-wrap">
+        <div className="max-w-3xl mb-12 md:mb-16">
+            <p className="text-base md:text-lg text-zinc-500 leading-relaxed whitespace-pre-wrap">
                 {isDe 
                  ? "Wir nutzen moderne Tools, die schnell und zuverlässig sind:\n\nReact - Die gleiche Technologie, die Facebook und Netflix nutzen. Sehr schnell. Sehr stabil.\nTypeScript - Fängt Fehler ab, bevor deine Website live geht. Bedeutet weniger Bugs.\nTailwind CSS - Macht deine Website auf Handys, Tablets und Computern gut aussehend. Automatisch.\nSanity CMS - Du kannst deine Website selbst bearbeiten. Kein Coding nötig. Wie WordPress, aber schneller und sicherer.\n\nDu musst diese Tools nicht verstehen. Aber jeder Entwickler, den du später beauftragst, wird sie erkennen. Das ist wichtig."
                  : "We use modern tools that are fast and reliable:\n\nReact - The same technology Facebook and Netflix use. Very fast. Very stable.\nTypeScript - Catches errors before your website goes live. Means fewer bugs.\nTailwind CSS - Makes your website look good on phones, tablets, and computers. Automatically.\nSanity CMS - You can edit your website yourself. No coding needed. Like WordPress but faster and safer.\n\nYou don't need to understand these tools. But any developer you hire later will recognize them. That's important."}
             </p>
         </div>
         <TechStackMatrix />
+        </div>
       </section>
 
       <AudienceSection perfectFor={audience.perfectFor} notFor={audience.notFor} />
@@ -375,13 +381,15 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
       <FAQSection faqs={faqs} title="FAQ: Web Design" />
 
       {/* 6. CTA */}
-      <section className="py-20 px-4 md:px-12 bg-white border-t border-zinc-100 text-center">
-         <h2 className="text-4xl font-bold text-black mb-8 tracking-tight">
+      <section className="py-12 md:py-16 lg:py-20 bg-white border-t border-zinc-100 text-center">
+         <div className="container-responsive">
+         <h2 className="text-3xl md:text-4xl font-bold text-black mb-6 md:mb-8 tracking-tight">
              {isDe ? "Bereit für das Upgrade?" : "Ready to upgrade?"}
          </h2>
          <Link to={isDe ? "/de/start" : "/en/start"}>
             <Button size="lg">{isDe ? "Projekt Starten" : "Start Project"}</Button>
          </Link>
+         </div>
       </section>
 
     </div>

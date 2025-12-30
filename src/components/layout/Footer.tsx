@@ -7,8 +7,8 @@ export const Footer: React.FC = () => {
   const isDe = location.pathname.startsWith('/de');
 
   return (
-    <footer className="bg-void text-white pb-20 pt-10 px-6 border-t border-zinc-800 relative z-20">
-      <div className="max-w-[95%] mx-auto">
+    <footer className="bg-void text-white pb-20 pt-10 border-t border-zinc-800 relative z-20">
+      <div className="container-responsive">
         
         {/* Trust Badges Row */}
         <div className="flex flex-wrap gap-4 md:gap-8 mb-12 border-b border-zinc-800 pb-12">

@@ -17,6 +17,21 @@
   --font-sans: 'Inter', 'system-ui', 'sans-serif';
   --font-mono: 'JetBrains Mono', 'monospace';
 
+  /* Responsive Container Widths */
+  --container-padding: clamp(1rem, 4vw, 3rem);
+  --container-max-width: min(90rem, 100% - var(--container-padding) * 2);
+  --container-narrow: min(65ch, 100% - var(--container-padding) * 2);
+  --container-wide: min(90rem, 100% - var(--container-padding) * 2);
+
+  /* Fluid Spacing */
+  --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+  --space-sm: clamp(0.75rem, 1.5vw, 1rem);
+  --space-md: clamp(1rem, 2vw, 1.5rem);
+  --space-lg: clamp(1.5rem, 3vw, 2.5rem);
+  --space-xl: clamp(2rem, 4vw, 4rem);
+  --space-2xl: clamp(3rem, 6vw, 6rem);
+  --space-3xl: clamp(4rem, 8vw, 8rem);
+
   --animate-fade-in-up: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-marquee: marquee 40s linear infinite;
   --animate-snow: snow 10s linear infinite;
@@ -100,3 +115,21 @@ html {
 .delay-200 { transition-delay: 200ms; }
 .delay-300 { transition-delay: 300ms; }
 .delay-500 { transition-delay: 500ms; }
+
+/* Responsive Container Utility */
+.container-responsive {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Safe Area Support for Mobile */
+@supports (padding: max(0px)) {
+  .container-responsive {
+    padding-left: max(var(--container-padding), env(safe-area-inset-left));
+    padding-right: max(var(--container-padding), env(safe-area-inset-right));
+  }
+}

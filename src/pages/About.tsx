@@ -24,12 +24,12 @@ export const About: React.FC<Props> = ({ lang }) => {
       />
       
       {/* 1. HERO */}
-      <section className="bg-void pt-40 pb-24 px-4 md:px-12 rounded-b-[3rem] relative overflow-hidden text-center">
-          <ChristmasBalls />
-          <div className="max-w-4xl mx-auto relative z-10">
+      <section className="bg-void pt-40 md:pt-48 pb-16 md:pb-24 rounded-b-[2rem] md:rounded-b-[3rem] relative overflow-hidden text-center">
+          {/* <ChristmasBalls /> */}
+          <div className="container-responsive max-w-4xl mx-auto relative z-10">
             {/* Founder Photo */}
-            <div className="mb-8 relative inline-block">
-                <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white/10 mx-auto bg-zinc-800">
+            <div className="mb-6 md:mb-8 relative inline-block">
+                <div className="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-white/10 mx-auto bg-zinc-800">
                     {/* Placeholder for photo */}
                     <img src="/images/founder-photo.jpg" alt="Founder" className="w-full h-full object-cover" 
                          onError={(e) => {
@@ -39,10 +39,10 @@ export const About: React.FC<Props> = ({ lang }) => {
                 </div>
             </div>
 
-            <h1 className="text-white text-[6vw] leading-[0.9] font-bold tracking-tighter mb-6">
+            <h1 className="text-white text-[clamp(2rem,6vw,4.5rem)] leading-[0.9] font-bold tracking-tighter mb-4 md:mb-6">
                 {isDe ? "Hallo. Ich bin die Person, die deine Website baut." : "Hi. I'm the person who will build your website."}
             </h1>
-            <p className="text-xl md:text-2xl text-zinc-400 leading-relaxed font-light mb-12 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl lg:text-2xl text-zinc-400 leading-relaxed font-light mb-8 md:mb-12 max-w-2xl mx-auto">
                 {isDe ? "Kein Team von 10 Leuten. Keine Agentur. Nur ich. Und ich mache das seit 10 Jahren." : "Not a team of 10. Not an agency. Just me. And I've been doing this for 10 years."}
             </p>
           </div>
@@ -52,15 +52,15 @@ export const About: React.FC<Props> = ({ lang }) => {
       <OriginStory />
 
       {/* 3. PROCESS & BIO */}
-      <section className="py-20 px-4 md:px-12 bg-white">
-          <div className="max-w-[90rem] mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-                <div className="text-lg text-zinc-600 leading-relaxed space-y-8">
-                    <div className="bg-zinc-50 border border-zinc-100 rounded-2xl p-8 space-y-6">
-                        <h3 className="text-black font-bold text-2xl mb-4">
+      <section className="py-12 md:py-16 lg:py-20 bg-white">
+          <div className="container-responsive">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+                <div className="text-base md:text-lg text-zinc-600 leading-relaxed space-y-6 md:space-y-8">
+                    <div className="bg-zinc-50 border border-zinc-100 rounded-xl md:rounded-2xl p-6 md:p-8 space-y-4 md:space-y-6">
+                        <h3 className="text-black font-bold text-xl md:text-2xl mb-3 md:mb-4">
                             {isDe ? "So arbeite ich:" : "How I work:"}
                         </h3>
-                        <div className="space-y-4">
+                        <div className="space-y-3 md:space-y-4 text-sm md:text-base">
                             <p><strong>1.</strong> {isDe ? "Ich entwerfe die Struktur der Website oder Anwendung basierend auf Ihren Anforderungen." : "I design the structure of the website or application based on your requirements."}</p>
                             <p><strong>2.</strong> {isDe ? "Ich finde den besten Tech-Stack für Ihre Situation." : "I find the best tech stack for your situation."}</p>
                             <p><strong>3.</strong> {isDe ? "Ich baue das Fundament textlich auf." : "I build out the foundation textually."}</p>
@@ -70,20 +70,20 @@ export const About: React.FC<Props> = ({ lang }) => {
                             <p><strong>7.</strong> {isDe ? "Qualitätskontrolle und Dokumentation. Dann übergebe ich das Projekt." : "Quality control and documentation. Then I hand over the project."}</p>
                         </div>
                     </div>
-                    <p className="text-black font-medium text-xl px-4 border-l-4 border-sonic-orange">
+                    <p className="text-black font-medium text-lg md:text-xl px-3 md:px-4 border-l-4 border-sonic-orange">
                         {isDe 
                         ? "Sie bekommen schnelle Ergebnisse durch KI. Aber ein Mensch mit 10 Jahren Erfahrung prüft alles. Das ist der Unterschied."
                         : "You get fast results through AI. But a human with 10 years of experience reviews everything. That's the difference."}
                     </p>
                 </div>
                 
-                <div className="bg-zinc-900 rounded-[2rem] p-8 md:p-12 border border-white/10 text-white sticky top-24">
-                    <h3 className="text-white font-bold text-2xl mb-8">Core Stack</h3>
-                    <div className="space-y-4">
-                        <div className="flex items-center gap-4 text-zinc-300 text-lg border-b border-white/5 pb-4"><CheckCircle2 size={24} className="text-sonic-orange" /> React Architecture</div>
-                        <div className="flex items-center gap-4 text-zinc-300 text-lg border-b border-white/5 pb-4"><CheckCircle2 size={24} className="text-sonic-orange" /> TypeScript Strict</div>
-                        <div className="flex items-center gap-4 text-zinc-300 text-lg border-b border-white/5 pb-4"><CheckCircle2 size={24} className="text-sonic-orange" /> Enterprise UX</div>
-                        <div className="flex items-center gap-4 text-zinc-300 text-lg"><CheckCircle2 size={24} className="text-sonic-orange" /> AI Integration</div>
+                <div className="bg-zinc-900 rounded-xl md:rounded-[2rem] p-6 md:p-8 lg:p-12 border border-white/10 text-white md:sticky md:top-24">
+                    <h3 className="text-white font-bold text-xl md:text-2xl mb-6 md:mb-8">Core Stack</h3>
+                    <div className="space-y-3 md:space-y-4">
+                        <div className="flex items-center gap-3 md:gap-4 text-zinc-300 text-base md:text-lg border-b border-white/5 pb-3 md:pb-4"><CheckCircle2 size={20} className="md:w-6 md:h-6 text-sonic-orange" /> React Architecture</div>
+                        <div className="flex items-center gap-3 md:gap-4 text-zinc-300 text-base md:text-lg border-b border-white/5 pb-3 md:pb-4"><CheckCircle2 size={20} className="md:w-6 md:h-6 text-sonic-orange" /> TypeScript Strict</div>
+                        <div className="flex items-center gap-3 md:gap-4 text-zinc-300 text-base md:text-lg border-b border-white/5 pb-3 md:pb-4"><CheckCircle2 size={20} className="md:w-6 md:h-6 text-sonic-orange" /> Enterprise UX</div>
+                        <div className="flex items-center gap-3 md:gap-4 text-zinc-300 text-base md:text-lg"><CheckCircle2 size={20} className="md:w-6 md:h-6 text-sonic-orange" /> AI Integration</div>
                     </div>
                 </div>
             </div>

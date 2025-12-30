@@ -73,7 +73,7 @@ export const Navigation: React.FC = () => {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${navBg}`} aria-label="Main navigation">
-      <div className="max-w-[95%] mx-auto flex items-center justify-between">
+      <div className="container-responsive flex items-center justify-between">
         
         <Link to={isDe ? "/de" : "/en"} className={`text-xl font-bold tracking-tighter uppercase transition-colors duration-500 ${logoColor}`}>
           Super Sonic<span className="text-sonic-orange">.</span>

@@ -11,7 +11,8 @@ export const ChristmasBalls: React.FC = () => {
 
   return (
     // Removed hidden md:block to ensure they are visible on all screen sizes (clipped if needed by parent)
-    <div className="absolute top-0 left-0 right-0 h-[400px] pointer-events-none z-30 overflow-visible">
+    // Reduced z-index to be below text content
+    <div className="absolute top-0 left-0 right-0 h-[400px] pointer-events-none z-10 overflow-visible">
       {balls.map((ball, i) => (
         <div 
             key={i} 
