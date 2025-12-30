@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { ProjectScopeTool } from '../components/features/ProjectScopeTool';
 import { Calendar, Cpu, ArrowRight, ArrowLeft, Mail, Clock } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
 import { SEO } from '../components/SEO';
+import { ProjectConfigurator } from '../components/configurator/ProjectConfigurator';
 
 interface Props { lang: 'de' | 'en'; }
 
@@ -11,7 +11,6 @@ export const StartProject: React.FC<Props> = ({ lang }) => {
   const isDe = lang === 'de';
   const [view, setView] = useState<'selection' | 'configurator'>('selection');
 
-  // Placeholder for the Google Calendar / Calendly link
   const handleBooking = () => {
     window.open('https://calendar.google.com/', '_blank');
   };
@@ -48,19 +47,19 @@ export const StartProject: React.FC<Props> = ({ lang }) => {
             
             <h1 className="text-6xl md:text-8xl font-bold text-black mb-6 tracking-tighter animate-fade-in-up">
                 {view === 'selection' 
-                    ? (isDe ? "LET'S BUILD." : "LET'S BUILD.") 
-                    : (isDe ? "ARCHITECT." : "ARCHITECT.")}
+                    ? (isDe ? "Lass uns bauen." : "Let's build.") 
+                    : (isDe ? "Konfiguration." : "Configuration.")}
             </h1>
             
             <p className="text-xl text-zinc-500 max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-100">
                 {view === 'selection' ? (
                     isDe 
-                    ? "Wählen Sie Ihren Weg. Starten Sie direkt mit dem Konfigurator oder lassen Sie uns persönlich sprechen."
-                    : "Choose your path. Start directly with the engine or lets talk strategy first."
+                    ? "Wählen Sie, wie Sie starten möchten:"
+                    : "Choose how you want to start:"
                 ) : (
                     isDe
-                    ? "Definieren Sie Ihre Anforderungen. Unser System erstellt eine erste Schätzung."
-                    : "Define your requirements. Our system generates a preliminary architectural blueprint."
+                    ? "Schritt für Schritt zum Angebot."
+                    : "Step by step to your quote."
                 )}
             </p>
         </div>
@@ -70,37 +69,40 @@ export const StartProject: React.FC<Props> = ({ lang }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto animate-fade-in-up delay-200">
                 
                 {/* Option 1: Human / Booking */}
-                <div className="bg-white p-10 rounded-[2.5rem] border border-black/5 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group h-[500px]">
+                <div className="bg-white p-10 rounded-[2.5rem] border border-black/5 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group h-auto min-h-[500px]">
                     <div>
                         <div className="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-sonic-orange mb-8 group-hover:scale-110 transition-transform">
                             <Calendar size={28} />
                         </div>
                         <h2 className="text-4xl font-bold text-black mb-4 tracking-tight">
-                            {isDe ? "Consulting Call" : "Strategy Call"}
+                            {isDe ? "Strategy Call" : "Strategy Call"}
                         </h2>
-                        <p className="text-zinc-500 text-lg leading-relaxed mb-6">
-                            {isDe 
-                             ? "Unsicher über den Tech-Stack? Lassen Sie uns in 15 Minuten klären, ob wir zueinander passen."
-                             : "Unsure about the tech stack? Let's figure out if we are a match in a focused 15-minute session."}
-                        </p>
-                        <div className="flex items-center gap-4 text-sm font-medium text-zinc-600 bg-zinc-50 p-4 rounded-xl">
-                            <Clock size={18} className="text-sonic-orange"/>
-                            {isDe ? "15 Min / Google Meet" : "15 Min / Google Meet"}
+                        
+                        <div className="path-details mb-6">
+                          <h3 className="font-bold text-sm uppercase text-zinc-400 mb-2">Perfekt, wenn:</h3>
+                          <ul className="space-y-2 text-zinc-600">
+                            <li>• Nicht sicher, was du brauchst</li>
+                            <li>• Erst Rat willst</li>
+                            <li>• Komplexes Projekt</li>
+                          </ul>
+                        </div>
+
+                        <div className="flex flex-col gap-3 text-sm font-medium text-zinc-600 bg-zinc-50 p-4 rounded-xl mb-6">
+                            <div className="flex items-center gap-3"><Clock size={16} className="text-sonic-orange"/> 15 Minuten</div>
+                            <div className="flex items-center gap-3"><Mail size={16} className="text-sonic-orange"/> Google Meet</div>
+                            <div className="flex items-center gap-3"><span className="text-green-500">✓</span> Keine Verpflichtung</div>
                         </div>
                     </div>
                     
                     <div className="space-y-4">
                         <Button onClick={handleBooking} size="lg" className="w-full justify-between group-hover:bg-[#E64500]">
-                            {isDe ? "Termin buchen" : "Book Appointment"} <ArrowRight size={20} />
+                            {isDe ? "Call buchen" : "Book Call"} <ArrowRight size={20} />
                         </Button>
-                        <button onClick={handleEmail} className="w-full text-center text-sm font-medium text-zinc-400 hover:text-black transition-colors flex items-center justify-center gap-2">
-                            <Mail size={14} /> {isDe ? "oder per Email" : "or via Email"}
-                        </button>
                     </div>
                 </div>
 
                 {/* Option 2: Machine / Configurator */}
-                <div className="bg-black p-10 rounded-[2.5rem] border border-zinc-800 shadow-xl hover:shadow-2xl hover:border-zinc-600 transition-all duration-300 flex flex-col justify-between group h-[500px]">
+                <div className="bg-black p-10 rounded-[2.5rem] border border-zinc-800 shadow-xl hover:shadow-2xl hover:border-zinc-600 transition-all duration-300 flex flex-col justify-between group h-auto min-h-[500px]">
                     <div>
                         <div className="w-14 h-14 bg-zinc-900 rounded-2xl flex items-center justify-center text-white mb-8 group-hover:scale-110 transition-transform border border-zinc-800">
                             <Cpu size={28} />
@@ -108,14 +110,20 @@ export const StartProject: React.FC<Props> = ({ lang }) => {
                         <h2 className="text-4xl font-bold text-white mb-4 tracking-tight">
                             {isDe ? "Projekt Engine" : "Project Engine"}
                         </h2>
-                        <p className="text-zinc-400 text-lg leading-relaxed mb-6">
-                            {isDe 
-                             ? "Sie wissen, was Sie wollen? Generieren Sie eine technische Blaupause und eine Kostenschätzung sofort."
-                             : "Know what you need? Generate a technical blueprint and investment estimate instantly."}
-                        </p>
-                        <div className="flex items-center gap-2 text-sm font-mono text-zinc-500 bg-zinc-900/50 p-4 rounded-xl border border-zinc-800">
-                            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                            {isDe ? "System Online" : "System Online"}
+                        
+                        <div className="path-details mb-6">
+                          <h3 className="font-bold text-sm uppercase text-zinc-500 mb-2">Perfekt, wenn:</h3>
+                          <ul className="space-y-2 text-zinc-400">
+                            <li>• Du weißt, was du brauchst</li>
+                            <li>• Sofort-Angebot willst</li>
+                            <li>• Bereit zum Starten</li>
+                          </ul>
+                        </div>
+
+                        <div className="flex flex-col gap-3 text-sm font-medium text-zinc-400 bg-zinc-900/50 p-4 rounded-xl border border-zinc-800 mb-6">
+                            <div className="flex items-center gap-3"><Clock size={16} className="text-white"/> 5 Minuten</div>
+                            <div className="flex items-center gap-3"><span className="text-white">💰</span> Sofort-Angebot</div>
+                            <div className="flex items-center gap-3"><span className="text-green-500">✓</span> Keine Verpflichtung</div>
                         </div>
                     </div>
                     
@@ -130,9 +138,15 @@ export const StartProject: React.FC<Props> = ({ lang }) => {
         {/* VIEW: TOOL */}
         {view === 'configurator' && (
             <div className="animate-fade-in-up">
-                <ProjectScopeTool />
+                <ProjectConfigurator />
             </div>
         )}
+        
+        <div className="trust-indicators text-center mt-12 text-zinc-400 text-sm flex justify-center gap-8 flex-wrap">
+          <span>✓ Keine Kreditkarte nötig</span>
+          <span>✓ Kein Druck</span>
+          <span>✓ Antwort in 24h</span>
+        </div>
 
       </div>
     </div>

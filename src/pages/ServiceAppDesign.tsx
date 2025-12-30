@@ -8,6 +8,10 @@ import { SEO } from '../components/SEO';
 import { FAQSection } from '../components/features/FAQSection';
 import { SoftwareComparisonTable } from '../components/features/SoftwareComparisonTable';
 import { TechStackMatrix } from '../components/features/TechStackMatrix';
+import { MVPProblem } from '../components/services/ProblemSection';
+import { ExamplesSection } from '../components/services/ExamplesSection';
+import { AudienceSection } from '../components/services/AudienceSection';
+import { MVPPricing } from '../components/services/MVPPricing';
 
 interface Props { lang: 'de' | 'en'; }
 
@@ -168,6 +172,8 @@ export const ServiceAppDesign: React.FC<Props> = ({ lang }) => {
           </div>
       </section>
 
+      <MVPProblem />
+
       {/* 2. PROCESS (Simple 3 Steps) */}
       <section className="py-24 px-4 md:px-12 max-w-[90rem] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -182,6 +188,10 @@ export const ServiceAppDesign: React.FC<Props> = ({ lang }) => {
               ))}
           </div>
       </section>
+
+      <MVPPricing />
+      <ExamplesSection examples={mvpExamples} />
+      <AudienceSection perfectFor={audience.perfectFor} notFor={audience.notFor} />
 
       {/* 3. COMPARISON */}
       <section className="py-12 px-4 md:px-12 max-w-[90rem] mx-auto">

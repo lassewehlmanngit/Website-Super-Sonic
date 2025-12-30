@@ -8,6 +8,8 @@ import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
 import { SEO } from '../components/SEO';
 import { FAQSection } from '../components/features/FAQSection';
 import { useCMSContent } from '../lib/cms';
+import { ProblemSection } from '../components/home/ProblemSection';
+import { TestimonialsSection } from '../components/home/TestimonialsSection';
 
 interface HomeProps {
   lang: 'de' | 'en';
@@ -31,16 +33,10 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
             : "You do. 100%.\n\nThink of it like buying a house. After you pay us, we give you the keys. The website is yours.\n\nWe put all the code in a secure folder online (called GitHub). Only you can access it. You can hire any developer to change it. Or sell your company with the website included.\n\nWe have zero claim on your website after we hand it over."
       },
       {
-          question: isDe ? "Kann ich meine Website selbst bearbeiten ohne Programmierkenntnisse?" : "Can I edit my website myself without programming skills?",
+          question: isDe ? "Was kostet eine professionelle Website in Deutschland?" : "What does a professional website cost in Germany?",
           answer: isDe
-            ? "Ja. Wir integrieren ein Headless CMS wie Keystatic oder Sanity. Sie können Texte und Bilder ändern, ohne den Code zu berühren. So einfach wie WordPress, aber schneller und sicherer."
-            : "Yes. We integrate a Headless CMS like Keystatic or Sanity. You can edit text and images without touching the code. As easy as WordPress, but faster and safer."
-      },
-      {
-          question: isDe ? "Warum nicht einfach WordPress nutzen?" : "Why not just use WordPress?",
-          answer: isDe
-            ? "WordPress ist wie eine Wohnung mieten. Unsere Websites sind wie ein Haus besitzen.\n\nMit WordPress:\n• Du zahlst für immer (€50-200/Monat)\n• Plugins brechen nach Updates\n• Hacker zielen darauf ab (es sind 43% aller Websites)\n• Langsames Laden = Leute gehen = verlorenes Geld\n\nMit uns:\n• Du zahlst einmal\n• Nichts bricht (keine Plugins)\n• Individuell gebaut = schwer zu hacken\n• Schnelles Laden = Leute bleiben = mehr Geld\n\nHier ist der echte Unterschied: Eine WordPress-Site braucht 3-5 Sekunden zum Laden. Unsere braucht 0,8 Sekunden. Google machte eine Studie: Jede Sekunde Verzögerung kostet dich 20% deiner Besucher."
-            : "WordPress is like renting an apartment. Our websites are like owning a house.\n\nWith WordPress:\n• You pay forever (€50-200/month)\n• Plugins break after updates\n• Hackers target it (it's 43% of all websites)\n• Slow loading = people leave = lost money\n\nWith us:\n• You pay once\n• Nothing breaks (no plugins)\n• Custom-built = hard to hack\n• Fast loading = people stay = more money\n\nHere's the real difference: A WordPress site takes 3-5 seconds to load. Ours takes 0.8 seconds. Google did a study: Every second of delay costs you 20% of your visitors."
+            ? "Ab €5.800 für eine komplette Website (Starter-Paket, fertig in 72 Stunden). Festpreis. Keine monatlichen Gebühren. Sie zahlen einmal und besitzen die Website für immer. Größere Projekte auf Anfrage."
+            : "Starting at €5,800 for a complete website (Starter package, ready in 72 hours). Fixed price. No monthly fees. You pay once and own the website forever. Larger projects on request."
       },
       {
           question: isDe ? "Wie lange dauert es eine neue Website zu entwickeln?" : "How long does it take to develop a new website?",
@@ -49,30 +45,13 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
             : "A marketing website takes 2-4 weeks. Our Starter package is ready in 72 hours. We use AI for speed, but a human with 10 years of experience reviews everything."
       },
       {
-          question: isDe ? "Was kostet eine professionelle Website in Deutschland?" : "What does a professional website cost in Germany?",
+          question: isDe ? "Kann ich meine Website selbst bearbeiten ohne Programmierkenntnisse?" : "Can I edit my website myself without programming skills?",
           answer: isDe
-            ? "Ab €5.800 für eine komplette Website (Starter-Paket, fertig in 72 Stunden). Festpreis. Keine monatlichen Gebühren. Sie zahlen einmal und besitzen die Website für immer. Größere Projekte auf Anfrage."
-            : "Starting at €5,800 for a complete website (Starter package, ready in 72 hours). Fixed price. No monthly fees. You pay once and own the website forever. Larger projects on request."
-      },
-      {
-          question: isDe ? "Ist KI-Code sicher? Wird er nicht kaputt gehen?" : "Is AI code safe? Won't it break?",
-          answer: isDe
-            ? "Hier ist die Wahrheit: KI schreibt Code schnell. Aber sie macht Fehler.\n\nDeshalb überprüfe ich jede einzelne Zeile. Ich habe 10 Jahre lang Software für Banken (Allianz) und Autofirmen (Volkswagen) gebaut. Ich weiß, was kaputtgeht und was nicht.\n\nDenk an KI wie an einen Junior-Entwickler, der 24/7 arbeitet. Sie ist schnell, braucht aber Aufsicht. Ich bin die Aufsicht.\n\nDu bekommst die Geschwindigkeit von KI + die Sicherheit menschlicher Erfahrung."
-            : "Here's the truth: AI writes code fast. But it makes mistakes.\n\nThat's why I check every single line. I've built software for banks (Allianz) and car companies (Volkswagen) for 10 years. I know what breaks and what doesn't.\n\nThink of AI like a junior developer who works 24/7. They're fast but need supervision. I'm the supervisor.\n\nYou get the speed of AI + the safety of human experience."
-      },
-      {
-          question: isDe ? "Kann ich meine Website später erweitern oder ändern?" : "Can I extend or change my website later?",
-          answer: isDe
-            ? "Ja. Da Sie den vollen Zugriff auf den Quellcode haben, kann jeder Entwickler die Website erweitern. Sie sind nicht an mich gebunden. Der Code ist sauber und modular aufgebaut."
-            : "Yes. Since you have full access to the source code, any developer can extend the website. You're not tied to me. The code is clean and modular."
-      },
-      {
-          question: isDe ? "Brauche ich monatliche Wartungskosten für meine Website?" : "Do I need monthly maintenance costs for my website?",
-          answer: isDe
-            ? "Nein. Unsere Websites sind statisch und sicher. Sie brauchen keine monatlichen Wartungskosten. Nur Hosting (ca. €19/Monat bei Render). Keine Plugin-Updates. Keine Sicherheits-Patches."
-            : "No. Our websites are static and secure. You don't need monthly maintenance costs. Only hosting (approx. €19/month on Render). No plugin updates. No security patches."
+            ? "Ja. Wir integrieren ein Headless CMS wie Keystatic oder Sanity. Sie können Texte und Bilder ändern, ohne den Code zu berühren. So einfach wie WordPress, aber schneller und sicherer."
+            : "Yes. We integrate a Headless CMS like Keystatic or Sanity. You can edit text and images without touching the code. As easy as WordPress, but faster and safer."
       }
   ];
+
 
   useEffect(() => {
     // Initialize Scroll Observer
@@ -205,43 +184,8 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
         </div>
       </section>
 
-      {/* 1.1 COST EXPLAINER SECTION */}
-      <section className="bg-paper py-20 px-4 md:px-12 border-b border-zinc-200">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
-          
-          {/* Left: Number Block */}
-          <div className="md:col-span-1">
-            <div className="inline-flex flex-col items-start justify-center rounded-3xl bg-black text-white px-6 py-6 md:px-8 md:py-8 shadow-xl">
-              <span className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400 mb-3">
-                {isDe ? "Was du wirklich zahlst" : "What you really pay"}
-              </span>
-              <div className="text-4xl md:text-5xl font-bold leading-none mb-2">
-                €2.400
-              </div>
-              <span className="text-xs font-mono uppercase tracking-[0.2em] text-zinc-400">
-                {isDe ? "pro Jahr" : "per year"}
-              </span>
-            </div>
-          </div>
-
-          {/* Right: Text Block */}
-          <div className="md:col-span-2 space-y-4">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-black">
-              {isDe ? "Mieten vs. Besitzen" : "Renting vs. owning"}
-            </h2>
-            <p className="text-zinc-600 text-base md:text-lg leading-relaxed whitespace-pre-wrap">
-              {isDe
-                ? "Gerade zahlst du wahrscheinlich jeden Monat €50 an WordPress. Oder €200 an Webflow. Für immer.\n\nDas sind €2.400 pro Jahr für etwas, das dir nie gehören wird."
-                : "Right now you're probably paying €50 a month to WordPress. Or €200 to Webflow. Forever.\n\nThat's €2,400 per year for something you'll never own."}
-            </p>
-            <p className="text-zinc-900 text-base md:text-lg leading-relaxed font-medium">
-              {isDe
-                ? "Wir machen das anders. Du zahlst einmal. Wir bauen deine Website. Wir geben dir den Code. Sie gehört dir. Für immer."
-                : "We do it differently. You pay once. We build your website. We give you the code. It's yours. Forever."}
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* 1.1 PROBLEM SECTION (Replaces Cost Explainer) */}
+      <ProblemSection />
 
       {/* 2. SERVICES BENTO GRID (Paper Background) */}
       <section className="py-32 px-4 md:px-12 max-w-[95rem] mx-auto">
@@ -327,6 +271,9 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
           </div>
       </section>
 
+      {/* 2.5 Testimonials Section */}
+      <TestimonialsSection />
+
       {/* 3. VELOCITY SECTION (Visual Break) */}
       <section className="py-20 px-4 md:px-12 bg-white border-y border-zinc-200">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
@@ -376,6 +323,11 @@ export const Home: React.FC<HomeProps> = ({ lang }) => {
 
       {/* 5. FAQ Section */}
       <FAQSection faqs={faqs} title={isDe ? "Häufige Fragen" : "FAQ"} />
+      <div className="text-center pb-20 -mt-10">
+          <Link to={isDe ? "/de/faq" : "/en/faq"} className="view-all-faq text-sonic-orange font-bold hover:underline">
+             {isDe ? "Alle FAQs ansehen →" : "View all FAQs →"}
+          </Link>
+      </div>
 
       {/* 6. FINAL CTA */}
       <section className="py-40 px-4 md:px-12 bg-paper text-center">

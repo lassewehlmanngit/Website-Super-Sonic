@@ -7,6 +7,9 @@ import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
 import { SEO } from '../components/SEO';
 import { Link } from 'react-router-dom';
 import { FAQSection } from '../components/features/FAQSection';
+import { WebDesignProblem } from '../components/services/ProblemSection';
+import { ExamplesSection } from '../components/services/ExamplesSection';
+import { AudienceSection } from '../components/services/AudienceSection';
 
 // Lazy load calculator component (heavy, only needed when user scrolls to it)
 const TCOCalculator = lazy(() => import('../components/features/TCOCalculator').then(module => ({ default: module.TCOCalculator })));
@@ -104,6 +107,67 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
     }
   ];
 
+  const webExamples = [
+    {
+      title: "Fashion E-Commerce",
+      client: "Boutique Brand",
+      thumbnail: "", 
+      metrics: [
+        { label: "Load Time", value: "0.8s" },
+        { label: "Speed Score", value: "100/100" },
+        { label: "Revenue", value: "+81%" }
+      ],
+      link: "/work"
+    },
+    {
+      title: "SaaS Marketing Site",
+      client: "Tech Startup",
+      thumbnail: "",
+      metrics: [
+        { label: "Conversion", value: "+45%" },
+        { label: "Lighthouse", value: "100" },
+        { label: "Traffic", value: "2.5x" }
+      ],
+      link: "/work"
+    },
+    {
+      title: "Corporate Portal",
+      client: "Finance AG",
+      thumbnail: "",
+      metrics: [
+        { label: "Security", value: "A+" },
+        { label: "Uptime", value: "99.99%" },
+        { label: "Speed", value: "0.5s" }
+      ],
+      link: "/work"
+    }
+  ];
+
+  const audience = {
+    perfectFor: isDe ? [
+      "€20k+ Jahresumsatz online",
+      "Custom Features nötig",
+      "Code-Eigentum wichtig",
+      "Geschwindigkeit wichtig"
+    ] : [
+      "€20k+ Annual Revenue online",
+      "Custom Features needed",
+      "Code Ownership important",
+      "Speed important"
+    ],
+    notFor: isDe ? [
+      "Gerade erst gestartet (kein Umsatz)",
+      "Zufrieden mit Templates",
+      "Monatlicher Support gewünscht",
+      "Brauche 6+ Monate Projekt"
+    ] : [
+      "Just started (no revenue)",
+      "Happy with templates",
+      "Monthly support wanted",
+      "Need 6+ months project"
+    ]
+  };
+
   const faqs = [
       {
           question: isDe ? "Wie schnell kann ich eine neue Website bekommen?" : "How fast can I get a new website?",
@@ -192,6 +256,8 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
              </Link>
           </div>
       </section>
+
+      <WebDesignProblem />
 
       {/* 2. PACKAGES (Pricing) */}
       <section className="py-32 px-4 md:px-12 max-w-[90rem] mx-auto">
@@ -286,6 +352,8 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
           </div>
       </section>
 
+      <ExamplesSection examples={webExamples} />
+
       {/* 4. TECH STACK */}
       <section className="px-4 md:px-12 pb-32 max-w-[90rem] mx-auto">
         <h2 className="text-6xl font-bold text-black mb-8 tracking-tighter">
@@ -300,6 +368,8 @@ export const ServiceWebDesign: React.FC<Props> = ({ lang }) => {
         </div>
         <TechStackMatrix />
       </section>
+
+      <AudienceSection perfectFor={audience.perfectFor} notFor={audience.notFor} />
       
       {/* 5. FAQ */}
       <FAQSection faqs={faqs} title="FAQ: Web Design" />

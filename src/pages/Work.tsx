@@ -1,53 +1,78 @@
 import React from 'react';
 import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
 import { SEO } from '../components/SEO';
-import { CaseStudyCard } from '../components/work/CaseStudyCard';
+import { WorkFilters } from '../components/work/WorkFilters';
+import { FeaturedCase } from '../components/work/FeaturedCase';
+import { ProjectCard } from '../components/work/ProjectCard';
+import { ResultsSummary } from '../components/work/ResultsSummary';
 
 interface Props { lang: 'de' | 'en'; }
 
 export const Work: React.FC<Props> = ({ lang }) => {
   const isDe = lang === 'de';
 
-  const cases = [
-    {
-      title: isDe ? "Neobank für 20-Jährige" : "Neobank for 20-Somethings",
-      category: "Fintech MVP",
-      description: isDe
-        ? "Das Problem: Dieses Startup wollte eine Banking-App für junge Leute bauen. Sie hatten €4M bei Investoren zu sammeln. Aber Investoren wollten etwas Echtes sehen. Nicht nur Folien.\n\nWas wir gebaut haben: Einen funktionierenden Prototypen in 72 Stunden. Man konnte ein Konto erstellen. Eine Kreditkarte verknüpfen. Ausgaben verfolgen. Alle Kernfunktionen. Nicht poliert. Nicht perfekt. Aber echt.\n\nDas Ergebnis: Sie zeigten es Investoren am Montag. Bis Freitag hatten sie €4,2M zugesagt."
-        : "The Problem: This startup wanted to build a banking app for young people. They had €4M to raise from investors. But investors wanted to see something real. Not just slides.\n\nWhat We Built: A working prototype in 72 hours. You could create an account. Link a credit card. Track spending. All the core features. Not polished. Not perfect. But real.\n\nThe Result: They showed it to investors on Monday. By Friday, they had €4.2M committed.",
-      tags: ["React", "Tailwind", "Real-Time Data", "MVP"],
-      link: isDe ? "/de/work" : "/en/work",
-      stats: [
-        { label: isDe ? "Baukosten" : "Cost to build", value: "€12,000" },
-        { label: isDe ? "Eingesammeltes Geld" : "Money raised", value: "€4.2M" },
-        { label: "ROI", value: "35,000%" }
-      ]
-    },
+  const featuredCaseData = {
+    title: "Neobank für Gen Z",
+    client: "FinTech Startup",
+    industry: "Banking",
+    thumbnail: "", 
+    challenge: "Brauchten €4M von Investoren. Investoren wollten Proof of Concept, nicht nur Folien.",
+    solution: "Funktionierender Prototyp in 72 Stunden. Kernfunktionen: Account-Erstellung, Kartenverknüpfung, Ausgaben-Tracking.",
+    results: [
+      { label: "In 4 Tagen gesammelt", value: "€4,2M" },
+      { label: "ROI", value: "35.000%" },
+      { label: "Beta Launch", value: "2 Monate" }
+    ],
+    quote: "Ohne diesen Prototypen würden wir immer noch Folien präsentieren.",
+    quoteAuthor: "CEO",
+    quoteTitle: "NeoBank",
+    link: "/work"
+  };
+
+  const projects: any[] = [
     {
       title: "Logistics Dashboard",
-      category: "SaaS Platform",
-      description: isDe
-        ? "Redesign einer komplexen Logistik-Software. Fokus auf Informationsdichte und Reduzierung der Klickwege für Disponenten."
-        : "Redesign of a complex logistics software. Focus on information density and reduction of click paths for dispatchers.",
-      tags: ["UX Audit", "Design System", "Dashboard"],
-      link: isDe ? "/de/work" : "/en/work",
-      stats: [
-        { label: "Efficiency Gain", value: "+35%" },
-        { label: "User Satisfaction", value: "4.8/5" }
-      ]
+      client: "SaaS Platform",
+      serviceType: "ux",
+      thumbnail: "",
+      metrics: [
+        { label: "Efficiency", value: "+35%" },
+        { label: "Satisfaction", value: "4.8/5" }
+      ],
+      link: "/work"
     },
     {
         title: "Architecture Portfolio",
-        category: "Marketing Asset",
-        description: isDe
-          ? "Minimalistische Portfolio-Website für ein Architekturbüro. Fokus auf Ladezeit (LCP < 0.8s) und visuelle Hierarchie."
-          : "Minimalist portfolio website for an architecture firm. Focus on load time (LCP < 0.8s) and visual hierarchy.",
-        tags: ["Astro", "CMS", "SEO"],
-        link: isDe ? "/de/work" : "/en/work",
-        stats: [
-          { label: "PageSpeed Score", value: "100" },
-          { label: "SEO Visibility", value: "+200%" }
-        ]
+        client: "Architekturbüro",
+        serviceType: "web",
+        thumbnail: "",
+        metrics: [
+          { label: "PageSpeed", value: "100" },
+          { label: "SEO", value: "+200%" }
+        ],
+        link: "/work"
+    },
+    {
+        title: "E-Commerce Replatforming",
+        client: "Fashion Brand",
+        serviceType: "web",
+        thumbnail: "",
+        metrics: [
+          { label: "Revenue", value: "+45%" },
+          { label: "Conversion", value: "3.2%" }
+        ],
+        link: "/work"
+    },
+    {
+        title: "HealthTech MVP",
+        client: "MedTech Startup",
+        serviceType: "mvp",
+        thumbnail: "",
+        metrics: [
+          { label: "Compliance", value: "100%" },
+          { label: "Pilot Users", value: "500+" }
+        ],
+        link: "/work"
     }
   ];
 
@@ -67,23 +92,29 @@ export const Work: React.FC<Props> = ({ lang }) => {
       <ChristmasBalls />
 
       <div className="max-w-[90rem] mx-auto relative z-10">
-        <div className="mb-24">
+        <div className="mb-12">
             <h1 className="text-6xl md:text-9xl font-bold text-black mb-12 tracking-tighter leading-[0.85]">
                 {isDe ? "AUSGEWÄHLTE" : "SELECTED"} <br />
                 <span className="text-zinc-300">{isDe ? "ARBEITEN." : "WORK."}</span>
             </h1>
-            <p className="text-xl text-zinc-500 max-w-2xl leading-relaxed">
+            <p className="text-xl text-zinc-500 max-w-2xl leading-relaxed mb-12">
                 {isDe
                  ? "Software und Webseiten, die Business-Probleme lösen. Keine Platzhalter, echte Ergebnisse."
                  : "Software and websites that solve business problems. No placeholders, real results."}
             </p>
+            
+            <WorkFilters />
         </div>
 
-        <div className="space-y-12">
-            {cases.map((project, index) => (
-                <CaseStudyCard key={index} {...project} />
+        <FeaturedCase data={featuredCaseData} />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+            {projects.map((project, index) => (
+                <ProjectCard key={index} data={project} />
             ))}
         </div>
+
+        <ResultsSummary />
 
         <div className="mt-32 text-center">
             <h3 className="text-2xl font-bold text-black mb-6">

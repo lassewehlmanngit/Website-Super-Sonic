@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+@import "./styles/utilities/typography.css";
+@import "./styles/utilities/mobile.css";
+@import "./styles/components/trust-bar.css";
+@import "./styles/components/exit-popup.css";
+@import "./styles/components/sticky-cta.css";
+@import "./styles/components/problem-section.css";
+@import "./styles/components/testimonials.css";
+@import "./styles/components/pricing.css";
+
 @theme {
   --color-paper: #F3F3F3;
   --color-void: #050505;

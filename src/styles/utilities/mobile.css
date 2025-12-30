@@ -1,0 +1,33 @@
+/* Comparison Table Mobile Fix */
+@media (max-width: 768px) {
+  .cost-comparison {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .vs-divider {
+    text-align: center;
+    padding: 1rem 0;
+  }
+}
+
+/* Grid Layouts Mobile Fix */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+

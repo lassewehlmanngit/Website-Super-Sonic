@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom';
 import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
 import { SEO } from '../components/SEO';
 import { FAQSection } from '../components/features/FAQSection';
+import { UXProblem } from '../components/services/ProblemSection';
+import { ExamplesSection } from '../components/services/ExamplesSection';
+import { AudienceSection } from '../components/services/AudienceSection';
+import { UXPricing } from '../components/services/UXPricing';
 
 // Lazy load calculator component (heavy, only needed when user scrolls to it)
 const SAMCalculator = lazy(() => import('../components/features/SAMCalculator').then(module => ({ default: module.SAMCalculator })));
@@ -118,6 +122,67 @@ export const ServiceUX: React.FC<Props> = ({ lang }) => {
       }
   ];
 
+  const uxExamples = [
+    {
+      title: "E-Commerce Audit",
+      client: "Fashion Store",
+      thumbnail: "",
+      metrics: [
+        { label: "Add to Cart", value: "+45%" },
+        { label: "Checkout", value: "+22%" },
+        { label: "Revenue", value: "+30%" }
+      ],
+      link: "/work"
+    },
+    {
+      title: "SaaS Onboarding",
+      client: "B2B Tech",
+      thumbnail: "",
+      metrics: [
+        { label: "Activation", value: "+60%" },
+        { label: "Drop-off", value: "-40%" },
+        { label: "Support", value: "-25%" }
+      ],
+      link: "/work"
+    },
+     {
+      title: "Mobile App Redesign",
+      client: "FinTech",
+      thumbnail: "",
+      metrics: [
+        { label: "Retention", value: "+15%" },
+        { label: "App Store", value: "4.8★" },
+        { label: "Daily Active", value: "+50%" }
+      ],
+      link: "/work"
+    }
+  ];
+
+  const audience = {
+    perfectFor: isDe ? [
+      "Traffic aber keine Sales",
+      "Bounce Rate >60%",
+      "Fixes funktionieren nicht",
+      "€50k+ Online-Umsatz/Jahr"
+    ] : [
+      "Traffic but no sales",
+      "Bounce Rate >60%",
+      "Fixes don't work",
+      "€50k+ Online Revenue/Year"
+    ],
+    notFor: isDe ? [
+      "Brandneue Site (keine Daten)",
+      "Wenig Traffic (<1000/Monat)",
+      "Problem ist Marketing, nicht UX",
+      "Kein Budget für Fixes"
+    ] : [
+      "Brand new site (no data)",
+      "Low traffic (<1000/month)",
+      "Problem is marketing, not UX",
+      "No budget for fixes"
+    ]
+  };
+
   return (
     <div className="bg-paper min-h-screen">
       <SEO 
@@ -153,6 +218,8 @@ export const ServiceUX: React.FC<Props> = ({ lang }) => {
              </Link>
           </div>
       </section>
+
+      <UXProblem />
 
       {/* 2. PRICING */}
       <section className="py-32 px-4 md:px-12 max-w-[90rem] mx-auto">
@@ -231,6 +298,10 @@ export const ServiceUX: React.FC<Props> = ({ lang }) => {
             </div>
          </div>
       </section>
+
+      <UXPricing />
+      <ExamplesSection examples={uxExamples} />
+      <AudienceSection perfectFor={audience.perfectFor} notFor={audience.notFor} />
 
       {/* 5. ROI CALCULATOR (Lead Magnet) */}
       <section className="px-4 md:px-12 pb-32 max-w-[90rem] mx-auto">
