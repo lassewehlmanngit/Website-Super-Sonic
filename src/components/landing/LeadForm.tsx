@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
-import { ArrowRight, ArrowLeft, Check, User, Target, Palette, Key, Video } from 'lucide-react';
+import React, { useState, useEffect, useRef, useId } from 'react';
+import { ArrowRight, ArrowLeft, Check, User, Target, Palette, Key, Video, AlertCircle } from 'lucide-react';
 import { FormSuccess } from './FormSuccess';
+
+// ============================================
+// TYPE DEFINITIONS
+// ============================================
 
 interface LeadFormProps {
   lang: 'de' | 'en';
 }
+
+// Strict union types for better type safety
+type GoalValue = 'image' | 'revenue' | 'recruiting' | 'independence';
+type FeatureValue = 'contact' | 'team' | 'portfolio' | 'careers' | 'blog';
+type OwnershipValue = 'full' | 'doesnt-matter' | '';
+type TestimonialValue = 'yes' | 'discuss' | '';
 
 interface FormData {
   // Step 1: Basis
@@ -12,17 +22,54 @@ interface FormData {
   email: string;
   currentWebsite: string;
   // Step 2: Plan
-  goals: string[];
+  goals: GoalValue[];
   // Step 3: Style
   inspirations: string;
-  features: string[];
+  features: FeatureValue[];
   // Step 4: Eigentum
-  ownership: string;
+  ownership: OwnershipValue;
   // Step 5: Testimonial
-  testimonial: string;
+  testimonial: TestimonialValue;
 }
 
-const initialFormData: FormData = {
+interface FormErrors {
+  name?: string;
+  email?: string;
+  currentWebsite?: string;
+  goals?: string;
+  ownership?: string;
+  testimonial?: string;
+}
+
+interface TouchedFields {
+  name: boolean;
+  email: boolean;
+  currentWebsite: boolean;
+  goals: boolean;
+  ownership: boolean;
+  testimonial: boolean;
+}
+
+// ============================================
+// CONSTANTS
+// ============================================
+
+const GOAL_OPTIONS: { value: GoalValue; labelDe: string; labelEn: string }[] = [
+  { value: 'image', labelDe: 'Endlich mal modern aussehen (Image)', labelEn: 'Finally look modern (Image)' },
+  { value: 'revenue', labelDe: 'Mehr Anfragen/Kunden gewinnen (Umsatz)', labelEn: 'Get more inquiries/customers (Revenue)' },
+  { value: 'recruiting', labelDe: 'Neue Mitarbeiter anziehen (Recruiting)', labelEn: 'Attract new employees (Recruiting)' },
+  { value: 'independence', labelDe: 'Meinen alten Agentur-Vertrag kündigen (Unabhängigkeit)', labelEn: 'Cancel my old agency contract (Independence)' },
+];
+
+const FEATURE_OPTIONS: { value: FeatureValue; labelDe: string; labelEn: string }[] = [
+  { value: 'contact', labelDe: 'Kontaktformular', labelEn: 'Contact form' },
+  { value: 'team', labelDe: 'Team-Vorstellung', labelEn: 'Team presentation' },
+  { value: 'portfolio', labelDe: 'Portfolio/Referenzen', labelEn: 'Portfolio/References' },
+  { value: 'careers', labelDe: 'Karriere-Bereich', labelEn: 'Careers section' },
+  { value: 'blog', labelDe: 'Blog', labelEn: 'Blog' },
+];
+
+const INITIAL_FORM_DATA: FormData = {
   name: '',
   email: '',
   currentWebsite: '',
@@ -33,99 +80,275 @@ const initialFormData: FormData = {
   testimonial: '',
 };
 
+const INITIAL_TOUCHED: TouchedFields = {
+  name: false,
+  email: false,
+  currentWebsite: false,
+  goals: false,
+  ownership: false,
+  testimonial: false,
+};
+
+const TOTAL_STEPS = 5;
+
+// ============================================
+// VALIDATION UTILITIES
+// ============================================
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const URL_REGEX = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;
+
+function validateEmail(email: string): boolean {
+  return EMAIL_REGEX.test(email.trim());
+}
+
+function validateUrl(url: string): boolean {
+  if (!url.trim()) return true; // Optional field
+  return URL_REGEX.test(url.trim());
+}
+
+// ============================================
+// COMPONENT
+// ============================================
+
 export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
   const isDe = lang === 'de';
+  const formId = useId();
+  
+  // Refs for focus management
+  const stepContainerRef = useRef<HTMLDivElement>(null);
+  const firstFieldRef = useRef<HTMLInputElement>(null);
+  const announcerRef = useRef<HTMLDivElement>(null);
+  
+  // State
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [formData, setFormData] = useState<FormData>(INITIAL_FORM_DATA);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<TouchedFields>(INITIAL_TOUCHED);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const totalSteps = 5;
-
+  // Step configuration
   const stepIcons = [User, Target, Palette, Key, Video];
   const stepLabels = isDe 
     ? ['Basis', 'Plan', 'Style', 'Eigentum', 'Testimonial']
     : ['Basics', 'Plan', 'Style', 'Ownership', 'Testimonial'];
 
-  const goalOptions = isDe ? [
-    { value: 'image', label: 'Endlich mal modern aussehen (Image)' },
-    { value: 'revenue', label: 'Mehr Anfragen/Kunden gewinnen (Umsatz)' },
-    { value: 'recruiting', label: 'Neue Mitarbeiter anziehen (Recruiting)' },
-    { value: 'independence', label: 'Meinen alten Agentur-Vertrag kündigen (Unabhängigkeit)' },
-  ] : [
-    { value: 'image', label: 'Finally look modern (Image)' },
-    { value: 'revenue', label: 'Get more inquiries/customers (Revenue)' },
-    { value: 'recruiting', label: 'Attract new employees (Recruiting)' },
-    { value: 'independence', label: 'Cancel my old agency contract (Independence)' },
-  ];
+  // ============================================
+  // VALIDATION
+  // ============================================
 
-  const featureOptions = isDe ? [
-    { value: 'contact', label: 'Kontaktformular' },
-    { value: 'team', label: 'Team-Vorstellung' },
-    { value: 'portfolio', label: 'Portfolio/Referenzen' },
-    { value: 'careers', label: 'Karriere-Bereich' },
-    { value: 'blog', label: 'Blog' },
-  ] : [
-    { value: 'contact', label: 'Contact form' },
-    { value: 'team', label: 'Team presentation' },
-    { value: 'portfolio', label: 'Portfolio/References' },
-    { value: 'careers', label: 'Careers section' },
-    { value: 'blog', label: 'Blog' },
-  ];
+  const validateStep = (stepNumber: number): FormErrors => {
+    const newErrors: FormErrors = {};
 
-  const handleCheckboxChange = (field: 'goals' | 'features', value: string) => {
+    switch (stepNumber) {
+      case 1:
+        if (!formData.name.trim()) {
+          newErrors.name = isDe ? 'Bitte gib deinen Namen ein.' : 'Please enter your name.';
+        }
+        if (!formData.email.trim()) {
+          newErrors.email = isDe ? 'Bitte gib deine E-Mail ein.' : 'Please enter your email.';
+        } else if (!validateEmail(formData.email)) {
+          newErrors.email = isDe ? 'Bitte gib eine gültige E-Mail ein.' : 'Please enter a valid email.';
+        }
+        if (formData.currentWebsite && !validateUrl(formData.currentWebsite)) {
+          newErrors.currentWebsite = isDe ? 'Bitte gib eine gültige URL ein.' : 'Please enter a valid URL.';
+        }
+        break;
+      case 2:
+        if (formData.goals.length === 0) {
+          newErrors.goals = isDe ? 'Bitte wähle mindestens ein Ziel.' : 'Please select at least one goal.';
+        }
+        break;
+      case 4:
+        if (!formData.ownership) {
+          newErrors.ownership = isDe ? 'Bitte wähle eine Option.' : 'Please select an option.';
+        }
+        break;
+      case 5:
+        if (!formData.testimonial) {
+          newErrors.testimonial = isDe ? 'Bitte wähle eine Option.' : 'Please select an option.';
+        }
+        break;
+    }
+
+    return newErrors;
+  };
+
+  const isStepValid = (): boolean => {
+    const stepErrors = validateStep(step);
+    return Object.keys(stepErrors).length === 0;
+  };
+
+  // ============================================
+  // EVENT HANDLERS
+  // ============================================
+
+  const handleFieldChange = <K extends keyof FormData>(field: K, value: FormData[K]) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    
+    // Clear error when user starts typing
+    if (errors[field as keyof FormErrors]) {
+      setErrors(prev => ({ ...prev, [field]: undefined }));
+    }
+  };
+
+  const handleFieldBlur = (field: keyof TouchedFields) => {
+    setTouched(prev => ({ ...prev, [field]: true }));
+    
+    // Validate on blur
+    const stepErrors = validateStep(step);
+    if (stepErrors[field as keyof FormErrors]) {
+      setErrors(prev => ({ ...prev, [field]: stepErrors[field as keyof FormErrors] }));
+    }
+  };
+
+  const handleCheckboxChange = (field: 'goals' | 'features', value: GoalValue | FeatureValue) => {
     setFormData(prev => {
-      const current = prev[field];
+      const current = prev[field] as (GoalValue | FeatureValue)[];
       const updated = current.includes(value)
         ? current.filter(v => v !== value)
         : [...current, value];
       return { ...prev, [field]: updated };
     });
+    
+    // Clear error when user makes a selection
+    if (field === 'goals' && errors.goals) {
+      setErrors(prev => ({ ...prev, goals: undefined }));
+    }
   };
 
   const handleNext = () => {
-    if (step < totalSteps) {
+    // Mark all fields in current step as touched
+    const touchedUpdate = { ...touched };
+    if (step === 1) {
+      touchedUpdate.name = true;
+      touchedUpdate.email = true;
+      touchedUpdate.currentWebsite = true;
+    } else if (step === 2) {
+      touchedUpdate.goals = true;
+    } else if (step === 4) {
+      touchedUpdate.ownership = true;
+    }
+    setTouched(touchedUpdate);
+
+    // Validate
+    const stepErrors = validateStep(step);
+    if (Object.keys(stepErrors).length > 0) {
+      setErrors(stepErrors);
+      // Focus first error field
+      const firstErrorField = document.querySelector('[aria-invalid="true"]') as HTMLElement;
+      firstErrorField?.focus();
+      return;
+    }
+
+    if (step < TOTAL_STEPS) {
       setStep(step + 1);
+      announceStepChange(step + 1);
     }
   };
 
   const handleBack = () => {
     if (step > 1) {
       setStep(step - 1);
+      announceStepChange(step - 1);
     }
   };
 
   const handleSubmit = async () => {
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    console.log('Form submitted:', formData);
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-  };
+    // Final validation
+    setTouched(prev => ({ ...prev, testimonial: true }));
+    const stepErrors = validateStep(step);
+    if (Object.keys(stepErrors).length > 0) {
+      setErrors(stepErrors);
+      return;
+    }
 
-  const isStepValid = () => {
-    switch (step) {
-      case 1:
-        return formData.name.trim() !== '' && formData.email.trim() !== '';
-      case 2:
-        return formData.goals.length > 0;
-      case 3:
-        return true; // Optional step
-      case 4:
-        return formData.ownership !== '';
-      case 5:
-        return formData.testimonial !== '';
-      default:
-        return false;
+    setIsSubmitting(true);
+    setSubmitError(null);
+    
+    try {
+      // Simulate API call - replace with actual endpoint
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      console.log('Form submitted:', formData);
+      setIsSubmitted(true);
+      
+      // Announce success to screen readers
+      if (announcerRef.current) {
+        announcerRef.current.textContent = isDe 
+          ? 'Formular erfolgreich gesendet!' 
+          : 'Form submitted successfully!';
+      }
+    } catch (error) {
+      setSubmitError(isDe 
+        ? 'Etwas ist schiefgelaufen. Bitte versuche es erneut.' 
+        : 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    // Prevent form submission on Enter in text fields
+    if (e.key === 'Enter' && e.target instanceof HTMLInputElement && e.target.type !== 'submit') {
+      e.preventDefault();
+      if (isStepValid()) {
+        handleNext();
+      }
+    }
+  };
+
+  // ============================================
+  // ACCESSIBILITY HELPERS
+  // ============================================
+
+  const announceStepChange = (newStep: number) => {
+    if (announcerRef.current) {
+      announcerRef.current.textContent = isDe 
+        ? `Schritt ${newStep} von ${TOTAL_STEPS}: ${stepLabels[newStep - 1]}`
+        : `Step ${newStep} of ${TOTAL_STEPS}: ${stepLabels[newStep - 1]}`;
+    }
+  };
+
+  // Focus first field when step changes
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (stepContainerRef.current) {
+        const firstInput = stepContainerRef.current.querySelector<HTMLElement>(
+          'input:not([type="hidden"]), textarea, button[role="radio"], input[type="checkbox"]'
+        );
+        firstInput?.focus();
+      }
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [step]);
+
+  // ============================================
+  // RENDER HELPERS
+  // ============================================
+
+  const getFieldError = (field: keyof FormErrors): string | undefined => {
+    return touched[field as keyof TouchedFields] ? errors[field] : undefined;
+  };
+
+  const inputClassName = (field: keyof FormErrors) => {
+    const hasError = getFieldError(field);
+    return `w-full p-4 border rounded-xl focus:outline-none focus:ring-2 transition-colors fluid-base ${
+      hasError 
+        ? 'border-red-400 focus:border-red-500 focus:ring-red-500/20 bg-red-50/50' 
+        : 'border-zinc-200 focus:border-sonic-orange focus:ring-sonic-orange/20'
+    }`;
+  };
+
+  // ============================================
+  // RENDER
+  // ============================================
+
   if (isSubmitted) {
     return (
-      <section id="form" className="fluid-section bg-white">
+      <section id="form" className="fluid-section bg-white" aria-label={isDe ? "Formular gesendet" : "Form submitted"}>
         <div className="container-responsive max-w-2xl mx-auto">
           <FormSuccess lang={lang} />
         </div>
@@ -134,11 +357,20 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
   }
 
   return (
-    <section id="form" className="fluid-section bg-white">
+    <section id="form" className="fluid-section bg-white" aria-labelledby={`${formId}-title`}>
+      {/* Screen reader announcer for live updates */}
+      <div 
+        ref={announcerRef}
+        className="sr-only" 
+        role="status" 
+        aria-live="polite" 
+        aria-atomic="true"
+      />
+
       <div className="container-responsive max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 reveal">
-          <h2 className="fluid-section-title font-bold text-zinc-900 tracking-tight mb-4">
+          <h2 id={`${formId}-title`} className="fluid-section-title font-bold text-zinc-900 tracking-tight mb-4">
             {isDe ? "Teste uns, bevor du uns buchst." : "Test us before you book us."}
           </h2>
           <p className="text-zinc-500 fluid-lg">
@@ -158,12 +390,13 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-8 reveal delay-200">
+        <div className="mb-8 reveal delay-200" role="navigation" aria-label={isDe ? "Formular Fortschritt" : "Form progress"}>
           <div className="flex justify-between mb-4">
             {stepLabels.map((label, i) => {
               const StepIcon = stepIcons[i];
-              const isActive = i + 1 === step;
-              const isComplete = i + 1 < step;
+              const stepNum = i + 1;
+              const isActive = stepNum === step;
+              const isComplete = stepNum < step;
               
               return (
                 <div 
@@ -171,269 +404,411 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                   className={`flex flex-col items-center gap-2 ${
                     isActive ? 'text-sonic-orange' : isComplete ? 'text-sonic-orange' : 'text-zinc-300'
                   }`}
+                  aria-current={isActive ? 'step' : undefined}
                 >
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-colors ${
-                    isActive ? 'border-sonic-orange bg-sonic-orange/10' : 
-                    isComplete ? 'border-sonic-orange bg-orange-50' : 'border-zinc-200 bg-white'
-                  }`}>
+                  <div 
+                    className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-colors ${
+                      isActive ? 'border-sonic-orange bg-sonic-orange/10' : 
+                      isComplete ? 'border-sonic-orange bg-orange-50' : 'border-zinc-200 bg-white'
+                    }`}
+                    aria-hidden="true"
+                  >
                     {isComplete ? (
                       <Check size={18} />
                     ) : (
                       <StepIcon size={18} />
                     )}
                   </div>
-                  <span className="fluid-xs font-medium hidden md:block">{label}</span>
+                  {/* Mobile: show step number, Desktop: show full label */}
+                  <span className="fluid-xs font-medium md:hidden">
+                    {stepNum}
+                  </span>
+                  <span className="fluid-xs font-medium hidden md:block">
+                    <span className="sr-only">
+                      {isDe ? `Schritt ${stepNum}: ` : `Step ${stepNum}: `}
+                      {isComplete ? (isDe ? '(Abgeschlossen) ' : '(Completed) ') : ''}
+                      {isActive ? (isDe ? '(Aktuell) ' : '(Current) ') : ''}
+                    </span>
+                    {label}
+                  </span>
                 </div>
               );
             })}
           </div>
-          <div className="h-2 bg-zinc-100 rounded-full overflow-hidden">
+          <div 
+            className="h-2 bg-zinc-100 rounded-full overflow-hidden"
+            role="progressbar"
+            aria-valuenow={step}
+            aria-valuemin={1}
+            aria-valuemax={TOTAL_STEPS}
+            aria-label={isDe ? `Schritt ${step} von ${TOTAL_STEPS}` : `Step ${step} of ${TOTAL_STEPS}`}
+          >
             <div 
               className="h-full bg-sonic-orange transition-all duration-500"
-              style={{ width: `${(step / totalSteps) * 100}%` }}
+              style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}
             />
           </div>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl border border-zinc-200 p-6 md:p-8 shadow-sm">
-          
-          {/* Step 1: Basis */}
-          {step === 1 && (
-            <div className="space-y-6 animate-fade-in-up">
-              <h3 className="fluid-xl font-bold text-zinc-900">
-                {isDe ? "Die Basis" : "The Basics"}
-              </h3>
-              
-              <div>
-                <label className="block fluid-sm font-medium text-zinc-700 mb-2">
-                  {isDe ? "Wer bist du und was macht deine Firma?" : "Who are you and what does your company do?"}
-                </label>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder={isDe ? "Name & kurzer Satz zum Business" : "Name & short sentence about your business"}
-                  className="w-full p-4 border border-zinc-200 rounded-xl focus:outline-none focus:border-sonic-orange focus:ring-2 focus:ring-sonic-orange/20 fluid-base"
-                />
-              </div>
+        <form 
+          onKeyDown={handleKeyDown}
+          onSubmit={(e) => e.preventDefault()}
+          className="bg-white rounded-2xl border border-zinc-200 p-6 md:p-8 shadow-sm"
+          noValidate
+        >
+          <div ref={stepContainerRef}>
+            {/* Step 1: Basis */}
+            {step === 1 && (
+              <fieldset className="space-y-6 animate-fade-in-up" aria-labelledby={`${formId}-step1-title`}>
+                <legend id={`${formId}-step1-title`} className="fluid-xl font-bold text-zinc-900">
+                  {isDe ? "Die Basis" : "The Basics"}
+                </legend>
+                
+                {/* Name Field */}
+                <div>
+                  <label htmlFor={`${formId}-name`} className="block fluid-sm font-medium text-zinc-700 mb-2">
+                    {isDe ? "Wer bist du und was macht deine Firma?" : "Who are you and what does your company do?"}
+                    <span className="text-sonic-orange ml-1" aria-hidden="true">*</span>
+                    <span className="sr-only">{isDe ? " (Pflichtfeld)" : " (required)"}</span>
+                  </label>
+                  <input
+                    ref={firstFieldRef}
+                    id={`${formId}-name`}
+                    type="text"
+                    value={formData.name}
+                    onChange={(e) => handleFieldChange('name', e.target.value)}
+                    onBlur={() => handleFieldBlur('name')}
+                    placeholder={isDe ? "Name & kurzer Satz zum Business" : "Name & short sentence about your business"}
+                    className={inputClassName('name')}
+                    aria-required="true"
+                    aria-invalid={!!getFieldError('name')}
+                    aria-describedby={getFieldError('name') ? `${formId}-name-error` : undefined}
+                    autoComplete="organization"
+                  />
+                  {getFieldError('name') && (
+                    <p id={`${formId}-name-error`} className="mt-2 flex items-center gap-1 text-red-600 fluid-sm" role="alert">
+                      <AlertCircle size={14} aria-hidden="true" />
+                      {getFieldError('name')}
+                    </p>
+                  )}
+                </div>
 
-              <div>
-                <label className="block fluid-sm font-medium text-zinc-700 mb-2">
-                  {isDe ? "Wie erreichen wir dich?" : "How do we reach you?"}
-                </label>
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder={isDe ? "E-Mail Adresse" : "Email address"}
-                  className="w-full p-4 border border-zinc-200 rounded-xl focus:outline-none focus:border-sonic-orange focus:ring-2 focus:ring-sonic-orange/20 fluid-base"
-                />
-              </div>
+                {/* Email Field */}
+                <div>
+                  <label htmlFor={`${formId}-email`} className="block fluid-sm font-medium text-zinc-700 mb-2">
+                    {isDe ? "Wie erreichen wir dich?" : "How do we reach you?"}
+                    <span className="text-sonic-orange ml-1" aria-hidden="true">*</span>
+                    <span className="sr-only">{isDe ? " (Pflichtfeld)" : " (required)"}</span>
+                  </label>
+                  <input
+                    id={`${formId}-email`}
+                    type="email"
+                    inputMode="email"
+                    value={formData.email}
+                    onChange={(e) => handleFieldChange('email', e.target.value)}
+                    onBlur={() => handleFieldBlur('email')}
+                    placeholder={isDe ? "E-Mail Adresse" : "Email address"}
+                    className={inputClassName('email')}
+                    aria-required="true"
+                    aria-invalid={!!getFieldError('email')}
+                    aria-describedby={getFieldError('email') ? `${formId}-email-error` : undefined}
+                    autoComplete="email"
+                  />
+                  {getFieldError('email') && (
+                    <p id={`${formId}-email-error`} className="mt-2 flex items-center gap-1 text-red-600 fluid-sm" role="alert">
+                      <AlertCircle size={14} aria-hidden="true" />
+                      {getFieldError('email')}
+                    </p>
+                  )}
+                </div>
 
-              <div>
-                <label className="block fluid-sm font-medium text-zinc-700 mb-2">
-                  {isDe ? "Hast du schon eine Website?" : "Do you already have a website?"}
-                </label>
-                <input
-                  type="url"
-                  value={formData.currentWebsite}
-                  onChange={(e) => setFormData({ ...formData, currentWebsite: e.target.value })}
-                  placeholder={isDe ? "Her mit dem Link (optional)" : "Share the link (optional)"}
-                  className="w-full p-4 border border-zinc-200 rounded-xl focus:outline-none focus:border-sonic-orange focus:ring-2 focus:ring-sonic-orange/20 fluid-base"
-                />
-              </div>
-            </div>
-          )}
+                {/* Website Field */}
+                <div>
+                  <label htmlFor={`${formId}-website`} className="block fluid-sm font-medium text-zinc-700 mb-2">
+                    {isDe ? "Hast du schon eine Website?" : "Do you already have a website?"}
+                    <span className="text-zinc-400 ml-1 font-normal">({isDe ? "optional" : "optional"})</span>
+                  </label>
+                  <input
+                    id={`${formId}-website`}
+                    type="url"
+                    inputMode="url"
+                    value={formData.currentWebsite}
+                    onChange={(e) => handleFieldChange('currentWebsite', e.target.value)}
+                    onBlur={() => handleFieldBlur('currentWebsite')}
+                    placeholder={isDe ? "https://deine-website.de" : "https://your-website.com"}
+                    className={inputClassName('currentWebsite')}
+                    aria-invalid={!!getFieldError('currentWebsite')}
+                    aria-describedby={getFieldError('currentWebsite') ? `${formId}-website-error` : undefined}
+                    autoComplete="url"
+                  />
+                  {getFieldError('currentWebsite') && (
+                    <p id={`${formId}-website-error`} className="mt-2 flex items-center gap-1 text-red-600 fluid-sm" role="alert">
+                      <AlertCircle size={14} aria-hidden="true" />
+                      {getFieldError('currentWebsite')}
+                    </p>
+                  )}
+                </div>
+              </fieldset>
+            )}
 
-          {/* Step 2: Plan */}
-          {step === 2 && (
-            <div className="space-y-6 animate-fade-in-up">
-              <h3 className="fluid-xl font-bold text-zinc-900">
-                {isDe ? "Der Plan" : "The Plan"}
-              </h3>
-              <p className="text-zinc-500 fluid-base">
-                {isDe ? "Was ist dein Hauptziel mit der neuen Seite? (Mehrere Antworten möglich)" : "What's your main goal with the new site? (Multiple answers possible)"}
-              </p>
-              
-              <div className="space-y-3">
-                {goalOptions.map((option) => (
+            {/* Step 2: Plan */}
+            {step === 2 && (
+              <fieldset className="space-y-6 animate-fade-in-up" aria-labelledby={`${formId}-step2-title`}>
+                <legend id={`${formId}-step2-title`} className="fluid-xl font-bold text-zinc-900">
+                  {isDe ? "Der Plan" : "The Plan"}
+                </legend>
+                <p id={`${formId}-goals-desc`} className="text-zinc-500 fluid-base">
+                  {isDe ? "Was ist dein Hauptziel mit der neuen Seite?" : "What's your main goal with the new site?"}
+                  <span className="text-zinc-400 ml-1">({isDe ? "Mehrere möglich" : "Multiple possible"})</span>
+                  <span className="text-sonic-orange ml-1" aria-hidden="true">*</span>
+                </p>
+                
+                <div 
+                  className="space-y-3" 
+                  role="group" 
+                  aria-labelledby={`${formId}-step2-title`}
+                  aria-describedby={`${formId}-goals-desc ${getFieldError('goals') ? `${formId}-goals-error` : ''}`}
+                >
+                  {GOAL_OPTIONS.map((option) => {
+                    const isChecked = formData.goals.includes(option.value);
+                    return (
+                      <label
+                        key={option.value}
+                        className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
+                          isChecked
+                            ? 'border-sonic-orange bg-orange-50'
+                            : 'border-zinc-200 hover:border-zinc-300'
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={() => handleCheckboxChange('goals', option.value)}
+                          className="w-5 h-5 text-sonic-orange rounded border-zinc-300 focus:ring-sonic-orange focus:ring-2"
+                          aria-describedby={`${formId}-goals-desc`}
+                        />
+                        <span className="text-zinc-700 fluid-base">{isDe ? option.labelDe : option.labelEn}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+                {getFieldError('goals') && (
+                  <p id={`${formId}-goals-error`} className="flex items-center gap-1 text-red-600 fluid-sm" role="alert">
+                    <AlertCircle size={14} aria-hidden="true" />
+                    {getFieldError('goals')}
+                  </p>
+                )}
+              </fieldset>
+            )}
+
+            {/* Step 3: Style */}
+            {step === 3 && (
+              <fieldset className="space-y-6 animate-fade-in-up" aria-labelledby={`${formId}-step3-title`}>
+                <legend id={`${formId}-step3-title`} className="fluid-xl font-bold text-zinc-900">
+                  {isDe ? "Der Style-Check" : "The Style Check"}
+                </legend>
+                <p className="text-zinc-400 fluid-sm">
+                  {isDe ? "(Alle Felder optional)" : "(All fields optional)"}
+                </p>
+                
+                {/* Inspirations */}
+                <div>
+                  <label htmlFor={`${formId}-inspirations`} className="block fluid-sm font-medium text-zinc-700 mb-2">
+                    {isDe ? "Gibt es Vorbilder?" : "Any inspirations?"}
+                  </label>
+                  <textarea
+                    id={`${formId}-inspirations`}
+                    value={formData.inspirations}
+                    onChange={(e) => handleFieldChange('inspirations', e.target.value)}
+                    placeholder={isDe 
+                      ? "Links von Websites die du feierst – oder von Konkurrenten, die du digital überholen willst."
+                      : "Links to websites you love – or competitors you want to outperform digitally."}
+                    rows={3}
+                    className="w-full p-4 border border-zinc-200 rounded-xl focus:outline-none focus:border-sonic-orange focus:ring-2 focus:ring-sonic-orange/20 fluid-base resize-none"
+                  />
+                </div>
+
+                {/* Features */}
+                <div>
+                  <p id={`${formId}-features-label`} className="block fluid-sm font-medium text-zinc-700 mb-3">
+                    {isDe ? "Was muss unbedingt rein?" : "What must be included?"}
+                  </p>
+                  <div 
+                    className="space-y-3" 
+                    role="group" 
+                    aria-labelledby={`${formId}-features-label`}
+                  >
+                    {FEATURE_OPTIONS.map((option) => {
+                      const isChecked = formData.features.includes(option.value);
+                      return (
+                        <label
+                          key={option.value}
+                          className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
+                            isChecked
+                              ? 'border-sonic-orange bg-orange-50'
+                              : 'border-zinc-200 hover:border-zinc-300'
+                          }`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => handleCheckboxChange('features', option.value)}
+                            className="w-5 h-5 text-sonic-orange rounded border-zinc-300 focus:ring-sonic-orange focus:ring-2"
+                          />
+                          <span className="text-zinc-700 fluid-base">{isDe ? option.labelDe : option.labelEn}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+              </fieldset>
+            )}
+
+            {/* Step 4: Eigentum */}
+            {step === 4 && (
+              <fieldset className="space-y-6 animate-fade-in-up" aria-labelledby={`${formId}-step4-title`}>
+                <legend id={`${formId}-step4-title`} className="fluid-xl font-bold text-zinc-900">
+                  {isDe ? "Die \"Eigentums-Frage\"" : "The \"Ownership Question\""}
+                </legend>
+                <p id={`${formId}-ownership-desc`} className="text-zinc-500 fluid-base">
+                  {isDe 
+                    ? "Willst du die Seite am Ende wirklich besitzen oder weiter monatlich \"Miete\" für ein System zahlen, das dir nicht gehört?"
+                    : "Do you want to truly own the site at the end or keep paying monthly \"rent\" for a system that doesn't belong to you?"}
+                  <span className="text-sonic-orange ml-1" aria-hidden="true">*</span>
+                </p>
+                
+                <div 
+                  className="space-y-3" 
+                  role="radiogroup" 
+                  aria-labelledby={`${formId}-step4-title`}
+                  aria-describedby={`${formId}-ownership-desc ${getFieldError('ownership') ? `${formId}-ownership-error` : ''}`}
+                  aria-required="true"
+                >
                   <label
-                    key={option.value}
                     className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
-                      formData.goals.includes(option.value)
+                      formData.ownership === 'full'
                         ? 'border-sonic-orange bg-orange-50'
                         : 'border-zinc-200 hover:border-zinc-300'
                     }`}
                   >
                     <input
-                      type="checkbox"
-                      checked={formData.goals.includes(option.value)}
-                      onChange={() => handleCheckboxChange('goals', option.value)}
-                      className="w-5 h-5 text-sonic-orange rounded focus:ring-sonic-orange"
+                      type="radio"
+                      name="ownership"
+                      value="full"
+                      checked={formData.ownership === 'full'}
+                      onChange={() => handleFieldChange('ownership', 'full')}
+                      className="w-5 h-5 text-sonic-orange border-zinc-300 focus:ring-sonic-orange focus:ring-2"
                     />
-                    <span className="text-zinc-700 fluid-base">{option.label}</span>
+                    <span className="text-zinc-700 font-medium fluid-base">
+                      {isDe ? "Ich will die volle Kontrolle und 100% Eigentum." : "I want full control and 100% ownership."}
+                    </span>
                   </label>
-                ))}
-              </div>
-            </div>
-          )}
 
-          {/* Step 3: Style */}
-          {step === 3 && (
-            <div className="space-y-6 animate-fade-in-up">
-              <h3 className="fluid-xl font-bold text-zinc-900">
-                {isDe ? "Der Style-Check" : "The Style Check"}
-              </h3>
-              
-              <div>
-                <label className="block fluid-sm font-medium text-zinc-700 mb-2">
-                  {isDe ? "Gibt es Vorbilder?" : "Any inspirations?"}
-                </label>
-                <textarea
-                  value={formData.inspirations}
-                  onChange={(e) => setFormData({ ...formData, inspirations: e.target.value })}
-                  placeholder={isDe 
-                    ? "Links von Websites die du feierst – oder von Konkurrenten, die du digital überholen willst."
-                    : "Links to websites you love – or competitors you want to outperform digitally."}
-                  rows={3}
-                  className="w-full p-4 border border-zinc-200 rounded-xl focus:outline-none focus:border-sonic-orange focus:ring-2 focus:ring-sonic-orange/20 fluid-base"
-                />
-              </div>
-
-              <div>
-                <label className="block fluid-sm font-medium text-zinc-700 mb-2">
-                  {isDe ? "Was muss unbedingt rein?" : "What must be included?"}
-                </label>
-                <div className="space-y-3">
-                  {featureOptions.map((option) => (
-                    <label
-                      key={option.value}
-                      className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
-                        formData.features.includes(option.value)
-                          ? 'border-sonic-orange bg-orange-50'
-                          : 'border-zinc-200 hover:border-zinc-300'
-                      }`}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={formData.features.includes(option.value)}
-                        onChange={() => handleCheckboxChange('features', option.value)}
-                        className="w-5 h-5 text-sonic-orange rounded focus:ring-sonic-orange"
-                      />
-                      <span className="text-zinc-700 fluid-base">{option.label}</span>
-                    </label>
-                  ))}
+                  <label
+                    className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
+                      formData.ownership === 'doesnt-matter'
+                        ? 'border-sonic-orange bg-orange-50'
+                        : 'border-zinc-200 hover:border-zinc-300'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="ownership"
+                      value="doesnt-matter"
+                      checked={formData.ownership === 'doesnt-matter'}
+                      onChange={() => handleFieldChange('ownership', 'doesnt-matter')}
+                      className="w-5 h-5 text-sonic-orange border-zinc-300 focus:ring-sonic-orange focus:ring-2"
+                    />
+                    <span className="text-zinc-700 fluid-base">
+                      {isDe ? "Ist mir eigentlich egal, solange es funktioniert." : "I don't really care, as long as it works."}
+                    </span>
+                  </label>
                 </div>
-              </div>
-            </div>
-          )}
+                {getFieldError('ownership') && (
+                  <p id={`${formId}-ownership-error`} className="flex items-center gap-1 text-red-600 fluid-sm" role="alert">
+                    <AlertCircle size={14} aria-hidden="true" />
+                    {getFieldError('ownership')}
+                  </p>
+                )}
+              </fieldset>
+            )}
 
-          {/* Step 4: Eigentum */}
-          {step === 4 && (
-            <div className="space-y-6 animate-fade-in-up">
-              <h3 className="fluid-xl font-bold text-zinc-900">
-                {isDe ? "Die \"Eigentums-Frage\"" : "The \"Ownership Question\""}
-              </h3>
-              <p className="text-zinc-500 fluid-base">
-                {isDe 
-                  ? "Willst du die Seite am Ende wirklich besitzen oder weiter monatlich \"Miete\" für ein System zahlen, das dir nicht gehört?"
-                  : "Do you want to truly own the site at the end or keep paying monthly \"rent\" for a system that doesn't belong to you?"}
-              </p>
-              
-              <div className="space-y-3">
-                <label
-                  className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
-                    formData.ownership === 'full'
-                      ? 'border-sonic-orange bg-orange-50'
-                      : 'border-zinc-200 hover:border-zinc-300'
-                  }`}
+            {/* Step 5: Testimonial */}
+            {step === 5 && (
+              <fieldset className="space-y-6 animate-fade-in-up" aria-labelledby={`${formId}-step5-title`}>
+                <legend id={`${formId}-step5-title`} className="fluid-xl font-bold text-zinc-900">
+                  {isDe ? "Der \"Testimonial-Deal\"" : "The \"Testimonial Deal\""}
+                </legend>
+                <p id={`${formId}-testimonial-desc`} className="text-zinc-500 fluid-base">
+                  {isDe 
+                    ? "Hand aufs Herz: Unser Preis von 5.600 € ist nur machbar, weil wir auf klassisches Marketing verzichten. Bist du bereit, uns nach dem Launch ein kurzes Video-Testimonial zu geben, wenn du mit der Arbeit zufrieden bist?"
+                    : "Honestly: Our price of €5,600 is only possible because we skip traditional marketing. Are you willing to give us a short video testimonial after launch if you're happy with the work?"}
+                  <span className="text-sonic-orange ml-1" aria-hidden="true">*</span>
+                </p>
+                
+                <div 
+                  className="space-y-3" 
+                  role="radiogroup" 
+                  aria-labelledby={`${formId}-step5-title`}
+                  aria-describedby={`${formId}-testimonial-desc ${getFieldError('testimonial') ? `${formId}-testimonial-error` : ''}`}
+                  aria-required="true"
                 >
-                  <input
-                    type="radio"
-                    name="ownership"
-                    checked={formData.ownership === 'full'}
-                    onChange={() => setFormData({ ...formData, ownership: 'full' })}
-                    className="w-5 h-5 text-sonic-orange focus:ring-sonic-orange"
-                  />
-                  <span className="text-zinc-700 font-medium fluid-base">
-                    {isDe ? "Ich will die volle Kontrolle und 100% Eigentum." : "I want full control and 100% ownership."}
-                  </span>
-                </label>
+                  <label
+                    className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
+                      formData.testimonial === 'yes'
+                        ? 'border-sonic-orange bg-orange-50'
+                        : 'border-zinc-200 hover:border-zinc-300'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="testimonial"
+                      value="yes"
+                      checked={formData.testimonial === 'yes'}
+                      onChange={() => handleFieldChange('testimonial', 'yes')}
+                      className="w-5 h-5 text-sonic-orange border-zinc-300 focus:ring-sonic-orange focus:ring-2"
+                    />
+                    <span className="text-zinc-700 font-medium fluid-base">
+                      {isDe ? "Klar, Ehrensache!" : "Sure, of course!"}
+                    </span>
+                  </label>
 
-                <label
-                  className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
-                    formData.ownership === 'doesnt-matter'
-                      ? 'border-sonic-orange bg-orange-50'
-                      : 'border-zinc-200 hover:border-zinc-300'
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="ownership"
-                    checked={formData.ownership === 'doesnt-matter'}
-                    onChange={() => setFormData({ ...formData, ownership: 'doesnt-matter' })}
-                    className="w-5 h-5 text-sonic-orange focus:ring-sonic-orange"
-                  />
-                  <span className="text-zinc-700 fluid-base">
-                    {isDe ? "Ist mir eigentlich egal, solange es funktioniert." : "I don't really care, as long as it works."}
-                  </span>
-                </label>
-              </div>
-            </div>
-          )}
+                  <label
+                    className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
+                      formData.testimonial === 'discuss'
+                        ? 'border-sonic-orange bg-orange-50'
+                        : 'border-zinc-200 hover:border-zinc-300'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="testimonial"
+                      value="discuss"
+                      checked={formData.testimonial === 'discuss'}
+                      onChange={() => handleFieldChange('testimonial', 'discuss')}
+                      className="w-5 h-5 text-sonic-orange border-zinc-300 focus:ring-sonic-orange focus:ring-2"
+                    />
+                    <span className="text-zinc-700 fluid-base">
+                      {isDe ? "Lass uns da erst nochmal drüber quatschen." : "Let's talk about that first."}
+                    </span>
+                  </label>
+                </div>
+                {getFieldError('testimonial') && (
+                  <p id={`${formId}-testimonial-error`} className="flex items-center gap-1 text-red-600 fluid-sm" role="alert">
+                    <AlertCircle size={14} aria-hidden="true" />
+                    {getFieldError('testimonial')}
+                  </p>
+                )}
+              </fieldset>
+            )}
+          </div>
 
-          {/* Step 5: Testimonial */}
-          {step === 5 && (
-            <div className="space-y-6 animate-fade-in-up">
-              <h3 className="fluid-xl font-bold text-zinc-900">
-                {isDe ? "Der \"Testimonial-Deal\"" : "The \"Testimonial Deal\""}
-              </h3>
-              <p className="text-zinc-500 fluid-base">
-                {isDe 
-                  ? "Hand aufs Herz: Unser Preis von 5.600 € ist nur machbar, weil wir auf klassisches Marketing verzichten. Bist du bereit, uns nach dem Launch ein kurzes Video-Testimonial zu geben, wenn du mit der Arbeit zufrieden bist?"
-                  : "Honestly: Our price of €5,600 is only possible because we skip traditional marketing. Are you willing to give us a short video testimonial after launch if you're happy with the work?"}
-              </p>
-              
-              <div className="space-y-3">
-                <label
-                  className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
-                    formData.testimonial === 'yes'
-                      ? 'border-sonic-orange bg-orange-50'
-                      : 'border-zinc-200 hover:border-zinc-300'
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="testimonial"
-                    checked={formData.testimonial === 'yes'}
-                    onChange={() => setFormData({ ...formData, testimonial: 'yes' })}
-                    className="w-5 h-5 text-sonic-orange focus:ring-sonic-orange"
-                  />
-                  <span className="text-zinc-700 font-medium fluid-base">
-                    {isDe ? "Klar, Ehrensache!" : "Sure, of course!"}
-                  </span>
-                </label>
-
-                <label
-                  className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
-                    formData.testimonial === 'discuss'
-                      ? 'border-sonic-orange bg-orange-50'
-                      : 'border-zinc-200 hover:border-zinc-300'
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="testimonial"
-                    checked={formData.testimonial === 'discuss'}
-                    onChange={() => setFormData({ ...formData, testimonial: 'discuss' })}
-                    className="w-5 h-5 text-sonic-orange focus:ring-sonic-orange"
-                  />
-                  <span className="text-zinc-700 fluid-base">
-                    {isDe ? "Lass uns da erst nochmal drüber quatschen." : "Let's talk about that first."}
-                  </span>
-                </label>
-              </div>
+          {/* Submit Error */}
+          {submitError && (
+            <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-red-700" role="alert">
+              <AlertCircle size={18} aria-hidden="true" />
+              <span className="fluid-sm">{submitError}</span>
             </div>
           )}
 
@@ -441,59 +816,71 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
           <div className="flex justify-between mt-8 pt-6 border-t border-zinc-100">
             {step > 1 ? (
               <button
+                type="button"
                 onClick={handleBack}
-                className="flex items-center gap-2 text-zinc-500 hover:text-zinc-900 transition-colors fluid-base"
+                className="flex items-center gap-2 text-zinc-500 hover:text-zinc-900 transition-colors fluid-base focus:outline-none focus:ring-2 focus:ring-sonic-orange/50 rounded-lg px-2 py-1"
+                aria-label={isDe ? `Zurück zu Schritt ${step - 1}` : `Back to step ${step - 1}`}
               >
-                <ArrowLeft size={18} />
+                <ArrowLeft size={18} aria-hidden="true" />
                 {isDe ? "Zurück" : "Back"}
               </button>
             ) : (
               <div />
             )}
 
-            {step < totalSteps ? (
+            {step < TOTAL_STEPS ? (
               <button
+                type="button"
                 onClick={handleNext}
                 disabled={!isStepValid()}
-                className="flex items-center gap-2 bg-zinc-900 text-white px-6 py-3 rounded-full font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-zinc-800 transition-colors fluid-base"
+                className="flex items-center gap-2 bg-zinc-900 text-white px-6 py-3 rounded-full font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-zinc-800 transition-colors fluid-base focus:outline-none focus:ring-2 focus:ring-sonic-orange focus:ring-offset-2"
+                aria-label={isDe ? `Weiter zu Schritt ${step + 1}` : `Continue to step ${step + 1}`}
               >
                 {isDe ? "Weiter" : "Next"}
-                <ArrowRight size={18} />
+                <ArrowRight size={18} aria-hidden="true" />
               </button>
             ) : (
               <button
+                type="submit"
                 onClick={handleSubmit}
                 disabled={!isStepValid() || isSubmitting}
-                className="flex items-center gap-2 bg-sonic-orange text-white px-6 py-3 rounded-full font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#E64500] transition-colors fluid-base"
+                className="flex items-center gap-2 bg-sonic-orange text-white px-6 py-3 rounded-full font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#E64500] transition-colors fluid-base focus:outline-none focus:ring-2 focus:ring-sonic-orange focus:ring-offset-2"
+                aria-busy={isSubmitting}
               >
                 {isSubmitting ? (
                   <>
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden="true" />
                     {isDe ? "Wird gesendet..." : "Sending..."}
                   </>
                 ) : (
                   <>
-                    {isDe ? "Ja, schickt mir den Gratis-Entwurf!" : "Yes, send me the free design!"}
-                    <ArrowRight size={18} />
+                    {/* Short text on mobile, full text on desktop */}
+                    <span className="sm:hidden">
+                      {isDe ? "Gratis-Entwurf!" : "Get free design!"}
+                    </span>
+                    <span className="hidden sm:inline">
+                      {isDe ? "Ja, schickt mir den Gratis-Entwurf!" : "Yes, send me the free design!"}
+                    </span>
+                    <ArrowRight size={18} aria-hidden="true" />
                   </>
                 )}
               </button>
             )}
           </div>
-        </div>
+        </form>
 
         {/* Trust indicators */}
-        <div className="flex justify-center gap-6 mt-8 text-zinc-400 fluid-sm flex-wrap">
+        <div className="flex justify-center gap-6 mt-8 text-zinc-400 fluid-sm flex-wrap" aria-label={isDe ? "Vertrauensindikatoren" : "Trust indicators"}>
           <span className="flex items-center gap-1">
-            <Check size={14} className="text-sonic-orange" />
+            <Check size={14} className="text-sonic-orange" aria-hidden="true" />
             {isDe ? "Keine Kreditkarte nötig" : "No credit card needed"}
           </span>
           <span className="flex items-center gap-1">
-            <Check size={14} className="text-sonic-orange" />
+            <Check size={14} className="text-sonic-orange" aria-hidden="true" />
             {isDe ? "Kein Druck" : "No pressure"}
           </span>
           <span className="flex items-center gap-1">
-            <Check size={14} className="text-sonic-orange" />
+            <Check size={14} className="text-sonic-orange" aria-hidden="true" />
             {isDe ? "Antwort in 48-72h" : "Response in 48-72h"}
           </span>
         </div>

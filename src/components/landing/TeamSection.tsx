@@ -42,7 +42,7 @@ export const TeamSection: React.FC<TeamSectionProps> = ({ lang }) => {
             )}
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {features.map((feature, i) => (
               <div key={i} className="bg-white p-6 rounded-2xl border border-zinc-100 text-center hover:shadow-lg transition-shadow">
                 <div className="w-14 h-14 bg-sonic-orange/10 rounded-2xl flex items-center justify-center mx-auto mb-4">

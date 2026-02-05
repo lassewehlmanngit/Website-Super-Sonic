@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
       <div className="container-responsive">
         
         {/* Trust Badges Row */}
-        <div className="flex flex-wrap gap-4 md:gap-8 mb-12 border-b border-zinc-800 pb-12">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 sm:gap-4 md:gap-6 mb-12 border-b border-zinc-800 pb-12">
             <div className="flex items-center gap-3 bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 text-xs md:text-sm text-zinc-400">
                 <Server size={14} className="text-green-500" />
                 <span>Hosted in Frankfurt 🇩🇪</span>
@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
             </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-12">
           {/* Brand */}
           <div>
              <div className="text-2xl font-bold tracking-tighter mb-4">Super Sonic<span className="text-sonic-orange">.</span></div>

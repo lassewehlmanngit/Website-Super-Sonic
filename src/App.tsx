@@ -9,6 +9,7 @@ const ExitIntentPopup = lazy(() => import('./components/global/ExitIntentPopup')
 
 // Lazy load page components
 const LandingPage = lazy(() => import('./pages/LandingPage').then(module => ({ default: module.LandingPage })));
+const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage').then(module => ({ default: module.CaseStudyPage })));
 const Impressum = lazy(() => import('./pages/Impressum').then(module => ({ default: module.Impressum })));
 const Privacy = lazy(() => import('./pages/Privacy').then(module => ({ default: module.Privacy })));
 const BusinessFacts = lazy(() => import('./pages/BusinessFacts').then(module => ({ default: module.BusinessFacts })));
@@ -75,6 +76,7 @@ const App: React.FC = () => {
         {/* German Routes */}
         <Route path="/de" element={<Layout />}>
           <Route index element={<LandingPage lang="de" />} />
+          <Route path="projekte/:slug" element={<CaseStudyPage lang="de" />} />
           <Route path="impressum" element={<Impressum />} />
           <Route path="datenschutz" element={<Privacy />} />
         </Route>
@@ -82,6 +84,7 @@ const App: React.FC = () => {
         {/* English Routes */}
         <Route path="/en" element={<Layout />}>
           <Route index element={<LandingPage lang="en" />} />
+          <Route path="projects/:slug" element={<CaseStudyPage lang="en" />} />
           <Route path="impressum" element={<Impressum />} />
           <Route path="privacy" element={<Privacy />} />
         </Route>

@@ -1,13 +1,27 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight, Leaf, Truck, Scale, Server, Building, Store } from 'lucide-react';
+import { getAllCaseStudies, CaseStudy } from '../../data/caseStudies';
 
 interface CaseStudiesProps {
   lang: 'de' | 'en';
 }
 
+const iconMap = {
+  leaf: Leaf,
+  truck: Truck,
+  scale: Scale,
+  server: Server,
+  building: Building,
+  store: Store,
+};
+
 export const CaseStudies: React.FC<CaseStudiesProps> = ({ lang }) => {
   const isDe = lang === 'de';
+  const caseStudies = getAllCaseStudies(lang);
 
-  const cases = isDe ? [
+  // Additional mini case studies (no detail pages)
+  const miniCases = isDe ? [
     {
       title: "Der ausgebuchte Handwerksbetrieb",
       problem: "Website von 2005, nicht mobilfähig.",
@@ -43,6 +57,8 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ lang }) => {
     }
   ];
 
+  const projectPath = isDe ? 'projekte' : 'projects';
+
   return (
     <section id="case-studies" className="fluid-section bg-white">
       <div className="container-responsive">
@@ -68,8 +84,89 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ lang }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {cases.map((caseStudy, i) => (
+        {/* Featured Case Studies (with detail pages) */}
+        {caseStudies.length > 0 && (
+          <div className="mb-12">
+            <div className="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
+              {caseStudies.map((caseStudy: CaseStudy) => {
+                const IconComponent = iconMap[caseStudy.icon];
+                return (
+                  <Link 
+                    key={caseStudy.slug}
+                    to={`/${lang}/${projectPath}/${caseStudy.slug}`}
+                    className="group bg-zinc-50 rounded-2xl overflow-hidden border border-zinc-100 hover:border-sonic-orange/30 hover:shadow-lg transition-all reveal"
+                  >
+                    <div className="grid md:grid-cols-3">
+                      {/* Color Block with Icon */}
+                      <div className={`${caseStudy.color} p-8 md:p-10 flex flex-col justify-center items-center text-white relative`}>
+                        <IconComponent className="text-white/30 mb-4" size={48} />
+                        <div className="text-center">
+                          <div className="fluid-2xl font-bold mb-1">
+                            {caseStudy.preview.metric}
+                          </div>
+                          <div className="fluid-sm text-white/70">
+                            {caseStudy.preview.metricLabel}
+                          </div>
+                        </div>
+                        <div className="absolute top-4 right-4 w-8 h-8 bg-white/20 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                          <ArrowUpRight className="text-white" size={16} />
+                        </div>
+                      </div>
+
+                      {/* Content */}
+                      <div className="md:col-span-2 p-8 md:p-10">
+                        <div className="flex items-start justify-between mb-4">
+                          <div>
+                            <span className="text-sonic-orange font-mono fluid-xs uppercase tracking-widest">
+                              {caseStudy.industry}
+                            </span>
+                            <h3 className="fluid-xl font-bold text-zinc-900 mt-1">
+                              {caseStudy.title}
+                            </h3>
+                          </div>
+                        </div>
+
+                        {/* Problem */}
+                        <div className="mb-3">
+                          <span className="fluid-xs font-bold text-zinc-500 uppercase tracking-wider">
+                            {isDe ? "Problem" : "Problem"}
+                          </span>
+                          <p className="text-zinc-600 mt-1 fluid-base">{caseStudy.preview.problem}</p>
+                        </div>
+
+                        {/* Solution */}
+                        <div className="mb-3">
+                          <span className="fluid-xs font-bold text-sonic-orange uppercase tracking-wider">
+                            {isDe ? "Lösung" : "Solution"}
+                          </span>
+                          <p className="text-zinc-600 mt-1 fluid-base">{caseStudy.preview.solution}</p>
+                        </div>
+
+                        {/* Result */}
+                        <div className="bg-green-50 rounded-xl p-4 border border-green-100">
+                          <span className="fluid-xs font-bold text-green-600 uppercase tracking-wider">
+                            {isDe ? "Ergebnis" : "Result"}
+                          </span>
+                          <p className="text-zinc-900 font-medium mt-1 fluid-base">{caseStudy.preview.result}</p>
+                        </div>
+
+                        {/* View Case Study Link */}
+                        <div className="mt-6 flex items-center gap-2 text-sonic-orange font-semibold fluid-sm group-hover:gap-3 transition-all">
+                          {isDe ? "Case Study ansehen" : "View Case Study"}
+                          <ArrowUpRight size={16} />
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Mini Case Studies (no detail pages) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
+          {miniCases.map((caseStudy, i) => (
             <div key={i} className="bg-zinc-50 rounded-2xl p-8 md:p-10 border border-zinc-100 hover:border-zinc-200 transition-colors reveal delay-100">
               {/* Header */}
               <div className="flex items-start justify-between mb-6">

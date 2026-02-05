@@ -4,7 +4,29 @@ Allow: /
 # Sitemap
 Sitemap: https://supersonic.design/sitemap.xml
 
-# Disallow admin/internal pages if any
+# Disallow admin/internal pages
 Disallow: /admin/
 Disallow: /api/
+Disallow: /keystatic/
 
+# Disallow hash routes that are internal (these are handled client-side but good practice)
+# Note: Hash fragments are not sent to servers, but this documents our intent
+
+# Allow all AI crawlers for AI search optimization
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { SEO } from '../components/SEO';
 import {
   LandingHero,
+  StoryBridge,
   ClientMarquee,
   BuilderTrap,
   AntiBloat,
@@ -80,6 +81,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
 
       {/* 1. Hero Section */}
       <LandingHero lang={lang} onScrollToForm={scrollToForm} />
+
+      {/* 1.5 Story Bridge - The longer narrative intro */}
+      <StoryBridge lang={lang} />
 
       {/* 2. Social Proof - Client Marquee */}
       <ClientMarquee lang={lang} />

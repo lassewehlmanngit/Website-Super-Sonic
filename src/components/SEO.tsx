@@ -157,6 +157,109 @@ export const SEO: React.FC<SEOProps> = ({
 
     addLocalBusinessSchema();
 
+    // Add WebSite Schema (for sitelinks search and AI understanding)
+    const addWebSiteSchema = () => {
+      const existing = document.querySelector('script[data-schema="website"]');
+      if (existing) existing.remove();
+
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": `${baseUrl}#website`,
+        "url": baseUrl,
+        "name": "Super Sonic Prototypes",
+        "description": isDe
+          ? "Webseiten für den Mittelstand. 14 Tage, Festpreis, 100% Eigentum."
+          : "Websites for SMBs. 14 days, fixed price, 100% ownership.",
+        "publisher": {
+          "@id": `${baseUrl}#organization`
+        },
+        "inLanguage": ["de", "en"],
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": `${baseUrl}/${lang}#faq`
+          },
+          "query-input": "required name=search_term_string"
+        }
+      };
+
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.setAttribute('data-schema', 'website');
+      script.text = JSON.stringify(schema);
+      document.head.appendChild(script);
+    };
+
+    addWebSiteSchema();
+
+    // Add Service Schema (for web development offerings)
+    const addServiceSchema = () => {
+      const existing = document.querySelector('script[data-schema="service"]');
+      if (existing) existing.remove();
+
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": `${baseUrl}#service`,
+        "name": isDe ? "Website-Entwicklung" : "Website Development",
+        "description": isDe
+          ? "Professionelle Webseiten für den Mittelstand. 14 Tage Lieferzeit, Festpreis von 5.600€, 100% Eigentum am Code."
+          : "Professional websites for SMBs. 14-day delivery, fixed price of €5,600, 100% code ownership.",
+        "provider": {
+          "@id": `${baseUrl}#organization`
+        },
+        "serviceType": "Web Development",
+        "areaServed": [
+          { "@type": "Country", "name": "Germany" },
+          { "@type": "Country", "name": "Austria" },
+          { "@type": "Country", "name": "Switzerland" }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": isDe ? "Website-Pakete" : "Website Packages",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": isDe ? "Sonic Website" : "Sonic Website",
+              "description": isDe 
+                ? "Komplette Website mit CMS, SEO-Optimierung und DSGVO-Konformität"
+                : "Complete website with CMS, SEO optimization and GDPR compliance",
+              "price": "5600",
+              "priceCurrency": "EUR",
+              "priceValidUntil": "2026-12-31",
+              "availability": "https://schema.org/InStock",
+              "deliveryLeadTime": {
+                "@type": "QuantitativeValue",
+                "value": "14",
+                "unitCode": "DAY"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": isDe ? "Website-Entwicklung" : "Website Development"
+              }
+            }
+          ]
+        },
+        "termsOfService": `${baseUrl}/${isDe ? 'de/datenschutz' : 'en/privacy'}`,
+        "serviceOutput": {
+          "@type": "WebSite",
+          "description": isDe
+            ? "Moderne, schnelle Website mit CMS-Integration"
+            : "Modern, fast website with CMS integration"
+        }
+      };
+
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.setAttribute('data-schema', 'service');
+      script.text = JSON.stringify(schema);
+      document.head.appendChild(script);
+    };
+
+    addServiceSchema();
+
   }, [title, description, lang, image, fullUrl, currentPath, isDe, noindex, baseUrl]);
 
   return null;

@@ -1,4 +1,5 @@
 export { LandingHero } from './LandingHero';
+export { StoryBridge } from './StoryBridge';
 export { ClientMarquee } from './ClientMarquee';
 export { BuilderTrap } from './BuilderTrap';
 export { AntiBloat } from './AntiBloat';
