@@ -21,7 +21,7 @@ export const CMSDemo: React.FC<CMSDemoProps> = ({ lang }) => {
   ];
 
   return (
-    <section id="cms-demo" className="py-20 md:py-32 bg-zinc-50">
+    <section id="cms-demo" className="fluid-section bg-paper">
       <div className="container-responsive">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left: Video */}
@@ -32,7 +32,7 @@ export const CMSDemo: React.FC<CMSDemoProps> = ({ lang }) => {
                 <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 cursor-pointer hover:scale-110 transition-transform shadow-lg">
                   <Play className="text-zinc-900 ml-1" size={28} fill="currentColor" />
                 </div>
-                <p className="text-zinc-400 text-sm">
+                <p className="text-zinc-400 fluid-sm">
                   {isDe ? "CMS Demo ansehen" : "Watch CMS Demo"}
                 </p>
               </div>
@@ -40,20 +40,20 @@ export const CMSDemo: React.FC<CMSDemoProps> = ({ lang }) => {
               {/* CMS UI Preview overlay */}
               <div className="absolute top-4 left-4 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-2 rounded-lg">
                 <Edit3 size={16} className="text-sonic-orange" />
-                <span className="text-zinc-900 text-xs font-medium">TinaCMS</span>
+                <span className="text-zinc-900 fluid-xs font-medium">TinaCMS</span>
               </div>
             </div>
           </div>
 
           {/* Right: Content */}
           <div className="reveal delay-100">
-            <h2 className="text-3xl md:text-5xl font-bold text-black mb-6 tracking-tighter">
+            <h2 className="fluid-section-title font-bold text-zinc-900 mb-6 tracking-tight">
               {isDe 
                 ? "Du kannst deine Webseitentexte selbst bearbeiten."
                 : "You can edit your website text yourself."}
             </h2>
             
-            <p className="text-lg md:text-xl text-zinc-600 leading-relaxed mb-8">
+            <p className="fluid-body text-zinc-600 leading-relaxed mb-8">
               {isDe 
                 ? "Keine Abhängigkeit an uns nachdem deine Webseite Live ist. Wir zeigen dir wie."
                 : "No dependency on us after your website goes live. We'll show you how."}
@@ -63,10 +63,8 @@ export const CMSDemo: React.FC<CMSDemoProps> = ({ lang }) => {
             <div className="space-y-4 mb-8">
               {features.map((feature, i) => (
                 <div key={i} className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                    <CheckCircle className="text-green-500" size={16} />
-                  </div>
-                  <span className="text-black font-medium">{feature}</span>
+                  <CheckCircle className="text-sonic-orange" size={20} />
+                  <span className="text-zinc-900 font-medium fluid-base">{feature}</span>
                 </div>
               ))}
             </div>
@@ -77,8 +75,8 @@ export const CMSDemo: React.FC<CMSDemoProps> = ({ lang }) => {
                 <Edit3 className="text-sonic-orange" size={18} />
               </div>
               <div>
-                <span className="text-black font-bold text-sm block">TinaCMS</span>
-                <span className="text-zinc-500 text-xs">{isDe ? "Integriert" : "Integrated"}</span>
+                <span className="text-zinc-900 font-bold fluid-sm block">TinaCMS</span>
+                <span className="text-zinc-500 fluid-xs">{isDe ? "Integriert" : "Integrated"}</span>
               </div>
             </div>
           </div>

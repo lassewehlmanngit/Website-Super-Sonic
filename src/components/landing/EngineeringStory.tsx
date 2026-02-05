@@ -21,21 +21,21 @@ export const EngineeringStory: React.FC<EngineeringStoryProps> = ({ lang }) => {
   ];
 
   return (
-    <section id="engineering" className="py-20 md:py-32 bg-void text-white rounded-t-[2rem] md:rounded-t-[3rem] -mt-4 md:-mt-8 relative z-10">
+    <section id="engineering" className="fluid-section bg-void text-white">
       <div className="container-responsive">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left: Content */}
           <div className="reveal">
-            <div className="inline-block px-4 py-1 rounded-full border border-sonic-orange/30 bg-orange-950/50 text-sonic-orange font-mono text-xs uppercase tracking-widest mb-6">
+            <div className="inline-block px-4 py-1 rounded-full border border-sonic-orange/30 bg-orange-950/50 text-sonic-orange font-mono fluid-xs uppercase tracking-widest mb-6">
               {isDe ? "Der Sonic Motor" : "The Sonic Engine"}
             </div>
             
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tighter">
+            <h2 className="fluid-section-title font-bold mb-6 tracking-tight">
               4 {isDe ? "Jahre" : "Years"}. <br />
               <span className="text-zinc-500">56 {isDe ? "Iterationen" : "Iterations"}.</span>
             </h2>
             
-            <p className="text-lg md:text-xl text-zinc-400 leading-relaxed mb-8">
+            <p className="fluid-body text-zinc-400 leading-relaxed mb-8">
               {isDe ? (
                 <>
                   Wir fangen nicht bei Null an. Deine Website basiert auf einem Framework, das wir über vier Jahre lang 56 Mal optimiert haben. <strong className="text-white">Jede Zeile Code</strong> ist auf Geschwindigkeit, Sicherheit und SEO, sowie AI-Search getrimmt.
@@ -54,7 +54,7 @@ export const EngineeringStory: React.FC<EngineeringStoryProps> = ({ lang }) => {
                   <div className="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center">
                     <feature.icon size={20} className="text-sonic-orange" />
                   </div>
-                  <span className="text-sm font-medium">{feature.text}</span>
+                  <span className="fluid-sm font-medium">{feature.text}</span>
                 </div>
               ))}
             </div>
@@ -64,12 +64,12 @@ export const EngineeringStory: React.FC<EngineeringStoryProps> = ({ lang }) => {
           <div className="reveal delay-200">
             <div className="relative">
               {/* Code block visualization */}
-              <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800 font-mono text-sm overflow-hidden">
+              <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800 font-mono fluid-sm overflow-hidden">
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                  <span className="ml-2 text-zinc-500 text-xs">sonic-framework.ts</span>
+                  <div className="w-3 h-3 rounded-full bg-zinc-600"></div>
+                  <div className="w-3 h-3 rounded-full bg-zinc-600"></div>
+                  <div className="w-3 h-3 rounded-full bg-zinc-600"></div>
+                  <span className="ml-2 text-zinc-500 fluid-xs">sonic-framework.ts</span>
                 </div>
                 <pre className="text-zinc-400 overflow-x-auto">
                   <code>
@@ -96,7 +96,7 @@ const sonicConfig = {
               </div>
 
               {/* Floating badge */}
-              <div className="absolute -bottom-4 -right-4 bg-sonic-orange text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+              <div className="absolute -bottom-4 -right-4 bg-sonic-orange text-white px-4 py-2 rounded-full font-bold fluid-sm shadow-lg">
                 v56.0
               </div>
             </div>

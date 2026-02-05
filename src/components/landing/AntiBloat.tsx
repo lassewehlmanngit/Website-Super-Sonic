@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trash2, Zap, Target } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 
 interface AntiBloatProps {
   lang: 'de' | 'en';
@@ -8,91 +8,46 @@ interface AntiBloatProps {
 export const AntiBloat: React.FC<AntiBloatProps> = ({ lang }) => {
   const isDe = lang === 'de';
 
-  const problems = isDe ? [
-    "Agenturen wollen dir mehr verkaufen als du brauchst.",
-    "Webseiten-Baukästen sind verwirrend und erfordern Entwicklerkenntnisse.",
-    "Beide geben dir monatliche Kosten, die du gar nicht willst."
+  const checklistItems = isDe ? [
+    "Jedes Feature hat einen klaren Zweck",
+    "Keine monatlichen Kosten für Funktionen die du nicht nutzt",
+    "Optimiert für Geschwindigkeit und Konversionen",
+    "Du bist CEO, kein Hobby-Webdesigner"
   ] : [
-    "Agencies want to sell you more than you need.",
-    "Website builders are confusing and require developer skills.",
-    "Both give you monthly costs you don't want."
+    "Every feature has a clear purpose",
+    "No monthly fees for features you don't use",
+    "Optimized for speed and conversions",
+    "You're a CEO, not a hobby web designer"
   ];
 
   return (
-    <section id="anti-bloat" className="py-20 md:py-32 bg-paper">
-      <div className="container-responsive">
-        {/* Pre-headline problems */}
-        <div className="max-w-3xl mx-auto mb-12 reveal">
-          <div className="flex flex-wrap gap-3 justify-center">
-            {problems.map((problem, i) => (
-              <span key={i} className="px-4 py-2 bg-red-50 text-red-600 rounded-full text-sm font-medium">
-                {problem}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Main headline */}
-        <div className="text-center mb-16 reveal delay-100">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-black tracking-tighter mb-6">
+    <section id="anti-bloat" className="fluid-section bg-white">
+      <div className="container-responsive max-w-3xl mx-auto">
+        {/* Clean headline */}
+        <div className="text-center mb-12 reveal">
+          <h2 className="fluid-section-title font-bold text-zinc-900 tracking-tight mb-6">
             {isDe ? "Wir bauen nur," : "We only build"}
             <br />
             <span className="text-sonic-orange">{isDe ? "was du brauchst." : "what you need."}</span>
           </h2>
+          
+          <p className="text-zinc-600 fluid-body leading-relaxed">
+            {isDe 
+              ? "Keine toten Blogs. Keine unnötigen Animationen. Wir reduzieren deine Website auf das, was zählt: Anfragen und Vertrauen."
+              : "No dead blogs. No unnecessary animations. We reduce your website to what matters: inquiries and trust."}
+          </p>
         </div>
 
-        {/* Content */}
-        <div className="max-w-3xl mx-auto reveal delay-200">
-          <p className="text-lg md:text-xl text-zinc-600 leading-relaxed mb-12">
-            {isDe ? (
-              <>
-                Ein toter Blog, den seit 2022 keiner mehr gelesen hat? <strong className="text-black">Weg damit.</strong> Animationen, die nur deine Ladezeit fressen? <strong className="text-black">Brauchst du nicht.</strong> Wir reduzieren deine Website auf das, was zählt: <strong className="text-sonic-orange">Anfragen und Vertrauen.</strong>
-              </>
-            ) : (
-              <>
-                A dead blog that no one has read since 2022? <strong className="text-black">Gone.</strong> Animations that just eat your loading time? <strong className="text-black">You don't need them.</strong> We reduce your website to what matters: <strong className="text-sonic-orange">inquiries and trust.</strong>
-              </>
-            )}
-          </p>
-
-          {/* Feature cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm">
-              <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center mb-4">
-                <Trash2 className="text-red-500" size={24} />
-              </div>
-              <h3 className="font-bold text-black mb-2">
-                {isDe ? "Kein Bloat" : "No Bloat"}
-              </h3>
-              <p className="text-zinc-500 text-sm">
-                {isDe ? "Jedes Feature hat einen Job." : "Every feature has a job."}
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm">
-              <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-4">
-                <Zap className="text-green-500" size={24} />
-              </div>
-              <h3 className="font-bold text-black mb-2">
-                {isDe ? "Schnell" : "Fast"}
-              </h3>
-              <p className="text-zinc-500 text-sm">
-                {isDe ? "Keine unnötige Komplexität." : "No unnecessary complexity."}
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm">
-              <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4">
-                <Target className="text-blue-500" size={24} />
-              </div>
-              <h3 className="font-bold text-black mb-2">
-                {isDe ? "Fokussiert" : "Focused"}
-              </h3>
-              <p className="text-zinc-500 text-sm">
-                {isDe ? "Nur was Ergebnisse bringt." : "Only what brings results."}
-              </p>
-            </div>
-          </div>
+        {/* Simple checklist instead of cards */}
+        <div className="bg-zinc-50 rounded-2xl p-8 md:p-10 reveal delay-100">
+          <ul className="space-y-4">
+            {checklistItems.map((item, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <CheckCircle className="text-sonic-orange mt-0.5 flex-shrink-0" size={20} />
+                <span className="text-zinc-700 fluid-lg">{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

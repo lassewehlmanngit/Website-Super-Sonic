@@ -9,7 +9,7 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
   const isDe = lang === 'de';
 
   return (
-    <section id="ceo-letter" className="py-20 md:py-32 bg-paper">
+    <section id="ceo-letter" className="fluid-section bg-white">
       <div className="container-responsive max-w-4xl mx-auto">
         <div className="reveal">
           <div className="flex items-center gap-4 mb-8">
@@ -24,20 +24,20 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
               />
             </div>
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-black">
+              <h2 className="fluid-2xl font-bold text-zinc-900">
                 {isDe ? "Ein Wort von Lasse" : "A Word from Lasse"}
               </h2>
-              <p className="text-zinc-500">
+              <p className="text-zinc-500 fluid-base">
                 {isDe ? "Warum wir Super Sonic gestartet haben" : "Why we started Super Sonic"}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-zinc-100 reveal delay-100">
+        <div className="bg-zinc-50 rounded-2xl p-8 md:p-12 border border-zinc-100 reveal delay-100">
           <Quote className="text-sonic-orange/20 mb-6" size={48} />
           
-          <div className="space-y-6 text-lg md:text-xl text-zinc-700 leading-relaxed">
+          <div className="space-y-6 fluid-body text-zinc-700 leading-relaxed">
             <p>
               {isDe ? "Hey, ich bin Lasse." : "Hey, I'm Lasse."}
             </p>
@@ -45,11 +45,11 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
             <p>
               {isDe ? (
                 <>
-                  Nach 10 Jahren Software-Entwicklung, Marketing, und Webseitendesign für Marken wie <strong className="text-black">VW, Allianz, Novartum</strong>, und co., hatte ich genug von zähen Prozessen und überteuerten Agentur-Rechnungen die einfach nur Geld wollen, ohne etwas zurückzugeben.
+                  Nach 10 Jahren Software-Entwicklung, Marketing, und Webseitendesign für Marken wie <strong className="text-zinc-900">VW, Allianz, Novartum</strong>, und co., hatte ich genug von zähen Prozessen und überteuerten Agentur-Rechnungen die einfach nur Geld wollen, ohne etwas zurückzugeben.
                 </>
               ) : (
                 <>
-                  After 10 years of software development, marketing, and web design for brands like <strong className="text-black">VW, Allianz, Novartum</strong>, and more, I had enough of slow processes and overpriced agency bills that just want money without giving anything back.
+                  After 10 years of software development, marketing, and web design for brands like <strong className="text-zinc-900">VW, Allianz, Novartum</strong>, and more, I had enough of slow processes and overpriced agency bills that just want money without giving anything back.
                 </>
               )}
             </p>
@@ -69,27 +69,27 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
             <p>
               {isDe ? (
                 <>
-                  Wir haben Super Sonic gegründet, um dem Mittelstand <strong className="text-black">echte digitale Souveränität</strong> zu geben. Es wird Zeit, dass der Mittelstand digital auffindbar und modern wird.
+                  Wir haben Super Sonic gegründet, um dem Mittelstand <strong className="text-zinc-900">echte digitale Souveränität</strong> zu geben. Es wird Zeit, dass der Mittelstand digital auffindbar und modern wird.
                 </>
               ) : (
                 <>
-                  We founded Super Sonic to give SMBs <strong className="text-black">real digital sovereignty</strong>. It's time for small and medium businesses to become digitally discoverable and modern.
+                  We founded Super Sonic to give SMBs <strong className="text-zinc-900">real digital sovereignty</strong>. It's time for small and medium businesses to become digitally discoverable and modern.
                 </>
               )}
             </p>
 
-            <p className="text-black font-medium border-l-4 border-sonic-orange pl-6">
+            <p className="text-zinc-900 font-medium border-l-4 border-sonic-orange pl-6">
               {isDe 
                 ? "Wir liefern dir eine Website, die dir gehört, die schnell ist und verdammt gut aussieht. Ohne Bullshit-Bingo."
                 : "We deliver a website that belongs to you, that's fast and looks damn good. No buzzword bingo."}
             </p>
           </div>
 
-          <div className="mt-8 pt-8 border-t border-zinc-100">
+          <div className="mt-8 pt-8 border-t border-zinc-200">
             <div className="flex items-center gap-4">
-              <div className="font-bold text-black">Lasse</div>
+              <div className="font-bold text-zinc-900 fluid-base">Lasse</div>
               <div className="text-zinc-400">|</div>
-              <div className="text-zinc-500 text-sm">Founder, Super Sonic</div>
+              <div className="text-zinc-500 fluid-sm">Founder, Super Sonic</div>
             </div>
           </div>
         </div>

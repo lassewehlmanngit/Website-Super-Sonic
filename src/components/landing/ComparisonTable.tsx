@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, X } from 'lucide-react';
+import { Check } from 'lucide-react';
 
 interface ComparisonTableProps {
   lang: 'de' | 'en';
@@ -9,27 +9,29 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({ lang }) => {
   const isDe = lang === 'de';
 
   const rows = isDe ? [
-    { feature: "Kosten", agency: "10k € - 20k € (variabel)", sonic: "5.600 € (Festpreis)", sonicBetter: true },
-    { feature: "Monatliche Miete", agency: "150 €+", sonic: "0 € - 7 €", sonicBetter: true },
-    { feature: "Wartungskosten", agency: "5.000 € pro Jahr", sonic: "0 €", sonicBetter: true },
-    { feature: "Dauer", agency: "3-6 Monate", sonic: "14 Tage (Garantiert)", sonicBetter: true },
-    { feature: "Eigentum", agency: "An Plattformen gebunden", sonic: "100% dein Code", sonicBetter: true },
+    { feature: "Gratis Design-Concept", agency: "Erst nach Anzahlung", sonic: "In 72h – ohne Verpflichtung" },
+    { feature: "Kosten", agency: "10k € - 20k € (variabel)", sonic: "5.600 € (Festpreis)" },
+    { feature: "Monatliche Miete", agency: "150 €+", sonic: "0 € - 7 €" },
+    { feature: "Wartungskosten", agency: "5.000 € pro Jahr", sonic: "0 €" },
+    { feature: "Dauer", agency: "3-6 Monate", sonic: "14 Tage (Garantiert)" },
+    { feature: "Eigentum", agency: "An Plattformen gebunden", sonic: "100% dein Code" },
   ] : [
-    { feature: "Costs", agency: "€10k - €20k (variable)", sonic: "€5,600 (fixed price)", sonicBetter: true },
-    { feature: "Monthly rent", agency: "€150+", sonic: "€0 - €7", sonicBetter: true },
-    { feature: "Maintenance", agency: "€5,000 per year", sonic: "€0", sonicBetter: true },
-    { feature: "Duration", agency: "3-6 months", sonic: "14 days (Guaranteed)", sonicBetter: true },
-    { feature: "Ownership", agency: "Platform locked", sonic: "100% your code", sonicBetter: true },
+    { feature: "Free Design Concept", agency: "Only after deposit", sonic: "In 72h – no obligation" },
+    { feature: "Costs", agency: "€10k - €20k (variable)", sonic: "€5,600 (fixed price)" },
+    { feature: "Monthly rent", agency: "€150+", sonic: "€0 - €7" },
+    { feature: "Maintenance", agency: "€5,000 per year", sonic: "€0" },
+    { feature: "Duration", agency: "3-6 months", sonic: "14 days (Guaranteed)" },
+    { feature: "Ownership", agency: "Platform locked", sonic: "100% your code" },
   ];
 
   return (
-    <section id="comparison" className="py-20 md:py-32 bg-white">
+    <section id="comparison" className="fluid-section bg-paper">
       <div className="container-responsive">
         <div className="text-center mb-16 reveal">
-          <h2 className="text-4xl md:text-6xl font-bold text-black tracking-tighter mb-4">
+          <h2 className="fluid-section-title font-bold text-zinc-900 tracking-tight mb-4">
             {isDe ? "Wir vs. \"Oldschool\" Agenturen" : "Us vs. \"Oldschool\" Agencies"}
           </h2>
-          <p className="text-zinc-500 text-lg">
+          <p className="text-zinc-500 fluid-lg">
             {isDe ? "Ein fairer Vergleich." : "A fair comparison."}
           </p>
         </div>
@@ -38,18 +40,18 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({ lang }) => {
           {/* Mobile Cards */}
           <div className="md:hidden space-y-4">
             {rows.map((row, i) => (
-              <div key={i} className="bg-zinc-50 rounded-2xl p-6">
-                <h3 className="font-bold text-black mb-4">{row.feature}</h3>
+              <div key={i} className={`bg-white rounded-2xl p-6 border ${i === 0 ? 'border-sonic-orange/30' : 'border-zinc-200'}`}>
+                <h3 className={`font-bold mb-4 fluid-lg ${i === 0 ? 'text-sonic-orange' : 'text-zinc-900'}`}>{row.feature}</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white p-4 rounded-xl border border-red-100">
-                    <span className="text-xs text-red-500 font-medium block mb-1">
+                  <div className="p-4 rounded-xl bg-zinc-50">
+                    <span className="fluid-xs text-zinc-500 font-medium block mb-1">
                       {isDe ? "Klassische Agentur" : "Traditional Agency"}
                     </span>
-                    <span className="text-zinc-700 text-sm">{row.agency}</span>
+                    <span className="text-zinc-700 fluid-sm">{row.agency}</span>
                   </div>
-                  <div className="bg-green-50 p-4 rounded-xl border border-green-200">
-                    <span className="text-xs text-green-600 font-medium block mb-1">Super Sonic</span>
-                    <span className="text-black font-bold text-sm">{row.sonic}</span>
+                  <div className="p-4 rounded-xl bg-orange-50 border border-orange-100">
+                    <span className="fluid-xs text-sonic-orange font-medium block mb-1">Super Sonic</span>
+                    <span className="text-zinc-900 font-bold fluid-sm">{row.sonic}</span>
                   </div>
                 </div>
               </div>
@@ -57,27 +59,27 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({ lang }) => {
           </div>
 
           {/* Desktop Table */}
-          <div className="hidden md:block overflow-hidden rounded-2xl border border-zinc-200">
+          <div className="hidden md:block overflow-hidden rounded-2xl border border-zinc-200 bg-white">
             <table className="w-full">
               <thead>
                 <tr className="bg-zinc-50">
-                  <th className="text-left p-6 font-bold text-black">Feature</th>
-                  <th className="text-left p-6 font-bold text-red-500">
+                  <th className="text-left p-6 font-bold text-zinc-900 fluid-base">Feature</th>
+                  <th className="text-left p-6 font-bold text-zinc-500 fluid-base">
                     {isDe ? "Klassische Agentur" : "Traditional Agency"}
                   </th>
-                  <th className="text-left p-6 font-bold text-sonic-orange bg-orange-50">
+                  <th className="text-left p-6 font-bold text-sonic-orange bg-orange-50 fluid-base">
                     {isDe ? "Deine \"Sonic\" Website" : "Your \"Sonic\" Website"}
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {rows.map((row, i) => (
-                  <tr key={i} className="border-t border-zinc-100">
-                    <td className="p-6 font-medium text-black">{row.feature}</td>
-                    <td className="p-6 text-zinc-600">{row.agency}</td>
-                    <td className="p-6 font-bold text-black bg-orange-50/50">
+                  <tr key={i} className={`border-t ${i === 0 ? 'border-sonic-orange/20 bg-orange-50/30' : 'border-zinc-100'}`}>
+                    <td className={`p-6 font-medium fluid-base ${i === 0 ? 'text-sonic-orange' : 'text-zinc-900'}`}>{row.feature}</td>
+                    <td className="p-6 text-zinc-600 fluid-base">{row.agency}</td>
+                    <td className={`p-6 font-bold text-zinc-900 fluid-base ${i === 0 ? 'bg-orange-100/50' : 'bg-orange-50/50'}`}>
                       <span className="flex items-center gap-2">
-                        <Check className="text-green-500" size={18} />
+                        <Check className="text-sonic-orange" size={18} />
                         {row.sonic}
                       </span>
                     </td>
@@ -89,7 +91,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({ lang }) => {
 
           {/* Bottom note */}
           <div className="mt-8 text-center reveal delay-200">
-            <p className="text-zinc-500 text-sm">
+            <p className="text-zinc-500 fluid-sm">
               {isDe 
                 ? "* Die Website gehört dir, keine Wartung benötigt, kein Agentur lock-in."
                 : "* The website is yours, no maintenance needed, no agency lock-in."}

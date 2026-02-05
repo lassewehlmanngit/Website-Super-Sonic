@@ -89,10 +89,10 @@ export const StrategicFAQ: React.FC<StrategicFAQProps> = ({ lang }) => {
   }, [faqs]);
 
   return (
-    <section id="faq" className="py-20 md:py-32 bg-paper">
+    <section id="faq" className="fluid-section bg-white">
       <div className="container-responsive max-w-4xl mx-auto">
         <div className="text-center mb-16 reveal">
-          <h2 className="text-4xl md:text-6xl font-bold text-black tracking-tighter">
+          <h2 className="fluid-section-title font-bold text-zinc-900 tracking-tight">
             {isDe ? "Häufige Fragen" : "FAQ"}
           </h2>
         </div>
@@ -101,10 +101,10 @@ export const StrategicFAQ: React.FC<StrategicFAQProps> = ({ lang }) => {
           {faqs.map((faq, index) => (
             <details
               key={index}
-              className="group bg-white rounded-2xl border border-black/5 open:bg-zinc-50 transition-colors duration-300"
+              className="group bg-zinc-50 rounded-2xl border border-zinc-100 open:bg-white transition-colors duration-300"
             >
               <summary className="flex justify-between items-center p-6 md:p-8 cursor-pointer list-none">
-                <span className="text-lg md:text-xl font-bold text-black pr-8">
+                <span className="fluid-lg font-bold text-zinc-900 pr-8">
                   {faq.question}
                 </span>
                 <span className="text-sonic-orange transition-transform duration-300 group-open:rotate-180 flex-shrink-0">
@@ -113,7 +113,7 @@ export const StrategicFAQ: React.FC<StrategicFAQProps> = ({ lang }) => {
                 </span>
               </summary>
 
-              <div className="px-6 md:px-8 pb-6 md:pb-8 text-zinc-600 leading-relaxed text-base md:text-lg">
+              <div className="px-6 md:px-8 pb-6 md:pb-8 text-zinc-600 leading-relaxed fluid-base">
                 {faq.answer}
               </div>
             </details>

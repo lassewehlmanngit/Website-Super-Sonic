@@ -1,45 +1,175 @@
-/* Base font size increase for better readability */
+/* ========================================
+   FLUID TYPOGRAPHY SYSTEM
+   Uses clamp(min, preferred, max) for smooth scaling
+   No breakpoints needed - sizes flow smoothly
+   ======================================== */
+
+:root {
+  /* Base fluid font size - affects all rem values */
+  --fluid-base: clamp(15px, 0.9375rem + 0.25vw, 18px);
+  
+  /* Fluid Type Scale */
+  --fluid-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);       /* 12px → 14px */
+  --fluid-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);          /* 14px → 16px */
+  --fluid-base-text: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);  /* 16px → 18px */
+  --fluid-lg: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);         /* 18px → 22px */
+  --fluid-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);         /* 20px → 24px */
+  --fluid-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);          /* 24px → 32px */
+  --fluid-3xl: clamp(1.875rem, 1.5rem + 1.75vw, 2.5rem);       /* 30px → 40px */
+  --fluid-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3.25rem);       /* 36px → 52px */
+  --fluid-5xl: clamp(2.75rem, 2rem + 3.5vw, 4rem);             /* 44px → 64px */
+  --fluid-6xl: clamp(3.25rem, 2.25rem + 4.5vw, 5rem);          /* 52px → 80px */
+  --fluid-7xl: clamp(3.75rem, 2.5rem + 5.5vw, 6rem);           /* 60px → 96px */
+  
+  /* Fluid Line Heights */
+  --line-tight: 1.1;
+  --line-snug: 1.2;
+  --line-normal: 1.5;
+  --line-relaxed: 1.625;
+  --line-loose: 1.75;
+}
+
 html {
-  font-size: clamp(14px, 1.5vw, 16px);
+  font-size: var(--fluid-base);
 }
 
 body {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: var(--fluid-base-text);
+  line-height: var(--line-normal);
 }
 
-/* Fluid Typography - Responsive Headings */
+/* ========================================
+   FLUID UTILITY CLASSES
+   Use these instead of text-xl, text-3xl, etc.
+   ======================================== */
+
+.fluid-xs { font-size: var(--fluid-xs); }
+.fluid-sm { font-size: var(--fluid-sm); }
+.fluid-base { font-size: var(--fluid-base-text); }
+.fluid-lg { font-size: var(--fluid-lg); }
+.fluid-xl { font-size: var(--fluid-xl); }
+.fluid-2xl { font-size: var(--fluid-2xl); }
+.fluid-3xl { font-size: var(--fluid-3xl); }
+.fluid-4xl { font-size: var(--fluid-4xl); }
+.fluid-5xl { font-size: var(--fluid-5xl); }
+.fluid-6xl { font-size: var(--fluid-6xl); }
+.fluid-7xl { font-size: var(--fluid-7xl); }
+
+/* ========================================
+   SEMANTIC FLUID CLASSES
+   Named for their purpose, not their size
+   ======================================== */
+
+/* Hero headline - largest, used once per page */
+.fluid-hero { 
+  font-size: var(--fluid-6xl); 
+  line-height: var(--line-tight);
+  letter-spacing: -0.02em;
+}
+
+/* Section titles - h2 level */
+.fluid-section-title { 
+  font-size: var(--fluid-4xl); 
+  line-height: var(--line-snug);
+  letter-spacing: -0.01em;
+}
+
+/* Subsection titles - h3 level */
+.fluid-subsection-title { 
+  font-size: var(--fluid-2xl); 
+  line-height: var(--line-snug);
+}
+
+/* Card titles */
+.fluid-card-title { 
+  font-size: var(--fluid-xl); 
+  line-height: var(--line-snug);
+}
+
+/* Body text - main paragraphs */
+.fluid-body { 
+  font-size: var(--fluid-lg); 
+  line-height: var(--line-relaxed);
+}
+
+/* Body text smaller variant */
+.fluid-body-sm { 
+  font-size: var(--fluid-base-text); 
+  line-height: var(--line-relaxed);
+}
+
+/* Labels, badges, captions */
+.fluid-label { 
+  font-size: var(--fluid-sm); 
+  line-height: var(--line-normal);
+}
+
+/* Extra small text */
+.fluid-caption { 
+  font-size: var(--fluid-xs); 
+  line-height: var(--line-normal);
+}
+
+/* ========================================
+   FLUID SECTION SPACING
+   ======================================== */
+
+.fluid-section {
+  padding-top: clamp(4rem, 8vw, 8rem);
+  padding-bottom: clamp(4rem, 8vw, 8rem);
+}
+
+.fluid-section-sm {
+  padding-top: clamp(3rem, 6vw, 6rem);
+  padding-bottom: clamp(3rem, 6vw, 6rem);
+}
+
+/* Fluid gaps */
+.fluid-gap-xs { gap: clamp(0.5rem, 1vw, 1rem); }
+.fluid-gap-sm { gap: clamp(0.75rem, 1.5vw, 1.5rem); }
+.fluid-gap { gap: clamp(1rem, 2vw, 2rem); }
+.fluid-gap-lg { gap: clamp(1.5rem, 3vw, 3rem); }
+.fluid-gap-xl { gap: clamp(2rem, 4vw, 4rem); }
+
+/* Fluid margins */
+.fluid-mb-xs { margin-bottom: clamp(0.5rem, 1vw, 1rem); }
+.fluid-mb-sm { margin-bottom: clamp(0.75rem, 1.5vw, 1.5rem); }
+.fluid-mb { margin-bottom: clamp(1rem, 2vw, 2rem); }
+.fluid-mb-lg { margin-bottom: clamp(1.5rem, 3vw, 3rem); }
+.fluid-mb-xl { margin-bottom: clamp(2rem, 4vw, 4rem); }
+
+/* ========================================
+   LEGACY SUPPORT (keep existing styles working)
+   ======================================== */
+
 h1, .h1, .hero-headline {
-  font-size: clamp(2rem, 5vw + 1rem, 3.5rem);
-  line-height: 1.1;
+  font-size: var(--fluid-5xl);
+  line-height: var(--line-tight);
   font-weight: 700;
-  margin-bottom: clamp(1rem, 2vw, 1.5rem);
 }
 
 h2, .h2, .section-headline {
-  font-size: clamp(1.75rem, 4vw + 0.5rem, 2.5rem);
-  line-height: 1.2;
+  font-size: var(--fluid-4xl);
+  line-height: var(--line-snug);
   font-weight: 700;
-  margin-bottom: clamp(1rem, 1.5vw, 1.25rem);
 }
 
 h3, .h3 {
-  font-size: clamp(1.375rem, 2.5vw + 0.25rem, 1.75rem);
-  line-height: 1.3;
+  font-size: var(--fluid-2xl);
+  line-height: var(--line-snug);
   font-weight: 600;
-  margin-bottom: clamp(0.75rem, 1vw, 1rem);
+}
+
+h4, .h4 {
+  font-size: var(--fluid-xl);
+  line-height: var(--line-snug);
+  font-weight: 600;
 }
 
 /* Hero Description */
 .hero-description {
-  font-size: clamp(1rem, 2vw + 0.25rem, 1.25rem);
-  line-height: 1.6;
-  margin-bottom: clamp(1rem, 2vw, 1.5rem);
-}
-
-/* Paragraph spacing */
-p + p {
-  margin-top: clamp(1rem, 2vw, 1.5rem);
+  font-size: var(--fluid-lg);
+  line-height: var(--line-relaxed);
 }
 
 /* Emphasis/highlight class for key numbers */
@@ -47,18 +177,7 @@ p + p {
 .highlight-number,
 .cost-amount,
 .metric-value {
-  font-size: clamp(1.25rem, 3vw + 0.5rem, 1.75rem);
+  font-size: var(--fluid-2xl);
   font-weight: 600;
   color: var(--color-sonic-orange);
 }
-
-/* Section spacing - Fluid */
-section {
-  padding: clamp(2rem, 5vw, 4rem) 0;
-}
-
-.section-headline {
-  text-align: center;
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-}
-

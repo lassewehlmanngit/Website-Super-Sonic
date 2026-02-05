@@ -9,15 +9,7 @@ export const ClientMarquee: React.FC<ClientMarqueeProps> = ({ lang }) => {
   const clients = ["VOLKSWAGEN", "ALLIANZ", "NOVARTUM", "SINNERSCHRADER", "SPARKASSE", "BLVRD", "MAKROSOLUTIONS", "NEVARIS"];
 
   return (
-    <section className="py-12 md:py-16 bg-paper border-b border-zinc-200">
-      <div className="container-responsive mb-8">
-        <p className="text-center text-zinc-500 text-sm md:text-base font-medium">
-          {isDe 
-            ? "Der Mittelstand verdient besseres als alte Webseiten die nicht funktionieren"
-            : "SMBs deserve better than old websites that don't work"}
-        </p>
-      </div>
-      
+    <section className="py-12 md:py-16 bg-white border-b border-zinc-100">
       <div className="overflow-hidden w-full">
         <div className="flex whitespace-nowrap motion-safe:animate-marquee">
           {[...Array(2)].map((_, loopIndex) => (
@@ -25,7 +17,7 @@ export const ClientMarquee: React.FC<ClientMarqueeProps> = ({ lang }) => {
               {clients.map((client, i) => (
                 <span 
                   key={`${loopIndex}-${i}`} 
-                  className="text-zinc-300 font-black text-xl md:text-3xl tracking-tighter hover:text-sonic-orange transition-colors duration-500 cursor-default uppercase"
+                  className="text-zinc-300 font-black fluid-2xl tracking-tighter hover:text-sonic-orange transition-colors duration-500 cursor-default uppercase"
                 >
                   {client}
                 </span>

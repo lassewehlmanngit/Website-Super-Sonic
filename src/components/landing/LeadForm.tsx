@@ -125,7 +125,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
 
   if (isSubmitted) {
     return (
-      <section id="form" className="py-20 md:py-32 bg-white">
+      <section id="form" className="fluid-section bg-white">
         <div className="container-responsive max-w-2xl mx-auto">
           <FormSuccess lang={lang} />
         </div>
@@ -134,14 +134,14 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
   }
 
   return (
-    <section id="form" className="py-20 md:py-32 bg-white">
+    <section id="form" className="fluid-section bg-white">
       <div className="container-responsive max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 reveal">
-          <h2 className="text-3xl md:text-5xl font-bold text-black tracking-tighter mb-4">
+          <h2 className="fluid-section-title font-bold text-zinc-900 tracking-tight mb-4">
             {isDe ? "Teste uns, bevor du uns buchst." : "Test us before you book us."}
           </h2>
-          <p className="text-zinc-500 text-lg">
+          <p className="text-zinc-500 fluid-lg">
             {isDe 
               ? "In 2 Minuten zu deinem kostenlosen Design-Entwurf."
               : "Get your free design draft in 2 minutes."}
@@ -149,8 +149,8 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
         </div>
 
         {/* Intro text */}
-        <div className="bg-zinc-50 rounded-xl p-6 mb-8 reveal delay-100">
-          <p className="text-zinc-600 text-sm leading-relaxed">
+        <div className="bg-zinc-50 rounded-2xl p-6 mb-8 reveal delay-100">
+          <p className="text-zinc-600 fluid-sm leading-relaxed">
             {isDe 
               ? "5600€ ausgeben ohne zu wissen was du bekommst? Nicht mit uns. Wenn du unsicher bist, kannst du ein gratis Konzept anfragen um zu schauen, ob wir nur Mist erzählen, oder es wirklich drauf haben."
               : "Spend €5,600 without knowing what you'll get? Not with us. If you're unsure, you can request a free concept to see if we're just talking or actually know our stuff."}
@@ -169,12 +169,12 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                 <div 
                   key={i} 
                   className={`flex flex-col items-center gap-2 ${
-                    isActive ? 'text-sonic-orange' : isComplete ? 'text-green-500' : 'text-zinc-300'
+                    isActive ? 'text-sonic-orange' : isComplete ? 'text-sonic-orange' : 'text-zinc-300'
                   }`}
                 >
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-colors ${
                     isActive ? 'border-sonic-orange bg-sonic-orange/10' : 
-                    isComplete ? 'border-green-500 bg-green-50' : 'border-zinc-200 bg-white'
+                    isComplete ? 'border-sonic-orange bg-orange-50' : 'border-zinc-200 bg-white'
                   }`}>
                     {isComplete ? (
                       <Check size={18} />
@@ -182,7 +182,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                       <StepIcon size={18} />
                     )}
                   </div>
-                  <span className="text-xs font-medium hidden md:block">{label}</span>
+                  <span className="fluid-xs font-medium hidden md:block">{label}</span>
                 </div>
               );
             })}
@@ -201,12 +201,12 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
           {/* Step 1: Basis */}
           {step === 1 && (
             <div className="space-y-6 animate-fade-in-up">
-              <h3 className="text-xl font-bold text-black">
+              <h3 className="fluid-xl font-bold text-zinc-900">
                 {isDe ? "Die Basis" : "The Basics"}
               </h3>
               
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
+                <label className="block fluid-sm font-medium text-zinc-700 mb-2">
                   {isDe ? "Wer bist du und was macht deine Firma?" : "Who are you and what does your company do?"}
                 </label>
                 <input
@@ -214,12 +214,12 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder={isDe ? "Name & kurzer Satz zum Business" : "Name & short sentence about your business"}
-                  className="w-full p-4 border border-zinc-200 rounded-xl focus:outline-none focus:border-sonic-orange focus:ring-2 focus:ring-sonic-orange/20"
+                  className="w-full p-4 border border-zinc-200 rounded-xl focus:outline-none focus:border-sonic-orange focus:ring-2 focus:ring-sonic-orange/20 fluid-base"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
+                <label className="block fluid-sm font-medium text-zinc-700 mb-2">
                   {isDe ? "Wie erreichen wir dich?" : "How do we reach you?"}
                 </label>
                 <input
@@ -227,12 +227,12 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder={isDe ? "E-Mail Adresse" : "Email address"}
-                  className="w-full p-4 border border-zinc-200 rounded-xl focus:outline-none focus:border-sonic-orange focus:ring-2 focus:ring-sonic-orange/20"
+                  className="w-full p-4 border border-zinc-200 rounded-xl focus:outline-none focus:border-sonic-orange focus:ring-2 focus:ring-sonic-orange/20 fluid-base"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
+                <label className="block fluid-sm font-medium text-zinc-700 mb-2">
                   {isDe ? "Hast du schon eine Website?" : "Do you already have a website?"}
                 </label>
                 <input
@@ -240,7 +240,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                   value={formData.currentWebsite}
                   onChange={(e) => setFormData({ ...formData, currentWebsite: e.target.value })}
                   placeholder={isDe ? "Her mit dem Link (optional)" : "Share the link (optional)"}
-                  className="w-full p-4 border border-zinc-200 rounded-xl focus:outline-none focus:border-sonic-orange focus:ring-2 focus:ring-sonic-orange/20"
+                  className="w-full p-4 border border-zinc-200 rounded-xl focus:outline-none focus:border-sonic-orange focus:ring-2 focus:ring-sonic-orange/20 fluid-base"
                 />
               </div>
             </div>
@@ -249,10 +249,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
           {/* Step 2: Plan */}
           {step === 2 && (
             <div className="space-y-6 animate-fade-in-up">
-              <h3 className="text-xl font-bold text-black">
+              <h3 className="fluid-xl font-bold text-zinc-900">
                 {isDe ? "Der Plan" : "The Plan"}
               </h3>
-              <p className="text-zinc-500">
+              <p className="text-zinc-500 fluid-base">
                 {isDe ? "Was ist dein Hauptziel mit der neuen Seite? (Mehrere Antworten möglich)" : "What's your main goal with the new site? (Multiple answers possible)"}
               </p>
               
@@ -272,7 +272,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                       onChange={() => handleCheckboxChange('goals', option.value)}
                       className="w-5 h-5 text-sonic-orange rounded focus:ring-sonic-orange"
                     />
-                    <span className="text-zinc-700">{option.label}</span>
+                    <span className="text-zinc-700 fluid-base">{option.label}</span>
                   </label>
                 ))}
               </div>
@@ -282,12 +282,12 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
           {/* Step 3: Style */}
           {step === 3 && (
             <div className="space-y-6 animate-fade-in-up">
-              <h3 className="text-xl font-bold text-black">
+              <h3 className="fluid-xl font-bold text-zinc-900">
                 {isDe ? "Der Style-Check" : "The Style Check"}
               </h3>
               
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
+                <label className="block fluid-sm font-medium text-zinc-700 mb-2">
                   {isDe ? "Gibt es Vorbilder?" : "Any inspirations?"}
                 </label>
                 <textarea
@@ -297,12 +297,12 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                     ? "Links von Websites die du feierst – oder von Konkurrenten, die du digital überholen willst."
                     : "Links to websites you love – or competitors you want to outperform digitally."}
                   rows={3}
-                  className="w-full p-4 border border-zinc-200 rounded-xl focus:outline-none focus:border-sonic-orange focus:ring-2 focus:ring-sonic-orange/20"
+                  className="w-full p-4 border border-zinc-200 rounded-xl focus:outline-none focus:border-sonic-orange focus:ring-2 focus:ring-sonic-orange/20 fluid-base"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
+                <label className="block fluid-sm font-medium text-zinc-700 mb-2">
                   {isDe ? "Was muss unbedingt rein?" : "What must be included?"}
                 </label>
                 <div className="space-y-3">
@@ -321,7 +321,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                         onChange={() => handleCheckboxChange('features', option.value)}
                         className="w-5 h-5 text-sonic-orange rounded focus:ring-sonic-orange"
                       />
-                      <span className="text-zinc-700">{option.label}</span>
+                      <span className="text-zinc-700 fluid-base">{option.label}</span>
                     </label>
                   ))}
                 </div>
@@ -332,10 +332,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
           {/* Step 4: Eigentum */}
           {step === 4 && (
             <div className="space-y-6 animate-fade-in-up">
-              <h3 className="text-xl font-bold text-black">
+              <h3 className="fluid-xl font-bold text-zinc-900">
                 {isDe ? "Die \"Eigentums-Frage\"" : "The \"Ownership Question\""}
               </h3>
-              <p className="text-zinc-500">
+              <p className="text-zinc-500 fluid-base">
                 {isDe 
                   ? "Willst du die Seite am Ende wirklich besitzen oder weiter monatlich \"Miete\" für ein System zahlen, das dir nicht gehört?"
                   : "Do you want to truly own the site at the end or keep paying monthly \"rent\" for a system that doesn't belong to you?"}
@@ -356,7 +356,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                     onChange={() => setFormData({ ...formData, ownership: 'full' })}
                     className="w-5 h-5 text-sonic-orange focus:ring-sonic-orange"
                   />
-                  <span className="text-zinc-700 font-medium">
+                  <span className="text-zinc-700 font-medium fluid-base">
                     {isDe ? "Ich will die volle Kontrolle und 100% Eigentum." : "I want full control and 100% ownership."}
                   </span>
                 </label>
@@ -375,7 +375,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                     onChange={() => setFormData({ ...formData, ownership: 'doesnt-matter' })}
                     className="w-5 h-5 text-sonic-orange focus:ring-sonic-orange"
                   />
-                  <span className="text-zinc-700">
+                  <span className="text-zinc-700 fluid-base">
                     {isDe ? "Ist mir eigentlich egal, solange es funktioniert." : "I don't really care, as long as it works."}
                   </span>
                 </label>
@@ -386,10 +386,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
           {/* Step 5: Testimonial */}
           {step === 5 && (
             <div className="space-y-6 animate-fade-in-up">
-              <h3 className="text-xl font-bold text-black">
+              <h3 className="fluid-xl font-bold text-zinc-900">
                 {isDe ? "Der \"Testimonial-Deal\"" : "The \"Testimonial Deal\""}
               </h3>
-              <p className="text-zinc-500">
+              <p className="text-zinc-500 fluid-base">
                 {isDe 
                   ? "Hand aufs Herz: Unser Preis von 5.600 € ist nur machbar, weil wir auf klassisches Marketing verzichten. Bist du bereit, uns nach dem Launch ein kurzes Video-Testimonial zu geben, wenn du mit der Arbeit zufrieden bist?"
                   : "Honestly: Our price of €5,600 is only possible because we skip traditional marketing. Are you willing to give us a short video testimonial after launch if you're happy with the work?"}
@@ -410,7 +410,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                     onChange={() => setFormData({ ...formData, testimonial: 'yes' })}
                     className="w-5 h-5 text-sonic-orange focus:ring-sonic-orange"
                   />
-                  <span className="text-zinc-700 font-medium">
+                  <span className="text-zinc-700 font-medium fluid-base">
                     {isDe ? "Klar, Ehrensache!" : "Sure, of course!"}
                   </span>
                 </label>
@@ -429,7 +429,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                     onChange={() => setFormData({ ...formData, testimonial: 'discuss' })}
                     className="w-5 h-5 text-sonic-orange focus:ring-sonic-orange"
                   />
-                  <span className="text-zinc-700">
+                  <span className="text-zinc-700 fluid-base">
                     {isDe ? "Lass uns da erst nochmal drüber quatschen." : "Let's talk about that first."}
                   </span>
                 </label>
@@ -442,7 +442,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
             {step > 1 ? (
               <button
                 onClick={handleBack}
-                className="flex items-center gap-2 text-zinc-500 hover:text-black transition-colors"
+                className="flex items-center gap-2 text-zinc-500 hover:text-zinc-900 transition-colors fluid-base"
               >
                 <ArrowLeft size={18} />
                 {isDe ? "Zurück" : "Back"}
@@ -455,7 +455,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
               <button
                 onClick={handleNext}
                 disabled={!isStepValid()}
-                className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-zinc-800 transition-colors"
+                className="flex items-center gap-2 bg-zinc-900 text-white px-6 py-3 rounded-full font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-zinc-800 transition-colors fluid-base"
               >
                 {isDe ? "Weiter" : "Next"}
                 <ArrowRight size={18} />
@@ -464,7 +464,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
               <button
                 onClick={handleSubmit}
                 disabled={!isStepValid() || isSubmitting}
-                className="flex items-center gap-2 bg-sonic-orange text-white px-6 py-3 rounded-full font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#E64500] transition-colors"
+                className="flex items-center gap-2 bg-sonic-orange text-white px-6 py-3 rounded-full font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#E64500] transition-colors fluid-base"
               >
                 {isSubmitting ? (
                   <>
@@ -483,17 +483,17 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
         </div>
 
         {/* Trust indicators */}
-        <div className="flex justify-center gap-6 mt-8 text-zinc-400 text-sm flex-wrap">
+        <div className="flex justify-center gap-6 mt-8 text-zinc-400 fluid-sm flex-wrap">
           <span className="flex items-center gap-1">
-            <Check size={14} className="text-green-500" />
+            <Check size={14} className="text-sonic-orange" />
             {isDe ? "Keine Kreditkarte nötig" : "No credit card needed"}
           </span>
           <span className="flex items-center gap-1">
-            <Check size={14} className="text-green-500" />
+            <Check size={14} className="text-sonic-orange" />
             {isDe ? "Kein Druck" : "No pressure"}
           </span>
           <span className="flex items-center gap-1">
-            <Check size={14} className="text-green-500" />
+            <Check size={14} className="text-sonic-orange" />
             {isDe ? "Antwort in 48-72h" : "Response in 48-72h"}
           </span>
         </div>

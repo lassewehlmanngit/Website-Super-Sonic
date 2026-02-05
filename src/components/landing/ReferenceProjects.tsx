@@ -14,7 +14,7 @@ export const ReferenceProjects: React.FC<ReferenceProjectsProps> = ({ lang }) =>
       title: "Logistik-Held",
       description: "Modernes Design, Fokus auf Mitarbeiter-Recruiting.",
       caption: "Bewerbung in 60 Sekunden möglich.",
-      color: "bg-blue-500"
+      color: "bg-sonic-orange"
     },
     {
       icon: Scale,
@@ -29,7 +29,7 @@ export const ReferenceProjects: React.FC<ReferenceProjectsProps> = ({ lang }) =>
       title: "Logistics Hero",
       description: "Modern design, focus on employee recruiting.",
       caption: "Application possible in 60 seconds.",
-      color: "bg-blue-500"
+      color: "bg-sonic-orange"
     },
     {
       icon: Scale,
@@ -41,10 +41,10 @@ export const ReferenceProjects: React.FC<ReferenceProjectsProps> = ({ lang }) =>
   ];
 
   return (
-    <section id="references" className="py-20 md:py-32 bg-white">
+    <section id="references" className="fluid-section bg-white">
       <div className="container-responsive">
         <div className="text-center mb-16 reveal">
-          <h2 className="text-4xl md:text-6xl font-bold text-black tracking-tighter">
+          <h2 className="fluid-section-title font-bold text-zinc-900 tracking-tight">
             {isDe ? "Referenz-Projekte" : "Reference Projects"}
           </h2>
         </div>
@@ -53,7 +53,7 @@ export const ReferenceProjects: React.FC<ReferenceProjectsProps> = ({ lang }) =>
           {projects.map((project, i) => (
             <div 
               key={i} 
-              className="group bg-zinc-50 rounded-3xl overflow-hidden hover:shadow-xl transition-all reveal delay-100"
+              className="group bg-zinc-50 rounded-2xl overflow-hidden hover:shadow-xl transition-all reveal delay-100"
             >
               {/* Preview area */}
               <div className={`h-48 ${project.color} flex items-center justify-center relative`}>
@@ -65,11 +65,11 @@ export const ReferenceProjects: React.FC<ReferenceProjectsProps> = ({ lang }) =>
 
               {/* Content */}
               <div className="p-6 md:p-8">
-                <h3 className="text-xl md:text-2xl font-bold text-black mb-2">
+                <h3 className="fluid-xl font-bold text-zinc-900 mb-2">
                   {project.title}
                 </h3>
-                <p className="text-zinc-600 mb-4">{project.description}</p>
-                <div className="inline-block px-3 py-1 bg-green-50 text-green-600 rounded-full text-sm font-medium">
+                <p className="text-zinc-600 mb-4 fluid-base">{project.description}</p>
+                <div className="inline-block px-3 py-1 bg-orange-50 text-sonic-orange rounded-full fluid-sm font-medium border border-orange-100">
                   {project.caption}
                 </div>
               </div>
