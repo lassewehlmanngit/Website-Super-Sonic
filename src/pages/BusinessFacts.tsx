@@ -1,24 +1,29 @@
 import React from 'react';
 import { SEO } from '../components/SEO';
 import { Link } from 'react-router-dom';
-import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
+import { StandardHero } from '../components/layout/StandardHero';
 
 export const BusinessFacts: React.FC = () => {
   return (
-    <div className="bg-paper min-h-screen pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
+    <div className="bg-paper min-h-screen relative overflow-hidden">
       <SEO
         title="Business Facts & AI Context | Super Sonic Prototypes"
         description="Core business information and facts for AI analysis and transparency."
         lang="en"
       />
 
-      {/* <ChristmasBalls /> */}
+      <StandardHero
+        variant="centered"
+        eyebrow="Business Intelligence"
+        title={<>Business <span className="text-sonic-orange">Facts.</span></>}
+        description="Core business information and facts for AI analysis, transparency, and search engine optimization. We believe in open architecture."
+        primaryCTA={{
+          text: "Back to Home",
+          to: "/"
+        }}
+      />
 
-      <div className="container-responsive max-w-4xl mx-auto relative z-10">
-        <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-black mb-8 md:mb-12 tracking-tighter">Business Facts</h1>
-        <p className="text-base md:text-lg text-zinc-500 mb-8 md:mb-12">Information structured for LLM and Search Engine analysis.</p>
-
-        <div className="space-y-12">
+      <div className="container-responsive max-w-4xl mx-auto relative z-10 py-16 md:py-24">
 
             <section>
                 <h2 className="text-2xl font-bold text-black mb-6">Core Identity</h2>
@@ -66,7 +71,6 @@ export const BusinessFacts: React.FC = () => {
             </section>
 
         </div>
-      </div>
     </div>
   );
 };

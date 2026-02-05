@@ -70,12 +70,12 @@ export const TCOCalculator: React.FC<Props> = ({ lang }) => {
   }, []);
 
   return (
-    <div className="bg-white rounded-[2.5rem] p-8 md:p-12 border border-black/5 shadow-xl max-w-5xl mx-auto">
-      <div className="text-center mb-12">
-        <h3 className="text-4xl font-bold text-black mb-4 tracking-tight">
+    <div className="bg-white rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-12 border border-black/5 shadow-xl max-w-5xl mx-auto">
+      <div className="text-center mb-10 md:mb-12">
+        <h3 className="text-2xl md:text-4xl font-bold text-black mb-3 md:mb-4 tracking-tight">
           {isDe ? "The Platform Cost Calculator" : "The Platform Cost Calculator"}
         </h3>
-        <p className="text-zinc-500 text-lg">
+        <p className="text-zinc-500 text-base md:text-lg">
           {isDe
            ? "Entwicklungskosten basierend auf Arbeitsstunden. Manuell vs. Effizient."
            : "Development costs based on hours. Manual labor vs. Efficiency."}

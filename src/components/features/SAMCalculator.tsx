@@ -33,9 +33,9 @@ export const SAMCalculator: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full bg-white border border-black/5 p-10 rounded-[2.5rem] shadow-xl relative overflow-hidden">
+    <div className="w-full bg-white border border-black/5 p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-xl relative overflow-hidden">
       
-      <div className="flex items-center justify-between mb-12">
+      <div className="flex items-center justify-between mb-8 md:mb-12">
         <div>
           <h3 className="text-2xl font-bold text-black flex items-center gap-2 tracking-tight">
             Revenue Simulator
@@ -64,38 +64,38 @@ export const SAMCalculator: React.FC = () => {
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
             <div className="space-y-2">
-            <label className="text-xs text-zinc-400 uppercase tracking-widest font-bold">Conv. Rate (%)</label>
+            <label className="text-[10px] md:text-xs text-zinc-400 uppercase tracking-widest font-bold">Conv. Rate (%)</label>
             <input 
                 type="number" 
                 value={conversionRate}
                 onChange={handleConversionRateChange}
-                className="w-full bg-zinc-50 border border-zinc-200 text-black px-4 py-3 rounded-xl focus:ring-2 focus:ring-sonic-orange outline-none font-mono"
+                className="w-full bg-zinc-50 border border-zinc-200 text-black px-4 py-3 rounded-xl focus:ring-2 focus:ring-sonic-orange outline-none font-mono text-sm md:text-base"
             />
             </div>
 
             <div className="space-y-2">
-            <label className="text-xs text-zinc-400 uppercase tracking-widest font-bold">Deal Value (€)</label>
+            <label className="text-[10px] md:text-xs text-zinc-400 uppercase tracking-widest font-bold">Deal Value (€)</label>
             <input 
                 type="number" 
                 value={avgOrderValue}
                 onChange={handleAvgOrderValueChange}
-                className="w-full bg-zinc-50 border border-zinc-200 text-black px-4 py-3 rounded-xl focus:ring-2 focus:ring-sonic-orange outline-none font-mono"
+                className="w-full bg-zinc-50 border border-zinc-200 text-black px-4 py-3 rounded-xl focus:ring-2 focus:ring-sonic-orange outline-none font-mono text-sm md:text-base"
             />
             </div>
         </div>
       </div>
 
-      <div className="bg-zinc-50 p-8 rounded-[2rem] border border-zinc-100">
-        <div className="grid grid-cols-2 gap-8 relative z-10">
+      <div className="bg-zinc-50 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border border-zinc-100">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 relative z-10">
           <div>
-            <span className="text-zinc-400 text-xs block mb-2 font-mono uppercase">Current Revenue</span>
-            <span className="text-3xl font-bold tracking-tighter text-zinc-300">€{result.current.toLocaleString()}</span>
+            <span className="text-zinc-400 text-[10px] md:text-xs block mb-1 md:mb-2 font-mono uppercase tracking-tight">Current Revenue</span>
+            <span className="text-2xl md:text-3xl font-bold tracking-tighter text-zinc-300">€{result.current.toLocaleString()}</span>
           </div>
           <div>
-            <span className="text-black text-xs block mb-2 font-mono uppercase">Projected Revenue</span>
-            <span className="text-3xl font-bold tracking-tighter text-black">€{result.potential.toLocaleString()}</span>
+            <span className="text-black text-[10px] md:text-xs block mb-1 md:mb-2 font-mono uppercase tracking-tight">Projected Revenue</span>
+            <span className="text-2xl md:text-3xl font-bold tracking-tighter text-black">€{result.potential.toLocaleString()}</span>
           </div>
         </div>
         

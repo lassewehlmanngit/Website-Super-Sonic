@@ -7,24 +7,12 @@ const MobileNav = lazy(() => import('./components/layout/MobileNav').then(module
 const Footer = lazy(() => import('./components/layout/Footer').then(module => ({ default: module.Footer })));
 const ExitIntentPopup = lazy(() => import('./components/global/ExitIntentPopup').then(module => ({ default: module.ExitIntentPopup })));
 
-// Lazy load all page components
-const Home = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
-const ServiceAppDesign = lazy(() => import('./pages/ServiceAppDesign').then(module => ({ default: module.ServiceAppDesign })));
-const ServiceWebDesign = lazy(() => import('./pages/ServiceWebDesign').then(module => ({ default: module.ServiceWebDesign })));
-const ServiceUX = lazy(() => import('./pages/ServiceUX').then(module => ({ default: module.ServiceUX })));
-const Work = lazy(() => import('./pages/Work').then(module => ({ default: module.Work })));
-const About = lazy(() => import('./pages/About').then(module => ({ default: module.About })));
+// Lazy load page components
+const LandingPage = lazy(() => import('./pages/LandingPage').then(module => ({ default: module.LandingPage })));
 const Impressum = lazy(() => import('./pages/Impressum').then(module => ({ default: module.Impressum })));
 const Privacy = lazy(() => import('./pages/Privacy').then(module => ({ default: module.Privacy })));
 const BusinessFacts = lazy(() => import('./pages/BusinessFacts').then(module => ({ default: module.BusinessFacts })));
-const StartProject = lazy(() => import('./pages/StartProject').then(module => ({ default: module.StartProject })));
-const CaseStudyWCAG = lazy(() => import('./pages/work/CaseStudyWCAG').then(module => ({ default: module.CaseStudyWCAG })));
-const CaseStudySchema = lazy(() => import('./pages/work/CaseStudySchema').then(module => ({ default: module.CaseStudySchema })));
 const KeystaticAdmin = lazy(() => import('./pages/KeystaticAdmin'));
-
-// Conditional seasonal imports
-const SnowOverlay = lazy(() => import('./components/seasonal/SnowOverlay').then(module => ({ default: module.SnowOverlay })));
-const WinterVillage = lazy(() => import('./components/seasonal/WinterVillage').then(module => ({ default: module.WinterVillage })));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -35,28 +23,14 @@ const PageLoader = () => (
 
 const Layout = () => {
   const location = useLocation();
-  const [showSeasonal, setShowSeasonal] = React.useState(false);
 
   // Reset scroll on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  // Only load seasonal components during winter months
-  // Temporarily disabled all Christmas decorations
-  useEffect(() => {
-    // const month = new Date().getMonth();
-    // setShowSeasonal(month === 11 || month === 0 || month === 1); // Dec, Jan, Feb
-    setShowSeasonal(false); // All Christmas decorations deactivated
-  }, []);
-
   return (
     <div className="min-h-screen bg-paper text-void font-sans selection:bg-black selection:text-white relative">
-      {showSeasonal && (
-        <Suspense fallback={null}>
-          <SnowOverlay />
-        </Suspense>
-      )}
       <Suspense fallback={null}>
         <Navigation />
       </Suspense>
@@ -69,11 +43,6 @@ const Layout = () => {
         </Suspense>
       </main>
       <div className="bg-void relative overflow-hidden">
-        {showSeasonal && (
-          <Suspense fallback={null}>
-            <WinterVillage />
-          </Suspense>
-        )}
         <Suspense fallback={null}>
           <Footer />
         </Suspense>
@@ -105,33 +74,34 @@ const App: React.FC = () => {
 
         {/* German Routes */}
         <Route path="/de" element={<Layout />}>
-          <Route index element={<Home lang="de" />} />
-          <Route path="web-design" element={<ServiceWebDesign lang="de" />} />
-          <Route path="app-design" element={<ServiceAppDesign lang="de" />} />
-          <Route path="ux-design" element={<ServiceUX lang="de" />} />
-          <Route path="work" element={<Work lang="de" />} />
-          <Route path="work/wcag-tool" element={<CaseStudyWCAG lang="de" />} />
-          <Route path="work/schema-generator" element={<CaseStudySchema lang="de" />} />
-          <Route path="about" element={<About lang="de" />} />
-          <Route path="start" element={<StartProject lang="de" />} />
+          <Route index element={<LandingPage lang="de" />} />
           <Route path="impressum" element={<Impressum />} />
           <Route path="datenschutz" element={<Privacy />} />
         </Route>
 
         {/* English Routes */}
         <Route path="/en" element={<Layout />}>
-          <Route index element={<Home lang="en" />} />
-          <Route path="web-design" element={<ServiceWebDesign lang="en" />} />
-          <Route path="app-design" element={<ServiceAppDesign lang="en" />} />
-          <Route path="ux-design" element={<ServiceUX lang="en" />} />
-          <Route path="work" element={<Work lang="en" />} />
-          <Route path="work/wcag-tool" element={<CaseStudyWCAG lang="en" />} />
-          <Route path="work/schema-generator" element={<CaseStudySchema lang="en" />} />
-          <Route path="about" element={<About lang="en" />} />
-          <Route path="start" element={<StartProject lang="en" />} />
+          <Route index element={<LandingPage lang="en" />} />
           <Route path="impressum" element={<Impressum />} />
           <Route path="privacy" element={<Privacy />} />
         </Route>
+
+        {/* Redirects for old routes */}
+        <Route path="/de/web-design" element={<Navigate to="/de#comparison" replace />} />
+        <Route path="/de/app-design" element={<Navigate to="/de#comparison" replace />} />
+        <Route path="/de/ux-design" element={<Navigate to="/de#comparison" replace />} />
+        <Route path="/de/work" element={<Navigate to="/de#case-studies" replace />} />
+        <Route path="/de/about" element={<Navigate to="/de#ceo-letter" replace />} />
+        <Route path="/de/start" element={<Navigate to="/de#form" replace />} />
+        <Route path="/en/web-design" element={<Navigate to="/en#comparison" replace />} />
+        <Route path="/en/app-design" element={<Navigate to="/en#comparison" replace />} />
+        <Route path="/en/ux-design" element={<Navigate to="/en#comparison" replace />} />
+        <Route path="/en/work" element={<Navigate to="/en#case-studies" replace />} />
+        <Route path="/en/about" element={<Navigate to="/en#ceo-letter" replace />} />
+        <Route path="/en/start" element={<Navigate to="/en#form" replace />} />
+
+        {/* Catch-all redirect */}
+        <Route path="*" element={<Navigate to="/de" replace />} />
       </Routes>
     </Router>
   );

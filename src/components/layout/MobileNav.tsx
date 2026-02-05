@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Menu, X, ArrowRight, LayoutGrid, Smartphone, Monitor } from 'lucide-react';
-import { Button } from '../ui/Button';
+import { Home, Menu, X, Scale, Users, HelpCircle, Zap, GitCompare } from 'lucide-react';
 
 export const MobileNav: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,12 +8,19 @@ export const MobileNav: React.FC = () => {
   const currentPath = location.pathname;
   const isDe = currentPath.startsWith('/de');
 
-  const links = [
-    { de: 'Web Design', en: 'Web Design', path: 'web-design', icon: Monitor },
-    { de: 'Software Design', en: 'Software Design', path: 'app-design', icon: LayoutGrid }, // Updated label based on previous context
-    { de: 'UX Design', en: 'UX Design', path: 'ux-design', icon: Smartphone },
-    { de: 'Arbeiten', en: 'Work', path: 'work', icon: null },
-    { de: 'Über Mich', en: 'About', path: 'about', icon: null },
+  // Anchor-based navigation links for single landing page
+  const links = isDe ? [
+    { label: 'Vergleich', anchor: '#comparison', icon: GitCompare },
+    { label: 'Prozess', anchor: '#engineering', icon: Zap },
+    { label: 'Projekte', anchor: '#case-studies', icon: Scale },
+    { label: 'Über Uns', anchor: '#ceo-letter', icon: Users },
+    { label: 'FAQ', anchor: '#faq', icon: HelpCircle },
+  ] : [
+    { label: 'Comparison', anchor: '#comparison', icon: GitCompare },
+    { label: 'Process', anchor: '#engineering', icon: Zap },
+    { label: 'Projects', anchor: '#case-studies', icon: Scale },
+    { label: 'About Us', anchor: '#ceo-letter', icon: Users },
+    { label: 'FAQ', anchor: '#faq', icon: HelpCircle },
   ];
 
   // Helper to close menu
@@ -24,6 +30,26 @@ export const MobileNav: React.FC = () => {
   const switchLang = (lang: string) => {
     const path = location.pathname;
     return lang === 'en' ? path.replace('/de', '/en') : path.replace('/en', '/de');
+  };
+
+  const handleAnchorClick = (anchor: string) => {
+    close();
+    setTimeout(() => {
+      const element = document.querySelector(anchor);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
+
+  const scrollToForm = () => {
+    close();
+    setTimeout(() => {
+      const element = document.querySelector('#form');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   };
 
   return (
@@ -47,11 +73,11 @@ export const MobileNav: React.FC = () => {
           </button>
 
           {/* 3. Primary CTA */}
-          <Link to={isDe ? "/de/start" : "/en/start"} onClick={close}>
+          <button onClick={scrollToForm}>
             <div className="bg-white text-black px-4 py-2 rounded-full text-xs font-bold hover:scale-105 transition-transform">
-                {isDe ? "Projekt Starten" : "Start Project"}
+                {isDe ? "Gratis-Entwurf" : "Free Design"}
             </div>
-          </Link>
+          </button>
 
         </div>
       </div>
@@ -91,43 +117,46 @@ export const MobileNav: React.FC = () => {
          <div className="grid gap-2">
             <div className="text-xs font-mono text-zinc-400 uppercase tracking-widest mb-4 ml-2">Navigation</div>
             
-            {links.map(link => {
-               const targetPath = `/${isDe ? 'de' : 'en'}/${link.path}`;
-               const isActive = currentPath === targetPath;
+            {links.map((link, index) => {
                const Icon = link.icon;
 
                return (
-                 <Link 
-                   key={link.path}
-                   to={targetPath}
-                   onClick={close}
-                   className={`
-                      flex items-center gap-4 p-4 rounded-2xl transition-all active:scale-[0.98]
-                      ${isActive ? 'bg-white shadow-sm border border-black/5' : 'hover:bg-black/5'}
-                   `}
+                 <button 
+                   key={index}
+                   onClick={() => handleAnchorClick(link.anchor)}
+                   className="flex items-center gap-4 p-4 rounded-2xl transition-all active:scale-[0.98] hover:bg-black/5 text-left w-full"
                  >
-                    {Icon && <Icon size={20} className={isActive ? 'text-sonic-orange' : 'text-zinc-400'} />}
-                    <span className={`text-lg font-medium ${isActive ? 'text-black' : 'text-zinc-600'}`}>
-                        {isDe ? link.de : link.en}
+                    {Icon && <Icon size={20} className="text-zinc-400" />}
+                    <span className="text-lg font-medium text-zinc-600">
+                        {link.label}
                     </span>
-                    {isActive && <div className="ml-auto w-2 h-2 rounded-full bg-sonic-orange"></div>}
-                 </Link>
+                 </button>
                );
             })}
          </div>
 
+         {/* CTA Button */}
+         <button 
+           onClick={scrollToForm}
+           className="w-full mt-6 bg-sonic-orange text-white py-4 rounded-2xl font-bold text-lg hover:bg-[#E64500] transition-colors"
+         >
+           {isDe ? "Gratis-Entwurf anfordern" : "Request free design"}
+         </button>
+
          {/* Social Proof / Trust Indicator */}
-         <div className="mt-8 p-4 bg-void text-white rounded-2xl">
+         <div className="mt-6 p-4 bg-void text-white rounded-2xl">
              <div className="flex items-center gap-3 mb-2">
                 <div className="flex -space-x-2">
                     <div className="w-6 h-6 rounded-full bg-zinc-700 border border-void"></div>
                     <div className="w-6 h-6 rounded-full bg-zinc-600 border border-void"></div>
                     <div className="w-6 h-6 rounded-full bg-zinc-500 border border-void"></div>
                 </div>
-                <span className="text-xs text-zinc-400">Trusted by founders</span>
+                <span className="text-xs text-zinc-400">
+                  {isDe ? "Vertraut von Gründern" : "Trusted by founders"}
+                </span>
              </div>
              <div className="text-sm font-medium">
-                "Best investment we made."
+                {isDe ? "\"Die beste Investition, die wir gemacht haben.\"" : "\"Best investment we made.\""}
              </div>
          </div>
 
@@ -135,4 +164,3 @@ export const MobileNav: React.FC = () => {
     </>
   );
 };
-

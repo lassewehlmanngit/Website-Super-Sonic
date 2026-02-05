@@ -8,29 +8,9 @@ export const Navigation: React.FC = () => {
   const currentPath = location.pathname;
   const isDe = currentPath.startsWith('/de');
 
-  // Routes whose hero sections use a dark/void background,
-  // so the nav should render in its \"on dark\" style when not scrolled.
-  const darkHeroRoutes = [
-    '/de',
-    '/en',
-    '/de/web-design',
-    '/en/web-design',
-    '/de/app-design',
-    '/en/app-design',
-    '/de/ux-design',
-    '/en/ux-design',
-    '/de/work',
-    '/en/work',
-    '/de/about',
-    '/en/about',
-  ];
-
-  // Treat routes and their sub-paths as "dark" hero sections,
-  // so logo + links render in white on initial load (before scroll),
-  // even if the URL has a trailing slash or extra segments.
-  const isDarkSection = darkHeroRoutes.some((route) => {
-    return currentPath === route || currentPath.startsWith(`${route}/`);
-  });
+  // Landing page always has dark hero
+  const isLandingPage = currentPath === '/de' || currentPath === '/en';
+  const isDarkSection = isLandingPage;
 
   useEffect(() => {
     let ticking = false;
@@ -54,13 +34,35 @@ export const Navigation: React.FC = () => {
     return lang === 'en' ? path.replace('/de', '/en') : path.replace('/en', '/de');
   };
 
-  const links = [
-    { de: 'Web Design', en: 'Web Design', path: 'web-design' },
-    { de: 'Software Design', en: 'Software Design', path: 'app-design' },
-    { de: 'UX Design', en: 'UX Design', path: 'ux-design' },
-    { de: 'Arbeiten', en: 'Work', path: 'work' },
-    { de: 'Über Mich', en: 'About', path: 'about' },
+  // Anchor-based navigation links for single landing page
+  const links = isDe ? [
+    { label: 'Vergleich', anchor: '#comparison' },
+    { label: 'Prozess', anchor: '#engineering' },
+    { label: 'Projekte', anchor: '#case-studies' },
+    { label: 'Über Uns', anchor: '#ceo-letter' },
+    { label: 'FAQ', anchor: '#faq' },
+  ] : [
+    { label: 'Comparison', anchor: '#comparison' },
+    { label: 'Process', anchor: '#engineering' },
+    { label: 'Projects', anchor: '#case-studies' },
+    { label: 'About Us', anchor: '#ceo-letter' },
+    { label: 'FAQ', anchor: '#faq' },
   ];
+
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, anchor: string) => {
+    e.preventDefault();
+    const element = document.querySelector(anchor);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const scrollToForm = () => {
+    const element = document.querySelector('#form');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   const textColor = isScrolled ? 'text-black' : (isDarkSection ? 'text-white' : 'text-black');
   
@@ -82,20 +84,16 @@ export const Navigation: React.FC = () => {
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-2 bg-transparent">
             <div className={`flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-500 mr-4 ${isScrolled ? 'bg-transparent' : 'bg-white/5 backdrop-blur-sm border border-white/10'}`}>
-              {links.map(link => {
-                const targetPath = `/${isDe ? 'de' : 'en'}/${link.path}`;
-                const isActive = currentPath === targetPath;
-                return (
-                  <Link 
-                      key={link.path} 
-                      to={targetPath} 
-                      aria-current={isActive ? 'page' : undefined}
-                      className={`text-xs font-medium px-4 py-2 rounded-full transition-all duration-300 ${textColor} hover:bg-black/5 hover:text-sonic-orange focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sonic-orange focus-visible:ring-offset-2 focus-visible:ring-offset-transparent`}
-                  >
-                      {isDe ? link.de : link.en}
-                  </Link>
-                );
-              })}
+              {links.map((link, index) => (
+                <a 
+                  key={index}
+                  href={link.anchor}
+                  onClick={(e) => handleAnchorClick(e, link.anchor)}
+                  className={`text-xs font-medium px-4 py-2 rounded-full transition-all duration-300 ${textColor} hover:bg-black/5 hover:text-sonic-orange focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sonic-orange focus-visible:ring-offset-2 focus-visible:ring-offset-transparent cursor-pointer`}
+                >
+                  {link.label}
+                </a>
+              ))}
             </div>
             
             <div className={`flex gap-4 text-xs font-mono font-bold mr-6 transition-colors duration-500 ${textColor}`}>
@@ -103,11 +101,14 @@ export const Navigation: React.FC = () => {
                 <Link to={switchLang('en')} className={!isDe ? 'underline decoration-2 underline-offset-4 decoration-sonic-orange' : 'opacity-50 hover:opacity-100'}>EN</Link>
             </div>
 
-            <Link to={isDe ? "/de/start" : "/en/start"}>
-                <Button size="sm" variant={buttonVariant} className="transition-all duration-500">
-                  {isDe ? 'Start Project' : 'Start Project'}
-                </Button>
-            </Link>
+            <Button 
+              size="sm" 
+              variant={buttonVariant} 
+              className="transition-all duration-500"
+              onClick={scrollToForm}
+            >
+              {isDe ? 'Gratis-Entwurf' : 'Free Design'}
+            </Button>
         </div>
       </div>
     </nav>

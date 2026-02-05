@@ -1,1 +1,0 @@
-// File removed as part of Super Sonic Prototypes rebrand.
