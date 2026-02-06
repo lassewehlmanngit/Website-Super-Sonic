@@ -17,11 +17,11 @@
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-router-dom": "^7.10.1",
-    "tinacms": "^2.2.0"
+    "tinacms": "^3.4.1"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.18",
-    "@tinacms/cli": "^1.6.0",
+    "@tinacms/cli": "^2.1.5",
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.4.23",
@@ -31,5 +31,8 @@
     "terser": "^5.44.1",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
+  },
+  "overrides": {
+    "graphql": "15.8.0"
   }
 }

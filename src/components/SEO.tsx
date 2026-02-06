@@ -242,7 +242,7 @@ export const SEO: React.FC<SEOProps> = ({
             }
           ]
         },
-        "termsOfService": `${baseUrl}/${isDe ? 'de/datenschutz' : 'en/privacy'}`,
+        "termsOfService": `${baseUrl}/${isDe ? 'de/agb' : 'en/terms'}`,
         "serviceOutput": {
           "@type": "WebSite",
           "description": isDe

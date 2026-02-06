@@ -107,13 +107,18 @@ export const Footer: React.FC = () => {
             <h4 className="text-white font-bold text-sm mb-4">{isJa ? "法的情報" : isDe ? "Rechtliches" : "Legal"}</h4>
             <ul className="flex flex-col gap-2 list-none">
               <li>
-                <Link to={`/${currentLang}/${isJa ? '会社概要' : 'impressum'}`} className="text-zinc-400 hover:text-white transition-colors text-sm">
-                    {isJa ? '会社概要' : isDe ? 'Impressum' : 'Imprint'}
+                <Link to={`/${currentLang}/${isJa ? 'tokushoho' : 'impressum'}`} className="text-zinc-400 hover:text-white transition-colors text-sm">
+                    {isJa ? '特定商取引法に基づく表記' : isDe ? 'Impressum' : 'Imprint'}
                 </Link>
               </li>
               <li>
-                <Link to={`/${currentLang}/${isJa ? 'プライバシー' : isDe ? 'datenschutz' : 'privacy'}`} className="text-zinc-400 hover:text-white transition-colors text-sm">
+                <Link to={`/${currentLang}/${isJa ? 'privacy' : isDe ? 'datenschutz' : 'privacy'}`} className="text-zinc-400 hover:text-white transition-colors text-sm">
                     {isJa ? 'プライバシーポリシー' : isDe ? 'Datenschutz' : 'Privacy'}
+                </Link>
+              </li>
+              <li>
+                <Link to={`/${currentLang}/${isJa ? 'terms' : isDe ? 'agb' : 'terms'}`} className="text-zinc-400 hover:text-white transition-colors text-sm">
+                    {isJa ? '利用規約' : isDe ? 'AGB' : 'Terms & Conditions'}
                 </Link>
               </li>
             </ul>
