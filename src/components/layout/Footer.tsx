@@ -38,7 +38,7 @@ export const Footer: React.FC = () => {
   ];
 
   const trustAriaLabel = isJa ? "信頼の証" : isDe ? "Vertrauensindikatoren" : "Trust indicators";
-  const mainNavAriaLabel = isJa ? "メインナビゲーション" : isDe ? "Hauptnavigation" : "Main navigation";
+  const footerNavAriaLabel = isJa ? "フッターナビゲーション" : isDe ? "Footer-Navigation" : "Footer navigation";
   const legalAriaLabel = isJa ? "法的情報" : isDe ? "Rechtliche Informationen" : "Legal information";
 
   return (
@@ -85,7 +85,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Navigation */}
-          <nav aria-label={mainNavAriaLabel}>
+          <div role="navigation" aria-label={footerNavAriaLabel}>
             <h4 className="text-white font-bold text-sm mb-4">{isJa ? "ナビゲーション" : "Navigation"}</h4>
             <ul className="grid grid-cols-2 gap-2 list-none">
               {navLinks.map((link, index) => (
@@ -100,10 +100,10 @@ export const Footer: React.FC = () => {
                 </li>
               ))}
             </ul>
-          </nav>
+          </div>
 
           {/* Legal */}
-          <nav aria-label={legalAriaLabel}>
+          <div role="navigation" aria-label={legalAriaLabel}>
             <h4 className="text-white font-bold text-sm mb-4">{isJa ? "法的情報" : isDe ? "Rechtliches" : "Legal"}</h4>
             <ul className="flex flex-col gap-2 list-none">
               <li>
@@ -122,7 +122,7 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
             </ul>
-          </nav>
+          </div>
         </div>
 
         {/* Bottom Bar */}
