@@ -1,0 +1,203 @@
+{
+  "seo": {
+    "title": "Super Sonic | 中小企業向けウェブサイト制作 | 14日納品・固定価格・100%所有権",
+    "description": "成果を出すウェブサイトを。最短14日で納品、92万円の固定価格、100%お客様の所有物に。中小企業にふさわしいウェブサイトを。"
+  },
+  "blocks": [
+    {
+      "_template": "hero",
+      "eyebrow": "中小企業のためのウェブサイト制作",
+      "headline": "成果を出すウェブサイトが必要です。",
+      "subheadline": "複雑な見積もりは、もう必要ありません。",
+      "body": "最短14日。固定価格。100%お客様のもの。御社に本当に必要な機能だけを備えたウェブサイトをお届けします。",
+      "primaryCta": {
+        "label": "無料デザイン案を72時間以内に",
+        "url": "#form",
+        "style": "primary"
+      },
+      "secondaryCta": {
+        "label": "92万円 固定価格",
+        "url": "#form",
+        "style": "outline"
+      },
+      "variant": "dark"
+    },
+    {
+      "_template": "faq",
+      "headline": "よくあるご質問",
+      "subheadline": "プロジェクト開始前に知っておいていただきたいこと",
+      "items": [
+        {
+          "question": "プロジェクトの期間はどのくらいですか？",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "ブリーフィングから公開まで最長14日です。ほとんどのプロジェクトは7〜10日で完了します。"
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "process"
+        },
+        {
+          "question": "ウェブサイトの費用はいくらですか？",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "92万円（税別）の固定価格です。隠れた費用や追加料金はありません。最初からお支払い金額がわかります。"
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "pricing"
+        },
+        {
+          "question": "ウェブサイトは私のものになりますか？",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "はい、100%お客様のものです。完全なソースコード、すべてのファイルをお渡しし、お好きな場所でホスティングできます。ロックインなし、月額料金なしです。"
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "general"
+        },
+        {
+          "question": "価格に何が含まれていますか？",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "デザイン、開発、全デバイス対応のレスポンシブ、SEO基本設定、自分で編集できるコンテンツ管理システム、そして操作説明。必要なものすべてが含まれています。"
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "pricing"
+        },
+        {
+          "question": "なぜこんなに安いのですか？",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "プロセスを自動化・最適化しているからです。中小企業の皆様は、サービスや製品を紹介し、オンラインで見つけてもらえる、機能するウェブサイトを求めています。私たちは複雑な提案は販売しません。"
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "pricing"
+        },
+        {
+          "question": "変更したい場合はどうすればいいですか？",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "公開後14日間、「ジョーカーリクエスト」をご利用いただけます。1つの変更をリクエストできます。やっぱりブログが必要？問題ありません。緑ではなく青がいい？お任せください。"
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "process"
+        },
+        {
+          "question": "プログラミングの知識は必要ですか？",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "全く必要ありません。メールが書ければ、ウェブサイトを管理できます。動画付きのガイドもご用意し、丁寧にご説明します。"
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "general"
+        },
+        {
+          "question": "本当に個人情報保護法に準拠していますか？",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "はい。信頼性の高いホスティングを使用し、海外クラウドや同意なしのトラッキングCookieはありません。個人情報保護法への完全準拠は、追加オプションではなく標準です。"
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "general"
+        }
+      ],
+      "variant": "default"
+    },
+    {
+      "_template": "caseStudies",
+      "headline": "導入事例",
+      "subheadline": "実際の企業様の実際の成果",
+      "studies": [
+        {
+          "slug": "matcha-partners",
+          "title": "Matcha Partners",
+          "client": "Matcha Partners GmbH",
+          "industry": "B2B 食品・飲料",
+          "year": "2024",
+          "color": "#1B3C1D",
+          "icon": "leaf",
+          "preview": {
+            "problem": "B2Bポータルにリード獲得とブランド権威の確立が必要でした。",
+            "solution": "インテント型ナビゲーションを備えたカスタムReactスタック。",
+            "result": "質の高いトラフィックで3〜4倍のコンバージョン率向上。",
+            "metric": "97%",
+            "metricLabel": "テンプレートより優れた性能"
+          },
+          "liveUrl": "https://matcha-partners.com"
+        }
+      ],
+      "variant": "featured"
+    }
+  ]
+}

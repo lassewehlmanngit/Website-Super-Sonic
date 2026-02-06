@@ -1,9 +1,33 @@
 import path from 'path';
-import { defineConfig, loadEnv } from 'vite';
+import fs from 'fs';
+import { defineConfig, loadEnv, Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { deferCSS } from './vite-plugin-defer-css';
 import { resourceHints } from './vite-plugin-resource-hints';
+
+/**
+ * Vite plugin to serve the content directory for TinaCMS
+ * This allows fetching /content/pages/*.json during development
+ */
+function serveContentPlugin(): Plugin {
+  return {
+    name: 'serve-content',
+    configureServer(server) {
+      server.middlewares.use('/content', (req, res, next) => {
+        const filePath = path.join(process.cwd(), 'content', req.url || '');
+        
+        if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+          const content = fs.readFileSync(filePath, 'utf-8');
+          res.setHeader('Content-Type', 'application/json');
+          res.end(content);
+        } else {
+          next();
+        }
+      });
+    }
+  };
+}
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
@@ -12,15 +36,8 @@ export default defineConfig(({ mode }) => {
       server: {
         port: 3000,
         host: '0.0.0.0',
-        proxy: {
-          '/api/keystatic': {
-            target: 'http://localhost:3001',
-            changeOrigin: true,
-            secure: false,
-          },
-        },
       },
-      plugins: [react(), tailwindcss(), deferCSS(), resourceHints()],
+      plugins: [react(), tailwindcss(), deferCSS(), resourceHints(), serveContentPlugin()],
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
@@ -66,14 +83,14 @@ export default defineConfig(({ mode }) => {
                 return; // App code stays with routes/components
               }
               
-              // CRITICAL: Never split these - they cause circular dependency errors
-              // They will be bundled with the components/routes that dynamically import them
-              if (id.includes('@react-pdf/renderer') || 
-                  id.includes('react-pdf') || 
-                  id.includes('@react-pdf') ||
-                  id.includes('@keystatic')) {
-                return; // undefined = bundle with importing module
-              }
+            // CRITICAL: Never split these - they cause circular dependency errors
+            // They will be bundled with the components/routes that dynamically import them
+            if (id.includes('@react-pdf/renderer') || 
+                id.includes('react-pdf') || 
+                id.includes('@react-pdf') ||
+                id.includes('tinacms')) {
+              return; // undefined = bundle with importing module
+            }
               
               // Safe to split - these don't have circular dependencies
               if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
@@ -115,7 +132,7 @@ export default defineConfig(({ mode }) => {
       optimizeDeps: {
         include: ['react', 'react-dom', 'react-router-dom', 'lucide-react'],
         // Exclude heavy dependencies that are already lazy-loaded
-        exclude: ['@react-pdf/renderer', '@keystatic/core'],
+        exclude: ['@react-pdf/renderer', 'tinacms'],
       },
     };
 });

@@ -81,7 +81,7 @@ export const ReferenceProjects: React.FC<ReferenceProjectsProps> = ({ lang }) =>
                 className="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all reveal delay-100 border border-zinc-100"
               >
                 {/* Preview area */}
-                <div className={`h-44 ${project.color} flex items-center justify-center relative`}>
+                <div className="h-44 flex items-center justify-center relative" style={{ backgroundColor: project.color }}>
                   <IconComponent className="text-white/30" size={64} />
                   <div className="absolute top-4 right-4 w-10 h-10 bg-white/20 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                     <ArrowUpRight className="text-white" size={20} />

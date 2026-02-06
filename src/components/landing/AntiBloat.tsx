@@ -2,13 +2,19 @@ import React from 'react';
 import { CheckCircle } from 'lucide-react';
 
 interface AntiBloatProps {
-  lang: 'de' | 'en';
+  lang: 'de' | 'en' | 'ja';
 }
 
 export const AntiBloat: React.FC<AntiBloatProps> = ({ lang }) => {
   const isDe = lang === 'de';
+  const isJa = lang === 'ja';
 
-  const checklistItems = isDe ? [
+  const checklistItems = isJa ? [
+    "すべての機能に明確な目的があります",
+    "使わない機能への月額料金は発生しません",
+    "スピードとコンバージョンに最適化",
+    "お客様は経営者です。趣味のウェブデザイナーではありません"
+  ] : isDe ? [
     "Jedes Feature hat einen klaren Zweck",
     "Keine monatlichen Kosten für Funktionen die du nicht nutzt",
     "Optimiert für Geschwindigkeit und Konversionen",
@@ -26,13 +32,15 @@ export const AntiBloat: React.FC<AntiBloatProps> = ({ lang }) => {
         {/* Clean headline */}
         <div className="text-center mb-12 reveal">
           <h2 className="fluid-section-title font-bold text-zinc-900 tracking-tight mb-6">
-            {isDe ? "Wir bauen nur," : "We only build"}
+            {isJa ? "本当に必要なものだけを" : isDe ? "Wir bauen nur," : "We only build"}
             <br />
-            <span className="text-sonic-orange">{isDe ? "was du brauchst." : "what you need."}</span>
+            <span className="text-sonic-orange">{isJa ? "構築します。" : isDe ? "was du brauchst." : "what you need."}</span>
           </h2>
           
           <p className="text-zinc-600 fluid-body leading-relaxed">
-            {isDe 
+            {isJa 
+              ? "更新されていないブログは不要です。無駄なアニメーションも不要です。お客様のウェブサイトを本質に絞り込みます：お問い合わせと信頼の獲得。"
+              : isDe 
               ? "Keine toten Blogs. Keine unnötigen Animationen. Wir reduzieren deine Website auf das, was zählt: Anfragen und Vertrauen."
               : "No dead blogs. No unnecessary animations. We reduce your website to what matters: inquiries and trust."}
           </p>

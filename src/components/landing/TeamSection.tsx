@@ -2,13 +2,18 @@ import React from 'react';
 import { Users, MessageCircle, HeartHandshake } from 'lucide-react';
 
 interface TeamSectionProps {
-  lang: 'de' | 'en';
+  lang: 'de' | 'en' | 'ja';
 }
 
 export const TeamSection: React.FC<TeamSectionProps> = ({ lang }) => {
   const isDe = lang === 'de';
+  const isJa = lang === 'ja';
 
-  const features = isDe ? [
+  const features = isJa ? [
+    { icon: Users, title: "固定チーム", description: "開発者、マーケター、サポートが一つ屋根の下に。" },
+    { icon: MessageCircle, title: "直接コミュニケーション", description: "対等な関係で。摩擦なし。" },
+    { icon: HeartHandshake, title: "長期サポート", description: "公開後もご質問にお答えします。" },
+  ] : isDe ? [
     { icon: Users, title: "Festes Team", description: "Entwickler, Marketer und Supporter unter einem Dach." },
     { icon: MessageCircle, title: "Direkte Kommunikation", description: "Auf Augenhöhe. Ohne Reibungsverluste." },
     { icon: HeartHandshake, title: "Langfristiger Support", description: "Auch nach dem Launch sind wir für Fragen da." },
@@ -23,15 +28,19 @@ export const TeamSection: React.FC<TeamSectionProps> = ({ lang }) => {
       <div className="container-responsive">
         <div className="text-center mb-16 reveal">
           <h2 className="fluid-section-title font-bold text-zinc-900 tracking-tight mb-4">
-            {isDe ? "Kein Outsourcing." : "No Outsourcing."}
+            {isJa ? "外注なし。" : isDe ? "Kein Outsourcing." : "No Outsourcing."}
             <br />
-            <span className="text-zinc-400">{isDe ? "Keine Funkstille." : "No Radio Silence."}</span>
+            <span className="text-zinc-400">{isJa ? "音信不通なし。" : isDe ? "Keine Funkstille." : "No Radio Silence."}</span>
           </h2>
         </div>
 
         <div className="max-w-3xl mx-auto reveal delay-100">
           <p className="fluid-body text-zinc-600 leading-relaxed text-center mb-12">
-            {isDe ? (
+            {isJa ? (
+              <>
+                Super Sonicの背後には、開発者、マーケター、サポートスタッフからなる<strong className="text-zinc-900">固定チーム</strong>がいます。対等な立場でコミュニケーションを取り、摩擦なく作業を進めます。ご質問があれば、直接お問い合わせいただけます。
+              </>
+            ) : isDe ? (
               <>
                 Hinter Super Sonic steckt ein <strong className="text-zinc-900">festes Team</strong> aus Entwicklern, Marketern und Supportern. Wir kommunizieren auf Augenhöhe und arbeiten ohne Reibungsverluste. Wenn du Fragen hast, erreichst du uns direkt.
               </>

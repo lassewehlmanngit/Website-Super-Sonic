@@ -1,0 +1,38 @@
+{
+  "theme": {
+    "primaryColor": "#FF5500",
+    "secondaryColor": "#0a0a0a",
+    "backgroundColor": "#fafafa",
+    "fontHeading": "Inter",
+    "fontBody": "Inter"
+  },
+  "navigation": {
+    "links": [
+      {
+        "label": "Projekte",
+        "url": "#case-studies"
+      },
+      {
+        "label": "Über uns",
+        "url": "#ceo-letter"
+      },
+      {
+        "label": "FAQ",
+        "url": "#faq"
+      }
+    ],
+    "cta": {
+      "label": "Projekt starten",
+      "url": "#form"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Super Sonic. Alle Rechte vorbehalten.",
+    "socialLinks": [
+      {
+        "platform": "linkedin",
+        "url": "https://linkedin.com/company/super-sonic"
+      }
+    ]
+  }
+}

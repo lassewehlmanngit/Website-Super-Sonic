@@ -2,11 +2,12 @@ import React from 'react';
 import { CheckCircle, Calendar, Mail } from 'lucide-react';
 
 interface FormSuccessProps {
-  lang: 'de' | 'en';
+  lang: 'de' | 'en' | 'ja';
 }
 
 export const FormSuccess: React.FC<FormSuccessProps> = ({ lang }) => {
   const isDe = lang === 'de';
+  const isJa = lang === 'ja';
 
   const handleBookCall = () => {
     window.open('https://calendar.google.com/', '_blank');
@@ -19,16 +20,20 @@ export const FormSuccess: React.FC<FormSuccessProps> = ({ lang }) => {
       </div>
 
       <h3 className="fluid-3xl font-bold text-zinc-900 mb-4">
-        {isDe ? "Läuft bei dir!" : "You're all set!"}
+        {isJa ? "完了しました！" : isDe ? "Läuft bei dir!" : "You're all set!"}
       </h3>
 
       <p className="fluid-lg text-zinc-600 mb-2">
-        {isDe ? "Deine Infos sind gelandet." : "Your info has landed."}
+        {isJa ? "情報を受け取りました。" : isDe ? "Deine Infos sind gelandet." : "Your info has landed."}
       </p>
 
       <div className="max-w-xl mx-auto bg-zinc-50 rounded-2xl p-6 md:p-8 mt-8 text-left">
         <p className="text-zinc-700 leading-relaxed mb-6 fluid-base">
-          {isDe ? (
+          {isJa ? (
+            <>
+              今すぐデザインに取り掛かります。<strong className="text-zinc-900">48〜72時間以内</strong>に、あなた専用のブループリントへのリンクと、なぜこのようなデザインにしたかを説明するビデオをメールでお送りします。
+            </>
+          ) : isDe ? (
             <>
               Ich setze mich jetzt direkt an deinen Entwurf. Innerhalb der nächsten <strong className="text-zinc-900">48 bis 72 Stunden</strong> kriegst du von mir eine E-Mail mit einem Link zu deinem persönlichen Blueprint und einem Video, in dem ich dir erkläre, warum wir das Design so gebaut haben.
             </>
@@ -42,7 +47,9 @@ export const FormSuccess: React.FC<FormSuccessProps> = ({ lang }) => {
         <div className="flex items-center gap-3 text-zinc-600 mb-6">
           <Mail className="text-sonic-orange" size={20} />
           <span className="fluid-sm">
-            {isDe 
+            {isJa 
+              ? "受信トレイ（と迷惑メールフォルダ）をご確認ください"
+              : isDe 
               ? "Check deine Inbox (und Spam-Ordner)"
               : "Check your inbox (and spam folder)"}
           </span>
@@ -50,7 +57,9 @@ export const FormSuccess: React.FC<FormSuccessProps> = ({ lang }) => {
 
         <div className="border-t border-zinc-200 pt-6">
           <p className="fluid-sm text-zinc-500 mb-4">
-            {isDe 
+            {isJa 
+              ? "その間に急ぎのご質問がある場合："
+              : isDe 
               ? "Wenn du zwischendurch brennende Fragen hast:"
               : "If you have burning questions in the meantime:"}
           </p>
@@ -59,13 +68,13 @@ export const FormSuccess: React.FC<FormSuccessProps> = ({ lang }) => {
             className="inline-flex items-center gap-2 bg-zinc-900 text-white px-6 py-3 rounded-full font-bold fluid-sm hover:bg-zinc-800 transition-colors"
           >
             <Calendar size={18} />
-            {isDe ? "15-Minuten-Call buchen" : "Book 15-minute call"}
+            {isJa ? "15分の通話を予約" : isDe ? "15-Minuten-Call buchen" : "Book 15-minute call"}
           </button>
         </div>
       </div>
 
       <p className="mt-8 text-zinc-500 fluid-base">
-        {isDe ? "Bis gleich!" : "Talk soon!"} <br />
+        {isJa ? "それでは、また！" : isDe ? "Bis gleich!" : "Talk soon!"} <br />
         <strong className="text-zinc-900">Lasse</strong>
       </p>
     </div>

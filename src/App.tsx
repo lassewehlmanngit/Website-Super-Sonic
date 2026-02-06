@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense, lazy } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
 
 // Lazy load layout components to reduce initial bundle size
 const Navigation = lazy(() => import('./components/layout/Navigation').then(module => ({ default: module.Navigation })));
@@ -13,7 +13,10 @@ const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage').then(module => 
 const Impressum = lazy(() => import('./pages/Impressum').then(module => ({ default: module.Impressum })));
 const Privacy = lazy(() => import('./pages/Privacy').then(module => ({ default: module.Privacy })));
 const BusinessFacts = lazy(() => import('./pages/BusinessFacts').then(module => ({ default: module.BusinessFacts })));
-const KeystaticAdmin = lazy(() => import('./pages/KeystaticAdmin'));
+
+// TinaCMS Dynamic Page (for CMS-managed content)
+// Uncomment when ready to migrate pages to CMS:
+// const DynamicPage = lazy(() => import('./pages/DynamicPage').then(module => ({ default: module.DynamicPage })));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -24,21 +27,48 @@ const PageLoader = () => (
 
 const Layout = () => {
   const location = useLocation();
+  const isDe = location.pathname.startsWith('/de');
+  const isJa = location.pathname.startsWith('/ja');
 
-  // Reset scroll on route change
+  // Update html lang attribute dynamically
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
+    document.documentElement.lang = isJa ? 'ja' : isDe ? 'de' : 'en';
+  }, [isDe, isJa]);
+
+  // Reset scroll on route change (but respect hash navigation)
+  useEffect(() => {
+    // Only scroll to top if there's no hash in the URL
+    if (!location.hash) {
+      window.scrollTo(0, 0);
+    } else {
+      // If there's a hash, let the browser handle it after a small delay
+      // to ensure the element exists in the DOM
+      const timer = setTimeout(() => {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location.pathname, location.hash]);
 
   return (
     <div className="min-h-screen bg-paper text-void font-sans selection:bg-black selection:text-white relative">
+      {/* Skip to main content link for keyboard navigation */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-sonic-orange focus:text-white focus:rounded-lg focus:font-semibold focus:outline-none focus:ring-2 focus:ring-sonic-orange focus:ring-offset-2"
+      >
+        {isJa ? 'メインコンテンツへスキップ' : isDe ? 'Zum Hauptinhalt springen' : 'Skip to main content'}
+      </a>
       <Suspense fallback={null}>
         <Navigation />
       </Suspense>
       <Suspense fallback={null}>
         <MobileNav />
       </Suspense>
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Suspense fallback={<PageLoader />}>
           <Outlet />
         </Suspense>
@@ -61,12 +91,8 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/de" replace />} />
 
-        {/* Keystatic Admin */}
-        <Route path="/keystatic/*" element={
-          <Suspense fallback={<PageLoader />}>
-            <KeystaticAdmin />
-          </Suspense>
-        } />
+        {/* TinaCMS Admin - Served automatically at /admin by tinacms dev */}
+        {/* No route needed here - Tina handles it */}
 
         {/* Global Pages */}
         <Route path="/business-facts" element={<Layout />}>
@@ -89,6 +115,14 @@ const App: React.FC = () => {
           <Route path="privacy" element={<Privacy />} />
         </Route>
 
+        {/* Japanese Routes */}
+        <Route path="/ja" element={<Layout />}>
+          <Route index element={<LandingPage lang="ja" />} />
+          <Route path="projects/:slug" element={<CaseStudyPage lang="ja" />} />
+          <Route path="tokushoho" element={<Impressum />} />
+          <Route path="privacy" element={<Privacy />} />
+        </Route>
+
         {/* Redirects for old routes */}
         <Route path="/de/web-design" element={<Navigate to="/de#comparison" replace />} />
         <Route path="/de/app-design" element={<Navigate to="/de#comparison" replace />} />
@@ -102,6 +136,12 @@ const App: React.FC = () => {
         <Route path="/en/work" element={<Navigate to="/en#case-studies" replace />} />
         <Route path="/en/about" element={<Navigate to="/en#ceo-letter" replace />} />
         <Route path="/en/start" element={<Navigate to="/en#form" replace />} />
+        <Route path="/ja/web-design" element={<Navigate to="/ja#comparison" replace />} />
+        <Route path="/ja/app-design" element={<Navigate to="/ja#comparison" replace />} />
+        <Route path="/ja/ux-design" element={<Navigate to="/ja#comparison" replace />} />
+        <Route path="/ja/work" element={<Navigate to="/ja#case-studies" replace />} />
+        <Route path="/ja/about" element={<Navigate to="/ja#ceo-letter" replace />} />
+        <Route path="/ja/start" element={<Navigate to="/ja#form" replace />} />
 
         {/* Catch-all redirect */}
         <Route path="*" element={<Navigate to="/de" replace />} />

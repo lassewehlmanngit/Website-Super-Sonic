@@ -2,13 +2,19 @@ import React from 'react';
 import { Cpu, Shield, Search, Sparkles } from 'lucide-react';
 
 interface EngineeringStoryProps {
-  lang: 'de' | 'en';
+  lang: 'de' | 'en' | 'ja';
 }
 
 export const EngineeringStory: React.FC<EngineeringStoryProps> = ({ lang }) => {
   const isDe = lang === 'de';
+  const isJa = lang === 'ja';
 
-  const features = isDe ? [
+  const features = isJa ? [
+    { icon: Cpu, text: "スピード最適化" },
+    { icon: Shield, text: "セキュリティ内蔵" },
+    { icon: Search, text: "SEO対応済み" },
+    { icon: Sparkles, text: "AI検索最適化" },
+  ] : isDe ? [
     { icon: Cpu, text: "Geschwindigkeit optimiert" },
     { icon: Shield, text: "Sicherheit eingebaut" },
     { icon: Search, text: "SEO ready" },
@@ -27,16 +33,20 @@ export const EngineeringStory: React.FC<EngineeringStoryProps> = ({ lang }) => {
           {/* Left: Content */}
           <div className="reveal">
             <div className="inline-block px-4 py-1 rounded-full border border-sonic-orange/30 bg-orange-950/50 text-sonic-orange font-mono fluid-xs uppercase tracking-widest mb-6">
-              {isDe ? "Der Sonic Motor" : "The Sonic Engine"}
+              {isJa ? "Sonicエンジン" : isDe ? "Der Sonic Motor" : "The Sonic Engine"}
             </div>
             
             <h2 className="fluid-section-title font-bold mb-6 tracking-tight">
-              4 {isDe ? "Jahre" : "Years"}. <br />
-              <span className="text-zinc-500">56 {isDe ? "Iterationen" : "Iterations"}.</span>
+              4 {isJa ? "年間" : isDe ? "Jahre" : "Years"}. <br />
+              <span className="text-zinc-500">56 {isJa ? "回の改良" : isDe ? "Iterationen" : "Iterations"}.</span>
             </h2>
             
             <p className="fluid-body text-zinc-400 leading-relaxed mb-8">
-              {isDe ? (
+              {isJa ? (
+                <>
+                  私たちはゼロから始めません。お客様のウェブサイトは、4年間で56回の改良を重ねたフレームワークをベースにしています。<strong className="text-white">すべてのコード</strong>が、スピード、セキュリティ、SEO、そしてAI検索に最適化されています。
+                </>
+              ) : isDe ? (
                 <>
                   Wir fangen nicht bei Null an. Deine Website basiert auf einem Framework, das wir über vier Jahre lang 56 Mal optimiert haben. <strong className="text-white">Jede Zeile Code</strong> ist auf Geschwindigkeit, Sicherheit und SEO, sowie AI-Search getrimmt.
                 </>

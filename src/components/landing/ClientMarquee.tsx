@@ -1,11 +1,12 @@
 import React from 'react';
 
 interface ClientMarqueeProps {
-  lang: 'de' | 'en';
+  lang: 'de' | 'en' | 'ja';
 }
 
 export const ClientMarquee: React.FC<ClientMarqueeProps> = ({ lang }) => {
   const isDe = lang === 'de';
+  const isJa = lang === 'ja';
   const clients = ["VOLKSWAGEN", "ALLIANZ", "NOVARTUM", "SINNERSCHRADER", "SPARKASSE", "BLVRD", "MAKROSOLUTIONS", "NEVARIS"];
 
   return (
@@ -17,7 +18,7 @@ export const ClientMarquee: React.FC<ClientMarqueeProps> = ({ lang }) => {
               {clients.map((client, i) => (
                 <span 
                   key={`${loopIndex}-${i}`} 
-                  className="text-zinc-300 font-black fluid-2xl tracking-tighter hover:text-sonic-orange transition-colors duration-500 cursor-default uppercase"
+                  className="text-zinc-200 font-black fluid-2xl tracking-tighter hover:text-sonic-orange transition-colors duration-500 cursor-default uppercase"
                 >
                   {client}
                 </span>

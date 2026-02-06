@@ -1,0 +1,139 @@
+fragment PageParts on Page {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    ogImage
+  }
+  blocks {
+    __typename
+    ... on PageBlocksHero {
+      eyebrow
+      headline
+      subheadline
+      body
+      primaryCta {
+        __typename
+        label
+        url
+        style
+      }
+      secondaryCta {
+        __typename
+        label
+        url
+        style
+      }
+      variant
+      backgroundImage
+    }
+    ... on PageBlocksFaq {
+      headline
+      subheadline
+      items {
+        __typename
+        question
+        answer
+        category
+      }
+      variant
+    }
+    ... on PageBlocksCaseStudies {
+      headline
+      subheadline
+      studies {
+        __typename
+        slug
+        title
+        client
+        industry
+        year
+        heroImage
+        color
+        icon
+        preview {
+          __typename
+          problem
+          solution
+          result
+          metric
+          metricLabel
+        }
+        content {
+          __typename
+          intro
+          challenges {
+            __typename
+            text
+          }
+          approach {
+            __typename
+            text
+          }
+          features {
+            __typename
+            title
+            description
+          }
+          results {
+            __typename
+            text
+          }
+          techStack {
+            __typename
+            name
+          }
+          metrics {
+            __typename
+            label
+            value
+            comparison
+          }
+          conclusion
+        }
+        seo {
+          __typename
+          title
+          description
+        }
+        liveUrl
+      }
+      variant
+    }
+  }
+}
+
+fragment GlobalParts on Global {
+  __typename
+  theme {
+    __typename
+    primaryColor
+    secondaryColor
+    backgroundColor
+    fontHeading
+    fontBody
+  }
+  navigation {
+    __typename
+    links {
+      __typename
+      label
+      url
+    }
+    cta {
+      __typename
+      label
+      url
+    }
+  }
+  footer {
+    __typename
+    copyright
+    socialLinks {
+      __typename
+      platform
+      url
+    }
+  }
+}

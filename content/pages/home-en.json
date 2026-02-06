@@ -1,0 +1,131 @@
+{
+  "seo": {
+    "title": "Super Sonic | Websites for SMBs | 14 Days, Fixed Price, 100% Ownership",
+    "description": "Websites that work. Max 14 days delivery, 100% ownership, fixed price of €5,600. SMBs deserve better."
+  },
+  "blocks": [
+    {
+      "_template": "hero",
+      "eyebrow": "Websites for SMBs",
+      "headline": "You need a website that works.",
+      "subheadline": "Not a rocket plan.",
+      "body": "Max 14 days. Fixed price. 100% yours. We build websites that do exactly what you need.",
+      "primaryCta": {
+        "label": "Free design in 72h",
+        "url": "#form",
+        "style": "primary"
+      },
+      "secondaryCta": {
+        "label": "€5,600 Fixed Price",
+        "url": "#form",
+        "style": "outline"
+      },
+      "variant": "dark"
+    },
+    {
+      "_template": "faq",
+      "headline": "Frequently Asked Questions",
+      "subheadline": "Everything you need to know before we start.",
+      "items": [
+        {
+          "question": "How long does a project take?",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "Maximum 14 days from briefing to launch. Most projects are done in 7-10 days."
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "process"
+        },
+        {
+          "question": "What does a website cost?",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "€5,600 fixed price. No hidden costs, no surprises. You know from the start what you're paying."
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "pricing"
+        },
+        {
+          "question": "Do I own the website afterwards?",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "Yes, 100%. You get the complete source code, all files, and can host the site wherever you want. No lock-in, no monthly fees to us."
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "general"
+        },
+        {
+          "question": "What's included in the price?",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "Design, development, responsive for all devices, SEO basics, a content management system for self-editing, and training. Everything you need."
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "pricing"
+        }
+      ],
+      "variant": "default"
+    },
+    {
+      "_template": "caseStudies",
+      "headline": "Our Projects",
+      "subheadline": "Real results for real businesses",
+      "studies": [
+        {
+          "slug": "matcha-partners",
+          "title": "Matcha Partners",
+          "client": "Matcha Partners GmbH",
+          "industry": "B2B Food & Beverage",
+          "year": "2024",
+          "color": "#1B3C1D",
+          "icon": "leaf",
+          "preview": {
+            "problem": "B2B portal needed lead qualification and brand authority.",
+            "solution": "Custom React stack with intent-based navigation.",
+            "result": "3-4x higher conversion rates on qualified traffic.",
+            "metric": "97%",
+            "metricLabel": "Better than templates"
+          },
+          "liveUrl": "https://matcha-partners.com"
+        }
+      ],
+      "variant": "featured"
+    }
+  ]
+}

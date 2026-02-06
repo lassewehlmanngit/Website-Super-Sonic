@@ -1,0 +1,131 @@
+{
+  "seo": {
+    "title": "Super Sonic | Webseiten für den Mittelstand | 14 Tage, Festpreis, 100% Eigentum",
+    "description": "Webseiten die funktionieren. Maximal 14 Tage Lieferzeit, 100% Eigentum, fester Preis von 5.600€. Der Mittelstand verdient besseres."
+  },
+  "blocks": [
+    {
+      "_template": "hero",
+      "eyebrow": "Webseiten für den Mittelstand",
+      "headline": "Du brauchst eine Website, die funktioniert.",
+      "subheadline": "Keinen Raketenplan.",
+      "body": "Maximal 14 Tage. Festpreis. 100% dein Eigentum. Wir bauen Webseiten die genau das machen, was du brauchst.",
+      "primaryCta": {
+        "label": "Gratisentwurf in 72h",
+        "url": "#form",
+        "style": "primary"
+      },
+      "secondaryCta": {
+        "label": "5.600 € Festpreis",
+        "url": "#form",
+        "style": "outline"
+      },
+      "variant": "dark"
+    },
+    {
+      "_template": "faq",
+      "headline": "Häufige Fragen",
+      "subheadline": "Alles was du wissen musst, bevor wir starten.",
+      "items": [
+        {
+          "question": "Wie lange dauert ein Projekt?",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "Maximal 14 Tage von Briefing bis Launch. Die meisten Projekte sind in 7-10 Tagen fertig."
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "process"
+        },
+        {
+          "question": "Was kostet eine Website?",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "5.600€ Festpreis. Keine versteckten Kosten, keine Überraschungen. Du weißt von Anfang an, was du bezahlst."
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "pricing"
+        },
+        {
+          "question": "Gehört mir die Website danach?",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "Ja, 100%. Du bekommst den kompletten Quellcode, alle Dateien, und kannst die Seite hosten wo du willst. Kein Lock-in, keine monatlichen Gebühren an uns."
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "general"
+        },
+        {
+          "question": "Was ist im Preis enthalten?",
+          "answer": {
+            "type": "root",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "Design, Entwicklung, Responsive für alle Geräte, SEO-Grundlagen, ein Content-Management-System zum selbst bearbeiten, und eine Einweisung. Alles was du brauchst."
+                  }
+                ]
+              }
+            ]
+          },
+          "category": "pricing"
+        }
+      ],
+      "variant": "default"
+    },
+    {
+      "_template": "caseStudies",
+      "headline": "Unsere Projekte",
+      "subheadline": "Echte Ergebnisse für echte Unternehmen",
+      "studies": [
+        {
+          "slug": "matcha-partners",
+          "title": "Matcha Partners",
+          "client": "Matcha Partners GmbH",
+          "industry": "B2B Food & Beverage",
+          "year": "2024",
+          "color": "#1B3C1D",
+          "icon": "leaf",
+          "preview": {
+            "problem": "B2B-Portal brauchte Lead-Qualifizierung und Markenautorität.",
+            "solution": "Custom React-Stack mit Intent-basierter Navigation.",
+            "result": "3-4x höhere Conversion-Rate bei qualifiziertem Traffic.",
+            "metric": "97%",
+            "metricLabel": "Besser als Templates"
+          },
+          "liveUrl": "https://matcha-partners.com"
+        }
+      ],
+      "variant": "featured"
+    }
+  ]
+}

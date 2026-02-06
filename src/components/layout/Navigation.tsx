@@ -7,10 +7,15 @@ export const Navigation: React.FC = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const isDe = currentPath.startsWith('/de');
+  const isJa = currentPath.startsWith('/ja');
+  const isEn = !isDe && !isJa;
 
-  // Landing page always has dark hero
-  const isLandingPage = currentPath === '/de' || currentPath === '/en';
-  const isDarkSection = isLandingPage;
+  // Pages with dark/colored hero backgrounds
+  const isLandingPage = currentPath === '/de' || currentPath === '/en' || currentPath === '/ja';
+  const isCaseStudyPage = currentPath.includes('/projekte/') || currentPath.includes('/projects/');
+  
+  // Both landing page and case study pages have dark/colored hero sections
+  const isDarkSection = isLandingPage || isCaseStudyPage;
 
   useEffect(() => {
     let ticking = false;
@@ -29,13 +34,21 @@ export const Navigation: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const switchLang = (lang: string) => {
+  const switchLang = (targetLang: string) => {
     const path = location.pathname;
-    return lang === 'en' ? path.replace('/de', '/en') : path.replace('/en', '/de');
+    // Remove current language prefix and add new one
+    const pathWithoutLang = path.replace(/^\/(de|en|ja)/, '');
+    return `/${targetLang}${pathWithoutLang}`;
   };
 
   // Anchor-based navigation links for single landing page
-  const links = isDe ? [
+  const links = isJa ? [
+    { label: '比較', anchor: '#comparison' },
+    { label: 'プロセス', anchor: '#engineering' },
+    { label: 'プロジェクト', anchor: '#case-studies' },
+    { label: '会社概要', anchor: '#ceo-letter' },
+    { label: 'FAQ', anchor: '#faq' },
+  ] : isDe ? [
     { label: 'Vergleich', anchor: '#comparison' },
     { label: 'Prozess', anchor: '#engineering' },
     { label: 'Projekte', anchor: '#case-studies' },
@@ -73,11 +86,14 @@ export const Navigation: React.FC = () => {
   const logoColor = isScrolled ? 'text-black' : (isDarkSection ? 'text-white' : 'text-black');
   const buttonVariant = isScrolled ? 'primary' : (isDarkSection ? 'white' : 'primary');
 
+  // Get home link based on current language
+  const homeLink = isJa ? '/ja' : isDe ? '/de' : '/en';
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${navBg}`} aria-label="Main navigation">
       <div className="container-responsive flex items-center justify-between">
         
-        <Link to={isDe ? "/de" : "/en"} className={`text-xl font-bold tracking-tighter uppercase transition-colors duration-500 ${logoColor}`}>
+        <Link to={homeLink} className={`text-xl font-bold tracking-tighter uppercase transition-colors duration-500 ${logoColor}`}>
           Super Sonic<span className="text-sonic-orange">.</span>
         </Link>
 
@@ -96,9 +112,10 @@ export const Navigation: React.FC = () => {
               ))}
             </div>
             
-            <div className={`flex gap-4 text-xs font-mono font-bold mr-6 transition-colors duration-500 ${textColor}`}>
+            <div className={`flex gap-3 text-xs font-mono font-bold mr-6 transition-colors duration-500 ${textColor}`}>
                 <Link to={switchLang('de')} className={isDe ? 'underline decoration-2 underline-offset-4 decoration-sonic-orange' : 'opacity-50 hover:opacity-100'}>DE</Link>
-                <Link to={switchLang('en')} className={!isDe ? 'underline decoration-2 underline-offset-4 decoration-sonic-orange' : 'opacity-50 hover:opacity-100'}>EN</Link>
+                <Link to={switchLang('en')} className={isEn ? 'underline decoration-2 underline-offset-4 decoration-sonic-orange' : 'opacity-50 hover:opacity-100'}>EN</Link>
+                <Link to={switchLang('ja')} className={isJa ? 'underline decoration-2 underline-offset-4 decoration-sonic-orange' : 'opacity-50 hover:opacity-100'}>JP</Link>
             </div>
 
             <Button 
@@ -107,7 +124,7 @@ export const Navigation: React.FC = () => {
               className="transition-all duration-500"
               onClick={scrollToForm}
             >
-              {isDe ? 'Gratis-Entwurf' : 'Free Design'}
+              {isJa ? '無料デザイン' : isDe ? 'Gratis-Entwurf' : 'Free Design'}
             </Button>
         </div>
       </div>

@@ -1,6 +1,7 @@
 export { LandingHero } from './LandingHero';
 export { StoryBridge } from './StoryBridge';
 export { ClientMarquee } from './ClientMarquee';
+export { ProjectShowcase } from './ProjectShowcase';
 export { BuilderTrap } from './BuilderTrap';
 export { AntiBloat } from './AntiBloat';
 export { ComparisonTable } from './ComparisonTable';

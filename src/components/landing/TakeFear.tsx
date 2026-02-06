@@ -2,11 +2,12 @@ import React from 'react';
 import { Shield, Wrench, MessageSquare } from 'lucide-react';
 
 interface TakeFearProps {
-  lang: 'de' | 'en';
+  lang: 'de' | 'en' | 'ja';
 }
 
 export const TakeFear: React.FC<TakeFearProps> = ({ lang }) => {
   const isDe = lang === 'de';
+  const isJa = lang === 'ja';
 
   return (
     <section id="guarantee" className="fluid-section bg-zinc-900 text-white">
@@ -17,11 +18,15 @@ export const TakeFear: React.FC<TakeFearProps> = ({ lang }) => {
           </div>
 
           <h2 className="fluid-section-title font-bold mb-6 tracking-tight">
-            {isDe ? "Was, wenn doch etwas schief läuft?" : "What if something goes wrong?"}
+            {isJa ? "万が一、問題が発生したら？" : isDe ? "Was, wenn doch etwas schief läuft?" : "What if something goes wrong?"}
           </h2>
 
           <p className="fluid-body text-zinc-400 leading-relaxed mb-10">
-            {isDe ? (
+            {isJa ? (
+              <>
+                問題やエラーは日常の一部です（誰もが経験します）。私たちは約束を守り、機能するウェブサイトを構築します。<strong className="text-white">エラーや問題が発生した場合は、一緒に解決します。</strong>
+              </>
+            ) : isDe ? (
               <>
                 Probleme und Fehler gehören zum Alltag (und wir alle kennen das). Wir stehen zu unserem Wort und bauen dir eine Webseite die funktioniert. <strong className="text-white">Tauchen Fehler und Probleme auf, lösen wir diese gemeinsam.</strong>
               </>
@@ -36,13 +41,13 @@ export const TakeFear: React.FC<TakeFearProps> = ({ lang }) => {
             <div className="bg-zinc-800/50 rounded-2xl p-6 border border-zinc-700 flex items-center gap-4">
               <Wrench className="text-sonic-orange" size={24} />
               <span className="text-white font-medium fluid-base">
-                {isDe ? "Kostenlose Bug-Fixes" : "Free Bug Fixes"}
+                {isJa ? "無料バグ修正" : isDe ? "Kostenlose Bug-Fixes" : "Free Bug Fixes"}
               </span>
             </div>
             <div className="bg-zinc-800/50 rounded-2xl p-6 border border-zinc-700 flex items-center gap-4">
               <MessageSquare className="text-sonic-orange" size={24} />
               <span className="text-white font-medium fluid-base">
-                {isDe ? "Direkte Kommunikation" : "Direct Communication"}
+                {isJa ? "直接コミュニケーション" : isDe ? "Direkte Kommunikation" : "Direct Communication"}
               </span>
             </div>
           </div>

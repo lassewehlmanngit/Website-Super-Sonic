@@ -4,7 +4,7 @@ import { ArrowUpRight, Leaf, Truck, Scale, Server, Building, Store } from 'lucid
 import { getAllCaseStudies, CaseStudy } from '../../data/caseStudies';
 
 interface CaseStudiesProps {
-  lang: 'de' | 'en';
+  lang: 'de' | 'en' | 'ja';
 }
 
 const iconMap = {
@@ -18,10 +18,28 @@ const iconMap = {
 
 export const CaseStudies: React.FC<CaseStudiesProps> = ({ lang }) => {
   const isDe = lang === 'de';
+  const isJa = lang === 'ja';
   const caseStudies = getAllCaseStudies(lang);
 
   // Additional mini case studies (no detail pages)
-  const miniCases = isDe ? [
+  const miniCases = isJa ? [
+    {
+      title: "予約で埋まった職人企業",
+      problem: "2005年のウェブサイト、モバイル非対応。",
+      solution: "Sonicブループリントを14日で導入。",
+      result: "新しいお問い合わせフォームから、初月で質の高いお問い合わせが45%増加。",
+      metric: "+45%",
+      metricLabel: "お問い合わせ増加"
+    },
+    {
+      title: "ITシステム会社",
+      problem: "WordPressの混乱、8秒の読み込み時間。",
+      solution: "Sonicスタック（コード主権）への移行。",
+      result: "読み込み時間0.8秒以下。地域キーワードでGoogle上位表示。",
+      metric: "<0.8s",
+      metricLabel: "読み込み時間"
+    }
+  ] : isDe ? [
     {
       title: "Der ausgebuchte Handwerksbetrieb",
       problem: "Website von 2005, nicht mobilfähig.",
@@ -59,26 +77,38 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ lang }) => {
 
   const projectPath = isDe ? 'projekte' : 'projects';
 
+  // Labels
+  const problemLabel = isJa ? "課題" : isDe ? "Problem" : "Problem";
+  const solutionLabel = isJa ? "解決策" : isDe ? "Lösung" : "Solution";
+  const resultLabel = isJa ? "成果" : isDe ? "Ergebnis" : "Result";
+  const viewCaseStudyLabel = isJa ? "導入事例を見る" : isDe ? "Case Study ansehen" : "View Case Study";
+
   return (
     <section id="case-studies" className="fluid-section bg-white">
       <div className="container-responsive">
         <div className="text-center mb-16 reveal">
           <p className="text-sonic-orange font-mono fluid-xs uppercase tracking-widest mb-4">
-            {isDe ? "Fallstudien" : "Case Studies"}
+            {isJa ? "導入事例" : isDe ? "Fallstudien" : "Case Studies"}
           </p>
           <h2 className="fluid-section-title font-bold text-zinc-900 tracking-tight mb-4">
-            {isDe 
+            {isJa 
+              ? "6つの成功プロジェクト、" 
+              : isDe 
               ? "6 erfolgreiche Projekte," 
               : "6 successful projects,"}
             <br />
             <span className="text-zinc-400">
-              {isDe 
+              {isJa 
+                ? "有料化する前に実現しました。" 
+                : isDe 
                 ? "bevor wir überhaupt Geld genommen haben." 
                 : "before we even took money."}
             </span>
           </h2>
           <p className="text-zinc-500 fluid-lg max-w-2xl mx-auto">
-            {isDe 
+            {isJa 
+              ? "信頼できないサービスは提供したくありませんでした。"
+              : isDe 
               ? "Wir wollten keinen Service anbieten, dem du nicht vertrauen kannst."
               : "We didn't want to offer a service you couldn't trust."}
           </p>
@@ -98,7 +128,7 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ lang }) => {
                   >
                     <div className="grid md:grid-cols-3">
                       {/* Color Block with Icon */}
-                      <div className={`${caseStudy.color} p-8 md:p-10 flex flex-col justify-center items-center text-white relative`}>
+                      <div className="p-8 md:p-10 flex flex-col justify-center items-center text-white relative" style={{ backgroundColor: caseStudy.color }}>
                         <IconComponent className="text-white/30 mb-4" size={48} />
                         <div className="text-center">
                           <div className="fluid-2xl font-bold mb-1">
@@ -129,7 +159,7 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ lang }) => {
                         {/* Problem */}
                         <div className="mb-3">
                           <span className="fluid-xs font-bold text-zinc-500 uppercase tracking-wider">
-                            {isDe ? "Problem" : "Problem"}
+                            {problemLabel}
                           </span>
                           <p className="text-zinc-600 mt-1 fluid-base">{caseStudy.preview.problem}</p>
                         </div>
@@ -137,7 +167,7 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ lang }) => {
                         {/* Solution */}
                         <div className="mb-3">
                           <span className="fluid-xs font-bold text-sonic-orange uppercase tracking-wider">
-                            {isDe ? "Lösung" : "Solution"}
+                            {solutionLabel}
                           </span>
                           <p className="text-zinc-600 mt-1 fluid-base">{caseStudy.preview.solution}</p>
                         </div>
@@ -145,15 +175,18 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ lang }) => {
                         {/* Result */}
                         <div className="bg-green-50 rounded-xl p-4 border border-green-100">
                           <span className="fluid-xs font-bold text-green-600 uppercase tracking-wider">
-                            {isDe ? "Ergebnis" : "Result"}
+                            {resultLabel}
                           </span>
                           <p className="text-zinc-900 font-medium mt-1 fluid-base">{caseStudy.preview.result}</p>
                         </div>
 
                         {/* View Case Study Link */}
                         <div className="mt-6 flex items-center gap-2 text-sonic-orange font-semibold fluid-sm group-hover:gap-3 transition-all">
-                          {isDe ? "Case Study ansehen" : "View Case Study"}
-                          <ArrowUpRight size={16} />
+                          <span>
+                            {viewCaseStudyLabel}
+                            <span className="sr-only">: {caseStudy.title}</span>
+                          </span>
+                          <ArrowUpRight size={16} aria-hidden="true" />
                         </div>
                       </div>
                     </div>
@@ -181,7 +214,7 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ lang }) => {
               {/* Problem */}
               <div className="mb-4">
                 <span className="fluid-xs font-bold text-zinc-500 uppercase tracking-wider">
-                  {isDe ? "Problem" : "Problem"}
+                  {problemLabel}
                 </span>
                 <p className="text-zinc-600 mt-1 fluid-base">{caseStudy.problem}</p>
               </div>
@@ -189,7 +222,7 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ lang }) => {
               {/* Solution */}
               <div className="mb-4">
                 <span className="fluid-xs font-bold text-sonic-orange uppercase tracking-wider">
-                  {isDe ? "Lösung" : "Solution"}
+                  {solutionLabel}
                 </span>
                 <p className="text-zinc-600 mt-1 fluid-base">{caseStudy.solution}</p>
               </div>
@@ -197,7 +230,7 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ lang }) => {
               {/* Result */}
               <div className="bg-orange-50 rounded-xl p-4 border border-orange-100">
                 <span className="fluid-xs font-bold text-sonic-orange uppercase tracking-wider">
-                  {isDe ? "Ergebnis" : "Result"}
+                  {resultLabel}
                 </span>
                 <p className="text-zinc-900 font-medium mt-1 fluid-base">{caseStudy.result}</p>
               </div>

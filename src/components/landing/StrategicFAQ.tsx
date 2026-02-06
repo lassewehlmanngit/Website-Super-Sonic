@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Plus, Minus } from 'lucide-react';
 
 interface StrategicFAQProps {
-  lang: 'de' | 'en';
+  lang: 'de' | 'en' | 'ja';
 }
 
 interface FAQ {
@@ -12,8 +12,30 @@ interface FAQ {
 
 export const StrategicFAQ: React.FC<StrategicFAQProps> = ({ lang }) => {
   const isDe = lang === 'de';
+  const isJa = lang === 'ja';
 
-  const faqs: FAQ[] = isDe ? [
+  const faqs: FAQ[] = isJa ? [
+    {
+      question: "なぜこんなに安いのですか？",
+      answer: "プロセスを自動化・最適化しているからです。中小企業は、サービスや製品を紹介し、オンラインで見つけてもらえるウェブサイトを求めています。複雑な計画は販売しません。だからこそ、中小企業にとってより速く、より良いサービスを提供できます。"
+    },
+    {
+      question: "変更したい場合はどうすればいいですか？",
+      answer: "公開後14日間は「ジョーカーリクエスト」を使用できます。1つの変更をリクエストできます。やっぱりブログが必要？問題ありません。緑ではなく青がいい？お任せください。"
+    },
+    {
+      question: "プログラミングの知識は必要ですか？",
+      answer: "まったく必要ありません。メールが書ければ、ウェブサイトを管理できます。また、ビデオ付きのガイドですべてをご案内します。"
+    },
+    {
+      question: "14日後はどうなりますか？",
+      answer: "ウェブサイトはお客様のものです。コードはお客様のGitHubアカウントにあります。どの開発者にも変更を依頼できます。または、統合されたCMSを使用して、テキストや画像を自分で変更できます。"
+    },
+    {
+      question: "ウェブサイトは本当に個人情報保護法に準拠していますか？",
+      answer: "はい。日本国内でホスティングしています。海外クラウドなし、同意なしのトラッキングCookieなし。完全な個人情報保護法準拠は、追加料金ではなく標準です。"
+    }
+  ] : isDe ? [
     {
       question: "Warum so günstig?",
       answer: "Weil wir unseren Prozess automatisiert und optimiert haben. Mittelständler wollen Webseiten die funktionieren und ihren Service/Produkt darstellen – auffindbar online. Wir verkaufen dir keine Raketenpläne. Daher sind wir schneller und besser für den Mittelstand."
@@ -93,7 +115,7 @@ export const StrategicFAQ: React.FC<StrategicFAQProps> = ({ lang }) => {
       <div className="container-responsive max-w-4xl mx-auto">
         <div className="text-center mb-16 reveal">
           <h2 className="fluid-section-title font-bold text-zinc-900 tracking-tight">
-            {isDe ? "Häufige Fragen" : "FAQ"}
+            {isJa ? "よくあるご質問" : isDe ? "Häufige Fragen" : "FAQ"}
           </h2>
         </div>
 
@@ -107,9 +129,9 @@ export const StrategicFAQ: React.FC<StrategicFAQProps> = ({ lang }) => {
                 <span className="fluid-lg font-bold text-zinc-900 pr-8">
                   {faq.question}
                 </span>
-                <span className="text-sonic-orange transition-transform duration-300 group-open:rotate-180 flex-shrink-0">
-                  <Plus className="block group-open:hidden" size={24} />
-                  <Minus className="hidden group-open:block" size={24} />
+                <span className="text-sonic-orange transition-transform duration-300 group-open:rotate-180 flex-shrink-0" aria-hidden="true">
+                  <Plus className="block group-open:hidden" size={24} aria-hidden="true" />
+                  <Minus className="hidden group-open:block" size={24} aria-hidden="true" />
                 </span>
               </summary>
 

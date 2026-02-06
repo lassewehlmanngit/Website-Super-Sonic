@@ -7,7 +7,7 @@ import { FormSuccess } from './FormSuccess';
 // ============================================
 
 interface LeadFormProps {
-  lang: 'de' | 'en';
+  lang: 'de' | 'en' | 'ja';
 }
 
 // Strict union types for better type safety
@@ -54,19 +54,19 @@ interface TouchedFields {
 // CONSTANTS
 // ============================================
 
-const GOAL_OPTIONS: { value: GoalValue; labelDe: string; labelEn: string }[] = [
-  { value: 'image', labelDe: 'Endlich mal modern aussehen (Image)', labelEn: 'Finally look modern (Image)' },
-  { value: 'revenue', labelDe: 'Mehr Anfragen/Kunden gewinnen (Umsatz)', labelEn: 'Get more inquiries/customers (Revenue)' },
-  { value: 'recruiting', labelDe: 'Neue Mitarbeiter anziehen (Recruiting)', labelEn: 'Attract new employees (Recruiting)' },
-  { value: 'independence', labelDe: 'Meinen alten Agentur-Vertrag kündigen (Unabhängigkeit)', labelEn: 'Cancel my old agency contract (Independence)' },
+const GOAL_OPTIONS: { value: GoalValue; labelDe: string; labelEn: string; labelJa: string }[] = [
+  { value: 'image', labelDe: 'Endlich mal modern aussehen (Image)', labelEn: 'Finally look modern (Image)', labelJa: 'ついにモダンな外観に（イメージ向上）' },
+  { value: 'revenue', labelDe: 'Mehr Anfragen/Kunden gewinnen (Umsatz)', labelEn: 'Get more inquiries/customers (Revenue)', labelJa: 'お問い合わせ・顧客を増やす（売上向上）' },
+  { value: 'recruiting', labelDe: 'Neue Mitarbeiter anziehen (Recruiting)', labelEn: 'Attract new employees (Recruiting)', labelJa: '新しい従業員を引き付ける（採用）' },
+  { value: 'independence', labelDe: 'Meinen alten Agentur-Vertrag kündigen (Unabhängigkeit)', labelEn: 'Cancel my old agency contract (Independence)', labelJa: '古い制作会社との契約を解除（独立）' },
 ];
 
-const FEATURE_OPTIONS: { value: FeatureValue; labelDe: string; labelEn: string }[] = [
-  { value: 'contact', labelDe: 'Kontaktformular', labelEn: 'Contact form' },
-  { value: 'team', labelDe: 'Team-Vorstellung', labelEn: 'Team presentation' },
-  { value: 'portfolio', labelDe: 'Portfolio/Referenzen', labelEn: 'Portfolio/References' },
-  { value: 'careers', labelDe: 'Karriere-Bereich', labelEn: 'Careers section' },
-  { value: 'blog', labelDe: 'Blog', labelEn: 'Blog' },
+const FEATURE_OPTIONS: { value: FeatureValue; labelDe: string; labelEn: string; labelJa: string }[] = [
+  { value: 'contact', labelDe: 'Kontaktformular', labelEn: 'Contact form', labelJa: 'お問い合わせフォーム' },
+  { value: 'team', labelDe: 'Team-Vorstellung', labelEn: 'Team presentation', labelJa: 'チーム紹介' },
+  { value: 'portfolio', labelDe: 'Portfolio/Referenzen', labelEn: 'Portfolio/References', labelJa: 'ポートフォリオ・実績' },
+  { value: 'careers', labelDe: 'Karriere-Bereich', labelEn: 'Careers section', labelJa: '採用情報' },
+  { value: 'blog', labelDe: 'Blog', labelEn: 'Blog', labelJa: 'ブログ' },
 ];
 
 const INITIAL_FORM_DATA: FormData = {
@@ -113,6 +113,7 @@ function validateUrl(url: string): boolean {
 
 export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
   const isDe = lang === 'de';
+  const isJa = lang === 'ja';
   const formId = useId();
   
   // Refs for focus management
@@ -131,7 +132,9 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
 
   // Step configuration
   const stepIcons = [User, Target, Palette, Key, Video];
-  const stepLabels = isDe 
+  const stepLabels = isJa 
+    ? ['基本情報', 'プラン', 'スタイル', '所有権', '推薦']
+    : isDe 
     ? ['Basis', 'Plan', 'Style', 'Eigentum', 'Testimonial']
     : ['Basics', 'Plan', 'Style', 'Ownership', 'Testimonial'];
 
@@ -145,30 +148,30 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
     switch (stepNumber) {
       case 1:
         if (!formData.name.trim()) {
-          newErrors.name = isDe ? 'Bitte gib deinen Namen ein.' : 'Please enter your name.';
+          newErrors.name = isJa ? 'お名前を入力してください。' : isDe ? 'Bitte gib deinen Namen ein.' : 'Please enter your name.';
         }
         if (!formData.email.trim()) {
-          newErrors.email = isDe ? 'Bitte gib deine E-Mail ein.' : 'Please enter your email.';
+          newErrors.email = isJa ? 'メールアドレスを入力してください。' : isDe ? 'Bitte gib deine E-Mail ein.' : 'Please enter your email.';
         } else if (!validateEmail(formData.email)) {
-          newErrors.email = isDe ? 'Bitte gib eine gültige E-Mail ein.' : 'Please enter a valid email.';
+          newErrors.email = isJa ? '有効なメールアドレスを入力してください。' : isDe ? 'Bitte gib eine gültige E-Mail ein.' : 'Please enter a valid email.';
         }
         if (formData.currentWebsite && !validateUrl(formData.currentWebsite)) {
-          newErrors.currentWebsite = isDe ? 'Bitte gib eine gültige URL ein.' : 'Please enter a valid URL.';
+          newErrors.currentWebsite = isJa ? '有効なURLを入力してください。' : isDe ? 'Bitte gib eine gültige URL ein.' : 'Please enter a valid URL.';
         }
         break;
       case 2:
         if (formData.goals.length === 0) {
-          newErrors.goals = isDe ? 'Bitte wähle mindestens ein Ziel.' : 'Please select at least one goal.';
+          newErrors.goals = isJa ? '少なくとも1つの目標を選択してください。' : isDe ? 'Bitte wähle mindestens ein Ziel.' : 'Please select at least one goal.';
         }
         break;
       case 4:
         if (!formData.ownership) {
-          newErrors.ownership = isDe ? 'Bitte wähle eine Option.' : 'Please select an option.';
+          newErrors.ownership = isJa ? 'オプションを選択してください。' : isDe ? 'Bitte wähle eine Option.' : 'Please select an option.';
         }
         break;
       case 5:
         if (!formData.testimonial) {
-          newErrors.testimonial = isDe ? 'Bitte wähle eine Option.' : 'Please select an option.';
+          newErrors.testimonial = isJa ? 'オプションを選択してください。' : isDe ? 'Bitte wähle eine Option.' : 'Please select an option.';
         }
         break;
     }
@@ -277,12 +280,16 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
       
       // Announce success to screen readers
       if (announcerRef.current) {
-        announcerRef.current.textContent = isDe 
+        announcerRef.current.textContent = isJa 
+          ? 'フォームが正常に送信されました！' 
+          : isDe 
           ? 'Formular erfolgreich gesendet!' 
           : 'Form submitted successfully!';
       }
     } catch (error) {
-      setSubmitError(isDe 
+      setSubmitError(isJa 
+        ? '問題が発生しました。もう一度お試しください。' 
+        : isDe 
         ? 'Etwas ist schiefgelaufen. Bitte versuche es erneut.' 
         : 'Something went wrong. Please try again.');
     } finally {
@@ -306,20 +313,31 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
 
   const announceStepChange = (newStep: number) => {
     if (announcerRef.current) {
-      announcerRef.current.textContent = isDe 
+      announcerRef.current.textContent = isJa 
+        ? `ステップ ${newStep} / ${TOTAL_STEPS}: ${stepLabels[newStep - 1]}`
+        : isDe 
         ? `Schritt ${newStep} von ${TOTAL_STEPS}: ${stepLabels[newStep - 1]}`
         : `Step ${newStep} of ${TOTAL_STEPS}: ${stepLabels[newStep - 1]}`;
     }
   };
 
-  // Focus first field when step changes
+  // Focus first field when step changes (but only after user interaction, not on mount)
+  const hasInteracted = useRef(false);
+  
   useEffect(() => {
+    // Skip focus on initial mount to prevent auto-scroll
+    if (!hasInteracted.current) {
+      hasInteracted.current = true;
+      return;
+    }
+    
     const timer = setTimeout(() => {
       if (stepContainerRef.current) {
         const firstInput = stepContainerRef.current.querySelector<HTMLElement>(
           'input:not([type="hidden"]), textarea, button[role="radio"], input[type="checkbox"]'
         );
-        firstInput?.focus();
+        // Use preventScroll to avoid scrolling the page when focusing
+        firstInput?.focus({ preventScroll: true });
       }
     }, 100);
     return () => clearTimeout(timer);
@@ -348,7 +366,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
 
   if (isSubmitted) {
     return (
-      <section id="form" className="fluid-section bg-white" aria-label={isDe ? "Formular gesendet" : "Form submitted"}>
+      <section id="form" className="fluid-section bg-white" aria-label={isJa ? "フォーム送信完了" : isDe ? "Formular gesendet" : "Form submitted"}>
         <div className="container-responsive max-w-2xl mx-auto">
           <FormSuccess lang={lang} />
         </div>
@@ -371,10 +389,12 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
         {/* Header */}
         <div className="text-center mb-12 reveal">
           <h2 id={`${formId}-title`} className="fluid-section-title font-bold text-zinc-900 tracking-tight mb-4">
-            {isDe ? "Teste uns, bevor du uns buchst." : "Test us before you book us."}
+            {isJa ? "ご予約前にお試しください。" : isDe ? "Teste uns, bevor du uns buchst." : "Test us before you book us."}
           </h2>
           <p className="text-zinc-500 fluid-lg">
-            {isDe 
+            {isJa 
+              ? "2分で無料デザイン案を入手。"
+              : isDe 
               ? "In 2 Minuten zu deinem kostenlosen Design-Entwurf."
               : "Get your free design draft in 2 minutes."}
           </p>
@@ -383,14 +403,16 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
         {/* Intro text */}
         <div className="bg-zinc-50 rounded-2xl p-6 mb-8 reveal delay-100">
           <p className="text-zinc-600 fluid-sm leading-relaxed">
-            {isDe 
+            {isJa 
+              ? "何が得られるかわからないまま92万円を支払う？私たちはそうしません。ご不安な場合は、無料のコンセプトをリクエストして、私たちが本当に実力があるかどうかをご確認いただけます。"
+              : isDe 
               ? "5600€ ausgeben ohne zu wissen was du bekommst? Nicht mit uns. Wenn du unsicher bist, kannst du ein gratis Konzept anfragen um zu schauen, ob wir nur Mist erzählen, oder es wirklich drauf haben."
               : "Spend €5,600 without knowing what you'll get? Not with us. If you're unsure, you can request a free concept to see if we're just talking or actually know our stuff."}
           </p>
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-8 reveal delay-200" role="navigation" aria-label={isDe ? "Formular Fortschritt" : "Form progress"}>
+        <div className="mb-8 reveal delay-200" role="navigation" aria-label={isJa ? "フォームの進捗" : isDe ? "Formular Fortschritt" : "Form progress"}>
           <div className="flex justify-between mb-4">
             {stepLabels.map((label, i) => {
               const StepIcon = stepIcons[i];
@@ -425,9 +447,9 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                   </span>
                   <span className="fluid-xs font-medium hidden md:block">
                     <span className="sr-only">
-                      {isDe ? `Schritt ${stepNum}: ` : `Step ${stepNum}: `}
-                      {isComplete ? (isDe ? '(Abgeschlossen) ' : '(Completed) ') : ''}
-                      {isActive ? (isDe ? '(Aktuell) ' : '(Current) ') : ''}
+                      {isJa ? `ステップ ${stepNum}: ` : isDe ? `Schritt ${stepNum}: ` : `Step ${stepNum}: `}
+                      {isComplete ? (isJa ? '(完了) ' : isDe ? '(Abgeschlossen) ' : '(Completed) ') : ''}
+                      {isActive ? (isJa ? '(現在) ' : isDe ? '(Aktuell) ' : '(Current) ') : ''}
                     </span>
                     {label}
                   </span>
@@ -441,7 +463,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
             aria-valuenow={step}
             aria-valuemin={1}
             aria-valuemax={TOTAL_STEPS}
-            aria-label={isDe ? `Schritt ${step} von ${TOTAL_STEPS}` : `Step ${step} of ${TOTAL_STEPS}`}
+            aria-label={isJa ? `ステップ ${step} / ${TOTAL_STEPS}` : isDe ? `Schritt ${step} von ${TOTAL_STEPS}` : `Step ${step} of ${TOTAL_STEPS}`}
           >
             <div 
               className="h-full bg-sonic-orange transition-all duration-500"
@@ -462,15 +484,15 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
             {step === 1 && (
               <fieldset className="space-y-6 animate-fade-in-up" aria-labelledby={`${formId}-step1-title`}>
                 <legend id={`${formId}-step1-title`} className="fluid-xl font-bold text-zinc-900">
-                  {isDe ? "Die Basis" : "The Basics"}
+                  {isJa ? "基本情報" : isDe ? "Die Basis" : "The Basics"}
                 </legend>
                 
                 {/* Name Field */}
                 <div>
                   <label htmlFor={`${formId}-name`} className="block fluid-sm font-medium text-zinc-700 mb-2">
-                    {isDe ? "Wer bist du und was macht deine Firma?" : "Who are you and what does your company do?"}
+                    {isJa ? "お名前と会社の事業内容を教えてください" : isDe ? "Wer bist du und was macht deine Firma?" : "Who are you and what does your company do?"}
                     <span className="text-sonic-orange ml-1" aria-hidden="true">*</span>
-                    <span className="sr-only">{isDe ? " (Pflichtfeld)" : " (required)"}</span>
+                    <span className="sr-only">{isJa ? " (必須)" : isDe ? " (Pflichtfeld)" : " (required)"}</span>
                   </label>
                   <input
                     ref={firstFieldRef}
@@ -479,7 +501,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                     value={formData.name}
                     onChange={(e) => handleFieldChange('name', e.target.value)}
                     onBlur={() => handleFieldBlur('name')}
-                    placeholder={isDe ? "Name & kurzer Satz zum Business" : "Name & short sentence about your business"}
+                    placeholder={isJa ? "お名前と事業内容を簡潔に" : isDe ? "Name & kurzer Satz zum Business" : "Name & short sentence about your business"}
                     className={inputClassName('name')}
                     aria-required="true"
                     aria-invalid={!!getFieldError('name')}
@@ -497,9 +519,9 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                 {/* Email Field */}
                 <div>
                   <label htmlFor={`${formId}-email`} className="block fluid-sm font-medium text-zinc-700 mb-2">
-                    {isDe ? "Wie erreichen wir dich?" : "How do we reach you?"}
+                    {isJa ? "ご連絡先を教えてください" : isDe ? "Wie erreichen wir dich?" : "How do we reach you?"}
                     <span className="text-sonic-orange ml-1" aria-hidden="true">*</span>
-                    <span className="sr-only">{isDe ? " (Pflichtfeld)" : " (required)"}</span>
+                    <span className="sr-only">{isJa ? " (必須)" : isDe ? " (Pflichtfeld)" : " (required)"}</span>
                   </label>
                   <input
                     id={`${formId}-email`}
@@ -508,7 +530,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                     value={formData.email}
                     onChange={(e) => handleFieldChange('email', e.target.value)}
                     onBlur={() => handleFieldBlur('email')}
-                    placeholder={isDe ? "E-Mail Adresse" : "Email address"}
+                    placeholder={isJa ? "メールアドレス" : isDe ? "E-Mail Adresse" : "Email address"}
                     className={inputClassName('email')}
                     aria-required="true"
                     aria-invalid={!!getFieldError('email')}
@@ -526,8 +548,8 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                 {/* Website Field */}
                 <div>
                   <label htmlFor={`${formId}-website`} className="block fluid-sm font-medium text-zinc-700 mb-2">
-                    {isDe ? "Hast du schon eine Website?" : "Do you already have a website?"}
-                    <span className="text-zinc-400 ml-1 font-normal">({isDe ? "optional" : "optional"})</span>
+                    {isJa ? "既存のウェブサイトはありますか？" : isDe ? "Hast du schon eine Website?" : "Do you already have a website?"}
+                    <span className="text-zinc-400 ml-1 font-normal">({isJa ? "任意" : isDe ? "optional" : "optional"})</span>
                   </label>
                   <input
                     id={`${formId}-website`}
@@ -536,7 +558,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                     value={formData.currentWebsite}
                     onChange={(e) => handleFieldChange('currentWebsite', e.target.value)}
                     onBlur={() => handleFieldBlur('currentWebsite')}
-                    placeholder={isDe ? "https://deine-website.de" : "https://your-website.com"}
+                    placeholder={isJa ? "https://your-website.jp" : isDe ? "https://deine-website.de" : "https://your-website.com"}
                     className={inputClassName('currentWebsite')}
                     aria-invalid={!!getFieldError('currentWebsite')}
                     aria-describedby={getFieldError('currentWebsite') ? `${formId}-website-error` : undefined}
@@ -556,11 +578,11 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
             {step === 2 && (
               <fieldset className="space-y-6 animate-fade-in-up" aria-labelledby={`${formId}-step2-title`}>
                 <legend id={`${formId}-step2-title`} className="fluid-xl font-bold text-zinc-900">
-                  {isDe ? "Der Plan" : "The Plan"}
+                  {isJa ? "プラン" : isDe ? "Der Plan" : "The Plan"}
                 </legend>
                 <p id={`${formId}-goals-desc`} className="text-zinc-500 fluid-base">
-                  {isDe ? "Was ist dein Hauptziel mit der neuen Seite?" : "What's your main goal with the new site?"}
-                  <span className="text-zinc-400 ml-1">({isDe ? "Mehrere möglich" : "Multiple possible"})</span>
+                  {isJa ? "新しいサイトの主な目標は何ですか？" : isDe ? "Was ist dein Hauptziel mit der neuen Seite?" : "What's your main goal with the new site?"}
+                  <span className="text-zinc-400 ml-1">({isJa ? "複数選択可" : isDe ? "Mehrere möglich" : "Multiple possible"})</span>
                   <span className="text-sonic-orange ml-1" aria-hidden="true">*</span>
                 </p>
                 
@@ -606,22 +628,24 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
             {step === 3 && (
               <fieldset className="space-y-6 animate-fade-in-up" aria-labelledby={`${formId}-step3-title`}>
                 <legend id={`${formId}-step3-title`} className="fluid-xl font-bold text-zinc-900">
-                  {isDe ? "Der Style-Check" : "The Style Check"}
+                  {isJa ? "スタイルチェック" : isDe ? "Der Style-Check" : "The Style Check"}
                 </legend>
                 <p className="text-zinc-400 fluid-sm">
-                  {isDe ? "(Alle Felder optional)" : "(All fields optional)"}
+                  {isJa ? "(すべて任意)" : isDe ? "(Alle Felder optional)" : "(All fields optional)"}
                 </p>
                 
                 {/* Inspirations */}
                 <div>
                   <label htmlFor={`${formId}-inspirations`} className="block fluid-sm font-medium text-zinc-700 mb-2">
-                    {isDe ? "Gibt es Vorbilder?" : "Any inspirations?"}
+                    {isJa ? "参考にしたいサイトはありますか？" : isDe ? "Gibt es Vorbilder?" : "Any inspirations?"}
                   </label>
                   <textarea
                     id={`${formId}-inspirations`}
                     value={formData.inspirations}
                     onChange={(e) => handleFieldChange('inspirations', e.target.value)}
-                    placeholder={isDe 
+                    placeholder={isJa 
+                      ? "好きなウェブサイトのリンク、またはデジタルで追い越したい競合他社のリンク。"
+                      : isDe 
                       ? "Links von Websites die du feierst – oder von Konkurrenten, die du digital überholen willst."
                       : "Links to websites you love – or competitors you want to outperform digitally."}
                     rows={3}
@@ -632,7 +656,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                 {/* Features */}
                 <div>
                   <p id={`${formId}-features-label`} className="block fluid-sm font-medium text-zinc-700 mb-3">
-                    {isDe ? "Was muss unbedingt rein?" : "What must be included?"}
+                    {isJa ? "必ず含めたい機能は？" : isDe ? "Was muss unbedingt rein?" : "What must be included?"}
                   </p>
                   <div 
                     className="space-y-3" 
@@ -656,7 +680,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                             onChange={() => handleCheckboxChange('features', option.value)}
                             className="w-5 h-5 text-sonic-orange rounded border-zinc-300 focus:ring-sonic-orange focus:ring-2"
                           />
-                          <span className="text-zinc-700 fluid-base">{isDe ? option.labelDe : option.labelEn}</span>
+                          <span className="text-zinc-700 fluid-base">{isJa ? option.labelJa : isDe ? option.labelDe : option.labelEn}</span>
                         </label>
                       );
                     })}
@@ -669,10 +693,12 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
             {step === 4 && (
               <fieldset className="space-y-6 animate-fade-in-up" aria-labelledby={`${formId}-step4-title`}>
                 <legend id={`${formId}-step4-title`} className="fluid-xl font-bold text-zinc-900">
-                  {isDe ? "Die \"Eigentums-Frage\"" : "The \"Ownership Question\""}
+                  {isJa ? "「所有権」について" : isDe ? "Die \"Eigentums-Frage\"" : "The \"Ownership Question\""}
                 </legend>
                 <p id={`${formId}-ownership-desc`} className="text-zinc-500 fluid-base">
-                  {isDe 
+                  {isJa 
+                    ? "サイトを本当に所有したいですか？それとも、所有していないシステムに毎月「家賃」を払い続けますか？"
+                    : isDe 
                     ? "Willst du die Seite am Ende wirklich besitzen oder weiter monatlich \"Miete\" für ein System zahlen, das dir nicht gehört?"
                     : "Do you want to truly own the site at the end or keep paying monthly \"rent\" for a system that doesn't belong to you?"}
                   <span className="text-sonic-orange ml-1" aria-hidden="true">*</span>
@@ -701,7 +727,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                       className="w-5 h-5 text-sonic-orange border-zinc-300 focus:ring-sonic-orange focus:ring-2"
                     />
                     <span className="text-zinc-700 font-medium fluid-base">
-                      {isDe ? "Ich will die volle Kontrolle und 100% Eigentum." : "I want full control and 100% ownership."}
+                      {isJa ? "完全なコントロールと100%の所有権が欲しいです。" : isDe ? "Ich will die volle Kontrolle und 100% Eigentum." : "I want full control and 100% ownership."}
                     </span>
                   </label>
 
@@ -721,7 +747,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                       className="w-5 h-5 text-sonic-orange border-zinc-300 focus:ring-sonic-orange focus:ring-2"
                     />
                     <span className="text-zinc-700 fluid-base">
-                      {isDe ? "Ist mir eigentlich egal, solange es funktioniert." : "I don't really care, as long as it works."}
+                      {isJa ? "機能すれば、特にこだわりません。" : isDe ? "Ist mir eigentlich egal, solange es funktioniert." : "I don't really care, as long as it works."}
                     </span>
                   </label>
                 </div>
@@ -738,10 +764,12 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
             {step === 5 && (
               <fieldset className="space-y-6 animate-fade-in-up" aria-labelledby={`${formId}-step5-title`}>
                 <legend id={`${formId}-step5-title`} className="fluid-xl font-bold text-zinc-900">
-                  {isDe ? "Der \"Testimonial-Deal\"" : "The \"Testimonial Deal\""}
+                  {isJa ? "「推薦」について" : isDe ? "Der \"Testimonial-Deal\"" : "The \"Testimonial Deal\""}
                 </legend>
                 <p id={`${formId}-testimonial-desc`} className="text-zinc-500 fluid-base">
-                  {isDe 
+                  {isJa 
+                    ? "正直に申し上げます：92万円という価格は、従来のマーケティングを省略しているからこそ実現できています。仕事に満足いただけた場合、公開後に短いビデオ推薦をいただけますか？"
+                    : isDe 
                     ? "Hand aufs Herz: Unser Preis von 5.600 € ist nur machbar, weil wir auf klassisches Marketing verzichten. Bist du bereit, uns nach dem Launch ein kurzes Video-Testimonial zu geben, wenn du mit der Arbeit zufrieden bist?"
                     : "Honestly: Our price of €5,600 is only possible because we skip traditional marketing. Are you willing to give us a short video testimonial after launch if you're happy with the work?"}
                   <span className="text-sonic-orange ml-1" aria-hidden="true">*</span>
@@ -770,7 +798,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                       className="w-5 h-5 text-sonic-orange border-zinc-300 focus:ring-sonic-orange focus:ring-2"
                     />
                     <span className="text-zinc-700 font-medium fluid-base">
-                      {isDe ? "Klar, Ehrensache!" : "Sure, of course!"}
+                      {isJa ? "もちろん、喜んで！" : isDe ? "Klar, Ehrensache!" : "Sure, of course!"}
                     </span>
                   </label>
 
@@ -790,7 +818,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                       className="w-5 h-5 text-sonic-orange border-zinc-300 focus:ring-sonic-orange focus:ring-2"
                     />
                     <span className="text-zinc-700 fluid-base">
-                      {isDe ? "Lass uns da erst nochmal drüber quatschen." : "Let's talk about that first."}
+                      {isJa ? "まずは相談させてください。" : isDe ? "Lass uns da erst nochmal drüber quatschen." : "Let's talk about that first."}
                     </span>
                   </label>
                 </div>
@@ -819,10 +847,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                 type="button"
                 onClick={handleBack}
                 className="flex items-center gap-2 text-zinc-500 hover:text-zinc-900 transition-colors fluid-base focus:outline-none focus:ring-2 focus:ring-sonic-orange/50 rounded-lg px-2 py-1"
-                aria-label={isDe ? `Zurück zu Schritt ${step - 1}` : `Back to step ${step - 1}`}
+                aria-label={isJa ? `ステップ ${step - 1} に戻る` : isDe ? `Zurück zu Schritt ${step - 1}` : `Back to step ${step - 1}`}
               >
                 <ArrowLeft size={18} aria-hidden="true" />
-                {isDe ? "Zurück" : "Back"}
+                {isJa ? "戻る" : isDe ? "Zurück" : "Back"}
               </button>
             ) : (
               <div />
@@ -834,9 +862,9 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                 onClick={handleNext}
                 disabled={!isStepValid()}
                 className="flex items-center gap-2 bg-zinc-900 text-white px-6 py-3 rounded-full font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-zinc-800 transition-colors fluid-base focus:outline-none focus:ring-2 focus:ring-sonic-orange focus:ring-offset-2"
-                aria-label={isDe ? `Weiter zu Schritt ${step + 1}` : `Continue to step ${step + 1}`}
+                aria-label={isJa ? `ステップ ${step + 1} へ進む` : isDe ? `Weiter zu Schritt ${step + 1}` : `Continue to step ${step + 1}`}
               >
-                {isDe ? "Weiter" : "Next"}
+                {isJa ? "次へ" : isDe ? "Weiter" : "Next"}
                 <ArrowRight size={18} aria-hidden="true" />
               </button>
             ) : (
@@ -850,16 +878,16 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                 {isSubmitting ? (
                   <>
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden="true" />
-                    {isDe ? "Wird gesendet..." : "Sending..."}
+                    {isJa ? "送信中..." : isDe ? "Wird gesendet..." : "Sending..."}
                   </>
                 ) : (
                   <>
                     {/* Short text on mobile, full text on desktop */}
                     <span className="sm:hidden">
-                      {isDe ? "Gratis-Entwurf!" : "Get free design!"}
+                      {isJa ? "無料デザイン！" : isDe ? "Gratis-Entwurf!" : "Get free design!"}
                     </span>
                     <span className="hidden sm:inline">
-                      {isDe ? "Ja, schickt mir den Gratis-Entwurf!" : "Yes, send me the free design!"}
+                      {isJa ? "はい、無料デザインを送ってください！" : isDe ? "Ja, schickt mir den Gratis-Entwurf!" : "Yes, send me the free design!"}
                     </span>
                     <ArrowRight size={18} aria-hidden="true" />
                   </>
@@ -870,18 +898,18 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
         </form>
 
         {/* Trust indicators */}
-        <div className="flex justify-center gap-6 mt-8 text-zinc-400 fluid-sm flex-wrap" aria-label={isDe ? "Vertrauensindikatoren" : "Trust indicators"}>
+        <div className="flex justify-center gap-6 mt-8 text-zinc-400 fluid-sm flex-wrap" aria-label={isJa ? "信頼の証" : isDe ? "Vertrauensindikatoren" : "Trust indicators"}>
           <span className="flex items-center gap-1">
             <Check size={14} className="text-sonic-orange" aria-hidden="true" />
-            {isDe ? "Keine Kreditkarte nötig" : "No credit card needed"}
+            {isJa ? "クレジットカード不要" : isDe ? "Keine Kreditkarte nötig" : "No credit card needed"}
           </span>
           <span className="flex items-center gap-1">
             <Check size={14} className="text-sonic-orange" aria-hidden="true" />
-            {isDe ? "Kein Druck" : "No pressure"}
+            {isJa ? "プレッシャーなし" : isDe ? "Kein Druck" : "No pressure"}
           </span>
           <span className="flex items-center gap-1">
             <Check size={14} className="text-sonic-orange" aria-hidden="true" />
-            {isDe ? "Antwort in 48-72h" : "Response in 48-72h"}
+            {isJa ? "48〜72時間以内に返信" : isDe ? "Antwort in 48-72h" : "Response in 48-72h"}
           </span>
         </div>
       </div>

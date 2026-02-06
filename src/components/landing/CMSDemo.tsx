@@ -2,13 +2,19 @@ import React from 'react';
 import { Play, Edit3, CheckCircle } from 'lucide-react';
 
 interface CMSDemoProps {
-  lang: 'de' | 'en';
+  lang: 'de' | 'en' | 'ja';
 }
 
 export const CMSDemo: React.FC<CMSDemoProps> = ({ lang }) => {
   const isDe = lang === 'de';
+  const isJa = lang === 'ja';
 
-  const features = isDe ? [
+  const features = isJa ? [
+    "テキストを自分で編集",
+    "画像を差し替え",
+    "プログラミングスキル不要",
+    "私たちへの依存なし"
+  ] : isDe ? [
     "Texte selbst ändern",
     "Bilder austauschen",
     "Keine Programmierkenntnisse nötig",
@@ -33,7 +39,7 @@ export const CMSDemo: React.FC<CMSDemoProps> = ({ lang }) => {
                   <Play className="text-zinc-900 ml-1" size={28} fill="currentColor" />
                 </div>
                 <p className="text-zinc-400 fluid-sm">
-                  {isDe ? "CMS Demo ansehen" : "Watch CMS Demo"}
+                  {isJa ? "CMSデモを見る" : isDe ? "CMS Demo ansehen" : "Watch CMS Demo"}
                 </p>
               </div>
 
@@ -48,13 +54,17 @@ export const CMSDemo: React.FC<CMSDemoProps> = ({ lang }) => {
           {/* Right: Content */}
           <div className="reveal delay-100">
             <h2 className="fluid-section-title font-bold text-zinc-900 mb-6 tracking-tight">
-              {isDe 
+              {isJa 
+                ? "ウェブサイトのテキストを自分で編集できます。"
+                : isDe 
                 ? "Du kannst deine Webseitentexte selbst bearbeiten."
                 : "You can edit your website text yourself."}
             </h2>
             
             <p className="fluid-body text-zinc-600 leading-relaxed mb-8">
-              {isDe 
+              {isJa 
+                ? "ウェブサイト公開後、私たちへの依存はありません。方法をお教えします。"
+                : isDe 
                 ? "Keine Abhängigkeit an uns nachdem deine Webseite Live ist. Wir zeigen dir wie."
                 : "No dependency on us after your website goes live. We'll show you how."}
             </p>
@@ -76,7 +86,7 @@ export const CMSDemo: React.FC<CMSDemoProps> = ({ lang }) => {
               </div>
               <div>
                 <span className="text-zinc-900 font-bold fluid-sm block">TinaCMS</span>
-                <span className="text-zinc-500 fluid-xs">{isDe ? "Integriert" : "Integrated"}</span>
+                <span className="text-zinc-500 fluid-xs">{isJa ? "統合済み" : isDe ? "Integriert" : "Integrated"}</span>
               </div>
             </div>
           </div>

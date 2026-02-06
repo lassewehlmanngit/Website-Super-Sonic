@@ -4,6 +4,7 @@ import {
   LandingHero,
   StoryBridge,
   ClientMarquee,
+  ProjectShowcase,
   BuilderTrap,
   AntiBloat,
   ComparisonTable,
@@ -12,7 +13,6 @@ import {
   TeamSection,
   CaseStudies,
   TakeFear,
-  ReferenceProjects,
   ProcessVideo,
   DigitalSovereignty,
   FutureProof,
@@ -23,11 +23,12 @@ import {
 } from '../components/landing';
 
 interface LandingPageProps {
-  lang: 'de' | 'en';
+  lang: 'de' | 'en' | 'ja';
 }
 
 export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
   const isDe = lang === 'de';
+  const isJa = lang === 'ja';
   const observerRef = useRef<IntersectionObserver | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -67,12 +68,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
     <div className="bg-paper relative">
       <SEO
         title={
-          isDe
+          isJa
+            ? 'Super Sonic | 中小企業向けウェブサイト制作 | 14日納品・固定価格・100%所有権'
+            : isDe
             ? 'Super Sonic | Webseiten für den Mittelstand | 14 Tage, Festpreis, 100% Eigentum'
             : 'Super Sonic | Websites for SMBs | 14 Days, Fixed Price, 100% Ownership'
         }
         description={
-          isDe
+          isJa
+            ? '成果を出すウェブサイトを。最短14日で納品、92万円の固定価格、100%お客様の所有物に。中小企業にふさわしいウェブサイトを。'
+            : isDe
             ? 'Webseiten die funktionieren. Maximal 14 Tage Lieferzeit, 100% Eigentum, fester Preis von 5.600€. Der Mittelstand verdient besseres.'
             : 'Websites that work. Max 14 days delivery, 100% ownership, fixed price of €5,600. SMBs deserve better.'
         }
@@ -87,6 +92,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
 
       {/* 2. Social Proof - Client Marquee */}
       <ClientMarquee lang={lang} />
+
+      {/* 2.5. Project Showcase Carousel */}
+      <ProjectShowcase lang={lang} />
 
       {/* 3. Die Website-Baukasten-Falle */}
       <BuilderTrap lang={lang} />
@@ -112,10 +120,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
       {/* 10. Take the Fear */}
       <TakeFear lang={lang} />
 
-      {/* 11. Referenz-Projekte */}
-      <ReferenceProjects lang={lang} />
-
-      {/* 12. Prozess-Video */}
+      {/* 11. Prozess-Video */}
       <ProcessVideo lang={lang} />
 
       {/* 13. Digitale Souveränität */}

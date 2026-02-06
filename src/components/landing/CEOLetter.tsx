@@ -2,11 +2,12 @@ import React from 'react';
 import { Quote } from 'lucide-react';
 
 interface CEOLetterProps {
-  lang: 'de' | 'en';
+  lang: 'de' | 'en' | 'ja';
 }
 
 export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
   const isDe = lang === 'de';
+  const isJa = lang === 'ja';
 
   return (
     <section id="ceo-letter" className="fluid-section bg-white">
@@ -25,10 +26,10 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
             </div>
             <div>
               <h2 className="fluid-2xl font-bold text-zinc-900">
-                {isDe ? "Ein Wort von Lasse" : "A Word from Lasse"}
+                {isJa ? "代表 Lasse より" : isDe ? "Ein Wort von Lasse" : "A Word from Lasse"}
               </h2>
               <p className="text-zinc-500 fluid-base">
-                {isDe ? "Warum wir Super Sonic gestartet haben" : "Why we started Super Sonic"}
+                {isJa ? "Super Sonicを始めた理由" : isDe ? "Warum wir Super Sonic gestartet haben" : "Why we started Super Sonic"}
               </p>
             </div>
           </div>
@@ -39,11 +40,15 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
           
           <div className="space-y-6 fluid-body text-zinc-700 leading-relaxed">
             <p>
-              {isDe ? "Hey, ich bin Lasse." : "Hey, I'm Lasse."}
+              {isJa ? "はじめまして、Lasseと申します。" : isDe ? "Hey, ich bin Lasse." : "Hey, I'm Lasse."}
             </p>
             
             <p>
-              {isDe ? (
+              {isJa ? (
+                <>
+                  ソフトウェア開発、マーケティング、ウェブデザインの分野で10年間、<strong className="text-zinc-900">VW、Allianz、Novartum</strong>などの企業様と仕事をしてきました。その中で、非効率なプロセスと、価値を提供せずに高額な請求書だけを送ってくる制作会社に疑問を感じるようになりました。
+                </>
+              ) : isDe ? (
                 <>
                   Nach 10 Jahren Software-Entwicklung, Marketing, und Webseitendesign für Marken wie <strong className="text-zinc-900">VW, Allianz, Novartum</strong>, und co., hatte ich genug von zähen Prozessen und überteuerten Agentur-Rechnungen die einfach nur Geld wollen, ohne etwas zurückzugeben.
                 </>
@@ -55,7 +60,11 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
             </p>
 
             <p>
-              {isDe ? (
+              {isJa ? (
+                <>
+                  <strong className="text-sonic-orange">誠実なサービス</strong>を作りたいと思いました。
+                </>
+              ) : isDe ? (
                 <>
                   Ich wollte etwas bauen, das <strong className="text-sonic-orange">ehrlich</strong> ist.
                 </>
@@ -67,7 +76,11 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
             </p>
 
             <p>
-              {isDe ? (
+              {isJa ? (
+                <>
+                  Super Sonicは、中小企業の皆様に<strong className="text-zinc-900">真のデジタル主権</strong>をお届けするために設立しました。中小企業がデジタルで発見され、モダンになる時代が来ています。
+                </>
+              ) : isDe ? (
                 <>
                   Wir haben Super Sonic gegründet, um dem Mittelstand <strong className="text-zinc-900">echte digitale Souveränität</strong> zu geben. Es wird Zeit, dass der Mittelstand digital auffindbar und modern wird.
                 </>
@@ -79,7 +92,9 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
             </p>
 
             <p className="text-zinc-900 font-medium border-l-4 border-sonic-orange pl-6">
-              {isDe 
+              {isJa 
+                ? "お客様のものとなる、高速で、見栄えの良いウェブサイトをお届けします。業界用語の羅列ではなく、実際の成果を。"
+                : isDe 
                 ? "Wir liefern dir eine Website, die dir gehört, die schnell ist und verdammt gut aussieht. Ohne Bullshit-Bingo."
                 : "We deliver a website that belongs to you, that's fast and looks damn good. No buzzword bingo."}
             </p>
@@ -89,7 +104,7 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
             <div className="flex items-center gap-4">
               <div className="font-bold text-zinc-900 fluid-base">Lasse</div>
               <div className="text-zinc-400">|</div>
-              <div className="text-zinc-500 fluid-sm">Founder, Super Sonic</div>
+              <div className="text-zinc-500 fluid-sm">{isJa ? "代表、Super Sonic" : "Founder, Super Sonic"}</div>
             </div>
           </div>
         </div>
