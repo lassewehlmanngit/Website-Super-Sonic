@@ -537,7 +537,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ lang }) => {
 
   return (
     <section className="py-16 md:py-24 bg-void overflow-hidden" aria-labelledby="showcase-heading">
-      <div className="container-responsive">
+      <div className="w-full max-w-[80rem] mx-auto px-6">
         {/* Header */}
         <div className="flex items-end justify-between mb-10 reveal">
           <div>
@@ -673,7 +673,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ lang }) => {
       </div>
 
       {/* Dot indicators */}
-      <div className="container-responsive mt-8">
+      <div className="w-full max-w-[80rem] mx-auto px-6 mt-8">
         <div className="flex items-center justify-center gap-2 reveal" role="tablist" aria-label={isJa ? 'プロジェクトを選択' : isDe ? 'Projekt auswählen' : 'Select project'}>
           {Array.from({ length: totalSlides }).map((_, index) => (
             <button
