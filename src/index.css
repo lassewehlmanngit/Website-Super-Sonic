@@ -67,6 +67,19 @@
     0% { transform: translateY(0); }
     100% { transform: translateY(-100%); }
   }
+
+  /* Navigation-Specific Tokens */
+  --nav-height-desktop: 5rem; /* 80px */
+  --nav-z-index: 50;
+  --nav-mobile-bar-z-index: 90;
+  --nav-sheet-z-index: 2000;
+  --nav-glass-bg: rgba(255, 255, 255, 0.8);
+  --nav-glass-border: rgba(255, 255, 255, 0.1);
+  --nav-glass-blur: 12px;
+
+  /* Safe Area Spacing (Critical for Mobile) */
+  --safe-bottom: env(safe-area-inset-bottom, 20px);
+  --mobile-bar-bottom: calc(var(--space-md) + var(--safe-bottom));
 }
 
 /* Custom Utilities */

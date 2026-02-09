@@ -9,8 +9,9 @@ interface SheetProps {
   onClose: () => void;
   children: React.ReactNode;
   className?: string;
-  title?: string; // For accessibility
+  title?: string;
   closeLabel?: string;
+  variant?: 'bottom' | 'full'; // Added variant prop
 }
 
 export const Sheet: React.FC<SheetProps> = ({
@@ -19,7 +20,8 @@ export const Sheet: React.FC<SheetProps> = ({
   children,
   className,
   title = "Menu",
-  closeLabel = "Close menu"
+  closeLabel = "Close menu",
+  variant = 'bottom' // Default to bottom for backward compatibility
 }) => {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -34,7 +36,7 @@ export const Sheet: React.FC<SheetProps> = ({
       setVisible(true);
       document.body.style.overflow = 'hidden';
     } else {
-      const timer = setTimeout(() => setVisible(false), 300); // Match transition duration
+      const timer = setTimeout(() => setVisible(false), 300);
       document.body.style.overflow = '';
       return () => clearTimeout(timer);
     }
@@ -44,55 +46,60 @@ export const Sheet: React.FC<SheetProps> = ({
   }, [isOpen]);
 
   if (!mounted) return null;
-
-  // Don't render anything if not visible and not open (after animation)
   if (!visible && !isOpen) return null;
+
+  // Define styles based on variant
+  const variantStyles = variant === 'full' 
+    ? "fixed inset-0 h-[100dvh] w-screen rounded-none border-none" // Full screen: No rounding, full height
+    : "fixed bottom-0 left-0 right-0 max-h-[90dvh] h-[90dvh] rounded-t-[2rem]"; // Bottom sheet
 
   return createPortal(
     <>
       {/* Backdrop */}
       <div 
         className={cn(
-          "fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] transition-opacity duration-300",
+          "fixed inset-0 bg-black/60 backdrop-blur-sm z-[2000] transition-opacity duration-300", // Z-Index bumped to 2000
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         )}
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Sheet Content */}
+      {/* Sheet Container */}
       <div 
         role="dialog"
         aria-modal="true"
         aria-label={title}
         className={cn(
-          "fixed bottom-0 left-0 right-0 bg-[#F3F3F3] z-[101] rounded-t-[2rem] flex flex-col overflow-hidden shadow-2xl",
+          "bg-[#F3F3F3] z-[2001] flex flex-col overflow-hidden shadow-2xl", // Z-Index bumped to 2001
           "transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]",
-          "max-h-[90dvh] h-[90dvh]", // Default height, can be overridden by className
+          variantStyles,
           isOpen ? "translate-y-0" : "translate-y-full",
           className
         )}
         style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
-        {/* Handle for visual affordance */}
-        <div className="flex-none pt-4 pb-2 relative w-full flex justify-center" onClick={onClose}>
-           <div className="w-12 h-1 bg-zinc-300 rounded-full cursor-pointer"></div>
-        </div>
+        {/* Drag Handle (Only for bottom sheet) */}
+        {variant === 'bottom' && (
+          <div className="flex-none pt-4 pb-2 relative w-full flex justify-center" onClick={onClose}>
+             <div className="w-12 h-1 bg-zinc-300 rounded-full cursor-pointer"></div>
+          </div>
+        )}
 
-        {/* Close Button - Absolute positioning for flexibility */}
-        <div className="absolute top-4 right-4 z-10">
+        {/* Close Button (Top Right) */}
+        <div className="absolute top-6 right-6 z-50">
            <Button
              variant="ghost"
              size="icon"
              onClick={onClose}
              aria-label={closeLabel}
-             className="bg-white hover:bg-zinc-100 rounded-full shadow-sm h-10 w-10"
+             className="bg-white hover:bg-zinc-100 rounded-full shadow-md h-12 w-12 border border-zinc-100"
            >
-             <X size={20} className="text-black" />
+             <X size={24} className="text-black" />
            </Button>
         </div>
 
-        {/* Content */}
+        {/* Scrollable Content */}
         <div className="flex-1 overflow-y-auto min-h-0 w-full">
           {children}
         </div>
