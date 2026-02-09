@@ -101,8 +101,30 @@ export const MobileNavigation: React.FC = () => {
             {/* Scrollable Body */}
             <div className="flex-1 px-6 pb-12">
                <div className="flex flex-col gap-10">
+
+                  {/* Block 1: CTA & Language */}
+                  <div className="flex flex-col gap-6 relative w-full z-10">
+                      <div className="flex justify-center w-full">
+                        <LanguageSwitcher 
+                          currentLang={lang} 
+                          switchLang={switchLang} 
+                          variant="mobile" 
+                          onLinkClick={close}
+                          className="py-2.5 px-8 bg-white rounded-full border border-zinc-200 shadow-sm"
+                        />
+                      </div>
+
+                      <Button 
+                        onClick={scrollToForm}
+                        className="w-full py-6 text-lg shadow-xl shadow-sonic-orange/20 flex items-center justify-center gap-2"
+                        size="lg"
+                      >
+                        {labels.ctaLong}
+                        <ArrowRight size={20} />
+                      </Button>
+                  </div>
                   
-                  {/* Block 1: Navigation Links */}
+                  {/* Block 2: Navigation Links */}
                   <nav className="static flex flex-col gap-3 w-full z-10">
                     {links.map((link, index) => {
                        const Icon = link.icon;
@@ -123,42 +145,20 @@ export const MobileNavigation: React.FC = () => {
                     })}
                   </nav>
 
-                  {/* Block 2: CTA & Language */}
-                  <div className="flex flex-col gap-6 relative w-full z-10">
-                      <Button 
-                        onClick={scrollToForm}
-                        className="w-full py-6 text-lg shadow-xl shadow-sonic-orange/20 flex items-center justify-center gap-2"
-                        size="lg"
-                      >
-                        {labels.ctaLong}
-                        <ArrowRight size={20} />
-                      </Button>
-
-                      <div className="flex justify-center w-full">
-                        <LanguageSwitcher 
-                          currentLang={lang} 
-                          switchLang={switchLang} 
-                          variant="mobile" 
-                          onLinkClick={close}
-                          className="py-2.5 px-8 bg-white rounded-full border border-zinc-200 shadow-sm"
-                        />
-                      </div>
-                  </div>
-
                   {/* Block 3: Trust Indicator */}
                   <div className="p-6 bg-void text-white rounded-3xl mt-4 w-full">
                       <div className="flex items-center gap-3 mb-4">
-                         <div className="flex -space-x-3">
+                         {/* <div className="flex -space-x-3">
                              <div className="w-8 h-8 rounded-full bg-zinc-600 border-2 border-void"></div>
                              <div className="w-8 h-8 rounded-full bg-zinc-500 border-2 border-void"></div>
                              <div className="w-8 h-8 rounded-full bg-zinc-400 border-2 border-void"></div>
-                         </div>
+                         </div> */}
                          <span className="text-sm text-zinc-400 font-medium">
-                           {labels.trusted}
+                           Von Novartum
                          </span>
                       </div>
                       <p className="text-lg font-medium leading-snug opacity-90">
-                         {labels.quote}
+                         "Eine der besten Investitionen, die wir dieses Jahr gemacht haben."
                       </p>
                   </div>
 

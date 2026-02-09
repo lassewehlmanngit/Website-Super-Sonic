@@ -1,21 +1,22 @@
 export const businessConfig = {
   name: "Norddorf",
-  legalName: "Norddorf Pte. Ltd.", // Assuming Pte. Ltd. for Singapore
+  legalName: "LASSE WEHLMANN PTE. LTD.",
   address: {
-    street: "[Physical Street Address]",
+    street: "160 Robinson Road #14-04",
+    building: "Singapore Business Federation Center",
     city: "Singapore",
-    postalCode: "[Postal Code]",
+    postalCode: "068914",
     country: "Singapore",
     countryCode: "SG"
   },
   contact: {
     email: "hello@norddorf.com",
-    phone: "[Phone Number]",
-    website: "https://norddorf.com"
+    phone: "[Ihre Telefonnummer]",
+    website: "[Ihre Website-URL]"
   },
-  director: "Lasse [Nachname]",
+  director: "Lasse Wehlmann",
   registration: {
-    authority: "ACRA (Accounting and Corporate Regulatory Authority)",
-    uen: "[UEN Number]" // Unique Entity Number
+    authority: "ACRA",
+    uen: "202345839G"
   }
 };

@@ -121,154 +121,93 @@ export const Privacy: React.FC = () => {
           <section>
             <Typography variant="h2" className="mb-4">2. Verantwortliche Stelle</Typography>
             <Typography variant="body" className="mb-4 text-zinc-600">
-              <strong className="text-black">{businessConfig.name}</strong><br/>
-              {businessConfig.address.street}<br/>
-              {businessConfig.address.postalCode} {businessConfig.address.city}
+              Verantwortlich für die Datenverarbeitung auf dieser Website ist:
             </Typography>
             <Typography variant="body" className="mb-4 text-zinc-600">
-              E-Mail: {businessConfig.contact.email}<br/>
-              Website: {businessConfig.contact.website}
+              <strong className="text-black">{businessConfig.legalName}</strong><br/>
+              {businessConfig.address.street}<br/>
+              {businessConfig.address.building}<br/>
+              {businessConfig.address.postalCode} {businessConfig.address.city}
             </Typography>
             <Typography variant="body" className="text-zinc-600">
-              Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit 
-              anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.
+              E-Mail: {businessConfig.contact.email}<br/>
+              Website: {businessConfig.contact.website}
             </Typography>
           </section>
 
           <section>
             <Typography variant="h2" className="mb-4">3. Hosting & Content Delivery Networks (CDN)</Typography>
             <Typography variant="body" className="mb-4 text-zinc-600">
-              <strong className="text-black">Render Services, Inc.</strong><br/>
-              Wir hosten unsere Website bei Render. Anbieter ist die Render Services, Inc., 525 Brannan St Ste 300, 
-              San Francisco, CA 94107, USA.
-            </Typography>
-            <Typography variant="body" className="mb-4 text-zinc-600">
-              Der Serverstandort für unsere Dienste ist <strong className="text-black">Frankfurt am Main, Deutschland (eu-central-1)</strong>.
-              Render speichert Protokolldaten wie IP-Adressen zur Erkennung und Abwehr von Angriffen.
+              Wir hosten unsere Website bei externen Dienstleistern (z.B. Render Services, Inc.). Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Hierbei kann es sich v. a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe und sonstige Daten, die über eine Website generiert werden, handeln.
             </Typography>
             <Typography variant="body" className="text-zinc-600">
-              Rechtsgrundlage für die Verarbeitung ist Art. 6 Abs. 1 lit. f DSGVO (Berechtigtes Interesse an 
-              Sicherheit und Stabilität des Webauftritts).
+              Der Einsatz des Hosters erfolgt zum Zwecke der Vertragserfüllung gegenüber unseren potenziellen und bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter (Art. 6 Abs. 1 lit. f DSGVO).
             </Typography>
           </section>
 
           <section>
             <Typography variant="h2" className="mb-4">4. Analyse & Tracking</Typography>
-            <Typography variant="body" className="mb-4 text-zinc-600">
-              <strong className="text-black">Umami Analytics</strong><br/>
-              Wir nutzen auf dieser Website Umami, eine datenschutzfreundliche Open-Source-Webanalyse-Software.
-              Umami verwendet <strong className="text-black">keine Cookies</strong> und speichert keine personenbezogenen Daten.
-              Alle gesammelten Daten sind anonymisiert und lassen keine Rückschlüsse auf einzelne Besucher zu.
-            </Typography>
             <Typography variant="body" className="text-zinc-600">
-              Die Erfassung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein 
-              berechtigtes Interesse an der anonymisierten Analyse des Nutzerverhaltens, um sein Webangebot zu 
-              optimieren. Da Umami keine personenbezogenen Daten speichert, ist keine Einwilligung (Cookie-Banner) 
-              erforderlich.
+              Wir nutzen auf dieser Website datenschutzfreundliche Analysetools (z.B. Umami Analytics). Diese verwenden in der Regel keine Cookies und speichern keine personenbezogenen Daten. Alle gesammelten Daten sind anonymisiert und lassen keine Rückschlüsse auf einzelne Besucher zu.
+            </Typography>
+            <Typography variant="body" className="mt-4 text-zinc-600">
+              Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (Berechtigtes Interesse an der Optimierung des Webangebots).
             </Typography>
           </section>
 
           <section>
             <Typography variant="h2" className="mb-4">5. Kontaktformular & Anfragen</Typography>
             <Typography variant="body" className="mb-4 text-zinc-600">
-              Wenn Sie uns per Kontaktformular oder E-Mail Anfragen zukommen lassen, werden Ihre Angaben aus dem 
-              Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage 
-              und für den Fall von Anschlussfragen bei uns gespeichert.
-            </Typography>
-            <Typography variant="body" className="mb-4 text-zinc-600">
-              <strong className="text-black">Erfasste Daten:</strong><br/>
-              • Name und Firmenname<br/>
-              • E-Mail-Adresse<br/>
-              • Bestehende Website-URL (falls angegeben)<br/>
-              • Projektziele und -anforderungen<br/>
-              • Sonstige freiwillige Angaben
+              Wenn Sie uns per Kontaktformular oder E-Mail Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
             </Typography>
             <Typography variant="body" className="text-zinc-600">
-              Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) sowie Art. 6 Abs. 1 lit. f DSGVO 
-              (berechtigtes Interesse an der Bearbeitung von Kundenanfragen). Die Daten werden gelöscht, sobald 
-              sie für die Erreichung des Zweckes ihrer Erhebung nicht mehr erforderlich sind.
+              Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO).
             </Typography>
           </section>
 
           <section>
             <Typography variant="h2" className="mb-4">6. Datenverarbeitung bei Vertragsabschluss</Typography>
             <Typography variant="body" className="mb-4 text-zinc-600">
-              Bei Beauftragung unserer Dienstleistungen verarbeiten wir folgende Daten zur Vertragserfüllung:
+              Bei Beauftragung unserer Dienstleistungen (Norddorf) verarbeiten wir folgende Daten zur Vertragserfüllung:
             </Typography>
             <Typography variant="body" className="mb-4 text-zinc-600">
               • Firmendaten (Name, Anschrift, Rechtsform)<br/>
               • Kontaktdaten des Ansprechpartners<br/>
               • Rechnungsdaten<br/>
-              • Projektbezogene Kommunikation<br/>
-              • Zugangsdaten zu bereitgestellten Systemen (falls erforderlich)
+              • Projektbezogene Kommunikation
             </Typography>
             <Typography variant="body" className="text-zinc-600">
-              Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung). Die Daten werden nach Ablauf 
-              der gesetzlichen Aufbewahrungsfristen (in der Regel 10 Jahre für Geschäftsunterlagen) gelöscht.
+              Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung). Die Daten werden nach Ablauf der gesetzlichen Aufbewahrungsfristen gelöscht.
             </Typography>
           </section>
 
           <section>
             <Typography variant="h2" className="mb-4">7. Ihre Rechte</Typography>
+            <Typography variant="body" className="text-zinc-600">
+              Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese jederzeit für die Zukunft widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.
+            </Typography>
+          </section>
+
+          <section>
+            <Typography variant="h2" className="mb-4">8. SSL- bzw. TLS-Verschlüsselung</Typography>
+            <Typography variant="body" className="text-zinc-600">
+              Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel Bestellungen oder Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung.
+            </Typography>
+          </section>
+
+          <section>
+            <Typography variant="h2" className="mb-4">9. Datenübermittlung in Drittländer</Typography>
             <Typography variant="body" className="mb-4 text-zinc-600">
-              Sie haben gegenüber uns folgende Rechte hinsichtlich der Sie betreffenden personenbezogenen Daten:
-            </Typography>
-            <Typography variant="body" className="mb-4 text-zinc-600">
-              • <strong className="text-black">Auskunftsrecht (Art. 15 DSGVO)</strong> – Sie können Auskunft über Ihre von uns verarbeiteten 
-              personenbezogenen Daten verlangen.<br/>
-              • <strong className="text-black">Recht auf Berichtigung (Art. 16 DSGVO)</strong> – Sie können die Berichtigung unrichtiger 
-              Daten verlangen.<br/>
-              • <strong className="text-black">Recht auf Löschung (Art. 17 DSGVO)</strong> – Sie können die Löschung Ihrer Daten verlangen, 
-              sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.<br/>
-              • <strong className="text-black">Recht auf Einschränkung (Art. 18 DSGVO)</strong> – Sie können die Einschränkung der 
-              Verarbeitung verlangen.<br/>
-              • <strong className="text-black">Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</strong> – Sie können verlangen, dass wir 
-              Ihnen Ihre Daten in einem strukturierten Format übermitteln.<br/>
-              • <strong className="text-black">Widerspruchsrecht (Art. 21 DSGVO)</strong> – Sie können der Verarbeitung Ihrer Daten 
-              widersprechen.
+              Unser Unternehmen hat seinen Sitz in Singapur. Singapur verfügt über einen Angemessenheitsbeschluss der EU-Kommission, der ein angemessenes Datenschutzniveau bestätigt.
             </Typography>
             <Typography variant="body" className="text-zinc-600">
-              Zur Ausübung Ihrer Rechte wenden Sie sich bitte an: hello@norddorf.com
+              Soweit wir Dienste von anderen Anbietern in Drittländern nutzen, erfolgt dies auf Grundlage geeigneter Garantien (z.B. Standardvertragsklauseln).
             </Typography>
           </section>
 
           <section>
-            <Typography variant="h2" className="mb-4">8. Beschwerderecht bei der Aufsichtsbehörde</Typography>
-            <Typography variant="body" className="text-zinc-600">
-              Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer 
-              personenbezogenen Daten zu beschweren. Für Beschwerden in Deutschland können Sie sich an die 
-              zuständige Landesdatenschutzbehörde wenden.
-            </Typography>
-          </section>
-
-          <section>
-            <Typography variant="h2" className="mb-4">9. SSL/TLS-Verschlüsselung</Typography>
-            <Typography variant="body" className="text-zinc-600">
-              Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, 
-              wie zum Beispiel Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. 
-              Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" 
-              auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.
-            </Typography>
-          </section>
-
-          <section>
-            <Typography variant="h2" className="mb-4">10. Datenübermittlung in Drittländer</Typography>
-            <Typography variant="body" className="mb-4 text-zinc-600">
-              Unser Unternehmen hat seinen Sitz in Singapur. Singapur verfügt über einen Angemessenheitsbeschluss 
-              der EU-Kommission, der ein angemessenes Datenschutzniveau bestätigt.
-            </Typography>
-            <Typography variant="body" className="text-zinc-600">
-              Soweit wir Dienste von US-Anbietern nutzen (z.B. Render für Hosting), erfolgt dies auf Grundlage 
-              von Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO) oder anderen geeigneten Garantien.
-            </Typography>
-          </section>
-
-          <section>
-            <Typography variant="h2" className="mb-4">11. Aktualität und Änderung dieser Datenschutzerklärung</Typography>
-            <Typography variant="body" className="text-zinc-600">
-              Diese Datenschutzerklärung ist aktuell gültig und hat den Stand Februar 2026. Durch die 
-              Weiterentwicklung unserer Website und Angebote oder aufgrund geänderter gesetzlicher bzw. 
-              behördlicher Vorgaben kann eine Anpassung dieser Datenschutzerklärung erforderlich werden.
+            <Typography variant="body" className="text-sm text-zinc-500">
+              Stand: Februar 2026
             </Typography>
           </section>
 

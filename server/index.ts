@@ -3,6 +3,11 @@ import keystaticConfig from './keystatic.config';
 import { createReader } from '@keystatic/core/reader';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,6 +28,78 @@ app.use((req, res, next) => {
     return res.sendStatus(200);
   }
   next();
+});
+
+// Email Transporter Configuration
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: parseInt(process.env.SMTP_PORT || '587'),
+  secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
+
+// Verify connection configuration
+transporter.verify(function (error, success) {
+  if (error) {
+    console.log('SMTP Connection Error:', error);
+  } else {
+    console.log('SMTP Server is ready to take our messages');
+  }
+});
+
+// API Endpoint to Send Emails
+app.post('/api/send-email', async (req, res) => {
+  const { type, data, lang } = req.body;
+
+  try {
+    // 1. Email to Business Owner (You)
+    const ownerMailOptions = {
+      from: process.env.EMAIL_FROM || '"Norddorf Website" <noreply@norddorf.com>',
+      to: process.env.EMAIL_TO, // Your email address
+      subject: `New Lead: ${type} - ${data.name}`,
+      html: `
+        <h2>New Lead Received</h2>
+        <p><strong>Type:</strong> ${type}</p>
+        <p><strong>Name:</strong> ${data.name}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+        ${data.currentWebsite ? `<p><strong>Website:</strong> ${data.currentWebsite}</p>` : ''}
+        ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ''}
+        
+        <h3>Details:</h3>
+        <pre>${JSON.stringify(data, null, 2)}</pre>
+      `,
+    };
+
+    await transporter.sendMail(ownerMailOptions);
+
+    // 2. Confirmation Email to User
+    const userSubject = lang === 'de' 
+      ? 'Deine Anfrage bei Norddorf' 
+      : lang === 'ja' 
+      ? 'お問い合わせありがとうございます' 
+      : 'Your request at Norddorf';
+
+    const userMessage = lang === 'de'
+      ? `<p>Hallo ${data.name},</p><p>Danke für deine Anfrage. Wir haben deine Daten erhalten und melden uns in Kürze.</p>`
+      : lang === 'ja'
+      ? `<p>${data.name} 様</p><p>お問い合わせありがとうございます。内容を確認し、担当者よりご連絡いたします。</p>`
+      : `<p>Hi ${data.name},</p><p>Thanks for your request. We have received your details and will get back to you shortly.</p>`;
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_FROM || '"Norddorf" <hello@norddorf.com>',
+      to: data.email,
+      subject: userSubject,
+      html: userMessage,
+    });
+
+    res.status(200).json({ success: true, message: 'Emails sent successfully' });
+  } catch (error) {
+    console.error('Email sending failed:', error);
+    res.status(500).json({ success: false, message: 'Failed to send email' });
+  }
 });
 
 // Health check

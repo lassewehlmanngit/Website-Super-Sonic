@@ -272,8 +272,22 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
     setSubmitError(null);
     
     try {
-      // Simulate API call - replace with actual endpoint
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${apiUrl}/api/send-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: 'Lead Form',
+          lang,
+          data: formData
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
       
       console.log('Form submitted:', formData);
       setIsSubmitted(true);
@@ -287,6 +301,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
           : 'Form submitted successfully!';
       }
     } catch (error) {
+      console.error('Submission error:', error);
       setSubmitError(isJa 
         ? '問題が発生しました。もう一度お試しください。' 
         : isDe 

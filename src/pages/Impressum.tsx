@@ -23,7 +23,10 @@ export const Impressum: React.FC = () => {
           <section>
             <h2 className="text-xl font-bold text-black mb-4">Angaben gemäß § 5 TMG</h2>
             <p className="font-bold">{businessConfig.name}</p>
+            <p>Ein Angebot der:</p>
+            <p className="font-bold">{businessConfig.legalName}</p>
             <p>{businessConfig.address.street}</p>
+            <p>{businessConfig.address.building}</p>
             <p>{businessConfig.address.postalCode} {businessConfig.address.city}</p>
           </section>
 
@@ -50,8 +53,7 @@ export const Impressum: React.FC = () => {
             <h2 className="text-xl font-bold text-black mb-4">Umsatzsteuer</h2>
             <p>
               Als Unternehmen mit Sitz in Singapur unterliegen wir nicht der deutschen Umsatzsteuer.
-              Für B2B-Kunden in Deutschland gilt das Reverse-Charge-Verfahren gemäß § 13b UStG.
-              Der Leistungsempfänger schuldet die Umsatzsteuer.
+              Für B2B-Kunden in Deutschland und der EU gilt das Reverse-Charge-Verfahren gemäß § 13b UStG (bzw. entsprechende EU-Richtlinien). Der Leistungsempfänger schuldet die Umsatzsteuer am Ort des Leistungsbezugs.
             </p>
           </section>
 
@@ -77,33 +79,34 @@ export const Impressum: React.FC = () => {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-black mb-4">Haftungsausschluss</h2>
-            <p className="mb-4">
-              <strong>Haftung für Inhalte</strong><br/>
-              Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den 
-              allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch 
-              nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach 
-              Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
-            </p>
-            <p className="mb-4">
-              <strong>Haftung für Links</strong><br/>
-              Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. 
-              Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der 
-              verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
-            </p>
-            <p>
-              <strong>Urheberrecht</strong><br/>
-              Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem 
-              Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb 
-              der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. 
-              Erstellers.
-            </p>
+            <h2 className="text-xl font-bold text-black mb-4">Haftungsausschluss (Disclaimer)</h2>
+            
+            <div className="mb-4">
+              <h3 className="text-lg font-bold text-black mb-2">Haftung für Inhalte</h3>
+              <p>
+                Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+              </p>
+            </div>
+
+            <div className="mb-4">
+              <h3 className="text-lg font-bold text-black mb-2">Haftung für Links</h3>
+              <p>
+                Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-bold text-black mb-2">Urheberrecht</h3>
+              <p>
+                Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
+              </p>
+            </div>
           </section>
 
           <section>
             <h2 className="text-xl font-bold text-black mb-4">Anwendbares Recht</h2>
             <p>
-              Für alle Rechtsbeziehungen zwischen Norddorf und dem Kunden gilt 
+              Für alle Rechtsbeziehungen zwischen {businessConfig.legalName} und dem Kunden gilt 
               singapurisches Recht unter Ausschluss des UN-Kaufrechts. Gerichtsstand ist Singapur, sofern 
               nicht zwingende gesetzliche Vorschriften dem entgegenstehen.
             </p>

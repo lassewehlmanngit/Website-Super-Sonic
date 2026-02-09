@@ -249,12 +249,30 @@ export function ExitIntentPopup() {
     
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    console.log('Exit popup form submitted:', formData);
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${apiUrl}/api/send-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: 'Exit Intent Popup',
+          lang: isDe ? 'de' : isJa ? 'ja' : 'en',
+          data: formData
+        }),
+      });
+
+      if (!response.ok) throw new Error('Failed to send');
+
+      console.log('Exit popup form submitted:', formData);
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error(error);
+      // Handle error state if needed
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleProjectClick = (url: string) => {

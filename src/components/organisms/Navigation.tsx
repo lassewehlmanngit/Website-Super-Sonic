@@ -45,7 +45,7 @@ export const Navigation: React.FC = () => {
   return (
     <header 
       className={cn(
-        "fixed top-0 w-full z-[var(--nav-z-index)] h-[var(--nav-height-desktop)] transition-all duration-500 ease-in-out hidden xl:flex items-center", 
+        "main-nav-critical fixed top-0 w-full z-[var(--nav-z-index)] h-[var(--nav-height-desktop)] transition-all duration-500 ease-in-out hidden xl:flex items-center", 
         navClasses
       )} 
       aria-label="Main navigation"
