@@ -32,7 +32,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         onClick={onLinkClick}
         className={cn(
           "hover:no-underline transition-colors", 
-          isDe ? 'underline decoration-2 underline-offset-4 decoration-sonic-orange text-black' : 'opacity-50 hover:opacity-100 hover:text-black'
+          isDe ? 'underline decoration-2 underline-offset-4 decoration-sonic-orange' : 'opacity-50 hover:opacity-100'
         )}
       >
         DE
@@ -43,7 +43,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         onClick={onLinkClick}
         className={cn(
           "hover:no-underline transition-colors", 
-          isEn ? 'underline decoration-2 underline-offset-4 decoration-sonic-orange text-black' : 'opacity-50 hover:opacity-100 hover:text-black'
+          isEn ? 'underline decoration-2 underline-offset-4 decoration-sonic-orange' : 'opacity-50 hover:opacity-100'
         )}
       >
         EN
@@ -54,7 +54,7 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         onClick={onLinkClick}
         className={cn(
           "hover:no-underline transition-colors", 
-          isJa ? 'underline decoration-2 underline-offset-4 decoration-sonic-orange text-black' : 'opacity-50 hover:opacity-100 hover:text-black'
+          isJa ? 'underline decoration-2 underline-offset-4 decoration-sonic-orange' : 'opacity-50 hover:opacity-100'
         )}
       >
         JP
