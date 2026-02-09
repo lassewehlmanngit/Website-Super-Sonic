@@ -3,7 +3,7 @@ import { Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
 
 // Lazy load layout components to reduce initial bundle size
 const Navigation = lazy(() => import('./components/organisms/Navigation').then(module => ({ default: module.Navigation })));
-const MobileNav = lazy(() => import('./components/layout/MobileNav').then(module => ({ default: module.MobileNav })));
+const MobileNavigation = lazy(() => import('./components/layout/MobileNavigation').then(module => ({ default: module.MobileNavigation })));
 const Footer = lazy(() => import('./components/organisms/Footer').then(module => ({ default: module.Footer })));
 const ExitIntentPopup = lazy(() => import('./components/global/ExitIntentPopup').then(module => ({ default: module.ExitIntentPopup })));
 
@@ -67,7 +67,7 @@ const Layout = () => {
         <Navigation />
       </Suspense>
       <Suspense fallback={null}>
-        <MobileNav />
+        <MobileNavigation />
       </Suspense>
       <main id="main-content" tabIndex={-1}>
         <Suspense fallback={<PageLoader />}>
