@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container } from '../atoms/Container';
-import { Link } from '../atoms/Link';
 import { Button } from '../atoms/Button';
-import { useScrollPosition } from '../../hooks/useScrollPosition';
 import { cn } from '../../lib/utils';
+import { useNavigationConfig } from '../../hooks/useNavigationConfig';
+import { LanguageSwitcher } from '../molecules/LanguageSwitcher';
 
 export const Navigation: React.FC = () => {
-  const { isScrolled } = useScrollPosition(20);
-  const location = useLocation();
-  const currentPath = location.pathname;
-  const isDe = currentPath.startsWith('/de');
-  const isJa = currentPath.startsWith('/ja');
-  const isEn = !isDe && !isJa;
-
-  // Pages with dark/colored hero backgrounds
-  const isLandingPage = currentPath === '/de' || currentPath === '/en' || currentPath === '/ja' || currentPath === '/';
-  const isCaseStudyPage = currentPath.includes('/projekte/') || currentPath.includes('/projects/');
-  const isDarkSection = isLandingPage || isCaseStudyPage;
+  const { 
+    links, 
+    lang, 
+    labels, 
+    isScrolled, 
+    isDarkSection, 
+    switchLang, 
+    homeLink 
+  } = useNavigationConfig();
 
   const textColor = isScrolled ? 'text-black' : (isDarkSection ? 'text-white' : 'text-black');
   
@@ -26,36 +24,7 @@ export const Navigation: React.FC = () => {
     : 'bg-transparent border-transparent py-6';
     
   const logoColor = isScrolled ? 'text-black' : (isDarkSection ? 'text-white' : 'text-black');
-  const buttonVariant = isScrolled ? 'primary' : (isDarkSection ? 'primary' : 'primary'); // Always primary unless overridden
-
-  const switchLang = (targetLang: string) => {
-    // Basic logic to replace prefix
-    // Assuming simple structure /lang/...
-    const path = location.pathname;
-    const pathWithoutLang = path.replace(/^\/(de|en|ja)/, '');
-    // If no lang prefix (root), add it
-    return `/${targetLang}${pathWithoutLang}`;
-  };
-
-  const links = isJa ? [
-    { label: '比較', anchor: '#comparison' },
-    { label: 'プロセス', anchor: '#engineering' },
-    { label: 'プロジェクト', anchor: '#case-studies' },
-    { label: '会社概要', anchor: '#ceo-letter' },
-    { label: 'FAQ', anchor: '#faq' },
-  ] : isDe ? [
-    { label: 'Vergleich', anchor: '#comparison' },
-    { label: 'Prozess', anchor: '#engineering' },
-    { label: 'Projekte', anchor: '#case-studies' },
-    { label: 'Über Uns', anchor: '#ceo-letter' },
-    { label: 'FAQ', anchor: '#faq' },
-  ] : [
-    { label: 'Comparison', anchor: '#comparison' },
-    { label: 'Process', anchor: '#engineering' },
-    { label: 'Projects', anchor: '#case-studies' },
-    { label: 'About Us', anchor: '#ceo-letter' },
-    { label: 'FAQ', anchor: '#faq' },
-  ];
+  const buttonVariant = isScrolled ? 'primary' : (isDarkSection ? 'primary' : 'primary');
 
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, anchor: string) => {
     e.preventDefault();
@@ -72,8 +41,6 @@ export const Navigation: React.FC = () => {
     }
   };
 
-  const homeLink = isJa ? '/ja' : isDe ? '/de' : '/en';
-
   return (
     <nav className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out", navBg)} aria-label="Main navigation">
       <Container className="flex items-center justify-between">
@@ -86,7 +53,7 @@ export const Navigation: React.FC = () => {
         </Link>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden xl:flex items-center gap-2">
             <div className={cn(
               "flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-500 mr-4",
               isScrolled ? 'bg-transparent' : 'bg-white/5 backdrop-blur-sm border border-white/10'
@@ -107,10 +74,13 @@ export const Navigation: React.FC = () => {
               ))}
             </div>
             
-            <div className={cn("flex gap-3 text-xs font-mono font-bold mr-6 transition-colors duration-500", textColor)}>
-                <Link to={switchLang('de')} className={cn("hover:no-underline", isDe ? 'underline decoration-2 underline-offset-4 decoration-sonic-orange' : 'opacity-50 hover:opacity-100')}>DE</Link>
-                <Link to={switchLang('en')} className={cn("hover:no-underline", isEn ? 'underline decoration-2 underline-offset-4 decoration-sonic-orange' : 'opacity-50 hover:opacity-100')}>EN</Link>
-                <Link to={switchLang('ja')} className={cn("hover:no-underline", isJa ? 'underline decoration-2 underline-offset-4 decoration-sonic-orange' : 'opacity-50 hover:opacity-100')}>JP</Link>
+            <div className={cn("mr-6 transition-colors duration-500", textColor)}>
+               <LanguageSwitcher 
+                 currentLang={lang} 
+                 switchLang={switchLang} 
+                 variant="desktop"
+                 className={textColor} // Pass text color to ensure visibility on dark backgrounds
+               />
             </div>
 
             <Button 
@@ -119,7 +89,7 @@ export const Navigation: React.FC = () => {
               className="transition-all duration-500"
               onClick={scrollToForm}
             >
-              {isJa ? '無料デザイン' : isDe ? 'Gratis-Entwurf' : 'Free Design'}
+              {labels.cta}
             </Button>
         </div>
       </Container>
