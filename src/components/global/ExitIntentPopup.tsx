@@ -250,8 +250,9 @@ export function ExitIntentPopup() {
     setIsSubmitting(true);
     
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-      const response = await fetch(`${apiUrl}/api/send-email`, {
+      // Remove trailing slash from VITE_API_URL if present to avoid double slashes
+      const baseUrl = (import.meta.env.VITE_API_URL || 'http://localhost:3001').replace(/\/$/, '');
+      const response = await fetch(`${baseUrl}/api/send-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
