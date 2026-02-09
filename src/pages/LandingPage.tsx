@@ -19,6 +19,7 @@ import {
   FutureProof,
   CMSDemo,
   LeadForm,
+  IndividualRequest,
   StrategicFAQ,
   FinalCTA,
 } from '../components/landing';
@@ -140,6 +141,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
       <div ref={formRef}>
         <LeadForm lang={lang} />
       </div>
+
+      {/* 16.5 Individual Request */}
+      <IndividualRequest lang={lang} />
 
       {/* 17. Strategic FAQ */}
       <StrategicFAQ lang={lang} />

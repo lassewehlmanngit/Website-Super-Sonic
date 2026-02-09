@@ -17,6 +17,7 @@ export { DigitalSovereignty } from './DigitalSovereignty';
 export { FutureProof } from './FutureProof';
 export { CMSDemo } from './CMSDemo';
 export { LeadForm } from './LeadForm';
+export { IndividualRequest } from './IndividualRequest';
 export { StrategicFAQ } from './StrategicFAQ';
 export { FinalCTA } from './FinalCTA';
 export { FormSuccess } from './FormSuccess';
