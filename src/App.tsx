@@ -1,10 +1,10 @@
 import React, { useEffect, Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
 
 // Lazy load layout components to reduce initial bundle size
-const Navigation = lazy(() => import('./components/layout/Navigation').then(module => ({ default: module.Navigation })));
+const Navigation = lazy(() => import('./components/organisms/Navigation').then(module => ({ default: module.Navigation })));
 const MobileNav = lazy(() => import('./components/layout/MobileNav').then(module => ({ default: module.MobileNav })));
-const Footer = lazy(() => import('./components/layout/Footer').then(module => ({ default: module.Footer })));
+const Footer = lazy(() => import('./components/organisms/Footer').then(module => ({ default: module.Footer })));
 const ExitIntentPopup = lazy(() => import('./components/global/ExitIntentPopup').then(module => ({ default: module.ExitIntentPopup })));
 
 // Lazy load page components
@@ -17,7 +17,7 @@ const BusinessFacts = lazy(() => import('./pages/BusinessFacts').then(module => 
 
 // TinaCMS Dynamic Page (for CMS-managed content)
 // Uncomment when ready to migrate pages to CMS:
-// const DynamicPage = lazy(() => import('./pages/DynamicPage').then(module => ({ default: module.DynamicPage })));
+const DynamicPage = lazy(() => import('./pages/DynamicPage').then(module => ({ default: module.DynamicPage })));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -88,9 +88,8 @@ const Layout = () => {
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Navigate to="/de" replace />} />
+    <Routes>
+      <Route path="/" element={<Navigate to="/de" replace />} />
 
         {/* TinaCMS Admin - Served automatically at /admin by tinacms dev */}
         {/* No route needed here - Tina handles it */}
@@ -107,6 +106,8 @@ const App: React.FC = () => {
           <Route path="impressum" element={<Impressum />} />
           <Route path="datenschutz" element={<Privacy />} />
           <Route path="agb" element={<AGB />} />
+          {/* CMS Pages */}
+          <Route path=":slug" element={<DynamicPage lang="de" />} />
         </Route>
 
         {/* English Routes */}
@@ -116,6 +117,8 @@ const App: React.FC = () => {
           <Route path="impressum" element={<Impressum />} />
           <Route path="privacy" element={<Privacy />} />
           <Route path="terms" element={<AGB />} />
+          {/* CMS Pages */}
+          <Route path=":slug" element={<DynamicPage lang="en" />} />
         </Route>
 
         {/* Japanese Routes */}
@@ -125,6 +128,8 @@ const App: React.FC = () => {
           <Route path="tokushoho" element={<Impressum />} />
           <Route path="privacy" element={<Privacy />} />
           <Route path="terms" element={<AGB />} />
+          {/* CMS Pages */}
+          <Route path=":slug" element={<DynamicPage lang="ja" />} />
         </Route>
 
         {/* Redirects for old routes */}
@@ -150,7 +155,6 @@ const App: React.FC = () => {
         {/* Catch-all redirect */}
         <Route path="*" element={<Navigate to="/de" replace />} />
       </Routes>
-    </Router>
   );
 };
 

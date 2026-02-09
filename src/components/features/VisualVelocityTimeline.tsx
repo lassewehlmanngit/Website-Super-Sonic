@@ -8,7 +8,7 @@ export const VisualVelocityTimeline: React.FC = () => {
   const [tradProgress, setTradProgress] = useState(0);
   const [tradStatus, setTradStatus] = useState("Discovery");
   
-  // Super Sonic State
+  // Norddorf State
   const [superProgress, setSuperProgress] = useState(0);
   const [superStatus, setSuperStatus] = useState("Discovery");
 
@@ -105,14 +105,14 @@ export const VisualVelocityTimeline: React.FC = () => {
             </div>
         </div>
 
-        {/* --- Track 2: Super Sonic (The Hero) --- */}
+        {/* --- Track 2: Norddorf (The Hero) --- */}
         <div className="relative z-10">
             <div className="flex justify-between items-end mb-3">
                 <div className="flex items-center gap-2">
                     <div className="p-1.5 bg-orange-50 rounded-md text-sonic-orange">
                         <Zap size={14} className="fill-sonic-orange" />
                     </div>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-black font-bold">Super Sonic</span>
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-black font-bold">Norddorf</span>
                 </div>
                 <div className={`flex items-center gap-2 text-xs font-bold px-3 py-1 rounded-full border transition-all duration-300 ${superProgress === 100 ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-orange-50 text-sonic-orange border-orange-100'}`}>
                     {superProgress === 100 ? <Check size={12} /> : <Zap size={12} />}

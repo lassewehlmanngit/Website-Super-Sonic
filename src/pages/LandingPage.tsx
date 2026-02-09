@@ -14,6 +14,7 @@ import {
   CaseStudies,
   TakeFear,
   ProcessVideo,
+  ProcessSteps,
   DigitalSovereignty,
   FutureProof,
   CMSDemo,
@@ -69,10 +70,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
       <SEO
         title={
           isJa
-            ? 'Super Sonic | 中小企業向けウェブサイト制作 | 14日納品・固定価格・100%所有権'
+            ? 'Norddorf | 中小企業向けウェブサイト制作 | 14日納品・固定価格・100%所有権'
             : isDe
-            ? 'Super Sonic | Webseiten für den Mittelstand | 14 Tage, Festpreis, 100% Eigentum'
-            : 'Super Sonic | Websites for SMBs | 14 Days, Fixed Price, 100% Ownership'
+            ? 'Norddorf | Webseiten für den Mittelstand | 14 Tage, Festpreis, 100% Eigentum'
+            : 'Norddorf | Websites for SMBs | 14 Days, Fixed Price, 100% Ownership'
         }
         description={
           isJa
@@ -122,6 +123,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
 
       {/* 11. Prozess-Video */}
       <ProcessVideo lang={lang} />
+
+      {/* 12. Process Steps */}
+      <ProcessSteps lang={lang} />
 
       {/* 13. Digitale Souveränität */}
       <DigitalSovereignty lang={lang} />

@@ -38,7 +38,7 @@ export const ChristmasLoader: React.FC = () => {
                     Merry Christmas!
                 </h1>
                 <p className="text-zinc-500 text-xl font-mono uppercase tracking-widest">
-                    Super Sonic Edition
+                    Norddorf Edition
                 </p>
              </div>
         )}

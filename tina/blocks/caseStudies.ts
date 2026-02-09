@@ -123,23 +123,25 @@ export const caseStudiesBlock: Template = {
             },
             {
               type: "object",
-              name: "challenges",
-              label: "Challenges",
-              list: true,
-              ui: listItemProps('text'),
+              name: "story",
+              label: "The Story",
               fields: [
-                { type: "string", name: "text", label: "Challenge" }
+                { type: "string", name: "hook", label: "The Hook", ui: { component: "textarea" } },
+                { type: "string", name: "turningPoint", label: "The Turning Point", ui: { component: "textarea" } },
+                { type: "string", name: "transformation", label: "The Transformation", ui: { component: "textarea" } }
               ]
             },
             {
-              type: "object",
+              type: "string",
+              name: "challenges",
+              label: "Challenges",
+              list: true,
+            },
+            {
+              type: "string",
               name: "approach",
               label: "Our Approach",
               list: true,
-              ui: listItemProps('text'),
-              fields: [
-                { type: "string", name: "text", label: "Approach Point" }
-              ]
             },
             {
               type: "object",
@@ -153,24 +155,19 @@ export const caseStudiesBlock: Template = {
               ]
             },
             {
-              type: "object",
+              type: "string",
               name: "results",
               label: "Results",
               list: true,
-              ui: listItemProps('text'),
-              fields: [
-                { type: "string", name: "text", label: "Result" }
-              ]
             },
             {
-              type: "object",
+              type: "string",
               name: "techStack",
               label: "Tech Stack",
               list: true,
-              ui: listItemProps('name'),
-              fields: [
-                { type: "string", name: "name", label: "Technology" }
-              ]
+              ui: {
+                component: "tags"
+              }
             },
             {
               type: "object",

@@ -54,10 +54,25 @@ export interface CaseStudy {
   seo: CaseStudySEO;
 }
 
+export interface MiniCaseStudy {
+  title: string;
+  problem: string;
+  solution: string;
+  result: string;
+  metric: string;
+  metricLabel: string;
+}
+
 export interface LocalizedCaseStudies {
   de: CaseStudy[];
   en: CaseStudy[];
   ja: CaseStudy[];
+}
+
+export interface LocalizedMiniCaseStudies {
+  de: MiniCaseStudy[];
+  en: MiniCaseStudy[];
+  ja: MiniCaseStudy[];
 }
 
 // ============================================
@@ -136,7 +151,7 @@ export const caseStudies: LocalizedCaseStudies = {
         conclusion: 'Die Matcha Partners Website beweist: Weniger ist mehr. Durch konsequenten Fokus auf das Wesentliche entstand eine Plattform, die komplexe B2B-Anforderungen verständlich macht – in drei Sprachen, mit eingebauter Flexibilität für die Zukunft.',
       },
       seo: {
-        title: 'Case Study: Matcha Partners – B2B Website aus Japan | Super Sonic',
+        title: 'Case Study: Matcha Partners – B2B Website aus Japan | Norddorf',
         description: 'Wie wir für Matcha Partners eine dreisprachige B2B-Website mit intelligentem Lead-Formular gebaut haben. Fokus auf Klarheit statt Feature-Overload.',
       },
     },
@@ -212,7 +227,7 @@ export const caseStudies: LocalizedCaseStudies = {
         conclusion: 'The Matcha Partners website proves: Less is more. Through consistent focus on what matters, we created a platform that makes complex B2B requirements understandable—in three languages, with built-in flexibility for the future.',
       },
       seo: {
-        title: 'Case Study: Matcha Partners – B2B Website from Japan | Super Sonic',
+        title: 'Case Study: Matcha Partners – B2B Website from Japan | Norddorf',
         description: 'How we built a trilingual B2B website with intelligent lead forms for Matcha Partners. Focus on clarity over feature overload.',
       },
     },
@@ -288,11 +303,68 @@ export const caseStudies: LocalizedCaseStudies = {
         conclusion: 'Matcha Partnersのウェブサイトは証明しています：少ないほど多い。重要なことへの一貫した集中により、複雑なB2B要件を理解しやすくするプラットフォームを作成しました——3言語で、将来のための柔軟性を内蔵しています。',
       },
       seo: {
-        title: '導入事例：Matcha Partners – 日本からのB2Bウェブサイト | Super Sonic',
+        title: '導入事例：Matcha Partners – 日本からのB2Bウェブサイト | Norddorf',
         description: 'Matcha Partnersのためにインテリジェントなリードフォームを備えた3言語B2Bウェブサイトを構築した方法。機能過多より明確さを重視。',
       },
     },
   ],
+};
+
+export const miniCaseStudies: LocalizedMiniCaseStudies = {
+  de: [
+    {
+      title: "Der ausgebuchte Handwerksbetrieb",
+      problem: "Website von 2005, nicht mobilfähig.",
+      solution: "Sonic-Blueprint in 14 Tagen.",
+      result: "45% mehr qualifizierte Anfragen über das neue Kontaktformular im ersten Monat.",
+      metric: "+45%",
+      metricLabel: "Mehr Anfragen"
+    },
+    {
+      title: "Das IT-Systemhaus",
+      problem: "Wordpress-Chaos, 8 Sekunden Ladezeit.",
+      solution: "Umstellung auf unseren Sonic-Stack (Code-Sovereignty).",
+      result: "Ladezeit unter 0,8s. Top-Rankings bei Google für lokale Keywords.",
+      metric: "<0.8s",
+      metricLabel: "Ladezeit"
+    }
+  ],
+  en: [
+    {
+      title: "The Fully Booked Craftsman",
+      problem: "Website from 2005, not mobile-friendly.",
+      solution: "Sonic Blueprint in 14 days.",
+      result: "45% more qualified inquiries through the new contact form in the first month.",
+      metric: "+45%",
+      metricLabel: "More inquiries"
+    },
+    {
+      title: "The IT System House",
+      problem: "WordPress chaos, 8 second load time.",
+      solution: "Switch to our Sonic Stack (Code Sovereignty).",
+      result: "Load time under 0.8s. Top rankings on Google for local keywords.",
+      metric: "<0.8s",
+      metricLabel: "Load time"
+    }
+  ],
+  ja: [
+    {
+      title: "予約で埋まった職人企業",
+      problem: "2005年のウェブサイト、モバイル非対応。",
+      solution: "Sonicブループリントを14日で導入。",
+      result: "新しいお問い合わせフォームから、初月で質の高いお問い合わせが45%増加。",
+      metric: "+45%",
+      metricLabel: "お問い合わせ増加"
+    },
+    {
+      title: "ITシステム会社",
+      problem: "WordPressの混乱、8秒の読み込み時間。",
+      solution: "Sonicスタック（コード主権）への移行。",
+      result: "読み込み時間0.8秒以下。地域キーワードでGoogle上位表示。",
+      metric: "<0.8s",
+      metricLabel: "読み込み時間"
+    }
+  ]
 };
 
 // ============================================
@@ -305,6 +377,10 @@ export function getCaseStudyBySlug(slug: string, lang: 'de' | 'en' | 'ja'): Case
 
 export function getAllCaseStudies(lang: 'de' | 'en' | 'ja'): CaseStudy[] {
   return caseStudies[lang];
+}
+
+export function getMiniCaseStudies(lang: 'de' | 'en' | 'ja'): MiniCaseStudy[] {
+  return miniCaseStudies[lang];
 }
 
 export function getCaseStudySlugs(): string[] {

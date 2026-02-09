@@ -63,27 +63,21 @@ fragment PageParts on Page {
         content {
           __typename
           intro
-          challenges {
+          story {
             __typename
-            text
+            hook
+            turningPoint
+            transformation
           }
-          approach {
-            __typename
-            text
-          }
+          challenges
+          approach
           features {
             __typename
             title
             description
           }
-          results {
-            __typename
-            text
-          }
-          techStack {
-            __typename
-            name
-          }
+          results
+          techStack
           metrics {
             __typename
             label
@@ -135,5 +129,20 @@ fragment GlobalParts on Global {
       platform
       url
     }
+  }
+}
+
+fragment PrivacyParts on Privacy {
+  __typename
+  title
+  sections {
+    __typename
+    title
+    content
+  }
+  seo {
+    __typename
+    title
+    description
   }
 }

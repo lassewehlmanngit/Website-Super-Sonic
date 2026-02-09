@@ -290,7 +290,7 @@ export const ProjectScopeTool: React.FC = () => {
                 </p>
              </div>
              <div className="text-right hidden md:block">
-                 <div className="text-2xl font-bold text-black mb-1">Super Sonic.</div>
+                 <div className="text-2xl font-bold text-black mb-1">Norddorf.</div>
                  <div className="text-xs text-zinc-400 uppercase tracking-widest">Engineering Division</div>
              </div>
           </div>

@@ -4,19 +4,19 @@
   
   <!-- Homepage (Landing Page) -->
   <url>
-    <loc>https://supersonic.design/de</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://supersonic.design/de"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://supersonic.design/en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://supersonic.design/de"/>
+    <loc>https://norddorf.com/de</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de"/>
     <lastmod>2026-02-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://supersonic.design/en</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://supersonic.design/de"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://supersonic.design/en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://supersonic.design/de"/>
+    <loc>https://norddorf.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de"/>
     <lastmod>2026-02-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -24,17 +24,17 @@
 
   <!-- Case Studies / Projects -->
   <url>
-    <loc>https://supersonic.design/de/projekte/matcha-partners</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://supersonic.design/de/projekte/matcha-partners"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://supersonic.design/en/projects/matcha-partners"/>
+    <loc>https://norddorf.com/de/projekte/matcha-partners</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/projekte/matcha-partners"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/projects/matcha-partners"/>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://supersonic.design/en/projects/matcha-partners</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://supersonic.design/de/projekte/matcha-partners"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://supersonic.design/en/projects/matcha-partners"/>
+    <loc>https://norddorf.com/en/projects/matcha-partners</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/projekte/matcha-partners"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/projects/matcha-partners"/>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -42,33 +42,33 @@
 
   <!-- Legal Pages -->
   <url>
-    <loc>https://supersonic.design/de/impressum</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://supersonic.design/de/impressum"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://supersonic.design/en/impressum"/>
+    <loc>https://norddorf.com/de/impressum</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/impressum"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/impressum"/>
     <lastmod>2026-02-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://supersonic.design/en/impressum</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://supersonic.design/de/impressum"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://supersonic.design/en/impressum"/>
+    <loc>https://norddorf.com/en/impressum</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/impressum"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/impressum"/>
     <lastmod>2026-02-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://supersonic.design/de/datenschutz</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://supersonic.design/de/datenschutz"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://supersonic.design/en/privacy"/>
+    <loc>https://norddorf.com/de/datenschutz</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/datenschutz"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/privacy"/>
     <lastmod>2026-02-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://supersonic.design/en/privacy</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://supersonic.design/de/datenschutz"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://supersonic.design/en/privacy"/>
+    <loc>https://norddorf.com/en/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/datenschutz"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/privacy"/>
     <lastmod>2026-02-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

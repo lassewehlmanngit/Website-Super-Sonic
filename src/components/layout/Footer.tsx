@@ -67,7 +67,7 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-12">
           {/* Brand */}
           <div>
-             <div className="text-2xl font-bold tracking-tighter mb-4">Super Sonic<span className="text-sonic-orange">.</span></div>
+             <div className="text-2xl font-bold tracking-tighter mb-4">Norddorf<span className="text-sonic-orange">.</span></div>
              <div className="text-zinc-300 text-sm max-w-xs leading-relaxed mb-4">
                {isJa 
                  ? "中小企業向けウェブサイト。14日間納期、固定価格、100%所有。"
@@ -76,11 +76,11 @@ export const Footer: React.FC = () => {
                  : "Websites for SMBs. 14 days delivery, fixed price, 100% ownership."}
              </div>
              <a 
-               href="mailto:hello@supersonic.design" 
+               href="mailto:hello@norddorf.com" 
                className="inline-flex items-center gap-2 text-sonic-orange hover:underline text-sm"
              >
                <Mail size={14} aria-hidden="true" />
-               hello@supersonic.design
+               hello@norddorf.com
              </a>
           </div>
 
@@ -128,7 +128,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-zinc-800 gap-4">
           <div className="text-zinc-300 text-sm">
-            © {new Date().getFullYear()} Super Sonic Prototypes Pte. Ltd.
+            © {new Date().getFullYear()} Norddorf
           </div>
           <div className="text-zinc-400 text-sm">
             {isJa ? "一度支払えば、永遠にあなたのもの。" : isDe ? "Einmal zahlen. Für immer besitzen." : "You pay once. You own it forever."}

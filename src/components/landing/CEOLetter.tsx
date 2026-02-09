@@ -29,7 +29,7 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
                 {isJa ? "代表 Lasse より" : isDe ? "Ein Wort von Lasse" : "A Word from Lasse"}
               </h2>
               <p className="text-zinc-500 fluid-base">
-                {isJa ? "Super Sonicを始めた理由" : isDe ? "Warum wir Super Sonic gestartet haben" : "Why we started Super Sonic"}
+                {isJa ? "Norddorfを始めた理由" : isDe ? "Warum wir Norddorf gestartet haben" : "Why we started Norddorf"}
               </p>
             </div>
           </div>
@@ -78,15 +78,15 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
             <p>
               {isJa ? (
                 <>
-                  Super Sonicは、中小企業の皆様に<strong className="text-zinc-900">真のデジタル主権</strong>をお届けするために設立しました。中小企業がデジタルで発見され、モダンになる時代が来ています。
+                  Norddorfは、中小企業の皆様に<strong className="text-zinc-900">真のデジタル主権</strong>をお届けするために設立しました。中小企業がデジタルで発見され、モダンになる時代が来ています。
                 </>
               ) : isDe ? (
                 <>
-                  Wir haben Super Sonic gegründet, um dem Mittelstand <strong className="text-zinc-900">echte digitale Souveränität</strong> zu geben. Es wird Zeit, dass der Mittelstand digital auffindbar und modern wird.
+                  Wir haben Norddorf gegründet, um dem Mittelstand <strong className="text-zinc-900">echte digitale Souveränität</strong> zu geben. Es wird Zeit, dass der Mittelstand digital auffindbar und modern wird.
                 </>
               ) : (
                 <>
-                  We founded Super Sonic to give SMBs <strong className="text-zinc-900">real digital sovereignty</strong>. It's time for small and medium businesses to become digitally discoverable and modern.
+                  We founded Norddorf to give SMBs <strong className="text-zinc-900">real digital sovereignty</strong>. It's time for small and medium businesses to become digitally discoverable and modern.
                 </>
               )}
             </p>
@@ -104,7 +104,7 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
             <div className="flex items-center gap-4">
               <div className="font-bold text-zinc-900 fluid-base">Lasse</div>
               <div className="text-zinc-400">|</div>
-              <div className="text-zinc-500 fluid-sm">{isJa ? "代表、Super Sonic" : "Founder, Super Sonic"}</div>
+              <div className="text-zinc-500 fluid-sm">{isJa ? "代表、Norddorf" : "Founder, Norddorf"}</div>
             </div>
           </div>
         </div>

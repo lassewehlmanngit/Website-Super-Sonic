@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { businessConfig } from '../config/business';
 
 interface SEOProps {
   title: string;
@@ -14,12 +15,12 @@ export const SEO: React.FC<SEOProps> = ({
   title, 
   description, 
   lang = 'de',
-  image = 'https://supersonic.design/og-image.jpg',
+  image = 'https://norddorf.com/og-image.jpg',
   path = '',
   noindex = false
 }) => {
   const location = useLocation();
-  const baseUrl = 'https://supersonic.design';
+  const baseUrl = 'https://norddorf.com';
   const currentPath = path || location.pathname;
   const fullUrl = `${baseUrl}${currentPath}`;
   const isDe = lang === 'de';
@@ -28,7 +29,7 @@ export const SEO: React.FC<SEOProps> = ({
     // Update document title
     document.title = title;
 
-    // Update or create meta tags
+    // ... (rest of the meta tag updates remain the same) ...
     const updateMetaTag = (name: string, content: string, isProperty = false) => {
       const attribute = isProperty ? 'property' : 'name';
       let meta = document.querySelector(`meta[${attribute}="${name}"]`);
@@ -41,7 +42,6 @@ export const SEO: React.FC<SEOProps> = ({
       meta.setAttribute('content', content);
     };
 
-    // Update or create link tags
     const updateLinkTag = (rel: string, href: string, hreflang?: string) => {
       let link = document.querySelector(`link[rel="${rel}"]${hreflang ? `[hreflang="${hreflang}"]` : ''}`);
       
@@ -71,7 +71,7 @@ export const SEO: React.FC<SEOProps> = ({
     updateMetaTag('og:description', description, true);
     updateMetaTag('og:image', image, true);
     updateMetaTag('og:locale', isDe ? 'de_DE' : 'en_US', true);
-    updateMetaTag('og:site_name', 'Super Sonic Prototypes', true);
+    updateMetaTag('og:site_name', businessConfig.name, true);
 
     // Twitter Card
     updateMetaTag('twitter:card', 'summary_large_image');
@@ -94,7 +94,6 @@ export const SEO: React.FC<SEOProps> = ({
 
     // Add LocalBusiness Schema (Global)
     const addLocalBusinessSchema = () => {
-      // Remove existing LocalBusiness schema if present
       const existing = document.querySelector('script[data-schema="localbusiness"]');
       if (existing) existing.remove();
 
@@ -102,8 +101,8 @@ export const SEO: React.FC<SEOProps> = ({
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "@id": `${baseUrl}#organization`,
-        "name": "Super Sonic Prototypes",
-        "legalName": "Super Sonic Prototypes Pte. Ltd.",
+        "name": businessConfig.name,
+        "legalName": businessConfig.legalName,
         "url": baseUrl,
         "logo": `${baseUrl}/logo.png`,
         "description": isDe 
@@ -112,28 +111,22 @@ export const SEO: React.FC<SEOProps> = ({
         "priceRange": "€€€",
         "priceCurrency": "EUR",
         "areaServed": [
-          {
-            "@type": "Country",
-            "name": "Germany"
-          },
-          {
-            "@type": "Country", 
-            "name": "Austria"
-          },
-          {
-            "@type": "Country",
-            "name": "Switzerland"
-          }
+          { "@type": "Country", "name": "Germany" },
+          { "@type": "Country", "name": "Austria" },
+          { "@type": "Country", "name": "Switzerland" }
         ],
         "address": {
           "@type": "PostalAddress",
-          "addressCountry": "SG",
-          "addressLocality": "Singapore"
+          "addressCountry": businessConfig.address.countryCode,
+          "addressLocality": businessConfig.address.city,
+          "postalCode": businessConfig.address.postalCode,
+          "streetAddress": businessConfig.address.street
         },
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "Customer Service",
-          "email": "hello@supersonic.design",
+          "email": businessConfig.contact.email,
+          "telephone": businessConfig.contact.phone,
           "availableLanguage": ["de", "en"]
         },
         "sameAs": [
@@ -157,7 +150,7 @@ export const SEO: React.FC<SEOProps> = ({
 
     addLocalBusinessSchema();
 
-    // Add WebSite Schema (for sitelinks search and AI understanding)
+    // Add WebSite Schema
     const addWebSiteSchema = () => {
       const existing = document.querySelector('script[data-schema="website"]');
       if (existing) existing.remove();
@@ -167,7 +160,7 @@ export const SEO: React.FC<SEOProps> = ({
         "@type": "WebSite",
         "@id": `${baseUrl}#website`,
         "url": baseUrl,
-        "name": "Super Sonic Prototypes",
+        "name": businessConfig.name,
         "description": isDe
           ? "Webseiten für den Mittelstand. 14 Tage, Festpreis, 100% Eigentum."
           : "Websites for SMBs. 14 days, fixed price, 100% ownership.",
@@ -194,7 +187,7 @@ export const SEO: React.FC<SEOProps> = ({
 
     addWebSiteSchema();
 
-    // Add Service Schema (for web development offerings)
+    // Add Service Schema
     const addServiceSchema = () => {
       const existing = document.querySelector('script[data-schema="service"]');
       if (existing) existing.remove();

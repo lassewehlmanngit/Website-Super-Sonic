@@ -33,14 +33,14 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({ lang }) => {
   ];
 
   const agencyLabel = isJa ? "従来の制作会社" : isDe ? "Klassische Agentur" : "Traditional Agency";
-  const sonicLabel = isJa ? "Super Sonic" : isDe ? "Deine \"Sonic\" Website" : "Your \"Sonic\" Website";
+  const sonicLabel = isJa ? "Norddorf" : isDe ? "Deine \"Norddorf\" Website" : "Your \"Norddorf\" Website";
 
   return (
     <section id="comparison" className="fluid-section bg-paper">
       <div className="container-responsive">
         <div className="text-center mb-16 reveal">
           <h2 className="fluid-section-title font-bold text-zinc-900 tracking-tight mb-4">
-            {isJa ? "Super Sonic vs. 従来の制作会社" : isDe ? "Wir vs. \"Oldschool\" Agenturen" : "Us vs. \"Oldschool\" Agencies"}
+            {isJa ? "Norddorf vs. 従来の制作会社" : isDe ? "Wir vs. \"Oldschool\" Agenturen" : "Us vs. \"Oldschool\" Agencies"}
           </h2>
           <p className="text-zinc-500 fluid-lg">
             {isJa ? "公正な比較をご覧ください。" : isDe ? "Ein fairer Vergleich." : "A fair comparison."}
@@ -61,7 +61,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({ lang }) => {
                     <span className="text-zinc-700 fluid-sm">{row.agency}</span>
                   </div>
                   <div className="p-4 rounded-xl bg-orange-50 border border-orange-100">
-                    <span className="fluid-xs text-sonic-orange font-medium block mb-1">Super Sonic</span>
+                    <span className="fluid-xs text-sonic-orange font-medium block mb-1">Norddorf</span>
                     <span className="text-zinc-900 font-bold fluid-sm">{row.sonic}</span>
                   </div>
                 </div>
@@ -71,13 +71,13 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({ lang }) => {
 
           {/* Desktop Table */}
           <div className="hidden md:block overflow-hidden rounded-2xl border border-zinc-200 bg-white">
-            <table className="w-full" role="table" aria-label={isJa ? "従来の制作会社とSuper Sonicの比較" : isDe ? "Vergleich zwischen klassischen Agenturen und Super Sonic" : "Comparison between traditional agencies and Super Sonic"}>
+            <table className="w-full" role="table" aria-label={isJa ? "従来の制作会社とNorddorfの比較" : isDe ? "Vergleich zwischen klassischen Agenturen und Norddorf" : "Comparison between traditional agencies and Norddorf"}>
               <caption className="sr-only">
                 {isJa 
-                  ? "比較表：Super Sonic vs. 従来の制作会社（費用、納期、所有権、その他の機能について）"
+                  ? "比較表：Norddorf vs. 従来の制作会社（費用、納期、所有権、その他の機能について）"
                   : isDe 
-                  ? "Vergleichstabelle: Super Sonic vs. klassische Agenturen in Bezug auf Kosten, Dauer, Eigentum und weitere Features"
-                  : "Comparison table: Super Sonic vs. traditional agencies regarding costs, duration, ownership, and other features"}
+                  ? "Vergleichstabelle: Norddorf vs. klassische Agenturen in Bezug auf Kosten, Dauer, Eigentum und weitere Features"
+                  : "Comparison table: Norddorf vs. traditional agencies regarding costs, duration, ownership, and other features"}
               </caption>
               <thead>
                 <tr className="bg-zinc-50">

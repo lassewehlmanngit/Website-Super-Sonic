@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://supersonic.design/sitemap.xml
+Sitemap: https://norddorf.com/sitemap.xml
 
 # Disallow admin/internal pages
 Disallow: /admin/

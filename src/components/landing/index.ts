@@ -12,6 +12,7 @@ export { CaseStudies } from './CaseStudies';
 export { TakeFear } from './TakeFear';
 export { ReferenceProjects } from './ReferenceProjects';
 export { ProcessVideo } from './ProcessVideo';
+export { ProcessSteps } from './ProcessSteps';
 export { DigitalSovereignty } from './DigitalSovereignty';
 export { FutureProof } from './FutureProof';
 export { CMSDemo } from './CMSDemo';

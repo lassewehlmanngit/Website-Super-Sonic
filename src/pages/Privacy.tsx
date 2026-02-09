@@ -1,195 +1,279 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useTina } from "tinacms/dist/react";
+import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { SEO } from '../components/SEO';
-import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
+import { businessConfig } from '../config/business';
+import { Typography } from '../components/atoms/Typography';
+import { Container } from '../components/atoms/Container';
+import { Section } from '../components/atoms/Section';
+
+const markdownComponents = {
+  h1: (props: any) => <Typography variant="h1" as="h1" className="mb-8 md:mb-12" {...props} />,
+  h2: (props: any) => <Typography variant="h2" as="h2" className="mb-4 mt-8" {...props} />,
+  h3: (props: any) => <Typography variant="h3" as="h3" className="mb-3 mt-6" {...props} />,
+  p: (props: any) => <Typography variant="body" as="p" className="mb-4 text-zinc-600" {...props} />,
+  ul: (props: any) => <ul className="list-disc pl-5 mb-4 text-zinc-600 space-y-2" {...props} />,
+  li: (props: any) => <li className="pl-1" {...props} ><Typography variant="body" as="span" {...props} /></li>,
+};
 
 export const Privacy: React.FC = () => {
+  const [initialData, setInitialData] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const response = await fetch('/content/privacy/privacy.json');
+        if (response.ok) {
+          const data = await response.json();
+          setInitialData({ privacy: data });
+        }
+      } catch (e) {
+        console.log("No CMS content found for Privacy page, using fallback.");
+      }
+    };
+    fetchContent();
+  }, []);
+
+  const { data } = useTina({
+    query: `
+      query Privacy($relativePath: String!) {
+        privacy(relativePath: $relativePath) {
+          title
+          sections {
+            title
+            content
+          }
+          seo {
+            title
+            description
+          }
+        }
+      }
+    `,
+    variables: { relativePath: "privacy.json" },
+    data: initialData || {},
+  });
+
+  const cmsData = data?.privacy;
+
+  if (cmsData) {
+    return (
+      <Section background="paper" className="pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
+        <SEO
+          title={cmsData.seo?.title || cmsData.title || "Datenschutzerklärung | Norddorf"}
+          description={cmsData.seo?.description || "Informationen zur Datenverarbeitung und DSGVO-Konformität bei Norddorf."}
+          lang="de"
+          path="/de/datenschutz"
+        />
+
+        <Container className="max-w-3xl relative z-10">
+          <Typography variant="h1" className="mb-8 md:mb-12">
+            {cmsData.title}
+          </Typography>
+
+          <div className="space-y-6 md:space-y-8">
+            {cmsData.sections?.map((section: any, index: number) => (
+              <section key={index}>
+                {section.title && (
+                  <Typography variant="h2" className="mb-4">{section.title}</Typography>
+                )}
+                <div className="prose prose-zinc max-w-none">
+                  <TinaMarkdown content={section.content} components={markdownComponents} />
+                </div>
+              </section>
+            ))}
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
+  // Fallback to Hardcoded Content
   return (
-    <div className="bg-paper min-h-screen pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
+    <Section background="paper" className="pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
       <SEO
-        title="Datenschutzerklärung | Super Sonic Prototypes"
-        description="Informationen zur Datenverarbeitung und DSGVO-Konformität bei Super Sonic Prototypes."
+        title="Datenschutzerklärung | Norddorf"
+        description="Informationen zur Datenverarbeitung und DSGVO-Konformität bei Norddorf."
         lang="de"
         path="/de/datenschutz"
       />
 
-      {/* <ChristmasBalls /> */}
+      <Container className="max-w-3xl relative z-10">
+        <Typography variant="h1" className="mb-8 md:mb-12">Datenschutzerklärung</Typography>
 
-      <div className="container-responsive max-w-3xl mx-auto relative z-10">
-        <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-black mb-8 md:mb-12 tracking-tighter">Datenschutzerklärung</h1>
-
-        <div className="space-y-6 md:space-y-8 text-zinc-600 leading-relaxed text-base md:text-lg">
+        <div className="space-y-6 md:space-y-8">
 
           <section>
-            <h2 className="text-xl font-bold text-black mb-4">1. Datenschutz auf einen Blick</h2>
-            <p>
-              <strong>Allgemeine Hinweise</strong><br/>
+            <Typography variant="h2" className="mb-4">1. Datenschutz auf einen Blick</Typography>
+            <Typography variant="body" className="mb-4 text-zinc-600">
+              <strong className="text-black">Allgemeine Hinweise</strong><br/>
               Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen 
               Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit 
               denen Sie persönlich identifiziert werden können.
-            </p>
-            <p className="mt-4">
-              <strong>Datenerfassung auf dieser Website</strong><br/>
+            </Typography>
+            <Typography variant="body" className="mt-4 text-zinc-600">
+              <strong className="text-black">Datenerfassung auf dieser Website</strong><br/>
               Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten 
               können Sie dem Impressum dieser Website entnehmen.
-            </p>
+            </Typography>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-black mb-4">2. Verantwortliche Stelle</h2>
-            <p className="mb-4">
-              <strong>Super Sonic Prototypes Pte. Ltd.</strong><br/>
-              [Physical Street Address]<br/>
-              [Postal Code] Singapore
-            </p>
-            <p className="mb-4">
-              E-Mail: hello@supersonic.design<br/>
-              Website: https://supersonic.design
-            </p>
-            <p>
+            <Typography variant="h2" className="mb-4">2. Verantwortliche Stelle</Typography>
+            <Typography variant="body" className="mb-4 text-zinc-600">
+              <strong className="text-black">{businessConfig.name}</strong><br/>
+              {businessConfig.address.street}<br/>
+              {businessConfig.address.postalCode} {businessConfig.address.city}
+            </Typography>
+            <Typography variant="body" className="mb-4 text-zinc-600">
+              E-Mail: {businessConfig.contact.email}<br/>
+              Website: {businessConfig.contact.website}
+            </Typography>
+            <Typography variant="body" className="text-zinc-600">
               Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit 
               anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.
-            </p>
+            </Typography>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-black mb-4">3. Hosting & Content Delivery Networks (CDN)</h2>
-            <p className="mb-4">
-              <strong>Render Services, Inc.</strong><br/>
+            <Typography variant="h2" className="mb-4">3. Hosting & Content Delivery Networks (CDN)</Typography>
+            <Typography variant="body" className="mb-4 text-zinc-600">
+              <strong className="text-black">Render Services, Inc.</strong><br/>
               Wir hosten unsere Website bei Render. Anbieter ist die Render Services, Inc., 525 Brannan St Ste 300, 
               San Francisco, CA 94107, USA.
-            </p>
-            <p className="mb-4">
-              Der Serverstandort für unsere Dienste ist <strong>Frankfurt am Main, Deutschland (eu-central-1)</strong>.
+            </Typography>
+            <Typography variant="body" className="mb-4 text-zinc-600">
+              Der Serverstandort für unsere Dienste ist <strong className="text-black">Frankfurt am Main, Deutschland (eu-central-1)</strong>.
               Render speichert Protokolldaten wie IP-Adressen zur Erkennung und Abwehr von Angriffen.
-            </p>
-            <p>
+            </Typography>
+            <Typography variant="body" className="text-zinc-600">
               Rechtsgrundlage für die Verarbeitung ist Art. 6 Abs. 1 lit. f DSGVO (Berechtigtes Interesse an 
               Sicherheit und Stabilität des Webauftritts).
-            </p>
+            </Typography>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-black mb-4">4. Analyse & Tracking</h2>
-            <p className="mb-4">
-              <strong>Umami Analytics</strong><br/>
+            <Typography variant="h2" className="mb-4">4. Analyse & Tracking</Typography>
+            <Typography variant="body" className="mb-4 text-zinc-600">
+              <strong className="text-black">Umami Analytics</strong><br/>
               Wir nutzen auf dieser Website Umami, eine datenschutzfreundliche Open-Source-Webanalyse-Software.
-              Umami verwendet <strong>keine Cookies</strong> und speichert keine personenbezogenen Daten.
+              Umami verwendet <strong className="text-black">keine Cookies</strong> und speichert keine personenbezogenen Daten.
               Alle gesammelten Daten sind anonymisiert und lassen keine Rückschlüsse auf einzelne Besucher zu.
-            </p>
-            <p>
+            </Typography>
+            <Typography variant="body" className="text-zinc-600">
               Die Erfassung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein 
               berechtigtes Interesse an der anonymisierten Analyse des Nutzerverhaltens, um sein Webangebot zu 
               optimieren. Da Umami keine personenbezogenen Daten speichert, ist keine Einwilligung (Cookie-Banner) 
               erforderlich.
-            </p>
+            </Typography>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-black mb-4">5. Kontaktformular & Anfragen</h2>
-            <p className="mb-4">
+            <Typography variant="h2" className="mb-4">5. Kontaktformular & Anfragen</Typography>
+            <Typography variant="body" className="mb-4 text-zinc-600">
               Wenn Sie uns per Kontaktformular oder E-Mail Anfragen zukommen lassen, werden Ihre Angaben aus dem 
               Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage 
               und für den Fall von Anschlussfragen bei uns gespeichert.
-            </p>
-            <p className="mb-4">
-              <strong>Erfasste Daten:</strong><br/>
+            </Typography>
+            <Typography variant="body" className="mb-4 text-zinc-600">
+              <strong className="text-black">Erfasste Daten:</strong><br/>
               • Name und Firmenname<br/>
               • E-Mail-Adresse<br/>
               • Bestehende Website-URL (falls angegeben)<br/>
               • Projektziele und -anforderungen<br/>
               • Sonstige freiwillige Angaben
-            </p>
-            <p>
+            </Typography>
+            <Typography variant="body" className="text-zinc-600">
               Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) sowie Art. 6 Abs. 1 lit. f DSGVO 
               (berechtigtes Interesse an der Bearbeitung von Kundenanfragen). Die Daten werden gelöscht, sobald 
               sie für die Erreichung des Zweckes ihrer Erhebung nicht mehr erforderlich sind.
-            </p>
+            </Typography>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-black mb-4">6. Datenverarbeitung bei Vertragsabschluss</h2>
-            <p className="mb-4">
+            <Typography variant="h2" className="mb-4">6. Datenverarbeitung bei Vertragsabschluss</Typography>
+            <Typography variant="body" className="mb-4 text-zinc-600">
               Bei Beauftragung unserer Dienstleistungen verarbeiten wir folgende Daten zur Vertragserfüllung:
-            </p>
-            <p className="mb-4">
+            </Typography>
+            <Typography variant="body" className="mb-4 text-zinc-600">
               • Firmendaten (Name, Anschrift, Rechtsform)<br/>
               • Kontaktdaten des Ansprechpartners<br/>
               • Rechnungsdaten<br/>
               • Projektbezogene Kommunikation<br/>
               • Zugangsdaten zu bereitgestellten Systemen (falls erforderlich)
-            </p>
-            <p>
+            </Typography>
+            <Typography variant="body" className="text-zinc-600">
               Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung). Die Daten werden nach Ablauf 
               der gesetzlichen Aufbewahrungsfristen (in der Regel 10 Jahre für Geschäftsunterlagen) gelöscht.
-            </p>
+            </Typography>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-black mb-4">7. Ihre Rechte</h2>
-            <p className="mb-4">
+            <Typography variant="h2" className="mb-4">7. Ihre Rechte</Typography>
+            <Typography variant="body" className="mb-4 text-zinc-600">
               Sie haben gegenüber uns folgende Rechte hinsichtlich der Sie betreffenden personenbezogenen Daten:
-            </p>
-            <p className="mb-4">
-              • <strong>Auskunftsrecht (Art. 15 DSGVO)</strong> – Sie können Auskunft über Ihre von uns verarbeiteten 
+            </Typography>
+            <Typography variant="body" className="mb-4 text-zinc-600">
+              • <strong className="text-black">Auskunftsrecht (Art. 15 DSGVO)</strong> – Sie können Auskunft über Ihre von uns verarbeiteten 
               personenbezogenen Daten verlangen.<br/>
-              • <strong>Recht auf Berichtigung (Art. 16 DSGVO)</strong> – Sie können die Berichtigung unrichtiger 
+              • <strong className="text-black">Recht auf Berichtigung (Art. 16 DSGVO)</strong> – Sie können die Berichtigung unrichtiger 
               Daten verlangen.<br/>
-              • <strong>Recht auf Löschung (Art. 17 DSGVO)</strong> – Sie können die Löschung Ihrer Daten verlangen, 
+              • <strong className="text-black">Recht auf Löschung (Art. 17 DSGVO)</strong> – Sie können die Löschung Ihrer Daten verlangen, 
               sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.<br/>
-              • <strong>Recht auf Einschränkung (Art. 18 DSGVO)</strong> – Sie können die Einschränkung der 
+              • <strong className="text-black">Recht auf Einschränkung (Art. 18 DSGVO)</strong> – Sie können die Einschränkung der 
               Verarbeitung verlangen.<br/>
-              • <strong>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</strong> – Sie können verlangen, dass wir 
+              • <strong className="text-black">Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</strong> – Sie können verlangen, dass wir 
               Ihnen Ihre Daten in einem strukturierten Format übermitteln.<br/>
-              • <strong>Widerspruchsrecht (Art. 21 DSGVO)</strong> – Sie können der Verarbeitung Ihrer Daten 
+              • <strong className="text-black">Widerspruchsrecht (Art. 21 DSGVO)</strong> – Sie können der Verarbeitung Ihrer Daten 
               widersprechen.
-            </p>
-            <p>
-              Zur Ausübung Ihrer Rechte wenden Sie sich bitte an: hello@supersonic.design
-            </p>
+            </Typography>
+            <Typography variant="body" className="text-zinc-600">
+              Zur Ausübung Ihrer Rechte wenden Sie sich bitte an: hello@norddorf.com
+            </Typography>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-black mb-4">8. Beschwerderecht bei der Aufsichtsbehörde</h2>
-            <p>
+            <Typography variant="h2" className="mb-4">8. Beschwerderecht bei der Aufsichtsbehörde</Typography>
+            <Typography variant="body" className="text-zinc-600">
               Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer 
               personenbezogenen Daten zu beschweren. Für Beschwerden in Deutschland können Sie sich an die 
               zuständige Landesdatenschutzbehörde wenden.
-            </p>
+            </Typography>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-black mb-4">9. SSL/TLS-Verschlüsselung</h2>
-            <p>
+            <Typography variant="h2" className="mb-4">9. SSL/TLS-Verschlüsselung</Typography>
+            <Typography variant="body" className="text-zinc-600">
               Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, 
               wie zum Beispiel Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. 
               Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" 
               auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.
-            </p>
+            </Typography>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-black mb-4">10. Datenübermittlung in Drittländer</h2>
-            <p className="mb-4">
+            <Typography variant="h2" className="mb-4">10. Datenübermittlung in Drittländer</Typography>
+            <Typography variant="body" className="mb-4 text-zinc-600">
               Unser Unternehmen hat seinen Sitz in Singapur. Singapur verfügt über einen Angemessenheitsbeschluss 
               der EU-Kommission, der ein angemessenes Datenschutzniveau bestätigt.
-            </p>
-            <p>
+            </Typography>
+            <Typography variant="body" className="text-zinc-600">
               Soweit wir Dienste von US-Anbietern nutzen (z.B. Render für Hosting), erfolgt dies auf Grundlage 
               von Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO) oder anderen geeigneten Garantien.
-            </p>
+            </Typography>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-black mb-4">11. Aktualität und Änderung dieser Datenschutzerklärung</h2>
-            <p>
+            <Typography variant="h2" className="mb-4">11. Aktualität und Änderung dieser Datenschutzerklärung</Typography>
+            <Typography variant="body" className="text-zinc-600">
               Diese Datenschutzerklärung ist aktuell gültig und hat den Stand Februar 2026. Durch die 
               Weiterentwicklung unserer Website und Angebote oder aufgrund geänderter gesetzlicher bzw. 
               behördlicher Vorgaben kann eine Anpassung dieser Datenschutzerklärung erforderlich werden.
-            </p>
+            </Typography>
           </section>
 
         </div>
-      </div>
-    </div>
+      </Container>
+    </Section>
   );
 };

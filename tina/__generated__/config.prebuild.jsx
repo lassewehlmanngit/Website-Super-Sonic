@@ -278,23 +278,25 @@ var caseStudiesBlock = {
             },
             {
               type: "object",
-              name: "challenges",
-              label: "Challenges",
-              list: true,
-              ui: listItemProps("text"),
+              name: "story",
+              label: "The Story",
               fields: [
-                { type: "string", name: "text", label: "Challenge" }
+                { type: "string", name: "hook", label: "The Hook", ui: { component: "textarea" } },
+                { type: "string", name: "turningPoint", label: "The Turning Point", ui: { component: "textarea" } },
+                { type: "string", name: "transformation", label: "The Transformation", ui: { component: "textarea" } }
               ]
             },
             {
-              type: "object",
+              type: "string",
+              name: "challenges",
+              label: "Challenges",
+              list: true
+            },
+            {
+              type: "string",
               name: "approach",
               label: "Our Approach",
-              list: true,
-              ui: listItemProps("text"),
-              fields: [
-                { type: "string", name: "text", label: "Approach Point" }
-              ]
+              list: true
             },
             {
               type: "object",
@@ -308,24 +310,19 @@ var caseStudiesBlock = {
               ]
             },
             {
-              type: "object",
+              type: "string",
               name: "results",
               label: "Results",
-              list: true,
-              ui: listItemProps("text"),
-              fields: [
-                { type: "string", name: "text", label: "Result" }
-              ]
+              list: true
             },
             {
-              type: "object",
+              type: "string",
               name: "techStack",
               label: "Tech Stack",
               list: true,
-              ui: listItemProps("name"),
-              fields: [
-                { type: "string", name: "name", label: "Technology" }
-              ]
+              ui: {
+                component: "tags"
+              }
             },
             {
               type: "object",
@@ -553,6 +550,66 @@ var globalCollection = {
   ]
 };
 
+// tina/collections/privacy.ts
+var privacyCollection = {
+  name: "privacy",
+  label: "\u{1F512} Privacy Page",
+  path: "content/privacy",
+  format: "json",
+  ui: {
+    // Lock the filename to 'privacy' so we effectively have a singleton
+    filename: {
+      readonly: true,
+      slugify: () => "privacy"
+    },
+    allowedActions: {
+      create: false,
+      delete: false
+    },
+    router: () => "/de/datenschutz"
+  },
+  fields: [
+    {
+      type: "string",
+      name: "title",
+      label: "Page Title",
+      required: true
+    },
+    {
+      type: "object",
+      name: "sections",
+      label: "Content Sections",
+      list: true,
+      ui: {
+        itemProps: (item) => ({
+          label: item.title || "Section"
+        })
+      },
+      fields: [
+        {
+          type: "string",
+          name: "title",
+          label: "Section Title"
+        },
+        {
+          type: "rich-text",
+          name: "content",
+          label: "Content"
+        }
+      ]
+    },
+    {
+      type: "object",
+      name: "seo",
+      label: "SEO Settings",
+      fields: [
+        { type: "string", name: "title", label: "Meta Title" },
+        { type: "string", name: "description", label: "Meta Description", ui: { component: "textarea" } }
+      ]
+    }
+  ]
+};
+
 // tina/config.ts
 var SUPPORTED_LANGUAGES = ["de", "en", "ja"];
 var getLanguageFromFilename = (filename) => {
@@ -578,7 +635,8 @@ var config_default = defineConfig({
   schema: {
     collections: [
       pageCollection,
-      globalCollection
+      globalCollection,
+      privacyCollection
     ]
   }
 });

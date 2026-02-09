@@ -245,12 +245,12 @@ const ComparisonTableComponent: React.FC<Props> = ({ lang = 'de' }) => {
           <div className="grid grid-cols-5 gap-4 mb-8 border-b border-zinc-100 pb-6">
             <div className="col-span-1"></div>
             
-            {/* Super Sonic Column */}
+            {/* Norddorf Column */}
             <div className="col-span-1 text-center">
                 <div className="inline-block bg-zinc-100 text-zinc-500 text-[10px] font-bold px-3 py-1 rounded-full mb-2 uppercase tracking-widest">
                     {isDe ? "Empfohlen" : "Recommended"}
                 </div>
-                <h4 className="font-bold text-xl tracking-tight text-sonic-orange">Super Sonic.</h4>
+                <h4 className="font-bold text-xl tracking-tight text-sonic-orange">Norddorf.</h4>
             </div>
 
             <div className="col-span-1 text-center pt-8 opacity-50">
@@ -278,7 +278,7 @@ const ComparisonTableComponent: React.FC<Props> = ({ lang = 'de' }) => {
                         {row.feature}
                       </div>
                       
-                      {/* Super Sonic Cell */}
+                      {/* Norddorf Cell */}
                       <div className="col-span-1 text-center bg-zinc-50 py-4 rounded-xl shadow-sm border border-zinc-100 transform group-hover:scale-105 transition-transform">
                         {renderCell(row.supersonic, true)}
                       </div>
@@ -305,4 +305,4 @@ const ComparisonTableComponent: React.FC<Props> = ({ lang = 'de' }) => {
 };
 
 // Memoize to prevent unnecessary re-renders
-export const ComparisonTable = React.memo(ComparisonTableComponent);
+export const DetailedComparison = React.memo(ComparisonTableComponent);

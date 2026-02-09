@@ -38,15 +38,15 @@ export const TeamSection: React.FC<TeamSectionProps> = ({ lang }) => {
           <p className="fluid-body text-zinc-600 leading-relaxed text-center mb-12">
             {isJa ? (
               <>
-                Super Sonicの背後には、開発者、マーケター、サポートスタッフからなる<strong className="text-zinc-900">固定チーム</strong>がいます。対等な立場でコミュニケーションを取り、摩擦なく作業を進めます。ご質問があれば、直接お問い合わせいただけます。
+                Norddorfの背後には、開発者、マーケター、サポートスタッフからなる<strong className="text-zinc-900">固定チーム</strong>がいます。対等な立場でコミュニケーションを取り、摩擦なく作業を進めます。ご質問があれば、直接お問い合わせいただけます。
               </>
             ) : isDe ? (
               <>
-                Hinter Super Sonic steckt ein <strong className="text-zinc-900">festes Team</strong> aus Entwicklern, Marketern und Supportern. Wir kommunizieren auf Augenhöhe und arbeiten ohne Reibungsverluste. Wenn du Fragen hast, erreichst du uns direkt.
+                Hinter Norddorf steckt ein <strong className="text-zinc-900">festes Team</strong> aus Entwicklern, Marketern und Supportern. Wir kommunizieren auf Augenhöhe und arbeiten ohne Reibungsverluste. Wenn du Fragen hast, erreichst du uns direkt.
               </>
             ) : (
               <>
-                Behind Super Sonic is a <strong className="text-zinc-900">fixed team</strong> of developers, marketers and supporters. We communicate at eye level and work without friction. If you have questions, you reach us directly.
+                Behind Norddorf is a <strong className="text-zinc-900">fixed team</strong> of developers, marketers and supporters. We communicate at eye level and work without friction. If you have questions, you reach us directly.
               </>
             )}
           </p>

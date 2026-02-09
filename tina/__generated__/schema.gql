@@ -58,11 +58,14 @@ type Query {
   pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
   global(relativePath: String): Global!
   globalConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GlobalFilter): GlobalConnection!
+  privacy(relativePath: String): Privacy!
+  privacyConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PrivacyFilter): PrivacyConnection!
 }
 
 input DocumentFilter {
   page: PageFilter
   global: GlobalFilter
+  privacy: PrivacyFilter
 }
 
 type DocumentConnectionEdges {
@@ -88,7 +91,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Page | Global | Folder
+union DocumentNode = Page | Global | Privacy | Folder
 
 type PageSeo {
   title: String
@@ -140,25 +143,15 @@ type PageBlocksCaseStudiesStudiesPreview {
   metricLabel: String
 }
 
-type PageBlocksCaseStudiesStudiesContentChallenges {
-  text: String
-}
-
-type PageBlocksCaseStudiesStudiesContentApproach {
-  text: String
+type PageBlocksCaseStudiesStudiesContentStory {
+  hook: String
+  turningPoint: String
+  transformation: String
 }
 
 type PageBlocksCaseStudiesStudiesContentFeatures {
   title: String
   description: String
-}
-
-type PageBlocksCaseStudiesStudiesContentResults {
-  text: String
-}
-
-type PageBlocksCaseStudiesStudiesContentTechStack {
-  name: String
 }
 
 type PageBlocksCaseStudiesStudiesContentMetrics {
@@ -169,11 +162,12 @@ type PageBlocksCaseStudiesStudiesContentMetrics {
 
 type PageBlocksCaseStudiesStudiesContent {
   intro: JSON
-  challenges: [PageBlocksCaseStudiesStudiesContentChallenges]
-  approach: [PageBlocksCaseStudiesStudiesContentApproach]
+  story: PageBlocksCaseStudiesStudiesContentStory
+  challenges: [String]
+  approach: [String]
   features: [PageBlocksCaseStudiesStudiesContentFeatures]
-  results: [PageBlocksCaseStudiesStudiesContentResults]
-  techStack: [PageBlocksCaseStudiesStudiesContentTechStack]
+  results: [String]
+  techStack: [String]
   metrics: [PageBlocksCaseStudiesStudiesContentMetrics]
   conclusion: JSON
 }
@@ -285,25 +279,15 @@ input PageBlocksCaseStudiesStudiesPreviewFilter {
   metricLabel: StringFilter
 }
 
-input PageBlocksCaseStudiesStudiesContentChallengesFilter {
-  text: StringFilter
-}
-
-input PageBlocksCaseStudiesStudiesContentApproachFilter {
-  text: StringFilter
+input PageBlocksCaseStudiesStudiesContentStoryFilter {
+  hook: StringFilter
+  turningPoint: StringFilter
+  transformation: StringFilter
 }
 
 input PageBlocksCaseStudiesStudiesContentFeaturesFilter {
   title: StringFilter
   description: StringFilter
-}
-
-input PageBlocksCaseStudiesStudiesContentResultsFilter {
-  text: StringFilter
-}
-
-input PageBlocksCaseStudiesStudiesContentTechStackFilter {
-  name: StringFilter
 }
 
 input PageBlocksCaseStudiesStudiesContentMetricsFilter {
@@ -314,11 +298,12 @@ input PageBlocksCaseStudiesStudiesContentMetricsFilter {
 
 input PageBlocksCaseStudiesStudiesContentFilter {
   intro: RichTextFilter
-  challenges: PageBlocksCaseStudiesStudiesContentChallengesFilter
-  approach: PageBlocksCaseStudiesStudiesContentApproachFilter
+  story: PageBlocksCaseStudiesStudiesContentStoryFilter
+  challenges: StringFilter
+  approach: StringFilter
   features: PageBlocksCaseStudiesStudiesContentFeaturesFilter
-  results: PageBlocksCaseStudiesStudiesContentResultsFilter
-  techStack: PageBlocksCaseStudiesStudiesContentTechStackFilter
+  results: StringFilter
+  techStack: StringFilter
   metrics: PageBlocksCaseStudiesStudiesContentMetricsFilter
   conclusion: RichTextFilter
 }
@@ -464,6 +449,52 @@ type GlobalConnection implements Connection {
   edges: [GlobalConnectionEdges]
 }
 
+type PrivacySections {
+  title: String
+  content: JSON
+}
+
+type PrivacySeo {
+  title: String
+  description: String
+}
+
+type Privacy implements Node & Document {
+  title: String!
+  sections: [PrivacySections]
+  seo: PrivacySeo
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input PrivacySectionsFilter {
+  title: StringFilter
+  content: RichTextFilter
+}
+
+input PrivacySeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input PrivacyFilter {
+  title: StringFilter
+  sections: PrivacySectionsFilter
+  seo: PrivacySeoFilter
+}
+
+type PrivacyConnectionEdges {
+  cursor: String!
+  node: Privacy
+}
+
+type PrivacyConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [PrivacyConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -474,17 +505,21 @@ type Mutation {
   createPage(relativePath: String!, params: PageMutation!): Page!
   updateGlobal(relativePath: String!, params: GlobalMutation!): Global!
   createGlobal(relativePath: String!, params: GlobalMutation!): Global!
+  updatePrivacy(relativePath: String!, params: PrivacyMutation!): Privacy!
+  createPrivacy(relativePath: String!, params: PrivacyMutation!): Privacy!
 }
 
 input DocumentUpdateMutation {
   page: PageMutation
   global: GlobalMutation
+  privacy: PrivacyMutation
   relativePath: String
 }
 
 input DocumentMutation {
   page: PageMutation
   global: GlobalMutation
+  privacy: PrivacyMutation
 }
 
 input PageSeoMutation {
@@ -537,25 +572,15 @@ input PageBlocksCaseStudiesStudiesPreviewMutation {
   metricLabel: String
 }
 
-input PageBlocksCaseStudiesStudiesContentChallengesMutation {
-  text: String
-}
-
-input PageBlocksCaseStudiesStudiesContentApproachMutation {
-  text: String
+input PageBlocksCaseStudiesStudiesContentStoryMutation {
+  hook: String
+  turningPoint: String
+  transformation: String
 }
 
 input PageBlocksCaseStudiesStudiesContentFeaturesMutation {
   title: String
   description: String
-}
-
-input PageBlocksCaseStudiesStudiesContentResultsMutation {
-  text: String
-}
-
-input PageBlocksCaseStudiesStudiesContentTechStackMutation {
-  name: String
 }
 
 input PageBlocksCaseStudiesStudiesContentMetricsMutation {
@@ -566,11 +591,12 @@ input PageBlocksCaseStudiesStudiesContentMetricsMutation {
 
 input PageBlocksCaseStudiesStudiesContentMutation {
   intro: JSON
-  challenges: [PageBlocksCaseStudiesStudiesContentChallengesMutation]
-  approach: [PageBlocksCaseStudiesStudiesContentApproachMutation]
+  story: PageBlocksCaseStudiesStudiesContentStoryMutation
+  challenges: [String]
+  approach: [String]
   features: [PageBlocksCaseStudiesStudiesContentFeaturesMutation]
-  results: [PageBlocksCaseStudiesStudiesContentResultsMutation]
-  techStack: [PageBlocksCaseStudiesStudiesContentTechStackMutation]
+  results: [String]
+  techStack: [String]
   metrics: [PageBlocksCaseStudiesStudiesContentMetricsMutation]
   conclusion: JSON
 }
@@ -650,6 +676,22 @@ input GlobalMutation {
   theme: GlobalThemeMutation
   navigation: GlobalNavigationMutation
   footer: GlobalFooterMutation
+}
+
+input PrivacySectionsMutation {
+  title: String
+  content: JSON
+}
+
+input PrivacySeoMutation {
+  title: String
+  description: String
+}
+
+input PrivacyMutation {
+  title: String
+  sections: [PrivacySectionsMutation]
+  seo: PrivacySeoMutation
 }
 
 schema {

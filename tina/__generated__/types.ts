@@ -86,6 +86,8 @@ export type Query = {
   pageConnection: PageConnection;
   global: Global;
   globalConnection: GlobalConnection;
+  privacy: Privacy;
+  privacyConnection: PrivacyConnection;
 };
 
 
@@ -139,9 +141,25 @@ export type QueryGlobalConnectionArgs = {
   filter?: InputMaybe<GlobalFilter>;
 };
 
+
+export type QueryPrivacyArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryPrivacyConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PrivacyFilter>;
+};
+
 export type DocumentFilter = {
   page?: InputMaybe<PageFilter>;
   global?: InputMaybe<GlobalFilter>;
+  privacy?: InputMaybe<PrivacyFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -181,7 +199,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Page | Global | Folder;
+export type DocumentNode = Page | Global | Privacy | Folder;
 
 export type PageSeo = {
   __typename?: 'PageSeo';
@@ -240,30 +258,17 @@ export type PageBlocksCaseStudiesStudiesPreview = {
   metricLabel?: Maybe<Scalars['String']['output']>;
 };
 
-export type PageBlocksCaseStudiesStudiesContentChallenges = {
-  __typename?: 'PageBlocksCaseStudiesStudiesContentChallenges';
-  text?: Maybe<Scalars['String']['output']>;
-};
-
-export type PageBlocksCaseStudiesStudiesContentApproach = {
-  __typename?: 'PageBlocksCaseStudiesStudiesContentApproach';
-  text?: Maybe<Scalars['String']['output']>;
+export type PageBlocksCaseStudiesStudiesContentStory = {
+  __typename?: 'PageBlocksCaseStudiesStudiesContentStory';
+  hook?: Maybe<Scalars['String']['output']>;
+  turningPoint?: Maybe<Scalars['String']['output']>;
+  transformation?: Maybe<Scalars['String']['output']>;
 };
 
 export type PageBlocksCaseStudiesStudiesContentFeatures = {
   __typename?: 'PageBlocksCaseStudiesStudiesContentFeatures';
   title?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
-};
-
-export type PageBlocksCaseStudiesStudiesContentResults = {
-  __typename?: 'PageBlocksCaseStudiesStudiesContentResults';
-  text?: Maybe<Scalars['String']['output']>;
-};
-
-export type PageBlocksCaseStudiesStudiesContentTechStack = {
-  __typename?: 'PageBlocksCaseStudiesStudiesContentTechStack';
-  name?: Maybe<Scalars['String']['output']>;
 };
 
 export type PageBlocksCaseStudiesStudiesContentMetrics = {
@@ -276,11 +281,12 @@ export type PageBlocksCaseStudiesStudiesContentMetrics = {
 export type PageBlocksCaseStudiesStudiesContent = {
   __typename?: 'PageBlocksCaseStudiesStudiesContent';
   intro?: Maybe<Scalars['JSON']['output']>;
-  challenges?: Maybe<Array<Maybe<PageBlocksCaseStudiesStudiesContentChallenges>>>;
-  approach?: Maybe<Array<Maybe<PageBlocksCaseStudiesStudiesContentApproach>>>;
+  story?: Maybe<PageBlocksCaseStudiesStudiesContentStory>;
+  challenges?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  approach?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   features?: Maybe<Array<Maybe<PageBlocksCaseStudiesStudiesContentFeatures>>>;
-  results?: Maybe<Array<Maybe<PageBlocksCaseStudiesStudiesContentResults>>>;
-  techStack?: Maybe<Array<Maybe<PageBlocksCaseStudiesStudiesContentTechStack>>>;
+  results?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  techStack?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   metrics?: Maybe<Array<Maybe<PageBlocksCaseStudiesStudiesContentMetrics>>>;
   conclusion?: Maybe<Scalars['JSON']['output']>;
 };
@@ -396,25 +402,15 @@ export type PageBlocksCaseStudiesStudiesPreviewFilter = {
   metricLabel?: InputMaybe<StringFilter>;
 };
 
-export type PageBlocksCaseStudiesStudiesContentChallengesFilter = {
-  text?: InputMaybe<StringFilter>;
-};
-
-export type PageBlocksCaseStudiesStudiesContentApproachFilter = {
-  text?: InputMaybe<StringFilter>;
+export type PageBlocksCaseStudiesStudiesContentStoryFilter = {
+  hook?: InputMaybe<StringFilter>;
+  turningPoint?: InputMaybe<StringFilter>;
+  transformation?: InputMaybe<StringFilter>;
 };
 
 export type PageBlocksCaseStudiesStudiesContentFeaturesFilter = {
   title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
-};
-
-export type PageBlocksCaseStudiesStudiesContentResultsFilter = {
-  text?: InputMaybe<StringFilter>;
-};
-
-export type PageBlocksCaseStudiesStudiesContentTechStackFilter = {
-  name?: InputMaybe<StringFilter>;
 };
 
 export type PageBlocksCaseStudiesStudiesContentMetricsFilter = {
@@ -425,11 +421,12 @@ export type PageBlocksCaseStudiesStudiesContentMetricsFilter = {
 
 export type PageBlocksCaseStudiesStudiesContentFilter = {
   intro?: InputMaybe<RichTextFilter>;
-  challenges?: InputMaybe<PageBlocksCaseStudiesStudiesContentChallengesFilter>;
-  approach?: InputMaybe<PageBlocksCaseStudiesStudiesContentApproachFilter>;
+  story?: InputMaybe<PageBlocksCaseStudiesStudiesContentStoryFilter>;
+  challenges?: InputMaybe<StringFilter>;
+  approach?: InputMaybe<StringFilter>;
   features?: InputMaybe<PageBlocksCaseStudiesStudiesContentFeaturesFilter>;
-  results?: InputMaybe<PageBlocksCaseStudiesStudiesContentResultsFilter>;
-  techStack?: InputMaybe<PageBlocksCaseStudiesStudiesContentTechStackFilter>;
+  results?: InputMaybe<StringFilter>;
+  techStack?: InputMaybe<StringFilter>;
   metrics?: InputMaybe<PageBlocksCaseStudiesStudiesContentMetricsFilter>;
   conclusion?: InputMaybe<RichTextFilter>;
 };
@@ -586,6 +583,57 @@ export type GlobalConnection = Connection & {
   edges?: Maybe<Array<Maybe<GlobalConnectionEdges>>>;
 };
 
+export type PrivacySections = {
+  __typename?: 'PrivacySections';
+  title?: Maybe<Scalars['String']['output']>;
+  content?: Maybe<Scalars['JSON']['output']>;
+};
+
+export type PrivacySeo = {
+  __typename?: 'PrivacySeo';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type Privacy = Node & Document & {
+  __typename?: 'Privacy';
+  title: Scalars['String']['output'];
+  sections?: Maybe<Array<Maybe<PrivacySections>>>;
+  seo?: Maybe<PrivacySeo>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type PrivacySectionsFilter = {
+  title?: InputMaybe<StringFilter>;
+  content?: InputMaybe<RichTextFilter>;
+};
+
+export type PrivacySeoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type PrivacyFilter = {
+  title?: InputMaybe<StringFilter>;
+  sections?: InputMaybe<PrivacySectionsFilter>;
+  seo?: InputMaybe<PrivacySeoFilter>;
+};
+
+export type PrivacyConnectionEdges = {
+  __typename?: 'PrivacyConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Privacy>;
+};
+
+export type PrivacyConnection = Connection & {
+  __typename?: 'PrivacyConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<PrivacyConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -597,6 +645,8 @@ export type Mutation = {
   createPage: Page;
   updateGlobal: Global;
   createGlobal: Global;
+  updatePrivacy: Privacy;
+  createPrivacy: Privacy;
 };
 
 
@@ -656,15 +706,29 @@ export type MutationCreateGlobalArgs = {
   params: GlobalMutation;
 };
 
+
+export type MutationUpdatePrivacyArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PrivacyMutation;
+};
+
+
+export type MutationCreatePrivacyArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PrivacyMutation;
+};
+
 export type DocumentUpdateMutation = {
   page?: InputMaybe<PageMutation>;
   global?: InputMaybe<GlobalMutation>;
+  privacy?: InputMaybe<PrivacyMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
   page?: InputMaybe<PageMutation>;
   global?: InputMaybe<GlobalMutation>;
+  privacy?: InputMaybe<PrivacyMutation>;
 };
 
 export type PageSeoMutation = {
@@ -717,25 +781,15 @@ export type PageBlocksCaseStudiesStudiesPreviewMutation = {
   metricLabel?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type PageBlocksCaseStudiesStudiesContentChallengesMutation = {
-  text?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type PageBlocksCaseStudiesStudiesContentApproachMutation = {
-  text?: InputMaybe<Scalars['String']['input']>;
+export type PageBlocksCaseStudiesStudiesContentStoryMutation = {
+  hook?: InputMaybe<Scalars['String']['input']>;
+  turningPoint?: InputMaybe<Scalars['String']['input']>;
+  transformation?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PageBlocksCaseStudiesStudiesContentFeaturesMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type PageBlocksCaseStudiesStudiesContentResultsMutation = {
-  text?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type PageBlocksCaseStudiesStudiesContentTechStackMutation = {
-  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PageBlocksCaseStudiesStudiesContentMetricsMutation = {
@@ -746,11 +800,12 @@ export type PageBlocksCaseStudiesStudiesContentMetricsMutation = {
 
 export type PageBlocksCaseStudiesStudiesContentMutation = {
   intro?: InputMaybe<Scalars['JSON']['input']>;
-  challenges?: InputMaybe<Array<InputMaybe<PageBlocksCaseStudiesStudiesContentChallengesMutation>>>;
-  approach?: InputMaybe<Array<InputMaybe<PageBlocksCaseStudiesStudiesContentApproachMutation>>>;
+  story?: InputMaybe<PageBlocksCaseStudiesStudiesContentStoryMutation>;
+  challenges?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  approach?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   features?: InputMaybe<Array<InputMaybe<PageBlocksCaseStudiesStudiesContentFeaturesMutation>>>;
-  results?: InputMaybe<Array<InputMaybe<PageBlocksCaseStudiesStudiesContentResultsMutation>>>;
-  techStack?: InputMaybe<Array<InputMaybe<PageBlocksCaseStudiesStudiesContentTechStackMutation>>>;
+  results?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  techStack?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   metrics?: InputMaybe<Array<InputMaybe<PageBlocksCaseStudiesStudiesContentMetricsMutation>>>;
   conclusion?: InputMaybe<Scalars['JSON']['input']>;
 };
@@ -832,16 +887,34 @@ export type GlobalMutation = {
   footer?: InputMaybe<GlobalFooterMutation>;
 };
 
-export type PagePartsFragment = { __typename: 'Page', seo?: { __typename: 'PageSeo', title?: string | null, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'PageBlocksHero', eyebrow?: string | null, headline?: string | null, subheadline?: string | null, body?: string | null, variant?: string | null, backgroundImage?: string | null, primaryCta?: { __typename: 'PageBlocksHeroPrimaryCta', label?: string | null, url?: string | null, style?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksHeroSecondaryCta', label?: string | null, url?: string | null, style?: string | null } | null } | { __typename: 'PageBlocksFaq', headline?: string | null, subheadline?: string | null, variant?: string | null, items?: Array<{ __typename: 'PageBlocksFaqItems', question?: string | null, answer?: any | null, category?: string | null } | null> | null } | { __typename: 'PageBlocksCaseStudies', headline?: string | null, subheadline?: string | null, variant?: string | null, studies?: Array<{ __typename: 'PageBlocksCaseStudiesStudies', slug?: string | null, title?: string | null, client?: string | null, industry?: string | null, year?: string | null, heroImage?: string | null, color?: string | null, icon?: string | null, liveUrl?: string | null, preview?: { __typename: 'PageBlocksCaseStudiesStudiesPreview', problem?: string | null, solution?: string | null, result?: string | null, metric?: string | null, metricLabel?: string | null } | null, content?: { __typename: 'PageBlocksCaseStudiesStudiesContent', intro?: any | null, conclusion?: any | null, challenges?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentChallenges', text?: string | null } | null> | null, approach?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentApproach', text?: string | null } | null> | null, features?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentFeatures', title?: string | null, description?: string | null } | null> | null, results?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentResults', text?: string | null } | null> | null, techStack?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentTechStack', name?: string | null } | null> | null, metrics?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentMetrics', label?: string | null, value?: string | null, comparison?: string | null } | null> | null } | null, seo?: { __typename: 'PageBlocksCaseStudiesStudiesSeo', title?: string | null, description?: string | null } | null } | null> | null } | null> | null };
+export type PrivacySectionsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+export type PrivacySeoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PrivacyMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  sections?: InputMaybe<Array<InputMaybe<PrivacySectionsMutation>>>;
+  seo?: InputMaybe<PrivacySeoMutation>;
+};
+
+export type PagePartsFragment = { __typename: 'Page', seo?: { __typename: 'PageSeo', title?: string | null, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'PageBlocksHero', eyebrow?: string | null, headline?: string | null, subheadline?: string | null, body?: string | null, variant?: string | null, backgroundImage?: string | null, primaryCta?: { __typename: 'PageBlocksHeroPrimaryCta', label?: string | null, url?: string | null, style?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksHeroSecondaryCta', label?: string | null, url?: string | null, style?: string | null } | null } | { __typename: 'PageBlocksFaq', headline?: string | null, subheadline?: string | null, variant?: string | null, items?: Array<{ __typename: 'PageBlocksFaqItems', question?: string | null, answer?: any | null, category?: string | null } | null> | null } | { __typename: 'PageBlocksCaseStudies', headline?: string | null, subheadline?: string | null, variant?: string | null, studies?: Array<{ __typename: 'PageBlocksCaseStudiesStudies', slug?: string | null, title?: string | null, client?: string | null, industry?: string | null, year?: string | null, heroImage?: string | null, color?: string | null, icon?: string | null, liveUrl?: string | null, preview?: { __typename: 'PageBlocksCaseStudiesStudiesPreview', problem?: string | null, solution?: string | null, result?: string | null, metric?: string | null, metricLabel?: string | null } | null, content?: { __typename: 'PageBlocksCaseStudiesStudiesContent', intro?: any | null, challenges?: Array<string | null> | null, approach?: Array<string | null> | null, results?: Array<string | null> | null, techStack?: Array<string | null> | null, conclusion?: any | null, story?: { __typename: 'PageBlocksCaseStudiesStudiesContentStory', hook?: string | null, turningPoint?: string | null, transformation?: string | null } | null, features?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentFeatures', title?: string | null, description?: string | null } | null> | null, metrics?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentMetrics', label?: string | null, value?: string | null, comparison?: string | null } | null> | null } | null, seo?: { __typename: 'PageBlocksCaseStudiesStudiesSeo', title?: string | null, description?: string | null } | null } | null> | null } | null> | null };
 
 export type GlobalPartsFragment = { __typename: 'Global', theme?: { __typename: 'GlobalTheme', primaryColor?: string | null, secondaryColor?: string | null, backgroundColor?: string | null, fontHeading?: string | null, fontBody?: string | null } | null, navigation?: { __typename: 'GlobalNavigation', links?: Array<{ __typename: 'GlobalNavigationLinks', label?: string | null, url?: string | null } | null> | null, cta?: { __typename: 'GlobalNavigationCta', label?: string | null, url?: string | null } | null } | null, footer?: { __typename: 'GlobalFooter', copyright?: string | null, socialLinks?: Array<{ __typename: 'GlobalFooterSocialLinks', platform?: string | null, url?: string | null } | null> | null } | null };
+
+export type PrivacyPartsFragment = { __typename: 'Privacy', title: string, sections?: Array<{ __typename: 'PrivacySections', title?: string | null, content?: any | null } | null> | null, seo?: { __typename: 'PrivacySeo', title?: string | null, description?: string | null } | null };
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'PageSeo', title?: string | null, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'PageBlocksHero', eyebrow?: string | null, headline?: string | null, subheadline?: string | null, body?: string | null, variant?: string | null, backgroundImage?: string | null, primaryCta?: { __typename: 'PageBlocksHeroPrimaryCta', label?: string | null, url?: string | null, style?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksHeroSecondaryCta', label?: string | null, url?: string | null, style?: string | null } | null } | { __typename: 'PageBlocksFaq', headline?: string | null, subheadline?: string | null, variant?: string | null, items?: Array<{ __typename: 'PageBlocksFaqItems', question?: string | null, answer?: any | null, category?: string | null } | null> | null } | { __typename: 'PageBlocksCaseStudies', headline?: string | null, subheadline?: string | null, variant?: string | null, studies?: Array<{ __typename: 'PageBlocksCaseStudiesStudies', slug?: string | null, title?: string | null, client?: string | null, industry?: string | null, year?: string | null, heroImage?: string | null, color?: string | null, icon?: string | null, liveUrl?: string | null, preview?: { __typename: 'PageBlocksCaseStudiesStudiesPreview', problem?: string | null, solution?: string | null, result?: string | null, metric?: string | null, metricLabel?: string | null } | null, content?: { __typename: 'PageBlocksCaseStudiesStudiesContent', intro?: any | null, conclusion?: any | null, challenges?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentChallenges', text?: string | null } | null> | null, approach?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentApproach', text?: string | null } | null> | null, features?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentFeatures', title?: string | null, description?: string | null } | null> | null, results?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentResults', text?: string | null } | null> | null, techStack?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentTechStack', name?: string | null } | null> | null, metrics?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentMetrics', label?: string | null, value?: string | null, comparison?: string | null } | null> | null } | null, seo?: { __typename: 'PageBlocksCaseStudiesStudiesSeo', title?: string | null, description?: string | null } | null } | null> | null } | null> | null } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'PageSeo', title?: string | null, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'PageBlocksHero', eyebrow?: string | null, headline?: string | null, subheadline?: string | null, body?: string | null, variant?: string | null, backgroundImage?: string | null, primaryCta?: { __typename: 'PageBlocksHeroPrimaryCta', label?: string | null, url?: string | null, style?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksHeroSecondaryCta', label?: string | null, url?: string | null, style?: string | null } | null } | { __typename: 'PageBlocksFaq', headline?: string | null, subheadline?: string | null, variant?: string | null, items?: Array<{ __typename: 'PageBlocksFaqItems', question?: string | null, answer?: any | null, category?: string | null } | null> | null } | { __typename: 'PageBlocksCaseStudies', headline?: string | null, subheadline?: string | null, variant?: string | null, studies?: Array<{ __typename: 'PageBlocksCaseStudiesStudies', slug?: string | null, title?: string | null, client?: string | null, industry?: string | null, year?: string | null, heroImage?: string | null, color?: string | null, icon?: string | null, liveUrl?: string | null, preview?: { __typename: 'PageBlocksCaseStudiesStudiesPreview', problem?: string | null, solution?: string | null, result?: string | null, metric?: string | null, metricLabel?: string | null } | null, content?: { __typename: 'PageBlocksCaseStudiesStudiesContent', intro?: any | null, challenges?: Array<string | null> | null, approach?: Array<string | null> | null, results?: Array<string | null> | null, techStack?: Array<string | null> | null, conclusion?: any | null, story?: { __typename: 'PageBlocksCaseStudiesStudiesContentStory', hook?: string | null, turningPoint?: string | null, transformation?: string | null } | null, features?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentFeatures', title?: string | null, description?: string | null } | null> | null, metrics?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentMetrics', label?: string | null, value?: string | null, comparison?: string | null } | null> | null } | null, seo?: { __typename: 'PageBlocksCaseStudiesStudiesSeo', title?: string | null, description?: string | null } | null } | null> | null } | null> | null } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -853,7 +926,7 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'PageSeo', title?: string | null, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'PageBlocksHero', eyebrow?: string | null, headline?: string | null, subheadline?: string | null, body?: string | null, variant?: string | null, backgroundImage?: string | null, primaryCta?: { __typename: 'PageBlocksHeroPrimaryCta', label?: string | null, url?: string | null, style?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksHeroSecondaryCta', label?: string | null, url?: string | null, style?: string | null } | null } | { __typename: 'PageBlocksFaq', headline?: string | null, subheadline?: string | null, variant?: string | null, items?: Array<{ __typename: 'PageBlocksFaqItems', question?: string | null, answer?: any | null, category?: string | null } | null> | null } | { __typename: 'PageBlocksCaseStudies', headline?: string | null, subheadline?: string | null, variant?: string | null, studies?: Array<{ __typename: 'PageBlocksCaseStudiesStudies', slug?: string | null, title?: string | null, client?: string | null, industry?: string | null, year?: string | null, heroImage?: string | null, color?: string | null, icon?: string | null, liveUrl?: string | null, preview?: { __typename: 'PageBlocksCaseStudiesStudiesPreview', problem?: string | null, solution?: string | null, result?: string | null, metric?: string | null, metricLabel?: string | null } | null, content?: { __typename: 'PageBlocksCaseStudiesStudiesContent', intro?: any | null, conclusion?: any | null, challenges?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentChallenges', text?: string | null } | null> | null, approach?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentApproach', text?: string | null } | null> | null, features?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentFeatures', title?: string | null, description?: string | null } | null> | null, results?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentResults', text?: string | null } | null> | null, techStack?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentTechStack', name?: string | null } | null> | null, metrics?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentMetrics', label?: string | null, value?: string | null, comparison?: string | null } | null> | null } | null, seo?: { __typename: 'PageBlocksCaseStudiesStudiesSeo', title?: string | null, description?: string | null } | null } | null> | null } | null> | null } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'PageSeo', title?: string | null, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'PageBlocksHero', eyebrow?: string | null, headline?: string | null, subheadline?: string | null, body?: string | null, variant?: string | null, backgroundImage?: string | null, primaryCta?: { __typename: 'PageBlocksHeroPrimaryCta', label?: string | null, url?: string | null, style?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksHeroSecondaryCta', label?: string | null, url?: string | null, style?: string | null } | null } | { __typename: 'PageBlocksFaq', headline?: string | null, subheadline?: string | null, variant?: string | null, items?: Array<{ __typename: 'PageBlocksFaqItems', question?: string | null, answer?: any | null, category?: string | null } | null> | null } | { __typename: 'PageBlocksCaseStudies', headline?: string | null, subheadline?: string | null, variant?: string | null, studies?: Array<{ __typename: 'PageBlocksCaseStudiesStudies', slug?: string | null, title?: string | null, client?: string | null, industry?: string | null, year?: string | null, heroImage?: string | null, color?: string | null, icon?: string | null, liveUrl?: string | null, preview?: { __typename: 'PageBlocksCaseStudiesStudiesPreview', problem?: string | null, solution?: string | null, result?: string | null, metric?: string | null, metricLabel?: string | null } | null, content?: { __typename: 'PageBlocksCaseStudiesStudiesContent', intro?: any | null, challenges?: Array<string | null> | null, approach?: Array<string | null> | null, results?: Array<string | null> | null, techStack?: Array<string | null> | null, conclusion?: any | null, story?: { __typename: 'PageBlocksCaseStudiesStudiesContentStory', hook?: string | null, turningPoint?: string | null, transformation?: string | null } | null, features?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentFeatures', title?: string | null, description?: string | null } | null> | null, metrics?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentMetrics', label?: string | null, value?: string | null, comparison?: string | null } | null> | null } | null, seo?: { __typename: 'PageBlocksCaseStudiesStudiesSeo', title?: string | null, description?: string | null } | null } | null> | null } | null> | null } | null } | null> | null } };
 
 export type GlobalQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -873,6 +946,25 @@ export type GlobalConnectionQueryVariables = Exact<{
 
 
 export type GlobalConnectionQuery = { __typename?: 'Query', globalConnection: { __typename?: 'GlobalConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'GlobalConnectionEdges', cursor: string, node?: { __typename: 'Global', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, theme?: { __typename: 'GlobalTheme', primaryColor?: string | null, secondaryColor?: string | null, backgroundColor?: string | null, fontHeading?: string | null, fontBody?: string | null } | null, navigation?: { __typename: 'GlobalNavigation', links?: Array<{ __typename: 'GlobalNavigationLinks', label?: string | null, url?: string | null } | null> | null, cta?: { __typename: 'GlobalNavigationCta', label?: string | null, url?: string | null } | null } | null, footer?: { __typename: 'GlobalFooter', copyright?: string | null, socialLinks?: Array<{ __typename: 'GlobalFooterSocialLinks', platform?: string | null, url?: string | null } | null> | null } | null } | null } | null> | null } };
+
+export type PrivacyQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type PrivacyQuery = { __typename?: 'Query', privacy: { __typename: 'Privacy', id: string, title: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PrivacySections', title?: string | null, content?: any | null } | null> | null, seo?: { __typename: 'PrivacySeo', title?: string | null, description?: string | null } | null } };
+
+export type PrivacyConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PrivacyFilter>;
+}>;
+
+
+export type PrivacyConnectionQuery = { __typename?: 'Query', privacyConnection: { __typename?: 'PrivacyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PrivacyConnectionEdges', cursor: string, node?: { __typename: 'Privacy', id: string, title: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PrivacySections', title?: string | null, content?: any | null } | null> | null, seo?: { __typename: 'PrivacySeo', title?: string | null, description?: string | null } | null } | null } | null> | null } };
 
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
@@ -940,27 +1032,21 @@ export const PagePartsFragmentDoc = gql`
         content {
           __typename
           intro
-          challenges {
+          story {
             __typename
-            text
+            hook
+            turningPoint
+            transformation
           }
-          approach {
-            __typename
-            text
-          }
+          challenges
+          approach
           features {
             __typename
             title
             description
           }
-          results {
-            __typename
-            text
-          }
-          techStack {
-            __typename
-            name
-          }
+          results
+          techStack
           metrics {
             __typename
             label
@@ -1013,6 +1099,22 @@ export const GlobalPartsFragmentDoc = gql`
       platform
       url
     }
+  }
+}
+    `;
+export const PrivacyPartsFragmentDoc = gql`
+    fragment PrivacyParts on Privacy {
+  __typename
+  title
+  sections {
+    __typename
+    title
+    content
+  }
+  seo {
+    __typename
+    title
+    description
   }
 }
     `;
@@ -1130,6 +1232,63 @@ export const GlobalConnectionDocument = gql`
   }
 }
     ${GlobalPartsFragmentDoc}`;
+export const PrivacyDocument = gql`
+    query privacy($relativePath: String!) {
+  privacy(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...PrivacyParts
+  }
+}
+    ${PrivacyPartsFragmentDoc}`;
+export const PrivacyConnectionDocument = gql`
+    query privacyConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PrivacyFilter) {
+  privacyConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...PrivacyParts
+      }
+    }
+  }
+}
+    ${PrivacyPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -1144,6 +1303,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     globalConnection(variables?: GlobalConnectionQueryVariables, options?: C): Promise<{data: GlobalConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GlobalConnectionQueryVariables, query: string}> {
         return requester<{data: GlobalConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GlobalConnectionQueryVariables, query: string}, GlobalConnectionQueryVariables>(GlobalConnectionDocument, variables, options);
+      },
+    privacy(variables: PrivacyQueryVariables, options?: C): Promise<{data: PrivacyQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PrivacyQueryVariables, query: string}> {
+        return requester<{data: PrivacyQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PrivacyQueryVariables, query: string}, PrivacyQueryVariables>(PrivacyDocument, variables, options);
+      },
+    privacyConnection(variables?: PrivacyConnectionQueryVariables, options?: C): Promise<{data: PrivacyConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PrivacyConnectionQueryVariables, query: string}> {
+        return requester<{data: PrivacyConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PrivacyConnectionQueryVariables, query: string}, PrivacyConnectionQueryVariables>(PrivacyConnectionDocument, variables, options);
       }
     };
   }
@@ -1192,7 +1357,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/2.1/content/xx/github/main",
+        url: "http://localhost:4001/graphql",
         queries,
       })
     )

@@ -1,13 +1,14 @@
 import React from 'react';
 import { SEO } from '../components/SEO';
 import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
+import { businessConfig } from '../config/business';
 
 export const Impressum: React.FC = () => {
   return (
     <div className="bg-paper min-h-screen pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
       <SEO
-        title="Impressum | Super Sonic Prototypes"
-        description="Rechtliche Informationen und Anbieterkennzeichnung für Super Sonic Prototypes."
+        title="Impressum | Norddorf"
+        description="Rechtliche Informationen und Anbieterkennzeichnung für Norddorf."
         lang="de"
         path="/de/impressum"
       />
@@ -21,28 +22,28 @@ export const Impressum: React.FC = () => {
 
           <section>
             <h2 className="text-xl font-bold text-black mb-4">Angaben gemäß § 5 TMG</h2>
-            <p className="font-bold">Super Sonic Prototypes Pte. Ltd.</p>
-            <p>[Physical Street Address]</p>
-            <p>[Postal Code] Singapore</p>
+            <p className="font-bold">{businessConfig.name}</p>
+            <p>{businessConfig.address.street}</p>
+            <p>{businessConfig.address.postalCode} {businessConfig.address.city}</p>
           </section>
 
           <section>
             <h2 className="text-xl font-bold text-black mb-4">Vertreten durch</h2>
-            <p>Lasse [Nachname]</p>
+            <p>{businessConfig.director}</p>
             <p>Geschäftsführer (Director)</p>
           </section>
 
           <section>
             <h2 className="text-xl font-bold text-black mb-4">Kontakt</h2>
-            <p>E-Mail: hello@supersonic.design</p>
-            <p>Telefon: [Phone Number]</p>
-            <p>Website: https://supersonic.design</p>
+            <p>E-Mail: {businessConfig.contact.email}</p>
+            <p>Telefon: {businessConfig.contact.phone}</p>
+            <p>Website: {businessConfig.contact.website}</p>
           </section>
 
           <section>
             <h2 className="text-xl font-bold text-black mb-4">Registereintrag</h2>
-            <p>Eingetragen im Unternehmensregister von Singapur (ACRA).</p>
-            <p>Registernummer (UEN): [UEN Number]</p>
+            <p>Eingetragen im Unternehmensregister von Singapur ({businessConfig.registration.authority}).</p>
+            <p>Registernummer (UEN): {businessConfig.registration.uen}</p>
           </section>
 
           <section>
@@ -56,8 +57,9 @@ export const Impressum: React.FC = () => {
 
           <section>
             <h2 className="text-xl font-bold text-black mb-4">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
-            <p>Lasse [Nachname]</p>
-            <p>[Address]</p>
+            <p>{businessConfig.director}</p>
+            <p>{businessConfig.address.street}</p>
+            <p>{businessConfig.address.postalCode} {businessConfig.address.city}</p>
           </section>
 
           <section>
@@ -101,7 +103,7 @@ export const Impressum: React.FC = () => {
           <section>
             <h2 className="text-xl font-bold text-black mb-4">Anwendbares Recht</h2>
             <p>
-              Für alle Rechtsbeziehungen zwischen Super Sonic Prototypes Pte. Ltd. und dem Kunden gilt 
+              Für alle Rechtsbeziehungen zwischen Norddorf und dem Kunden gilt 
               singapurisches Recht unter Ausschluss des UN-Kaufrechts. Gerichtsstand ist Singapur, sofern 
               nicht zwingende gesetzliche Vorschriften dem entgegenstehen.
             </p>

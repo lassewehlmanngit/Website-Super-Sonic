@@ -1,6 +1,7 @@
 import { defineConfig } from "tinacms";
 import { pageCollection } from "./collections/page";
 import { globalCollection } from "./collections/global";
+import { privacyCollection } from "./collections/privacy";
 
 // Re-export helpers for convenience (they're defined in helpers.ts)
 export { listItemProps, buttonField } from "./helpers";
@@ -50,6 +51,7 @@ export default defineConfig({
     collections: [
       pageCollection,
       globalCollection,
+      privacyCollection,
     ],
   },
 });

@@ -306,7 +306,7 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ lang }) => {
   const showBackToTop = useShowBackToTop();
 
   const caseStudy = slug ? getCaseStudyBySlug(slug, lang) : undefined;
-  const baseUrl = 'https://supersonic.design';
+  const baseUrl = 'https://norddorf.com';
   const projectPath = isDe ? 'projekte' : 'projects';
   const currentUrl = `${baseUrl}/${lang}/${projectPath}/${slug}`;
 
@@ -417,12 +417,12 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ lang }) => {
       "author": {
         "@type": "Organization",
         "@id": `${baseUrl}#organization`,
-        "name": "Super Sonic Prototypes"
+        "name": "Norddorf"
       },
       "publisher": {
         "@type": "Organization",
         "@id": `${baseUrl}#organization`,
-        "name": "Super Sonic Prototypes",
+        "name": "Norddorf",
         "logo": {
           "@type": "ImageObject",
           "url": `${baseUrl}/logo.png`

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Play, Clock } from 'lucide-react';
 
 interface ProcessVideoProps {
@@ -8,6 +8,7 @@ interface ProcessVideoProps {
 export const ProcessVideo: React.FC<ProcessVideoProps> = ({ lang }) => {
   const isDe = lang === 'de';
   const isJa = lang === 'ja';
+  const [isPlaying, setIsPlaying] = useState(false);
 
   return (
     <section id="process-video" className="fluid-section bg-paper">
@@ -28,21 +29,37 @@ export const ProcessVideo: React.FC<ProcessVideoProps> = ({ lang }) => {
         {/* Video Container */}
         <div className="relative reveal delay-100">
           <div className="aspect-video bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl">
-            {/* Placeholder - replace with actual video embed */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <div className="w-20 h-20 bg-sonic-orange rounded-full flex items-center justify-center mb-4 cursor-pointer hover:scale-110 transition-transform shadow-[0_0_40px_rgba(255,77,0,0.4)]">
-                <Play className="text-white ml-1" size={32} fill="white" />
-              </div>
-              <p className="text-zinc-400 fluid-sm">
-                {isJa ? "動画を再生" : isDe ? "Video abspielen" : "Play video"}
-              </p>
-            </div>
-
-            {/* Video timestamp badge */}
-            <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full">
-              <Clock size={14} className="text-white" />
-              <span className="text-white fluid-sm font-mono">2:00</span>
-            </div>
+            {isPlaying ? (
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+                title="Process Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
+            ) : (
+              <button 
+                onClick={() => setIsPlaying(true)}
+                className="absolute inset-0 flex flex-col items-center justify-center w-full h-full bg-black/20 hover:bg-black/30 transition-colors group cursor-pointer focus:outline-none focus:ring-2 focus:ring-sonic-orange focus:ring-offset-2 rounded-2xl"
+                aria-label={isJa ? "動画を再生" : isDe ? "Video abspielen" : "Play video"}
+              >
+                <div className="w-20 h-20 bg-sonic-orange rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-[0_0_40px_rgba(255,77,0,0.4)]">
+                  <Play className="text-white ml-1" size={32} fill="white" />
+                </div>
+                <p className="text-zinc-400 fluid-sm">
+                  {isJa ? "動画を再生" : isDe ? "Video abspielen" : "Play video"}
+                </p>
+                
+                {/* Video timestamp badge */}
+                <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full pointer-events-none">
+                  <Clock size={14} className="text-white" />
+                  <span className="text-white fluid-sm font-mono">2:00</span>
+                </div>
+              </button>
+            )}
           </div>
         </div>
 

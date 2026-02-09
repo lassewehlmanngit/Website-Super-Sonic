@@ -20,7 +20,7 @@ export const TCOCalculator: React.FC<Props> = ({ lang }) => {
     // Estimated Development Hours (The "Manual Labor" Factor)
     const agencyHours = 80;    // WordPress: Setup + Config + Plugins
     const webflowHours = 120;  // Webflow: Manual pixel pushing + Interactions
-    const supersonicHours = 40; // Super Sonic: Code Reuse + Efficiency
+    const supersonicHours = 40; // Norddorf: Code Reuse + Efficiency
 
     // Costs
     const agencyMaintenance = 150; // Monthly
@@ -170,12 +170,12 @@ export const TCOCalculator: React.FC<Props> = ({ lang }) => {
               </div>
           </div>
 
-          {/* 3. Super Sonic (Winner) */}
+          {/* 3. Norddorf (Winner) */}
           <div className="p-8 rounded-3xl bg-black text-white border border-zinc-800 shadow-2xl scale-105 relative z-10">
               <div className="absolute top-0 right-0 bg-sonic-orange text-white text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-xl">
                   RECOMMENDED
               </div>
-              <h4 className="font-bold text-xl text-white mb-2">Super Sonic Asset</h4>
+              <h4 className="font-bold text-xl text-white mb-2">Norddorf Asset</h4>
               <div className="text-4xl font-bold text-white mb-6">€{calculations.supersonicTotal.toLocaleString()}</div>
 
               <ul className="space-y-3 text-sm text-zinc-400 mb-8">

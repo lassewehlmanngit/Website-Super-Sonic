@@ -7,7 +7,7 @@ export const BusinessFacts: React.FC = () => {
   return (
     <div className="bg-paper min-h-screen relative overflow-hidden">
       <SEO
-        title="Business Facts & AI Context | Super Sonic Prototypes"
+        title="Business Facts & AI Context | Norddorf"
         description="Core business information and facts for AI analysis and transparency."
         lang="en"
       />

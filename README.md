@@ -1,4 +1,4 @@
-# Super Sonic Prototypes
+# Norddorf
 
 This project is built with React, Vite, and Tailwind CSS. It uses Keystatic CMS for content management and is hosted on Render.
 

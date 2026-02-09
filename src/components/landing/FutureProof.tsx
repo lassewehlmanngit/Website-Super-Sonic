@@ -117,11 +117,11 @@ export const FutureProof: React.FC<FutureProofProps> = ({ lang }) => {
                     : "Questions about technologies we use or can integrate?"}
                 </p>
                 <a 
-                  href="mailto:hello@supersonic.design" 
+                  href="mailto:hello@norddorf.com" 
                   className="inline-flex items-center gap-2 text-sonic-orange font-bold fluid-sm hover:underline"
                 >
                   <Mail size={16} />
-                  hello@supersonic.design
+                  hello@norddorf.com
                 </a>
               </div>
             </div>

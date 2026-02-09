@@ -5,7 +5,7 @@ export const AGB: React.FC = () => {
   return (
     <div className="bg-paper min-h-screen pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
       <SEO
-        title="AGB | Super Sonic Prototypes"
+        title="AGB | Norddorf"
         description="Allgemeine Geschäftsbedingungen für Website-Entwicklung und digitale Dienstleistungen."
         lang="de"
         path="/de/agb"
@@ -21,8 +21,8 @@ export const AGB: React.FC = () => {
           <section>
             <h2 className="text-xl font-bold text-black mb-4">§ 1 Geltungsbereich</h2>
             <p className="mb-4">
-              (1) Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Verträge zwischen Super Sonic 
-              Prototypes Pte. Ltd. (nachfolgend „Auftragnehmer") und dem Kunden (nachfolgend „Auftraggeber") 
+              (1) Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Verträge zwischen Norddorf 
+              (nachfolgend „Auftragnehmer") und dem Kunden (nachfolgend „Auftraggeber") 
               über die Erstellung von Websites, Webanwendungen und damit verbundenen digitalen Dienstleistungen.
             </p>
             <p className="mb-4">
@@ -195,7 +195,7 @@ export const AGB: React.FC = () => {
               (3) Ausgenommen von der Rechteübertragung sind:<br/>
               • Lizenzen von Drittanbieter-Software (z.B. Open-Source-Bibliotheken), die ihren eigenen 
               Lizenzbedingungen unterliegen<br/>
-              • Das zugrunde liegende Framework des Auftragnehmers („Sonic-Framework"), das weiterhin für 
+              • Das zugrunde liegende Framework des Auftragnehmers („Norddorf-Framework"), das weiterhin für 
               andere Projekte genutzt werden darf
             </p>
             <p>
@@ -310,7 +310,7 @@ export const AGB: React.FC = () => {
           <section>
             <p className="text-sm text-zinc-500">
               Stand: Februar 2026<br/>
-              Super Sonic Prototypes Pte. Ltd.
+              Norddorf
             </p>
           </section>
 

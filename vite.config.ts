@@ -29,7 +29,7 @@ function serveContentPlugin(): Plugin {
   };
 }
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, isSsrBuild }) => {
     const env = loadEnv(mode, '.', '');
     return {
       root: '.',
@@ -37,7 +37,14 @@ export default defineConfig(({ mode }) => {
         port: 3000,
         host: '0.0.0.0',
       },
-      plugins: [react(), tailwindcss(), deferCSS(), resourceHints(), serveContentPlugin()],
+      plugins: [
+        react(), 
+        tailwindcss(), 
+        // Only run HTML transformation plugins for client build
+        !isSsrBuild && deferCSS(), 
+        !isSsrBuild && resourceHints(), 
+        serveContentPlugin()
+      ].filter(Boolean),
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
@@ -101,18 +108,14 @@ export default defineConfig(({ mode }) => {
                 return 'ui-vendor';
               }
               
-              if (id.includes('@google/genai')) {
-                return 'genai';
-              }
-              
               // For all other node_modules, return undefined to prevent auto-splitting
               // This ensures problematic libraries stay with their consumers
               return;
             },
             // Optimize chunk file names
-            chunkFileNames: 'assets/js/[name]-[hash].js',
-            entryFileNames: 'assets/js/[name]-[hash].js',
-            assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
+            chunkFileNames: isSsrBuild ? '[name].js' : 'assets/js/[name]-[hash].js',
+            entryFileNames: isSsrBuild ? '[name].js' : 'assets/js/[name]-[hash].js',
+            assetFileNames: isSsrBuild ? '[name].[ext]' : 'assets/[ext]/[name]-[hash].[ext]',
           },
         },
         // Increase chunk size warning limit

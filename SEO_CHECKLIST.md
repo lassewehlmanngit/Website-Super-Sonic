@@ -1,4 +1,4 @@
-# SEO & Launch Checklist - Super Sonic Prototypes
+# SEO & Launch Checklist - Norddorf
 
 ## ✅ Erledigt
 

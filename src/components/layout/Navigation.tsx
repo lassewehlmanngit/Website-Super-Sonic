@@ -94,11 +94,11 @@ export const Navigation: React.FC = () => {
       <div className="container-responsive flex items-center justify-between">
         
         <Link to={homeLink} className={`text-xl font-bold tracking-tighter uppercase transition-colors duration-500 ${logoColor}`}>
-          Super Sonic<span className="text-sonic-orange">.</span>
+          Norddorf<span className="text-sonic-orange">.</span>
         </Link>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-2 bg-transparent">
+        <div className="hidden xl:flex items-center gap-2 bg-transparent">
             <div className={`flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-500 mr-4 ${isScrolled ? 'bg-transparent' : 'bg-white/5 backdrop-blur-sm border border-white/10'}`}>
               {links.map((link, index) => (
                 <a 

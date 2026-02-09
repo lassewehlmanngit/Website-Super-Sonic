@@ -79,7 +79,7 @@ export const MobileNav: React.FC = () => {
   return (
     <>
       {/* Floating Bottom Bar (Thumb Zone) */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-sm md:hidden">
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[2001] w-[90%] max-w-sm xl:hidden">
         <div className="bg-black/90 backdrop-blur-xl text-white rounded-full p-2 pl-6 shadow-2xl flex items-center justify-between border border-white/10">
           
           {/* 1. Home Link */}
@@ -112,7 +112,7 @@ export const MobileNav: React.FC = () => {
       {/* The Action Sheet (Overlay) */}
       {/* Backdrop */}
       <div 
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 md:hidden ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-[1999] transition-opacity duration-300 xl:hidden ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         onClick={close}
       />
 
@@ -122,12 +122,12 @@ export const MobileNav: React.FC = () => {
         role="dialog"
         aria-modal="true"
         aria-labelledby="mobile-nav-title"
-        className={`fixed bottom-0 left-0 right-0 bg-paper z-40 rounded-t-[2rem] p-6 pb-32 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] md:hidden ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}
+        className={`fixed bottom-0 left-0 right-0 bg-[#F3F3F3] z-[2000] rounded-t-[2rem] p-6 pb-32 max-h-[90dvh] overflow-y-auto flex flex-col transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] xl:hidden ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}
       >
-         <div className="w-12 h-1 bg-zinc-300 rounded-full mx-auto mb-8"></div>
+         <div className="w-12 h-1 bg-zinc-300 rounded-full mx-auto mb-8 shrink-0"></div>
          
          {/* Language Switcher */}
-         <div className="flex items-center justify-center gap-4 mb-6 pb-6 border-b border-zinc-200">
+         <div className="flex items-center justify-center gap-4 mb-6 pb-6 border-b border-zinc-200 shrink-0">
             <Link 
               to={switchLang('de')} 
               onClick={close}
@@ -153,13 +153,13 @@ export const MobileNav: React.FC = () => {
             </Link>
          </div>
          
-         <div className="grid gap-2">
+         <div className="flex flex-col gap-2 w-full shrink-0">
             <h2 id="mobile-nav-title" className="sr-only">{isJa ? 'ナビゲーション' : isDe ? 'Navigation' : 'Navigation'}</h2>
             <div className="text-xs font-mono text-zinc-400 uppercase tracking-widest mb-4 ml-2" aria-hidden="true">
               {isJa ? 'ナビゲーション' : 'Navigation'}
             </div>
             
-            <nav aria-label={navLabel}>
+            <nav aria-label={navLabel} className="flex flex-col gap-2 w-full">
               {links.map((link, index) => {
                  const Icon = link.icon;
 
@@ -167,7 +167,7 @@ export const MobileNav: React.FC = () => {
                    <button 
                      key={index}
                      onClick={() => handleAnchorClick(link.anchor)}
-                     className="flex items-center gap-4 p-4 rounded-2xl transition-all active:scale-[0.98] hover:bg-black/5 text-left w-full"
+                     className="flex items-center gap-4 p-4 rounded-2xl transition-all active:scale-[0.98] hover:bg-black/5 text-left w-full relative z-10"
                    >
                       {Icon && <Icon size={20} className="text-zinc-400" aria-hidden="true" />}
                       <span className="text-lg font-medium text-zinc-600">
@@ -180,15 +180,17 @@ export const MobileNav: React.FC = () => {
          </div>
 
          {/* CTA Button */}
-         <button 
-           onClick={scrollToForm}
-           className="w-full mt-6 bg-sonic-orange text-white py-4 rounded-2xl font-bold text-lg hover:bg-[#E64500] transition-colors"
-         >
-           {ctaLongLabel}
-         </button>
+         <div className="mt-6 w-full shrink-0 relative z-10">
+             <button 
+               onClick={scrollToForm}
+               className="w-full bg-sonic-orange text-white py-4 rounded-2xl font-bold text-lg hover:bg-[#E64500] transition-colors shadow-lg"
+             >
+               {ctaLongLabel}
+             </button>
+         </div>
 
          {/* Social Proof / Trust Indicator */}
-         <div className="mt-6 p-4 bg-void text-white rounded-2xl">
+         <div className="mt-6 p-4 bg-void text-white rounded-2xl shrink-0 relative z-10">
              <div className="flex items-center gap-3 mb-2">
                 <div className="flex -space-x-2">
                     <div className="w-6 h-6 rounded-full bg-zinc-700 border border-void"></div>

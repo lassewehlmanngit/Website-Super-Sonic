@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Leaf, Truck, Scale, Server, Building, Store } from 'lucide-react';
-import { getAllCaseStudies, CaseStudy } from '../../data/caseStudies';
+import { getAllCaseStudies, getMiniCaseStudies, CaseStudy } from '../../data/caseStudies';
 
 interface CaseStudiesProps {
   lang: 'de' | 'en' | 'ja';
@@ -20,60 +20,7 @@ export const CaseStudies: React.FC<CaseStudiesProps> = ({ lang }) => {
   const isDe = lang === 'de';
   const isJa = lang === 'ja';
   const caseStudies = getAllCaseStudies(lang);
-
-  // Additional mini case studies (no detail pages)
-  const miniCases = isJa ? [
-    {
-      title: "予約で埋まった職人企業",
-      problem: "2005年のウェブサイト、モバイル非対応。",
-      solution: "Sonicブループリントを14日で導入。",
-      result: "新しいお問い合わせフォームから、初月で質の高いお問い合わせが45%増加。",
-      metric: "+45%",
-      metricLabel: "お問い合わせ増加"
-    },
-    {
-      title: "ITシステム会社",
-      problem: "WordPressの混乱、8秒の読み込み時間。",
-      solution: "Sonicスタック（コード主権）への移行。",
-      result: "読み込み時間0.8秒以下。地域キーワードでGoogle上位表示。",
-      metric: "<0.8s",
-      metricLabel: "読み込み時間"
-    }
-  ] : isDe ? [
-    {
-      title: "Der ausgebuchte Handwerksbetrieb",
-      problem: "Website von 2005, nicht mobilfähig.",
-      solution: "Sonic-Blueprint in 14 Tagen.",
-      result: "45% mehr qualifizierte Anfragen über das neue Kontaktformular im ersten Monat.",
-      metric: "+45%",
-      metricLabel: "Mehr Anfragen"
-    },
-    {
-      title: "Das IT-Systemhaus",
-      problem: "Wordpress-Chaos, 8 Sekunden Ladezeit.",
-      solution: "Umstellung auf unseren Sonic-Stack (Code-Sovereignty).",
-      result: "Ladezeit unter 0,8s. Top-Rankings bei Google für lokale Keywords.",
-      metric: "<0.8s",
-      metricLabel: "Ladezeit"
-    }
-  ] : [
-    {
-      title: "The Fully Booked Craftsman",
-      problem: "Website from 2005, not mobile-friendly.",
-      solution: "Sonic Blueprint in 14 days.",
-      result: "45% more qualified inquiries through the new contact form in the first month.",
-      metric: "+45%",
-      metricLabel: "More inquiries"
-    },
-    {
-      title: "The IT System House",
-      problem: "WordPress chaos, 8 second load time.",
-      solution: "Switch to our Sonic Stack (Code Sovereignty).",
-      result: "Load time under 0.8s. Top rankings on Google for local keywords.",
-      metric: "<0.8s",
-      metricLabel: "Load time"
-    }
-  ];
+  const miniCases = getMiniCaseStudies(lang);
 
   const projectPath = isDe ? 'projekte' : 'projects';
 
