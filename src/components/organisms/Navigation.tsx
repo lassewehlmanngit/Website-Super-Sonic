@@ -62,6 +62,15 @@ export const Navigation: React.FC = () => {
 
         {/* Desktop Links */}
         <div className="flex items-center gap-8">
+            <div className={cn("transition-colors duration-500", textColor)}>
+               <LanguageSwitcher 
+                 currentLang={lang} 
+                 switchLang={switchLang} 
+                 variant="desktop"
+                 className={textColor}
+               />
+            </div>
+            
             <nav className="flex items-center gap-1">
               {links.map((link, index) => (
                 <Link 
@@ -79,15 +88,6 @@ export const Navigation: React.FC = () => {
                 </Link>
               ))}
             </nav>
-            
-            <div className={cn("transition-colors duration-500", textColor)}>
-               <LanguageSwitcher 
-                 currentLang={lang} 
-                 switchLang={switchLang} 
-                 variant="desktop"
-                 className={textColor}
-               />
-            </div>
 
             <Button 
               size="sm" 

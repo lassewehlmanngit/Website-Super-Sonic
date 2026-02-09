@@ -103,7 +103,7 @@ export const MobileNavigation: React.FC = () => {
                <div className="flex flex-col gap-10">
                   
                   {/* Block 1: Navigation Links */}
-                  <nav className="flex flex-col gap-3 relative w-full z-10">
+                  <nav className="static flex flex-col gap-3 w-full z-10">
                     {links.map((link, index) => {
                        const Icon = link.icon;
                        return (
