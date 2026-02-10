@@ -34,8 +34,45 @@ async function prerender() {
     console.warn('Could not read case studies data, skipping dynamic routes.', e);
   }
 
+  // Add CMS pages from content/pages/
+  try {
+    const contentDir = toAbsolute('content/pages');
+    if (fs.existsSync(contentDir)) {
+      const files = fs.readdirSync(contentDir);
+      const cmsRoutes = [];
+      
+      files.forEach(file => {
+        if (!file.endsWith('.json')) return;
+        
+        // Extract slug and lang from filename: {slug}-{lang}.json
+        // e.g. home-de.json -> slug: home, lang: de
+        // e.g. about-us-en.json -> slug: about-us, lang: en
+        const match = file.match(/^(.+)-([a-z]{2})\.json$/);
+        
+        if (match) {
+          const [_, slug, lang] = match;
+          
+          // Skip 'home' slug as it's already handled by /de, /en, /ja
+          if (slug === 'home') return;
+          
+          const route = `/${lang}/${slug}`;
+          routesToPrerender.push(route);
+          cmsRoutes.push(route);
+        }
+      });
+      
+      if (cmsRoutes.length > 0) {
+        console.log(`Found ${cmsRoutes.length} CMS pages to prerender:`, cmsRoutes.join(', '));
+      }
+    }
+  } catch (e) {
+    console.warn('Could not read content/pages directory, skipping CMS routes.', e);
+  }
+
   // Pre-render each route
-  for (const url of routesToPrerender) {
+  const routesToRender = [...new Set(routesToPrerender)]; // Deduplicate routes
+  
+  for (const url of routesToRender) {
     try {
       const appHtml = await render(url);
 
