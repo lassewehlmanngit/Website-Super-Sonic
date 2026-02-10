@@ -5,6 +5,7 @@ import {
   ClientMarquee,
   ProjectShowcase,
   ComparisonTable,
+  MidSectionCTA,
   EngineeringStory,
   CEOLetter,
   Testimonials,
@@ -93,6 +94,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
       {/* 5. Vergleich: Wir vs. "Oldschool" Agenturen */}
       <ComparisonTable lang={lang} />
 
+      {/* 5.5. Mid Section CTA */}
+      <MidSectionCTA lang={lang} onScrollToForm={scrollToForm} />
+
       {/* 6. Der "Sonic Motor" (Engineering Story) */}
       <EngineeringStory lang={lang} />
 
@@ -114,8 +118,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
       {/* 14. Future-Proof (BFSG & AI-SEO) */}
       <FutureProof lang={lang} />
 
-      {/* 15. CMS Demo */}
-      <CMSDemo lang={lang} />
+      {/* 15. CMS Demo - Deactivated for now */}
+      {/* <CMSDemo lang={lang} /> */}
 
       {/* 16. Lead Form */}
       <div ref={formRef}>

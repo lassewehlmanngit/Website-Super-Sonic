@@ -2,6 +2,7 @@ export { LandingHero } from './LandingHero';
 export { ClientMarquee } from './ClientMarquee';
 export { ProjectShowcase } from './ProjectShowcase';
 export { ComparisonTable } from './ComparisonTable';
+export { MidSectionCTA } from './MidSectionCTA';
 export { EngineeringStory } from './EngineeringStory';
 export { CEOLetter } from './CEOLetter';
 export { Testimonials } from './Testimonials';
