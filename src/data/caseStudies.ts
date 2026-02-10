@@ -39,6 +39,11 @@ export interface CaseStudySEO {
   description: string;
 }
 
+export interface CaseStudyFAQ {
+  question: string;
+  answer: string;
+}
+
 export interface CaseStudy {
   slug: string;
   title: string;
@@ -46,11 +51,13 @@ export interface CaseStudy {
   industry: string;
   year: string;
   heroImage?: string;
+  images?: Record<string, string>;
   color: string;
   icon: 'leaf' | 'truck' | 'scale' | 'server' | 'building' | 'store';
   liveUrl?: string;
   preview: CaseStudyPreview;
   content: CaseStudyContent;
+  faqs?: CaseStudyFAQ[];
   seo: CaseStudySEO;
 }
 
@@ -151,9 +158,103 @@ export const caseStudies: LocalizedCaseStudies = {
         ],
         conclusion: 'Die Matcha Partners Website beweist: Weniger ist mehr. Durch konsequenten Fokus auf das Wesentliche entstand eine Plattform, die komplexe B2B-Anforderungen verständlich macht – in drei Sprachen, mit eingebauter Flexibilität für die Zukunft.',
       },
+    },
+    {
+      slug: 'ivangs-bedachungen',
+      title: 'Relaunch Ivangs Bedachungen',
+      client: 'Ivangs Bedachungen',
+      industry: 'Handwerk / Dachdecker',
+      year: '2025',
+      heroImage: '/images/Ivangs-Bedachungen/Bild-1-hero.png',
+      images: {
+        hero: '/images/Ivangs-Bedachungen/Bild-1-hero.png',
+        services: '/images/Ivangs-Bedachungen/Bild-2-services.png',
+        material: '/images/Ivangs-Bedachungen/Bild-3-material.png',
+        ceo: '/images/Ivangs-Bedachungen/Bild-4-ceo.png',
+        faq: '/images/Ivangs-Bedachungen/Bild-5-faq.png',
+        cta: '/images/Ivangs-Bedachungen/Bild-6-cta.png',
+        contact: '/images/Ivangs-Bedachungen/bild-7-contact.png',
+      },
+      color: '#E30613',
+      icon: 'building',
+      preview: {
+        problem: 'Fachliche Exzellenz nicht digital sichtbar.',
+        solution: 'Moderne Web-Plattform mit Fokus auf Kundenanfragen und Recruiting.',
+        result: 'Mehr qualifizierte Kundenanfragen und eine moderne Lösung für das Mitarbeiter-Recruiting.',
+        metric: '2',
+        metricLabel: 'Zielgruppen',
+      },
+      content: {
+        intro: 'Ivangs Bedachungen ist fachlich top aufgestellt. Unsere Aufgabe war es, diesen Standard ins Digitale zu übertragen. Die neue Seite sollte vor allem mobil funktionieren, schnell sein und dem Nutzer sofort zeigen, woran er ist.',
+        story: {
+          hook: 'Auf der Startseite entscheiden sich Besucher innerhalb von Sekunden. Wir haben die Navigation radikal vereinfacht. Wir trennen die Besucher direkt beim Einstieg: Links Kunden, Rechts Bewerber.',
+          turningPoint: 'Niemand liest gerne lange Textblöcke. Wir haben das visuell gelöst. Jeder Fachbereich wird als eigene Kachel mit passendem Bild dargestellt.',
+          transformation: 'Wir haben die Seite nicht nur optisch modernisiert, sondern Funktionen eingebaut, die dem Betrieb im Alltag Zeit sparen. Unabhängigkeit durch TinaCMS, Bewerbung leicht gemacht, Geschwindigkeit.',
+        },
+        challenge: [
+          'Fachlichen Standard ins Digitale übertragen',
+          'Mobile Optimierung und Geschwindigkeit',
+          'Klare Nutzerführung für zwei Zielgruppen (Kunden & Bewerber)',
+          'Vertrauen aufbauen trotz Distanz',
+          'Bewerbungsprozess vereinfachen',
+        ],
+        approach: [
+          'Radikale Vereinfachung der Navigation (Hero Section)',
+          'Visuelle Erklärung der Leistungen statt Textwüsten',
+          'Hervorhebung des Wettbewerbsvorteils (Materiallager)',
+          'Persönlichkeit zeigen (Echte Fotos)',
+          'FAQ zur Vorab-Klärung',
+        ],
+        features: [
+          {
+            title: 'Duale Hero-Section',
+            description: 'Klare Trennung von Kunden und Bewerbern direkt beim Einstieg.',
+          },
+          {
+            title: 'Visuelle Navigation',
+            description: 'Leistungen werden als Kacheln mit Bildern dargestellt.',
+          },
+          {
+            title: 'Materiallager-Showcase',
+            description: 'Prominente Darstellung des Lagerbestands als Vertrauensbeweis.',
+          },
+          {
+            title: 'Bewerbungs-Assistent',
+            description: 'Interaktiver Wizard statt komplizierter Anschreiben.',
+          },
+        ],
+        results: [
+          'Mehr qualifizierte Kundenanfragen',
+          'Moderne Lösung für das Mitarbeiter-Recruiting',
+          'Zeitsparung im Alltag durch CMS und FAQ',
+          'Schnelle Ladezeiten auch mobil',
+        ],
+        techStack: ['TinaCMS', 'React', 'TypeScript', 'TailwindCSS'],
+        metrics: [
+          { label: 'Zielgruppen', value: '2', comparison: 'Kunden & Bewerber' },
+          { label: 'CMS', value: 'Tina', comparison: 'Volle Kontrolle' },
+          { label: 'Speed', value: 'Fast', comparison: 'Mobil optimiert' },
+          { label: 'Bewerbung', value: 'Einfach', comparison: 'Wizard statt Mail' },
+        ],
+        conclusion: 'Wir haben Ivangs Bedachungen eine digitale Plattform gebaut, die zwei Aufgaben erfüllt: Sie verkauft die Dienstleistung über Vertrauen und Verfügbarkeit und macht den Bewerbungsprozess so einfach wie möglich.',
+      },
+      faqs: [
+        {
+          question: 'Was kostet eine Dachsanierung?',
+          answer: 'Die Kosten variieren je nach Umfang und Material. Wir bieten eine transparente Kostenschätzung nach einer ersten Besichtigung an.',
+        },
+        {
+          question: 'Wie lange dauert eine Dachneudeckung?',
+          answer: 'Dank unseres großen Materiallagers können wir oft schneller starten. Eine typische Einfamilienhaus-Dachsanierung dauert etwa 1-2 Wochen, abhängig vom Wetter.',
+        },
+        {
+          question: 'Gibt es Förderungen für Dachsanierungen?',
+          answer: 'Ja, insbesondere für energetische Sanierungen gibt es staatliche Förderungen (z.B. BAFA, KfW). Wir beraten Sie gerne zu den aktuellen Möglichkeiten.',
+        },
+      ],
       seo: {
-        title: 'Case Study: Matcha Partners – B2B Website aus Japan | Norddorf',
-        description: 'Wie wir für Matcha Partners eine dreisprachige B2B-Website mit intelligentem Lead-Formular gebaut haben. Fokus auf Klarheit statt Feature-Overload.',
+        title: 'Case Study: Relaunch Ivangs Bedachungen | Norddorf',
+        description: 'Relaunch der Website für Ivangs Bedachungen. Fokus auf Kundenanfragen, Recruiting und einfache Pflege mit TinaCMS.',
       },
     },
   ],
@@ -228,9 +329,103 @@ export const caseStudies: LocalizedCaseStudies = {
         ],
         conclusion: 'The Matcha Partners website proves: Less is more. Through consistent focus on what matters, we created a platform that makes complex B2B requirements understandable—in three languages, with built-in flexibility for the future.',
       },
+    },
+    {
+      slug: 'ivangs-bedachungen',
+      title: 'Relaunch Ivangs Bedachungen',
+      client: 'Ivangs Bedachungen',
+      industry: 'Handwerk / Dachdecker',
+      year: '2025',
+      heroImage: '/images/Ivangs-Bedachungen/Bild-1-hero.png',
+      images: {
+        hero: '/images/Ivangs-Bedachungen/Bild-1-hero.png',
+        services: '/images/Ivangs-Bedachungen/Bild-2-services.png',
+        material: '/images/Ivangs-Bedachungen/Bild-3-material.png',
+        ceo: '/images/Ivangs-Bedachungen/Bild-4-ceo.png',
+        faq: '/images/Ivangs-Bedachungen/Bild-5-faq.png',
+        cta: '/images/Ivangs-Bedachungen/Bild-6-cta.png',
+        contact: '/images/Ivangs-Bedachungen/bild-7-contact.png',
+      },
+      color: '#E30613',
+      icon: 'building',
+      preview: {
+        problem: 'Fachliche Exzellenz nicht digital sichtbar.',
+        solution: 'Moderne Web-Plattform mit Fokus auf Kundenanfragen und Recruiting.',
+        result: 'Mehr qualifizierte Kundenanfragen und eine moderne Lösung für das Mitarbeiter-Recruiting.',
+        metric: '2',
+        metricLabel: 'Zielgruppen',
+      },
+      content: {
+        intro: 'Ivangs Bedachungen ist fachlich top aufgestellt. Unsere Aufgabe war es, diesen Standard ins Digitale zu übertragen. Die neue Seite sollte vor allem mobil funktionieren, schnell sein und dem Nutzer sofort zeigen, woran er ist.',
+        story: {
+          hook: 'Auf der Startseite entscheiden sich Besucher innerhalb von Sekunden. Wir haben die Navigation radikal vereinfacht. Wir trennen die Besucher direkt beim Einstieg: Links Kunden, Rechts Bewerber.',
+          turningPoint: 'Niemand liest gerne lange Textblöcke. Wir haben das visuell gelöst. Jeder Fachbereich wird als eigene Kachel mit passendem Bild dargestellt.',
+          transformation: 'Wir haben die Seite nicht nur optisch modernisiert, sondern Funktionen eingebaut, die dem Betrieb im Alltag Zeit sparen. Unabhängigkeit durch TinaCMS, Bewerbung leicht gemacht, Geschwindigkeit.',
+        },
+        challenge: [
+          'Fachlichen Standard ins Digitale übertragen',
+          'Mobile Optimierung und Geschwindigkeit',
+          'Klare Nutzerführung für zwei Zielgruppen (Kunden & Bewerber)',
+          'Vertrauen aufbauen trotz Distanz',
+          'Bewerbungsprozess vereinfachen',
+        ],
+        approach: [
+          'Radikale Vereinfachung der Navigation (Hero Section)',
+          'Visuelle Erklärung der Leistungen statt Textwüsten',
+          'Hervorhebung des Wettbewerbsvorteils (Materiallager)',
+          'Persönlichkeit zeigen (Echte Fotos)',
+          'FAQ zur Vorab-Klärung',
+        ],
+        features: [
+          {
+            title: 'Duale Hero-Section',
+            description: 'Klare Trennung von Kunden und Bewerbern direkt beim Einstieg.',
+          },
+          {
+            title: 'Visuelle Navigation',
+            description: 'Leistungen werden als Kacheln mit Bildern dargestellt.',
+          },
+          {
+            title: 'Materiallager-Showcase',
+            description: 'Prominente Darstellung des Lagerbestands als Vertrauensbeweis.',
+          },
+          {
+            title: 'Bewerbungs-Assistent',
+            description: 'Interaktiver Wizard statt komplizierter Anschreiben.',
+          },
+        ],
+        results: [
+          'Mehr qualifizierte Kundenanfragen',
+          'Moderne Lösung für das Mitarbeiter-Recruiting',
+          'Zeitsparung im Alltag durch CMS und FAQ',
+          'Schnelle Ladezeiten auch mobil',
+        ],
+        techStack: ['TinaCMS', 'React', 'TypeScript', 'TailwindCSS'],
+        metrics: [
+          { label: 'Zielgruppen', value: '2', comparison: 'Kunden & Bewerber' },
+          { label: 'CMS', value: 'Tina', comparison: 'Volle Kontrolle' },
+          { label: 'Speed', value: 'Fast', comparison: 'Mobil optimiert' },
+          { label: 'Bewerbung', value: 'Einfach', comparison: 'Wizard statt Mail' },
+        ],
+        conclusion: 'Wir haben Ivangs Bedachungen eine digitale Plattform gebaut, die zwei Aufgaben erfüllt: Sie verkauft die Dienstleistung über Vertrauen und Verfügbarkeit und macht den Bewerbungsprozess so einfach wie möglich.',
+      },
+      faqs: [
+        {
+          question: 'Was kostet eine Dachsanierung?',
+          answer: 'Die Kosten variieren je nach Umfang und Material. Wir bieten eine transparente Kostenschätzung nach einer ersten Besichtigung an.',
+        },
+        {
+          question: 'Wie lange dauert eine Dachneudeckung?',
+          answer: 'Dank unseres großen Materiallagers können wir oft schneller starten. Eine typische Einfamilienhaus-Dachsanierung dauert etwa 1-2 Wochen, abhängig vom Wetter.',
+        },
+        {
+          question: 'Gibt es Förderungen für Dachsanierungen?',
+          answer: 'Ja, insbesondere für energetische Sanierungen gibt es staatliche Förderungen (z.B. BAFA, KfW). Wir beraten Sie gerne zu den aktuellen Möglichkeiten.',
+        },
+      ],
       seo: {
-        title: 'Case Study: Matcha Partners – B2B Website from Japan | Norddorf',
-        description: 'How we built a trilingual B2B website with intelligent lead forms for Matcha Partners. Focus on clarity over feature overload.',
+        title: 'Case Study: Relaunch Ivangs Bedachungen | Norddorf',
+        description: 'Relaunch der Website für Ivangs Bedachungen. Fokus auf Kundenanfragen, Recruiting und einfache Pflege mit TinaCMS.',
       },
     },
   ],
@@ -305,9 +500,103 @@ export const caseStudies: LocalizedCaseStudies = {
         ],
         conclusion: 'Matcha Partnersのウェブサイトは証明しています：少ないほど多い。重要なことへの一貫した集中により、複雑なB2B要件を理解しやすくするプラットフォームを作成しました——3言語で、将来のための柔軟性を内蔵しています。',
       },
+    },
+    {
+      slug: 'ivangs-bedachungen',
+      title: 'Relaunch Ivangs Bedachungen',
+      client: 'Ivangs Bedachungen',
+      industry: 'Handwerk / Dachdecker',
+      year: '2025',
+      heroImage: '/images/Ivangs-Bedachungen/Bild-1-hero.png',
+      images: {
+        hero: '/images/Ivangs-Bedachungen/Bild-1-hero.png',
+        services: '/images/Ivangs-Bedachungen/Bild-2-services.png',
+        material: '/images/Ivangs-Bedachungen/Bild-3-material.png',
+        ceo: '/images/Ivangs-Bedachungen/Bild-4-ceo.png',
+        faq: '/images/Ivangs-Bedachungen/Bild-5-faq.png',
+        cta: '/images/Ivangs-Bedachungen/Bild-6-cta.png',
+        contact: '/images/Ivangs-Bedachungen/bild-7-contact.png',
+      },
+      color: '#E30613',
+      icon: 'building',
+      preview: {
+        problem: 'Fachliche Exzellenz nicht digital sichtbar.',
+        solution: 'Moderne Web-Plattform mit Fokus auf Kundenanfragen und Recruiting.',
+        result: 'Mehr qualifizierte Kundenanfragen und eine moderne Lösung für das Mitarbeiter-Recruiting.',
+        metric: '2',
+        metricLabel: 'Zielgruppen',
+      },
+      content: {
+        intro: 'Ivangs Bedachungen ist fachlich top aufgestellt. Unsere Aufgabe war es, diesen Standard ins Digitale zu übertragen. Die neue Seite sollte vor allem mobil funktionieren, schnell sein und dem Nutzer sofort zeigen, woran er ist.',
+        story: {
+          hook: 'Auf der Startseite entscheiden sich Besucher innerhalb von Sekunden. Wir haben die Navigation radikal vereinfacht. Wir trennen die Besucher direkt beim Einstieg: Links Kunden, Rechts Bewerber.',
+          turningPoint: 'Niemand liest gerne lange Textblöcke. Wir haben das visuell gelöst. Jeder Fachbereich wird als eigene Kachel mit passendem Bild dargestellt.',
+          transformation: 'Wir haben die Seite nicht nur optisch modernisiert, sondern Funktionen eingebaut, die dem Betrieb im Alltag Zeit sparen. Unabhängigkeit durch TinaCMS, Bewerbung leicht gemacht, Geschwindigkeit.',
+        },
+        challenge: [
+          'Fachlichen Standard ins Digitale übertragen',
+          'Mobile Optimierung und Geschwindigkeit',
+          'Klare Nutzerführung für zwei Zielgruppen (Kunden & Bewerber)',
+          'Vertrauen aufbauen trotz Distanz',
+          'Bewerbungsprozess vereinfachen',
+        ],
+        approach: [
+          'Radikale Vereinfachung der Navigation (Hero Section)',
+          'Visuelle Erklärung der Leistungen statt Textwüsten',
+          'Hervorhebung des Wettbewerbsvorteils (Materiallager)',
+          'Persönlichkeit zeigen (Echte Fotos)',
+          'FAQ zur Vorab-Klärung',
+        ],
+        features: [
+          {
+            title: 'Duale Hero-Section',
+            description: 'Klare Trennung von Kunden und Bewerbern direkt beim Einstieg.',
+          },
+          {
+            title: 'Visuelle Navigation',
+            description: 'Leistungen werden als Kacheln mit Bildern dargestellt.',
+          },
+          {
+            title: 'Materiallager-Showcase',
+            description: 'Prominente Darstellung des Lagerbestands als Vertrauensbeweis.',
+          },
+          {
+            title: 'Bewerbungs-Assistent',
+            description: 'Interaktiver Wizard statt komplizierter Anschreiben.',
+          },
+        ],
+        results: [
+          'Mehr qualifizierte Kundenanfragen',
+          'Moderne Lösung für das Mitarbeiter-Recruiting',
+          'Zeitsparung im Alltag durch CMS und FAQ',
+          'Schnelle Ladezeiten auch mobil',
+        ],
+        techStack: ['TinaCMS', 'React', 'TypeScript', 'TailwindCSS'],
+        metrics: [
+          { label: 'Zielgruppen', value: '2', comparison: 'Kunden & Bewerber' },
+          { label: 'CMS', value: 'Tina', comparison: 'Volle Kontrolle' },
+          { label: 'Speed', value: 'Fast', comparison: 'Mobil optimiert' },
+          { label: 'Bewerbung', value: 'Einfach', comparison: 'Wizard statt Mail' },
+        ],
+        conclusion: 'Wir haben Ivangs Bedachungen eine digitale Plattform gebaut, die zwei Aufgaben erfüllt: Sie verkauft die Dienstleistung über Vertrauen und Verfügbarkeit und macht den Bewerbungsprozess so einfach wie möglich.',
+      },
+      faqs: [
+        {
+          question: 'Was kostet eine Dachsanierung?',
+          answer: 'Die Kosten variieren je nach Umfang und Material. Wir bieten eine transparente Kostenschätzung nach einer ersten Besichtigung an.',
+        },
+        {
+          question: 'Wie lange dauert eine Dachneudeckung?',
+          answer: 'Dank unseres großen Materiallagers können wir oft schneller starten. Eine typische Einfamilienhaus-Dachsanierung dauert etwa 1-2 Wochen, abhängig vom Wetter.',
+        },
+        {
+          question: 'Gibt es Förderungen für Dachsanierungen?',
+          answer: 'Ja, insbesondere für energetische Sanierungen gibt es staatliche Förderungen (z.B. BAFA, KfW). Wir beraten Sie gerne zu den aktuellen Möglichkeiten.',
+        },
+      ],
       seo: {
-        title: '導入事例：Matcha Partners – 日本からのB2Bウェブサイト | Norddorf',
-        description: 'Matcha Partnersのためにインテリジェントなリードフォームを備えた3言語B2Bウェブサイトを構築した方法。機能過多より明確さを重視。',
+        title: 'Case Study: Relaunch Ivangs Bedachungen | Norddorf',
+        description: 'Relaunch der Website für Ivangs Bedachungen. Fokus auf Kundenanfragen, Recruiting und einfache Pflege mit TinaCMS.',
       },
     },
   ],
