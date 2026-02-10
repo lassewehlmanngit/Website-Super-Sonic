@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <!-- Homepage (Landing Page) -->
+
   <url>
     <loc>https://norddorf.com/de</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de"/>
-    <lastmod>2026-02-05</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -16,36 +16,29 @@
     <loc>https://norddorf.com/en</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de"/>
-    <lastmod>2026-02-05</lastmod>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- Case Studies / Projects -->
   <url>
-    <loc>https://norddorf.com/de/projekte/matcha-partners</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/projekte/matcha-partners"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/projects/matcha-partners"/>
-    <lastmod>2026-02-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://norddorf.com/ja</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
-  <url>
-    <loc>https://norddorf.com/en/projects/matcha-partners</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/projekte/matcha-partners"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/projects/matcha-partners"/>
-    <lastmod>2026-02-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Legal Pages -->
   <url>
     <loc>https://norddorf.com/de/impressum</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/impressum"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/impressum"/>
-    <lastmod>2026-02-05</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/tokushoho"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/impressum"/>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -53,7 +46,19 @@
     <loc>https://norddorf.com/en/impressum</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/impressum"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/impressum"/>
-    <lastmod>2026-02-05</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/tokushoho"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/impressum"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://norddorf.com/ja/tokushoho</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/impressum"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/impressum"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/tokushoho"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/impressum"/>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -61,7 +66,9 @@
     <loc>https://norddorf.com/de/datenschutz</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/datenschutz"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/privacy"/>
-    <lastmod>2026-02-05</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/datenschutz"/>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -69,9 +76,140 @@
     <loc>https://norddorf.com/en/privacy</loc>
     <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/datenschutz"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/privacy"/>
-    <lastmod>2026-02-05</lastmod>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/datenschutz"/>
+    <lastmod>2026-02-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-
+  <url>
+    <loc>https://norddorf.com/ja/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/datenschutz"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/datenschutz"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://norddorf.com/de/agb</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/agb"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/agb"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://norddorf.com/en/terms</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/agb"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/agb"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://norddorf.com/ja/terms</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/agb"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/agb"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://norddorf.com/business-facts</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/business-facts"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/business-facts"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/business-facts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/business-facts"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://norddorf.com/business-facts</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/business-facts"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/business-facts"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/business-facts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/business-facts"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://norddorf.com/business-facts</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/business-facts"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/business-facts"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/business-facts"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/business-facts"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://norddorf.com/de/projekte/matcha-partners</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/projekte/matcha-partners"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/projects/matcha-partners"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/projects/matcha-partners"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/projekte/matcha-partners"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://norddorf.com/en/projects/matcha-partners</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/projekte/matcha-partners"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/projects/matcha-partners"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/projects/matcha-partners"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/projekte/matcha-partners"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://norddorf.com/ja/projects/matcha-partners</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/projekte/matcha-partners"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/projects/matcha-partners"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/projects/matcha-partners"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/projekte/matcha-partners"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://norddorf.com/de/projekte/ivangs-bedachungen</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/projekte/ivangs-bedachungen"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/projects/ivangs-bedachungen"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/projects/ivangs-bedachungen"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/projekte/ivangs-bedachungen"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://norddorf.com/en/projects/ivangs-bedachungen</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/projekte/ivangs-bedachungen"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/projects/ivangs-bedachungen"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/projects/ivangs-bedachungen"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/projekte/ivangs-bedachungen"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://norddorf.com/ja/projects/ivangs-bedachungen</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://norddorf.com/de/projekte/ivangs-bedachungen"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://norddorf.com/en/projects/ivangs-bedachungen"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://norddorf.com/ja/projects/ivangs-bedachungen"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://norddorf.com/de/projekte/ivangs-bedachungen"/>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
