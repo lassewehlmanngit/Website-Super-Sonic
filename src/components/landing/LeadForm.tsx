@@ -272,17 +272,16 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
     setSubmitError(null);
     
     try {
-      // Remove trailing slash from VITE_API_URL if present to avoid double slashes
-      const baseUrl = (import.meta.env.VITE_API_URL || 'http://localhost:3001').replace(/\/$/, '');
-      const response = await fetch(`${baseUrl}/api/send-email`, {
+      const response = await fetch('https://submit-form.com/8vj9iQNx8', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
           type: 'Lead Form',
           lang,
-          data: formData
+          ...formData,
         }),
       });
 
