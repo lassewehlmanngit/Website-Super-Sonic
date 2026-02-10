@@ -158,6 +158,11 @@ export const caseStudies: LocalizedCaseStudies = {
         ],
         conclusion: 'Die Matcha Partners Website beweist: Weniger ist mehr. Durch konsequenten Fokus auf das Wesentliche entstand eine Plattform, die komplexe B2B-Anforderungen verständlich macht – in drei Sprachen, mit eingebauter Flexibilität für die Zukunft.',
       },
+      faqs: [],
+      seo: {
+        title: 'Case Study: Matcha Partners | B2B Matcha aus Japan',
+        description: 'Wie wir für Matcha Partners eine dreisprachige B2B-Plattform mit intelligenter Lead-Qualifizierung entwickelt haben.',
+      },
     },
     {
       slug: 'ivangs-bedachungen',
@@ -329,6 +334,11 @@ export const caseStudies: LocalizedCaseStudies = {
         ],
         conclusion: 'The Matcha Partners website proves: Less is more. Through consistent focus on what matters, we created a platform that makes complex B2B requirements understandable—in three languages, with built-in flexibility for the future.',
       },
+      faqs: [],
+      seo: {
+        title: 'Case Study: Matcha Partners | B2B Matcha from Japan',
+        description: 'How we built a trilingual B2B platform with intelligent lead qualification for Matcha Partners.',
+      },
     },
     {
       slug: 'ivangs-bedachungen',
@@ -499,6 +509,11 @@ export const caseStudies: LocalizedCaseStudies = {
           { label: 'フォームタイプ', value: '2+', comparison: 'カフェ vs. 企業' },
         ],
         conclusion: 'Matcha Partnersのウェブサイトは証明しています：少ないほど多い。重要なことへの一貫した集中により、複雑なB2B要件を理解しやすくするプラットフォームを作成しました——3言語で、将来のための柔軟性を内蔵しています。',
+      },
+      faqs: [],
+      seo: {
+        title: 'ケーススタディ: Matcha Partners | 日本からのB2B抹茶',
+        description: 'Matcha Partnersのために、インテリジェントなリード選別機能を備えた3言語対応のB2Bプラットフォームを構築した方法。',
       },
     },
     {
