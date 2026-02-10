@@ -24,15 +24,15 @@ export const TakeFear: React.FC<TakeFearProps> = ({ lang }) => {
           <p className="fluid-body text-zinc-400 leading-relaxed mb-10">
             {isJa ? (
               <>
-                問題やエラーは日常の一部です（誰もが経験します）。私たちは約束を守り、機能するウェブサイトを構築します。<strong className="text-white">エラーや問題が発生した場合は、一緒に解決します。</strong>
+                問題は起こります。私たちが解決します。<strong className="text-white">何かあれば、すぐに対応します。</strong>
               </>
             ) : isDe ? (
               <>
-                Probleme und Fehler gehören zum Alltag (und wir alle kennen das). Wir stehen zu unserem Wort und bauen dir eine Webseite die funktioniert. <strong className="text-white">Tauchen Fehler und Probleme auf, lösen wir diese gemeinsam.</strong>
+                Probleme passieren. Wir lösen sie. <strong className="text-white">Wenn etwas nicht läuft, kümmern wir uns darum. Punkt.</strong>
               </>
             ) : (
               <>
-                Problems and errors are part of everyday life (and we all know it). We stand by our word and build you a website that works. <strong className="text-white">If errors and problems occur, we solve them together.</strong>
+                Problems happen. We fix them. <strong className="text-white">If something breaks, we're here to solve it. Simple as that.</strong>
               </>
             )}
           </p>

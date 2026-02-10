@@ -32,10 +32,6 @@ export const EngineeringStory: React.FC<EngineeringStoryProps> = ({ lang }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left: Content */}
           <div className="reveal">
-            <div className="inline-block px-4 py-1 rounded-full border border-sonic-orange/30 bg-orange-950/50 text-sonic-orange font-mono fluid-xs uppercase tracking-widest mb-6">
-              {isJa ? "Sonicエンジン" : isDe ? "Der Sonic Motor" : "The Sonic Engine"}
-            </div>
-            
             <h2 className="fluid-section-title font-bold mb-6 tracking-tight">
               4 {isJa ? "年間" : isDe ? "Jahre" : "Years"}. <br />
               <span className="text-zinc-500">56 {isJa ? "回の改良" : isDe ? "Iterationen" : "Iterations"}.</span>

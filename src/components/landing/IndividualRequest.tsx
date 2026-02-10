@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail } from 'lucide-react';
+import { Mail, Calendar } from 'lucide-react';
 
 interface IndividualRequestProps {
   lang: 'de' | 'en' | 'ja';
@@ -20,6 +20,10 @@ export const IndividualRequest: React.FC<IndividualRequestProps> = ({ lang }) =>
       : isDe
       ? "Schreib uns an hey@norddorf.com und wir melden uns innerhalb weniger Stunden."
       : "Write us at hey@norddorf.com and we will get back to you within a few hours."
+  };
+
+  const handleBookCall = () => {
+    window.open('https://calendly.com/lasse-norddorf/30min', '_blank');
   };
 
   return (
@@ -48,6 +52,16 @@ export const IndividualRequest: React.FC<IndividualRequestProps> = ({ lang }) =>
             </>
           )}
         </p>
+
+        <div className="flex justify-center">
+          <button
+            onClick={handleBookCall}
+            className="inline-flex items-center gap-2 text-zinc-500 hover:text-sonic-orange font-medium transition-colors fluid-sm"
+          >
+            <Calendar size={16} />
+            {isJa ? "または、通話を予約する" : isDe ? "Oder buche direkt einen Call" : "Or book a call directly"}
+          </button>
+        </div>
       </div>
     </section>
   );

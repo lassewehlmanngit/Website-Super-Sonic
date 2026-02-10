@@ -11,7 +11,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ lang, onScrollToForm }) => {
   const isJa = lang === 'ja';
 
   const handleBookCall = () => {
-    window.open('https://calendar.google.com/', '_blank');
+    window.open('https://calendly.com/lasse-norddorf/30min', '_blank');
   };
 
   return (

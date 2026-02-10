@@ -5,7 +5,6 @@ import { Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
 const Navigation = lazy(() => import('./components/organisms/Navigation').then(module => ({ default: module.Navigation })));
 const MobileNavigation = lazy(() => import('./components/layout/MobileNavigation').then(module => ({ default: module.MobileNavigation })));
 const Footer = lazy(() => import('./components/organisms/Footer').then(module => ({ default: module.Footer })));
-const ExitIntentPopup = lazy(() => import('./components/global/ExitIntentPopup').then(module => ({ default: module.ExitIntentPopup })));
 
 // Lazy load page components
 const LandingPage = lazy(() => import('./pages/LandingPage').then(module => ({ default: module.LandingPage })));
@@ -79,9 +78,6 @@ const Layout = () => {
           <Footer />
         </Suspense>
       </div>
-      <Suspense fallback={null}>
-        <ExitIntentPopup />
-      </Suspense>
     </div>
   );
 };

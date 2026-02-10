@@ -10,7 +10,7 @@ export const FormSuccess: React.FC<FormSuccessProps> = ({ lang }) => {
   const isJa = lang === 'ja';
 
   const handleBookCall = () => {
-    window.open('https://calendar.google.com/', '_blank');
+    window.open('https://calendly.com/lasse-norddorf/30min', '_blank');
   };
 
   return (

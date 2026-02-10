@@ -2,18 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import { SEO } from '../components/SEO';
 import {
   LandingHero,
-  StoryBridge,
   ClientMarquee,
   ProjectShowcase,
-  BuilderTrap,
-  AntiBloat,
   ComparisonTable,
   EngineeringStory,
   CEOLetter,
-  TeamSection,
-  CaseStudies,
+  Testimonials,
   TakeFear,
-  ProcessVideo,
   ProcessSteps,
   DigitalSovereignty,
   FutureProof,
@@ -89,20 +84,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
       {/* 1. Hero Section */}
       <LandingHero lang={lang} onScrollToForm={scrollToForm} />
 
-      {/* 1.5 Story Bridge - The longer narrative intro */}
-      <StoryBridge lang={lang} />
-
       {/* 2. Social Proof - Client Marquee */}
       <ClientMarquee lang={lang} />
 
       {/* 2.5. Project Showcase Carousel */}
       <ProjectShowcase lang={lang} />
-
-      {/* 3. Die Website-Baukasten-Falle */}
-      <BuilderTrap lang={lang} />
-
-      {/* 4. Das "Anti-Bloat" Versprechen */}
-      <AntiBloat lang={lang} />
 
       {/* 5. Vergleich: Wir vs. "Oldschool" Agenturen */}
       <ComparisonTable lang={lang} />
@@ -113,17 +99,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
       {/* 7. CEO Letter */}
       <CEOLetter lang={lang} />
 
-      {/* 8. Das Team */}
-      <TeamSection lang={lang} />
-
-      {/* 9. Case Studies */}
-      <CaseStudies lang={lang} />
+      {/* 9. Testimonials */}
+      <Testimonials lang={lang} />
 
       {/* 10. Take the Fear */}
       <TakeFear lang={lang} />
-
-      {/* 11. Prozess-Video */}
-      <ProcessVideo lang={lang} />
 
       {/* 12. Process Steps */}
       <ProcessSteps lang={lang} />

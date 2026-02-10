@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navigation } from '../organisms/Navigation';
 import { Footer } from '../organisms/Footer';
-import { ExitIntentModal } from '../features/ExitIntentModal';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -15,7 +14,6 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         {children}
       </main>
       <Footer />
-      <ExitIntentModal />
     </div>
   );
 };

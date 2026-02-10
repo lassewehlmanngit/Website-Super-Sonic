@@ -17,6 +17,9 @@ services:
       - key: VITE_KEYSTATIC_API_URL
         sync: false
         value: https://super-sonic-keystatic-api.onrender.com
+      - key: VITE_API_URL
+        sync: false
+        value: https://super-sonic-keystatic-api.onrender.com
 
   # Backend: Keystatic API Server
   - type: web
