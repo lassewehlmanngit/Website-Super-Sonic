@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Star, CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Star, CheckCircle2, ChevronDown, ChevronUp, Quote } from 'lucide-react';
 
 interface TestimonialsProps {
   lang: 'de' | 'en' | 'ja';
@@ -17,6 +17,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ lang }) => {
   const isDe = lang === 'de';
   const isJa = lang === 'ja';
   const [isExpanded, setIsExpanded] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const title = isJa ? "お客様の声" : isDe ? "Was Kunden sagen" : "What Clients Say";
   const subtitle = isJa 
@@ -27,6 +28,25 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ lang }) => {
 
   const showMoreText = isJa ? "もっと見る" : isDe ? "Mehr anzeigen" : "Show more";
   const showLessText = isJa ? "閉じる" : isDe ? "Weniger anzeigen" : "Show less";
+
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = sectionRef.current?.querySelectorAll('.reveal');
+    elements?.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [lang]);
 
   // Expanded dataset to demonstrate masonry layout (12 items)
   const testimonials: Testimonial[] = isJa ? [
@@ -287,7 +307,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ lang }) => {
   ];
 
   return (
-    <section id="testimonials" className="fluid-section bg-zinc-50 relative overflow-hidden">
+    <section id="testimonials" className="fluid-section bg-zinc-50 relative overflow-hidden" ref={sectionRef}>
       {/* Background decoration - subtle grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
@@ -317,41 +337,45 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ lang }) => {
             {testimonials.map((testimonial, i) => (
               <div 
                 key={i} 
-                className="break-inside-avoid bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm hover:shadow-md transition-shadow duration-300"
+                className="group reveal break-inside-avoid bg-white p-8 rounded-2xl border border-zinc-200/60 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] hover:shadow-lg hover:shadow-sonic-orange/5 hover:border-sonic-orange/30 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
+                style={{ transitionDelay: `${(i % 3) * 100}ms` }}
               >
+                 {/* Decorative Quote Icon */}
+                 <Quote className="absolute top-6 right-6 text-zinc-50 opacity-0 group-hover:opacity-100 group-hover:text-sonic-orange/5 transition-all duration-500 scale-75 group-hover:scale-150 transform rotate-12" size={80} />
+
                 {/* Header */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex gap-1 text-sonic-orange">
+                <div className="flex items-center justify-between mb-6 relative z-10">
+                  <div className="flex gap-1 text-zinc-200 group-hover:text-sonic-orange transition-colors duration-300">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={14} fill="currentColor" />
+                      <Star key={i} size={16} fill="currentColor" />
                     ))}
                   </div>
                   {testimonial.verified && (
-                    <div className="flex items-center gap-1 text-zinc-400 fluid-xs" title={isJa ? "認証済みクライアント" : isDe ? "Verifizierter Kunde" : "Verified Client"}>
-                      <CheckCircle2 size={14} className="text-emerald-500" />
-                      <span className="hidden sm:inline">{isJa ? "認証済み" : isDe ? "Verifiziert" : "Verified"}</span>
+                    <div className="flex items-center gap-1.5 text-zinc-400 fluid-xs bg-zinc-50 px-2 py-1 rounded-full border border-zinc-100 group-hover:border-zinc-200 transition-colors" title={isJa ? "認証済みクライアント" : isDe ? "Verifizierter Kunde" : "Verified Client"}>
+                      <CheckCircle2 size={12} className="text-emerald-500" />
+                      <span className="hidden sm:inline font-medium">{isJa ? "認証済み" : isDe ? "Verifiziert" : "Verified"}</span>
                     </div>
                   )}
                 </div>
                 
                 {/* Quote */}
-                <blockquote className="mb-6">
-                  <p className="text-zinc-700 fluid-base leading-relaxed">
+                <blockquote className="mb-8 relative z-10">
+                  <p className="text-zinc-700 fluid-base leading-relaxed font-medium">
                     "{testimonial.quote}"
                   </p>
                 </blockquote>
 
                 {/* Author */}
-                <div className="flex items-center gap-3 pt-4 border-t border-zinc-50">
-                  <div className="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center text-zinc-400 font-bold fluid-base shrink-0">
+                <div className="flex items-center gap-4 pt-6 border-t border-zinc-100 group-hover:border-sonic-orange/10 transition-colors relative z-10">
+                  <div className="w-12 h-12 bg-zinc-100 group-hover:bg-sonic-orange/10 rounded-full flex items-center justify-center text-zinc-400 group-hover:text-sonic-orange font-bold fluid-base shrink-0 transition-colors duration-300">
                     {testimonial.author.charAt(0)}
                   </div>
                   <div>
-                    <div className="font-bold text-zinc-900 fluid-sm leading-tight">
+                    <div className="font-bold text-zinc-900 fluid-sm leading-tight mb-0.5">
                       {testimonial.author}
                     </div>
                     <div className="text-zinc-500 fluid-xs leading-tight">
-                      {testimonial.role}, {testimonial.company}
+                      {testimonial.role}, <span className="text-zinc-400">{testimonial.company}</span>
                     </div>
                   </div>
                 </div>
@@ -361,15 +385,15 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ lang }) => {
 
           {/* Gradient Fade Overlay (only when collapsed) */}
           {!isExpanded && (
-            <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-zinc-50 via-zinc-50/80 to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-zinc-50 via-zinc-50/90 to-transparent pointer-events-none" />
           )}
         </div>
 
         {/* Show More / Less Button */}
-        <div className="mt-8 text-center relative z-20">
+        <div className="mt-12 text-center relative z-20 reveal delay-200">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="inline-flex items-center gap-2 bg-white border border-zinc-200 text-zinc-700 hover:text-zinc-900 hover:border-zinc-300 px-6 py-3 rounded-full font-medium transition-all shadow-sm hover:shadow-md fluid-base group"
+            className="inline-flex items-center gap-2 bg-white border border-zinc-200 text-zinc-700 hover:text-sonic-orange hover:border-sonic-orange/30 px-8 py-4 rounded-full font-medium transition-all shadow-sm hover:shadow-lg hover:shadow-sonic-orange/10 fluid-base group"
           >
             {isExpanded ? (
               <>

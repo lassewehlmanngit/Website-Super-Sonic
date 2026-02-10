@@ -8,7 +8,7 @@ import {
   MidSectionCTA,
   EngineeringStory,
   CEOLetter,
-  Testimonials,
+  // Testimonials,
   TakeFear,
   ProcessSteps,
   DigitalSovereignty,
@@ -104,7 +104,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
       <CEOLetter lang={lang} />
 
       {/* 9. Testimonials */}
-      <Testimonials lang={lang} />
+      {/* <Testimonials lang={lang} /> */}
 
       {/* 10. Take the Fear */}
       <TakeFear lang={lang} />
