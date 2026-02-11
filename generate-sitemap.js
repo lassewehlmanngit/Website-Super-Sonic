@@ -121,7 +121,61 @@ function generateSitemap() {
     console.warn('Could not read case studies data for sitemap.', e);
   }
 
-  // 3. Construct XML
+  // 3. Dynamic CMS Pages (content/pages/*.json)
+  try {
+    const contentDir = toAbsolute('content/pages');
+    if (fs.existsSync(contentDir)) {
+      const files = fs.readdirSync(contentDir);
+      const cmsPages = {}; // Group by slug: { slug: { de: true, en: true, ja: false } }
+      
+      files.forEach(file => {
+        if (!file.endsWith('.json')) return;
+        
+        // Extract slug and lang from filename: {slug}-{lang}.json
+        const match = file.match(/^(.+)-([a-z]{2})\.json$/);
+        
+        if (match) {
+          const [_, slug, lang] = match;
+          
+          // Skip 'home' as it's handled in static groups
+          if (slug === 'home') return;
+          
+          if (!cmsPages[slug]) {
+            cmsPages[slug] = {};
+          }
+          cmsPages[slug][lang] = true;
+        }
+      });
+
+      // Generate entries for each slug
+      Object.keys(cmsPages).forEach(slug => {
+        const langs = cmsPages[slug];
+        const alternates = {};
+        
+        // Build alternates map for this slug
+        if (langs.de) alternates.de = `${BASE_URL}/de/${slug}`;
+        if (langs.en) alternates.en = `${BASE_URL}/en/${slug}`;
+        if (langs.ja) alternates.ja = `${BASE_URL}/ja/${slug}`;
+        
+        // Add entry for each language version that exists
+        Object.keys(alternates).forEach(lang => {
+          urlEntries.push({
+            loc: alternates[lang],
+            alternates,
+            priority: '0.7',
+            changefreq: 'monthly',
+            defaultUrl: alternates['de'] || alternates[Object.keys(alternates)[0]]
+          });
+        });
+      });
+      
+      console.log(`Found ${Object.keys(cmsPages).length} CMS dynamic pages.`);
+    }
+  } catch (e) {
+    console.warn('Could not read content/pages for sitemap.', e);
+  }
+
+  // 4. Construct XML
   const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
@@ -136,7 +190,7 @@ ${Object.entries(entry.alternates).map(([lang, url]) => `    <xhtml:link rel="al
   </url>`).join('')}
 </urlset>`;
 
-  // 4. Write to public/sitemap.xml
+  // 5. Write to public/sitemap.xml
   fs.writeFileSync(toAbsolute('public/sitemap.xml'), sitemapContent);
   console.log('Sitemap generated at public/sitemap.xml');
 }

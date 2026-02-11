@@ -128,12 +128,20 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, lang }) =
         >
           {/* Header with brand color */}
           <div
-            className="relative p-8 pb-12 bg-cover bg-center"
+            className="relative p-8 pb-12 overflow-hidden"
             style={{ 
               backgroundColor: project.color,
-              backgroundImage: project.image ? `url(${project.image})` : undefined
             }}
           >
+            {project.image && (
+              <img 
+                src={project.image} 
+                alt={project.title}
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+              />
+            )}
+
             {/* Overlay if image exists */}
             {project.image && (
               <div className="absolute inset-0 bg-black/40" />
@@ -491,12 +499,19 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ lang }) => {
             >
               {/* Hero area with brand color */}
               <div
-                className="relative h-64 sm:h-72 bg-cover bg-center"
+                className="relative h-64 sm:h-72 overflow-hidden"
                 style={{ 
                   backgroundColor: project.color,
-                  backgroundImage: project.image ? `url(${project.image})` : undefined
                 }}
               >
+                {project.image && (
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                )}
                 {/* Background icon - Only show if no image */}
                 {!project.image && (
                   <IconComponent

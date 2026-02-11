@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense, lazy } from 'react';
-import { Routes, Route, Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet, useLocation, useParams } from 'react-router-dom';
 
 // Lazy load layout components to reduce initial bundle size
 const Navigation = lazy(() => import('./components/organisms/Navigation').then(module => ({ default: module.Navigation })));
@@ -74,10 +74,21 @@ const Layout = () => {
   );
 };
 
+const ProjectRedirect = () => {
+  const { slug } = useParams();
+  return <Navigate to={`/de/projekte/${slug}`} replace />;
+};
+
 const App: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/de" replace />} />
+
+      {/* Redirects for crawler fixes */}
+      <Route path="/de/business-facts" element={<Navigate to="/business-facts" replace />} />
+      <Route path="/de/privacy" element={<Navigate to="/de/datenschutz" replace />} />
+      <Route path="/de/terms" element={<Navigate to="/de/agb" replace />} />
+      <Route path="/de/projects/:slug" element={<ProjectRedirect />} />
 
         {/* TinaCMS Admin - Served automatically at /admin by tinacms dev */}
         {/* No route needed here - Tina handles it */}

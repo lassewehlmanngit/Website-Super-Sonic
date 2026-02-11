@@ -1,0 +1,52 @@
+# Norddorf - High-End Web & Software Design
+
+> Building digital assets for the AI age.
+> Websites & Software. High-End. Instant. 10 Years Experience + AI Power.
+
+## About Us
+Norddorf is a specialized agency for high-end web and software design. We combine 10 years of development experience with modern AI workflows to deliver premium digital products in record time.
+
+We focus on "Code Sovereignty" - meaning our clients own 100% of their code and assets, with no vendor lock-in.
+
+## Services
+
+### 1. Sonic Website (Web Design)
+- **Target**: SMBs (Small & Medium Businesses)
+- **Offer**: Professional website in 14 days.
+- **Price**: €5,600 (Fixed Price)
+- **Features**: 
+  - Custom Design
+  - CMS Integration (TinaCMS)
+  - SEO Optimized
+  - Mobile First
+  - GDPR Compliant
+  - 100% Ownership
+
+### 2. Software & MVPs
+- **Target**: Startups & Enterprise
+- **Offer**: Rapid prototyping and MVP development.
+- **Stack**: React, TypeScript, Node.js, AI Integration.
+- **Philosophy**: Build fast, test early, scale with confidence.
+
+## Key Technologies
+- **Frontend**: React, TypeScript, TailwindCSS
+- **CMS**: TinaCMS (Git-based, no database required)
+- **Performance**: Vite, Prerendering, Edge Delivery
+
+## Core Values
+1. **Speed**: We deliver in days, not months.
+2. **Quality**: High-end design and robust engineering.
+3. **Ownership**: You own everything. No subscriptions, no lock-in.
+4. **Transparency**: Fixed prices, clear timelines.
+
+## Contact
+- **Website**: https://norddorf.com
+- **Email**: hello@norddorf.com
+- **Locations**: Germany, Austria, Switzerland, Japan
+
+## Navigation
+- **Home (DE)**: https://norddorf.com/de
+- **Home (EN)**: https://norddorf.com/en
+- **Home (JP)**: https://norddorf.com/ja
+- **Projects**: https://norddorf.com/de/projekte
+- **Business Facts**: https://norddorf.com/business-facts
