@@ -24,7 +24,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ lang, onScrollToForm }
           </p>
 
           {/* Headline - fluid hero size */}
-          <h1 className="text-white fluid-hero font-bold tracking-tight mb-8 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <h1 className="text-white fluid-hero font-bold tracking-tight mb-8">
             {isJa ? (
               <>
                 成果を出すウェブサイトが{' '}

@@ -23,11 +23,17 @@ export const SEO: React.FC<SEOProps> = ({
   const location = useLocation();
   const baseUrl = 'https://norddorf.com';
   const currentPath = path || location.pathname;
-  const fullUrl = `${baseUrl}${currentPath}`;
+  // Normalize path: remove index.html/php and trailing slashes (except root)
+  const normalizedPath = currentPath
+    .replace(/\/index\.(html|php)$/, '')
+    .replace(/\/$/, '');
+  
+  const fullUrl = `${baseUrl}${normalizedPath || '/'}`;
   const isDe = lang === 'de';
 
   // Construct alternate links
-  const alternatePath = currentPath.replace(/^\/(de|en|ja)/, '');
+  // Use normalizedPath to ensure alternate links are also clean (no index.html, no trailing slash)
+  const alternatePath = normalizedPath.replace(/^\/(de|en|ja)/, '');
   
   // Schema data
   const localBusinessSchema = {

@@ -67,10 +67,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
       <SEO
         title={
           isJa
-            ? 'Norddorf | 中小企業向けウェブサイト制作 | 14日納品・固定価格・100%所有権'
+            ? 'Norddorf | 中小企業向けウェブサイト制作'
             : isDe
-            ? 'Norddorf | High-End Web & Software für den Mittelstand | Festpreis & Eigentum'
-            : 'Norddorf | High-End Web & Software for SMEs | Fixed Price & Ownership'
+            ? 'Norddorf | Webseiten & Software für den Mittelstand'
+            : 'Norddorf | Websites & Software for SMEs'
         }
         description={
           isJa

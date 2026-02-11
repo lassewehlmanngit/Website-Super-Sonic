@@ -82,13 +82,14 @@ async function prerender() {
       finalHtml = finalHtml.replace('<!--app-html-->', appHtml);
 
       // Remove default metadata to avoid duplicates with Helmet
-      finalHtml = finalHtml.replace(/<title>.*?<\/title>/, '');
-      finalHtml = finalHtml.replace(/<meta name="title" content=".*?" \/>/, '');
-      finalHtml = finalHtml.replace(/<meta name="description" content=".*?" \/>/, '');
-      finalHtml = finalHtml.replace(/<meta property="og:.*?" content=".*?" \/>/g, '');
-      finalHtml = finalHtml.replace(/<meta name="twitter:.*?" content=".*?" \/>/g, '');
-      finalHtml = finalHtml.replace(/<link rel="canonical" href=".*?" \/>/, '');
-      finalHtml = finalHtml.replace(/<link rel="alternate" hreflang=".*?" href=".*?" \/>/g, '');
+      // Use simpler, more robust regexes that handle potential whitespace variations
+      finalHtml = finalHtml.replace(/<title>[\s\S]*?<\/title>/i, '');
+      finalHtml = finalHtml.replace(/<meta\s+name="title"\s+content="[\s\S]*?"\s*\/?>/i, '');
+      finalHtml = finalHtml.replace(/<meta\s+name="description"\s+content="[\s\S]*?"\s*\/?>/i, '');
+      finalHtml = finalHtml.replace(/<meta\s+property="og:[^"]*"\s+content="[\s\S]*?"\s*\/?>/gi, '');
+      finalHtml = finalHtml.replace(/<meta\s+name="twitter:[^"]*"\s+content="[\s\S]*?"\s*\/?>/gi, '');
+      finalHtml = finalHtml.replace(/<link\s+rel="canonical"\s+href="[\s\S]*?"\s*\/?>/i, '');
+      finalHtml = finalHtml.replace(/<link\s+rel="alternate"\s+hreflang="[^"]*"\s+href="[\s\S]*?"\s*\/?>/gi, '');
 
       // Inject Helmet HEAD tags
       const headContent = `
@@ -120,8 +121,27 @@ async function prerender() {
     }
   }
   
-  // Also copy dist/static/index.html to dist/static/404.html for SPA fallback
-  fs.copyFileSync(toAbsolute('dist/static/index.html'), toAbsolute('dist/static/404.html'));
+  // Write the original template (app shell) to 404.html for SPA fallback
+  // This ensures 404s don't flash the German landing page
+  fs.writeFileSync(toAbsolute('dist/static/404.html'), template);
+  console.log('Created 404.html from template');
+
+  // Copy dist/static/de/index.html to dist/static/index.html to serve real content at root
+  // This page will have a canonical tag pointing to /de, which avoids duplicate content issues
+  try {
+    const dePath = toAbsolute('dist/static/de/index.html');
+    const rootPath = toAbsolute('dist/static/index.html');
+    
+    // Check if de/index.html exists before copying
+    if (fs.existsSync(dePath)) {
+      fs.copyFileSync(dePath, rootPath);
+      console.log('Copied /de content to root index.html');
+    } else {
+      console.warn('Could not find /de/index.html to copy to root.');
+    }
+  } catch (e) {
+    console.error('Error copying de/index.html to root:', e);
+  }
 }
 
 prerender();
