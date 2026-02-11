@@ -51,6 +51,8 @@ export interface CaseStudy {
   industry: string;
   year: string;
   heroImage?: string;
+  heroImageWidth?: number;
+  heroImageHeight?: number;
   images?: Record<string, string>;
   color: string;
   icon: 'leaf' | 'truck' | 'scale' | 'server' | 'building' | 'store';
@@ -95,6 +97,8 @@ export const caseStudies: LocalizedCaseStudies = {
       industry: 'B2B Food & Beverage',
       year: '2024',
       heroImage: '/images/matcha-partners-landing-page.png',
+      heroImageWidth: 1920,
+      heroImageHeight: 1080,
       color: '#1B3C1D',
       icon: 'leaf',
       liveUrl: 'https://matcha-partners.com',
@@ -171,6 +175,8 @@ export const caseStudies: LocalizedCaseStudies = {
       industry: 'Handwerk / Dachdecker',
       year: '2025',
       heroImage: '/images/Ivangs-Bedachungen/Bild-1-hero.png',
+      heroImageWidth: 1920,
+      heroImageHeight: 1080,
       images: {
         hero: '/images/Ivangs-Bedachungen/Bild-1-hero.png',
         services: '/images/Ivangs-Bedachungen/Bild-2-services.png',
@@ -271,6 +277,8 @@ export const caseStudies: LocalizedCaseStudies = {
       industry: 'B2B Food & Beverage',
       year: '2024',
       heroImage: '/images/matcha-partners-landing-page.png',
+      heroImageWidth: 1920,
+      heroImageHeight: 1080,
       color: '#1B3C1D',
       icon: 'leaf',
       liveUrl: 'https://matcha-partners.com',
@@ -347,6 +355,8 @@ export const caseStudies: LocalizedCaseStudies = {
       industry: 'Handwerk / Dachdecker',
       year: '2025',
       heroImage: '/images/Ivangs-Bedachungen/Bild-1-hero.png',
+      heroImageWidth: 1920,
+      heroImageHeight: 1080,
       images: {
         hero: '/images/Ivangs-Bedachungen/Bild-1-hero.png',
         services: '/images/Ivangs-Bedachungen/Bild-2-services.png',
@@ -447,6 +457,8 @@ export const caseStudies: LocalizedCaseStudies = {
       industry: 'B2B 食品・飲料',
       year: '2024',
       heroImage: '/images/matcha-partners-landing-page.png',
+      heroImageWidth: 1920,
+      heroImageHeight: 1080,
       color: '#1B3C1D',
       icon: 'leaf',
       liveUrl: 'https://matcha-partners.com',
@@ -523,6 +535,8 @@ export const caseStudies: LocalizedCaseStudies = {
       industry: 'Handwerk / Dachdecker',
       year: '2025',
       heroImage: '/images/Ivangs-Bedachungen/Bild-1-hero.png',
+      heroImageWidth: 1920,
+      heroImageHeight: 1080,
       images: {
         hero: '/images/Ivangs-Bedachungen/Bild-1-hero.png',
         services: '/images/Ivangs-Bedachungen/Bild-2-services.png',

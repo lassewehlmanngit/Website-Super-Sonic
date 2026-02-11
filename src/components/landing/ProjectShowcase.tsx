@@ -35,6 +35,8 @@ interface ShowcaseProject {
   liveUrl?: string;
   caseStudySlug?: string; // If has full case study page
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
 }
 
 // Modal Component
@@ -341,6 +343,8 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ lang }) => {
     liveUrl: cs.liveUrl,
     caseStudySlug: cs.slug,
     image: cs.heroImage,
+    imageWidth: cs.heroImageWidth,
+    imageHeight: cs.heroImageHeight,
   }));
 
   // In Progress projects
@@ -353,32 +357,44 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ lang }) => {
   const totalSlides = allProjects.length;
 
   const updateScrollState = useCallback(() => {
-    const container = scrollRef.current;
-    if (!container) return;
-
-    const scrollLeft = container.scrollLeft;
-    const maxScroll = container.scrollWidth - container.clientWidth;
-
-    setCanScrollLeft(scrollLeft > 10);
-    setCanScrollRight(scrollLeft < maxScroll - 10);
-
-    const cardWidth = container.firstElementChild
-      ? (container.firstElementChild as HTMLElement).offsetWidth + 24
-      : 0;
-    if (cardWidth > 0) {
-      setActiveIndex(Math.round(scrollLeft / cardWidth));
-    }
+    // Scroll state is now handled by IntersectionObserver to avoid forced reflows
   }, []);
 
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
 
-    container.addEventListener('scroll', updateScrollState, { passive: true });
-    updateScrollState();
+    // Use IntersectionObserver to track active slide and scroll state
+    // This avoids querying scrollLeft/offsetWidth which causes forced reflows
+    const options = {
+      root: container,
+      threshold: 0.5, // Trigger when 50% of the item is visible
+    };
 
-    return () => container.removeEventListener('scroll', updateScrollState);
-  }, [updateScrollState]);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = Number(entry.target.getAttribute('data-index'));
+          if (!isNaN(index)) {
+            setActiveIndex(index);
+          }
+        }
+      });
+    }, options);
+
+    const items = container.querySelectorAll('[data-index]');
+    items.forEach((item) => observer.observe(item));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [allProjects.length]);
+
+  // Update button states based on active index
+  useEffect(() => {
+    setCanScrollLeft(activeIndex > 0);
+    setCanScrollRight(activeIndex < totalSlides - 1);
+  }, [activeIndex, totalSlides]);
 
   const scrollTo = (direction: 'left' | 'right') => {
     const container = scrollRef.current;
@@ -489,6 +505,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ lang }) => {
           return (
             <button
               key={project.id}
+              data-index={index}
               onClick={() => setSelectedProject(project)}
               className={`group flex-shrink-0 w-[85vw] sm:w-[60vw] md:w-[45vw] lg:w-[38vw] xl:w-[32vw] snap-start rounded-3xl overflow-hidden transition-all duration-500 hover:scale-[1.02] text-left flex flex-col shadow-sm hover:shadow-xl ${
                 project.status !== 'live' ? 'opacity-75 hover:opacity-100' : ''
@@ -508,6 +525,8 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ lang }) => {
                   <img 
                     src={project.image} 
                     alt={project.title}
+                    width={project.imageWidth}
+                    height={project.imageHeight}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
