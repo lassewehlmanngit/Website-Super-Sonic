@@ -52,6 +52,17 @@ For local development:
 -   Keystatic defaults to **Local Mode** if the GitHub environment variables are missing. Content is saved to `src/content/`.
 -   If you want to test GitHub mode locally, add the env vars to your `.env` file.
 
+## Redirect Rules (SEO)
+
+To avoid duplicate content, add these **Redirect Rules** in the Render Dashboard (Settings → Redirect Rules):
+
+| Source      | Destination | Action   |
+|-------------|-------------|----------|
+| `/index.html` | `/de`       | Redirect |
+| `/index.php`  | `/de`       | Redirect |
+
+This ensures `example.com/index.html` and `example.com/index.php` 301-redirect to the canonical `/de` URL.
+
 ## Troubleshooting
 
 -   **SPA Routing 404s**: If refreshing a page gives a 404, ensure the **Rewrite Rule** is active. `render.yaml` includes a rewrite from `/*` to `/index.html`. If configuring manually in the dashboard, add a Rewrite Rule: Source `/*`, Destination `/index.html`.

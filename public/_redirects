@@ -1,0 +1,4 @@
+# Redirect index.* to canonical URL (avoids duplicate content)
+# Supported by Netlify; for Render add these in Dashboard → Redirect Rules
+/index.html  /de  301
+/index.php   /de  301
