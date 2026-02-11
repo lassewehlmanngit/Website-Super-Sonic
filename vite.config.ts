@@ -137,5 +137,8 @@ export default defineConfig(({ mode, isSsrBuild }) => {
         // Exclude heavy dependencies that are already lazy-loaded
         exclude: ['@react-pdf/renderer', 'tinacms'],
       },
+      ssr: {
+        noExternal: ['react-helmet-async'],
+      },
     };
 });

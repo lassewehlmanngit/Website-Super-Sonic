@@ -59,12 +59,12 @@ export const Privacy: React.FC = () => {
   if (cmsData) {
     return (
       <Section background="paper" className="pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
-        <SEO
-          title={cmsData.seo?.title || cmsData.title || "Datenschutzerklärung | Norddorf"}
-          description={cmsData.seo?.description || "Informationen zur Datenverarbeitung und DSGVO-Konformität bei Norddorf."}
-          lang="de"
-          path="/de/datenschutz"
-        />
+      <SEO
+        title={cmsData.seo?.title || cmsData.title || "Datenschutz & DSGVO | Norddorf Webdesign"}
+        description={cmsData.seo?.description || "Datenschutzerklärung von Norddorf. Wir schützen Ihre Daten nach strengen DSGVO-Standards. Transparente Informationen zur Datenverarbeitung."}
+        lang="de"
+        path="/de/datenschutz"
+      />
 
         <Container className="max-w-3xl relative z-10">
           <Typography variant="h1" className="mb-8 md:mb-12">
@@ -92,8 +92,8 @@ export const Privacy: React.FC = () => {
   return (
     <Section background="paper" className="pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
       <SEO
-        title="Datenschutzerklärung | Norddorf"
-        description="Informationen zur Datenverarbeitung und DSGVO-Konformität bei Norddorf."
+        title="Datenschutz & DSGVO | Norddorf Webdesign"
+        description="Datenschutzerklärung von Norddorf. Wir schützen Ihre Daten nach strengen DSGVO-Standards. Transparente Informationen zur Datenverarbeitung."
         lang="de"
         path="/de/datenschutz"
       />

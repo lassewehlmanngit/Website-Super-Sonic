@@ -5,8 +5,8 @@ export const AGB: React.FC = () => {
   return (
     <div className="bg-paper min-h-screen pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
       <SEO
-        title="AGB | Norddorf"
-        description="Allgemeine Geschäftsbedingungen für Website-Entwicklung und digitale Dienstleistungen."
+        title="Allgemeine Geschäftsbedingungen (AGB) | Norddorf"
+        description="AGB von Norddorf für Webentwicklung und Softwareprojekte. Klare Konditionen für eine faire Zusammenarbeit mit mittelständischen Unternehmen."
         lang="de"
         path="/de/agb"
       />

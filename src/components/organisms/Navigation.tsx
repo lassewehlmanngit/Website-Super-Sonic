@@ -42,6 +42,16 @@ export const Navigation: React.FC = () => {
     }
   };
 
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // If we're already on the home page, scroll to top
+    const currentPath = window.location.pathname;
+    if (currentPath === homeLink || currentPath === '/' || currentPath === '/de' || currentPath === '/en' || currentPath === '/ja') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Otherwise, let the Link component handle navigation (App.tsx will scroll to top on route change)
+  };
+
   return (
     <header 
       className={cn(
@@ -54,6 +64,7 @@ export const Navigation: React.FC = () => {
         
         <Link 
           to={homeLink} 
+          onClick={handleLogoClick}
           className={cn("text-xl font-bold tracking-tighter uppercase transition-colors duration-500 hover:no-underline", logoColor)}
           variant="default"
         >

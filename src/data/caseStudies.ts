@@ -160,8 +160,8 @@ export const caseStudies: LocalizedCaseStudies = {
       },
       faqs: [],
       seo: {
-        title: 'Case Study: Matcha Partners | B2B Matcha aus Japan',
-        description: 'Wie wir für Matcha Partners eine dreisprachige B2B-Plattform mit intelligenter Lead-Qualifizierung entwickelt haben.',
+        title: 'Matcha Partners B2B Plattform | Case Study | Norddorf',
+        description: 'Wie wir für Matcha Partners eine dreisprachige B2B-Plattform mit intelligenter Lead-Qualifizierung entwickelt haben. High-Performance Webdesign für den internationalen Handel.',
       },
     },
     {
@@ -258,8 +258,8 @@ export const caseStudies: LocalizedCaseStudies = {
         },
       ],
       seo: {
-        title: 'Case Study: Relaunch Ivangs Bedachungen | Norddorf',
-        description: 'Relaunch der Website für Ivangs Bedachungen. Fokus auf Kundenanfragen, Recruiting und einfache Pflege mit TinaCMS.',
+        title: 'Ivangs Bedachungen Website Relaunch | Case Study | Norddorf',
+        description: 'Relaunch der Website für Ivangs Bedachungen. Fokus auf Kundenanfragen, Recruiting und einfache Pflege mit TinaCMS. Modernes Handwerker-Marketing.',
       },
     },
   ],
@@ -336,8 +336,8 @@ export const caseStudies: LocalizedCaseStudies = {
       },
       faqs: [],
       seo: {
-        title: 'Case Study: Matcha Partners | B2B Matcha from Japan',
-        description: 'How we built a trilingual B2B platform with intelligent lead qualification for Matcha Partners.',
+        title: 'Matcha Partners B2B Platform | Case Study | Norddorf',
+        description: 'How we built a trilingual B2B platform with intelligent lead qualification for Matcha Partners. High-performance web design for international trade.',
       },
     },
     {
@@ -434,8 +434,8 @@ export const caseStudies: LocalizedCaseStudies = {
         },
       ],
       seo: {
-        title: 'Case Study: Relaunch Ivangs Bedachungen | Norddorf',
-        description: 'Relaunch der Website für Ivangs Bedachungen. Fokus auf Kundenanfragen, Recruiting und einfache Pflege mit TinaCMS.',
+        title: 'Ivangs Bedachungen Website Relaunch | Case Study | Norddorf',
+        description: 'Website relaunch for Ivangs Bedachungen. Focus on customer inquiries, recruiting, and easy maintenance with TinaCMS. Modern craftsman marketing.',
       },
     },
   ],
@@ -610,8 +610,8 @@ export const caseStudies: LocalizedCaseStudies = {
         },
       ],
       seo: {
-        title: 'Case Study: Relaunch Ivangs Bedachungen | Norddorf',
-        description: 'Relaunch der Website für Ivangs Bedachungen. Fokus auf Kundenanfragen, Recruiting und einfache Pflege mit TinaCMS.',
+        title: 'Ivangs Bedachungen Website Relaunch | Case Study | Norddorf',
+        description: 'Website relaunch for Ivangs Bedachungen. Focus on customer inquiries, recruiting, and easy maintenance with TinaCMS. Modern craftsman marketing.',
       },
     },
   ],

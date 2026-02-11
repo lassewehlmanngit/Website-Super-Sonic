@@ -69,15 +69,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({ lang }) => {
           isJa
             ? 'Norddorf | 中小企業向けウェブサイト制作 | 14日納品・固定価格・100%所有権'
             : isDe
-            ? 'Norddorf | Webseiten für den Mittelstand | 14 Tage, Festpreis, 100% Eigentum'
-            : 'Norddorf | Websites for SMBs | 14 Days, Fixed Price, 100% Ownership'
+            ? 'Norddorf | High-End Web & Software für den Mittelstand | Festpreis & Eigentum'
+            : 'Norddorf | High-End Web & Software for SMEs | Fixed Price & Ownership'
         }
         description={
           isJa
             ? '成果を出すウェブサイトを。最短14日で納品、92万円の固定価格、100%お客様の所有物に。中小企業にふさわしいウェブサイトを。'
             : isDe
-            ? 'Webseiten die funktionieren. Maximal 14 Tage Lieferzeit, 100% Eigentum, fester Preis von 5.600€. Der Mittelstand verdient besseres.'
-            : 'Websites that work. Max 14 days delivery, 100% ownership, fixed price of €5,600. SMBs deserve better.'
+            ? 'Webseiten & Software, die verkaufen. 14 Tage Lieferzeit, 100% Code-Eigentum, DSGVO-konform & AI-Ready. Ihr digitaler Partner für den Mittelstand.'
+            : 'Websites & software that sell. 14-day delivery, 100% code ownership, GDPR compliant & AI-ready. Your digital partner for SMEs.'
         }
         lang={lang}
       />

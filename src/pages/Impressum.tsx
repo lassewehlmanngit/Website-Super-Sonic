@@ -7,8 +7,8 @@ export const Impressum: React.FC = () => {
   return (
     <div className="bg-paper min-h-screen pt-32 md:pt-40 pb-16 md:pb-20 relative overflow-hidden">
       <SEO
-        title="Impressum | Norddorf"
-        description="Rechtliche Informationen und Anbieterkennzeichnung für Norddorf."
+        title="Impressum & Rechtliche Angaben | Norddorf Webdesign & Software"
+        description="Offizielles Impressum von Norddorf. Vollständige Anbieterkennzeichnung gemäß TMG. Transparenz und Rechtssicherheit für unsere mittelständischen Kunden."
         lang="de"
         path="/de/impressum"
       />

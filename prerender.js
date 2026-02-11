@@ -74,12 +74,38 @@ async function prerender() {
   
   for (const url of routesToRender) {
     try {
-      const appHtml = await render(url);
+      const { html: appHtml, helmet } = await render(url);
 
-      const html = template.replace(
-        '<!--app-html-->',
-        appHtml
-      );
+      let finalHtml = template;
+      
+      // Inject app content
+      finalHtml = finalHtml.replace('<!--app-html-->', appHtml);
+
+      // Remove default metadata to avoid duplicates with Helmet
+      finalHtml = finalHtml.replace(/<title>.*?<\/title>/, '');
+      finalHtml = finalHtml.replace(/<meta name="title" content=".*?" \/>/, '');
+      finalHtml = finalHtml.replace(/<meta name="description" content=".*?" \/>/, '');
+      finalHtml = finalHtml.replace(/<meta property="og:.*?" content=".*?" \/>/g, '');
+      finalHtml = finalHtml.replace(/<meta name="twitter:.*?" content=".*?" \/>/g, '');
+      finalHtml = finalHtml.replace(/<link rel="canonical" href=".*?" \/>/, '');
+      finalHtml = finalHtml.replace(/<link rel="alternate" hreflang=".*?" href=".*?" \/>/g, '');
+
+      // Inject Helmet HEAD tags
+      const headContent = `
+        ${helmet.title.toString()}
+        ${helmet.meta.toString()}
+        ${helmet.link.toString()}
+        ${helmet.script.toString()}
+      `;
+      
+      finalHtml = finalHtml.replace('</head>', `${headContent}</head>`);
+      
+      // Update HTML lang attribute
+      if (helmet.htmlAttributes) {
+        // Try replacing both de and en defaults just in case
+        finalHtml = finalHtml.replace('<html lang="de">', `<html ${helmet.htmlAttributes.toString()}>`);
+        finalHtml = finalHtml.replace('<html lang="en">', `<html ${helmet.htmlAttributes.toString()}>`);
+      }
 
       const filePath = `dist/static${url === '/' ? '/index' : url}/index.html`;
       const dir = path.dirname(filePath);
@@ -87,7 +113,7 @@ async function prerender() {
         fs.mkdirSync(dir, { recursive: true });
       }
       
-      fs.writeFileSync(toAbsolute(filePath), html);
+      fs.writeFileSync(toAbsolute(filePath), finalHtml);
       console.log('Pre-rendered:', url);
     } catch (e) {
       console.error(`Error prerendering ${url}:`, e);

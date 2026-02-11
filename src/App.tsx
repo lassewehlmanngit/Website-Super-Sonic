@@ -8,6 +8,7 @@ const Footer = lazy(() => import('./components/organisms/Footer').then(module =>
 
 // Lazy load page components
 const LandingPage = lazy(() => import('./pages/LandingPage').then(module => ({ default: module.LandingPage })));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage').then(module => ({ default: module.ProjectsPage })));
 const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage').then(module => ({ default: module.CaseStudyPage })));
 const Impressum = lazy(() => import('./pages/Impressum').then(module => ({ default: module.Impressum })));
 const Privacy = lazy(() => import('./pages/Privacy').then(module => ({ default: module.Privacy })));
@@ -29,11 +30,6 @@ const Layout = () => {
   const location = useLocation();
   const isDe = location.pathname.startsWith('/de');
   const isJa = location.pathname.startsWith('/ja');
-
-  // Update html lang attribute dynamically
-  useEffect(() => {
-    document.documentElement.lang = isJa ? 'ja' : isDe ? 'de' : 'en';
-  }, [isDe, isJa]);
 
   // Reset scroll on route change (but respect hash navigation)
   useEffect(() => {
@@ -98,6 +94,7 @@ const App: React.FC = () => {
         {/* German Routes */}
         <Route path="/de" element={<Layout />}>
           <Route index element={<LandingPage lang="de" />} />
+          <Route path="projekte" element={<ProjectsPage lang="de" />} />
           <Route path="projekte/:slug" element={<CaseStudyPage lang="de" />} />
           <Route path="impressum" element={<Impressum />} />
           <Route path="datenschutz" element={<Privacy />} />
@@ -109,6 +106,7 @@ const App: React.FC = () => {
         {/* English Routes */}
         <Route path="/en" element={<Layout />}>
           <Route index element={<LandingPage lang="en" />} />
+          <Route path="projects" element={<ProjectsPage lang="en" />} />
           <Route path="projects/:slug" element={<CaseStudyPage lang="en" />} />
           <Route path="impressum" element={<Impressum />} />
           <Route path="privacy" element={<Privacy />} />
@@ -120,6 +118,7 @@ const App: React.FC = () => {
         {/* Japanese Routes */}
         <Route path="/ja" element={<Layout />}>
           <Route index element={<LandingPage lang="ja" />} />
+          <Route path="projects" element={<ProjectsPage lang="ja" />} />
           <Route path="projects/:slug" element={<CaseStudyPage lang="ja" />} />
           <Route path="tokushoho" element={<Impressum />} />
           <Route path="privacy" element={<Privacy />} />

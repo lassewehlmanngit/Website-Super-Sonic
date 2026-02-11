@@ -39,6 +39,18 @@ export const MobileNavigation: React.FC = () => {
     }, 100);
   };
 
+  const handleLogoClick = () => {
+    close();
+    // If we're already on the home page, scroll to top
+    const currentPath = window.location.pathname;
+    if (currentPath === homeLink || currentPath === '/' || currentPath === '/de' || currentPath === '/en' || currentPath === '/ja') {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    }
+    // Otherwise, navigation will happen via the Link component
+  };
+
   return (
     <>
       {/* 1. Closed State: Floating Thumb Zone */}
@@ -92,9 +104,13 @@ export const MobileNavigation: React.FC = () => {
             
             {/* Header: Logo */}
             <div className="flex-none flex items-center justify-between px-6 py-8">
-               <div className="text-xl font-bold tracking-tighter uppercase">
+               <Link 
+                 to={homeLink}
+                 onClick={handleLogoClick}
+                 className="text-xl font-bold tracking-tighter uppercase hover:no-underline text-black"
+               >
                   Norddorf<span className="text-sonic-orange">.</span>
-               </div>
+               </Link>
                {/* Close button is handled by Sheet component */}
             </div>
 

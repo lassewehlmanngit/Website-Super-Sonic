@@ -1,12 +1,15 @@
 import React from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
+import { HelmetProvider, HelmetServerState } from 'react-helmet-async';
 import App from './App';
 import { Writable } from 'node:stream';
 
-export function render(url: string): Promise<string> {
+export function render(url: string): Promise<{ html: string, helmet: HelmetServerState }> {
   return new Promise((resolve, reject) => {
     let html = '';
+    const helmetContext = {} as { helmet: HelmetServerState };
+
     const writable = new Writable({
       write(chunk, _encoding, callback) {
         html += chunk.toString();
@@ -15,14 +18,16 @@ export function render(url: string): Promise<string> {
     });
 
     writable.on('finish', () => {
-      resolve(html);
+      resolve({ html, helmet: helmetContext.helmet });
     });
 
     const { pipe } = renderToPipeableStream(
       <React.StrictMode>
-        <StaticRouter location={url}>
-          <App />
-        </StaticRouter>
+        <HelmetProvider context={helmetContext}>
+          <StaticRouter location={url}>
+            <App />
+          </StaticRouter>
+        </HelmetProvider>
       </React.StrictMode>,
       {
         onAllReady() {
