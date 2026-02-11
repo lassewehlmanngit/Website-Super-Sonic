@@ -1,6 +1,5 @@
 import React from 'react';
 import { SEO } from '../components/SEO';
-import { ChristmasBalls } from '../components/seasonal/ChristmasBalls';
 import { businessConfig } from '../config/business';
 
 export const Impressum: React.FC = () => {
@@ -12,8 +11,6 @@ export const Impressum: React.FC = () => {
         lang="de"
         path="/de/impressum"
       />
-
-      {/* <ChristmasBalls /> */}
 
       <div className="container-responsive max-w-3xl mx-auto relative z-10">
         <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-black mb-8 md:mb-12 tracking-tighter">Impressum</h1>
