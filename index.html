@@ -62,13 +62,13 @@
     <!-- Vite will automatically inject modulepreload hints for entry chunks in production builds -->
     <!-- For manual control, use vite-plugin-html or inject via build hooks -->
     
-    <!-- Load fonts asynchronously with font-display: swap -->
-    <!-- Preload critical font CSS -->
+    <!-- Load critical fonts only (400,600,700) - hero headline needs 600/700 -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
-    <!-- Load non-critical font weights asynchronously -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap"></noscript>
+    <!-- Non-critical font weights deferred until after LCP -->
+    <script>
+      window.addEventListener('load', function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap';document.head.appendChild(l);});
+    </script>
     <style>
       /* Critical CSS - Inlined for immediate rendering */
       body {
@@ -118,6 +118,14 @@
         min-height: 100vh;
         width: 100%;
       }
+      /* Critical hero shell - instant FCP/LCP before JS */
+      .hero-shell{min-height:100dvh;background:#050505;padding:8rem clamp(1rem,4vw,3rem) 5rem;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+      .hero-shell::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom right,#050505,#050505,#18181b);pointer-events:none}
+      .hero-shell-inner{position:relative;z-index:1;max-width:56rem;margin:0 auto;width:100%}
+      .hero-shell-eyebrow{font-size:clamp(0.875rem,0.8rem + 0.35vw,1rem);color:#FF4D00;font-family:ui-monospace,monospace;letter-spacing:0.05em;margin-bottom:1.5rem}
+      .hero-shell-h1{font-size:clamp(2rem,2.25rem + 4.5vw,3.5rem);line-height:1.1;font-weight:700;letter-spacing:-0.02em;color:#fff;margin:0 0 2rem}
+      .hero-shell-h1 span{color:#d4d4d8}
+      .hero-shell-h1 .accent{color:#FF4D00}
       /* Loading Skeleton - Shows immediately before React hydrates */
       @keyframes spin {
         to { transform: rotate(360deg); }
@@ -153,7 +161,15 @@
   <!-- REMOVED IMPORTMAP FOR PERFORMANCE -->
 </head>
   <body>
-    <div id="root"><!--app-html--></div>
+    <div id="root">
+      <!-- Static hero shell for instant FCP/LCP - replaced by React -->
+      <section class="hero-shell" aria-hidden="true">
+        <div class="hero-shell-inner">
+          <p class="hero-shell-eyebrow">Webseiten für den Mittelstand</p>
+          <h1 class="hero-shell-h1">Du brauchst eine Website, <span>die funktioniert.</span><br><span class="accent">Keinen Raketenplan.</span></h1>
+        </div>
+      </section>
+    </div>
     <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

@@ -19,12 +19,8 @@ const BusinessFacts = lazy(() => import('./pages/BusinessFacts').then(module => 
 // Uncomment when ready to migrate pages to CMS:
 const DynamicPage = lazy(() => import('./pages/DynamicPage').then(module => ({ default: module.DynamicPage })));
 
-// Loading fallback component
-const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sonic-orange"></div>
-  </div>
-);
+// Hero skeleton - matches static HTML shell for smooth FCP→LCP (no spinner flash)
+import { HeroSkeleton } from './components/HeroSkeleton';
 
 const Layout = () => {
   const location = useLocation();
@@ -65,7 +61,7 @@ const Layout = () => {
         <MobileNavigation />
       </Suspense>
       <main id="main-content" tabIndex={-1}>
-        <Suspense fallback={<PageLoader />}>
+        <Suspense fallback={<HeroSkeleton />}>
           <Outlet />
         </Suspense>
       </main>
