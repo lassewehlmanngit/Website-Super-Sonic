@@ -50,9 +50,6 @@
     <meta name="theme-color" content="#FF4D00" />
     <meta name="msapplication-TileColor" content="#050505" />
     
-    <!-- Preconnect for Performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Preconnect to own domain for faster asset loading -->
     <link rel="preconnect" href="https://norddorf.com" crossorigin />
     <link rel="dns-prefetch" href="https://norddorf.com" />
@@ -62,12 +59,7 @@
     <!-- Vite will automatically inject modulepreload hints for entry chunks in production builds -->
     <!-- For manual control, use vite-plugin-html or inject via build hooks -->
     
-    <!-- Load critical fonts (blocking to avoid layout shift) -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-    <!-- Non-critical font weights deferred until after LCP -->
-    <script>
-      window.addEventListener('load', function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap';document.head.appendChild(l);});
-    </script>
+    <!-- Fonts are loaded locally via CSS to be DSGVO compliant -->
     <style>
       /* Critical CSS - Inlined for immediate rendering */
       body {

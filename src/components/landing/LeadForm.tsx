@@ -30,6 +30,8 @@ interface FormData {
   ownership: OwnershipValue;
   // Step 5: Testimonial
   testimonial: TestimonialValue;
+  // Step 5: Consent
+  consent: boolean;
 }
 
 interface FormErrors {
@@ -39,6 +41,7 @@ interface FormErrors {
   goals?: string;
   ownership?: string;
   testimonial?: string;
+  consent?: string;
 }
 
 interface TouchedFields {
@@ -48,6 +51,7 @@ interface TouchedFields {
   goals: boolean;
   ownership: boolean;
   testimonial: boolean;
+  consent: boolean;
 }
 
 // ============================================
@@ -78,6 +82,7 @@ const INITIAL_FORM_DATA: FormData = {
   features: [],
   ownership: '',
   testimonial: '',
+  consent: false,
 };
 
 const INITIAL_TOUCHED: TouchedFields = {
@@ -87,6 +92,7 @@ const INITIAL_TOUCHED: TouchedFields = {
   goals: false,
   ownership: false,
   testimonial: false,
+  consent: false,
 };
 
 const TOTAL_STEPS = 5;
@@ -115,12 +121,12 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
   const isDe = lang === 'de';
   const isJa = lang === 'ja';
   const formId = useId();
-  
+
   // Refs for focus management
   const stepContainerRef = useRef<HTMLDivElement>(null);
   const firstFieldRef = useRef<HTMLInputElement>(null);
   const announcerRef = useRef<HTMLDivElement>(null);
-  
+
   // State
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM_DATA);
@@ -132,11 +138,11 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
 
   // Step configuration
   const stepIcons = [User, Target, Palette, Key, Video];
-  const stepLabels = isJa 
+  const stepLabels = isJa
     ? ['基本情報', 'プラン', 'スタイル', '所有権', '推薦']
-    : isDe 
-    ? ['Basis', 'Plan', 'Style', 'Eigentum', 'Testimonial']
-    : ['Basics', 'Plan', 'Style', 'Ownership', 'Testimonial'];
+    : isDe
+      ? ['Basis', 'Plan', 'Style', 'Eigentum', 'Testimonial']
+      : ['Basics', 'Plan', 'Style', 'Ownership', 'Testimonial'];
 
   // ============================================
   // VALIDATION
@@ -173,6 +179,13 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
         if (!formData.testimonial) {
           newErrors.testimonial = isJa ? 'オプションを選択してください。' : isDe ? 'Bitte wähle eine Option.' : 'Please select an option.';
         }
+        if (!formData.consent) {
+          newErrors.consent = isJa
+            ? 'プライバシーポリシーに同意してください。'
+            : isDe
+              ? 'Bitte stimme der Datenschutzerklärung zu.'
+              : 'Please agree to the privacy policy.';
+        }
         break;
     }
 
@@ -190,7 +203,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
 
   const handleFieldChange = <K extends keyof FormData>(field: K, value: FormData[K]) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-    
+
     // Clear error when user starts typing
     if (errors[field as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [field]: undefined }));
@@ -199,7 +212,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
 
   const handleFieldBlur = (field: keyof TouchedFields) => {
     setTouched(prev => ({ ...prev, [field]: true }));
-    
+
     // Validate on blur
     const stepErrors = validateStep(step);
     if (stepErrors[field as keyof FormErrors]) {
@@ -215,7 +228,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
         : [...current, value];
       return { ...prev, [field]: updated };
     });
-    
+
     // Clear error when user makes a selection
     if (field === 'goals' && errors.goals) {
       setErrors(prev => ({ ...prev, goals: undefined }));
@@ -261,7 +274,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
 
   const handleSubmit = async () => {
     // Final validation
-    setTouched(prev => ({ ...prev, testimonial: true }));
+    setTouched(prev => ({ ...prev, testimonial: true, consent: true }));
     const stepErrors = validateStep(step);
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors);
@@ -270,7 +283,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
 
     setIsSubmitting(true);
     setSubmitError(null);
-    
+
     try {
       const response = await fetch('https://submit-form.com/8vj9iQNx8', {
         method: 'POST',
@@ -288,25 +301,25 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      
+
       console.log('Form submitted:', formData);
       setIsSubmitted(true);
-      
+
       // Announce success to screen readers
       if (announcerRef.current) {
-        announcerRef.current.textContent = isJa 
-          ? 'フォームが正常に送信されました！' 
-          : isDe 
-          ? 'Formular erfolgreich gesendet!' 
-          : 'Form submitted successfully!';
+        announcerRef.current.textContent = isJa
+          ? 'フォームが正常に送信されました！'
+          : isDe
+            ? 'Formular erfolgreich gesendet!'
+            : 'Form submitted successfully!';
       }
     } catch (error) {
       console.error('Submission error:', error);
-      setSubmitError(isJa 
-        ? '問題が発生しました。もう一度お試しください。' 
-        : isDe 
-        ? 'Etwas ist schiefgelaufen. Bitte versuche es erneut.' 
-        : 'Something went wrong. Please try again.');
+      setSubmitError(isJa
+        ? '問題が発生しました。もう一度お試しください。'
+        : isDe
+          ? 'Etwas ist schiefgelaufen. Bitte versuche es erneut.'
+          : 'Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -328,24 +341,24 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
 
   const announceStepChange = (newStep: number) => {
     if (announcerRef.current) {
-      announcerRef.current.textContent = isJa 
+      announcerRef.current.textContent = isJa
         ? `ステップ ${newStep} / ${TOTAL_STEPS}: ${stepLabels[newStep - 1]}`
-        : isDe 
-        ? `Schritt ${newStep} von ${TOTAL_STEPS}: ${stepLabels[newStep - 1]}`
-        : `Step ${newStep} of ${TOTAL_STEPS}: ${stepLabels[newStep - 1]}`;
+        : isDe
+          ? `Schritt ${newStep} von ${TOTAL_STEPS}: ${stepLabels[newStep - 1]}`
+          : `Step ${newStep} of ${TOTAL_STEPS}: ${stepLabels[newStep - 1]}`;
     }
   };
 
   // Focus first field when step changes (but only after user interaction, not on mount)
   const hasInteracted = useRef(false);
-  
+
   useEffect(() => {
     // Skip focus on initial mount to prevent auto-scroll
     if (!hasInteracted.current) {
       hasInteracted.current = true;
       return;
     }
-    
+
     const timer = setTimeout(() => {
       if (stepContainerRef.current) {
         const firstInput = stepContainerRef.current.querySelector<HTMLElement>(
@@ -368,11 +381,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
 
   const inputClassName = (field: keyof FormErrors) => {
     const hasError = getFieldError(field);
-    return `w-full p-4 border rounded-xl focus:outline-none focus:ring-2 transition-colors fluid-base ${
-      hasError 
-        ? 'border-red-400 focus:border-red-500 focus:ring-red-500/20 bg-red-50/50' 
-        : 'border-zinc-200 focus:border-sonic-orange focus:ring-sonic-orange/20'
-    }`;
+    return `w-full p-4 border rounded-xl focus:outline-none focus:ring-2 transition-colors fluid-base ${hasError
+      ? 'border-red-400 focus:border-red-500 focus:ring-red-500/20 bg-red-50/50'
+      : 'border-zinc-200 focus:border-sonic-orange focus:ring-sonic-orange/20'
+      }`;
   };
 
   // ============================================
@@ -392,11 +404,11 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
   return (
     <section id="form" className="fluid-section bg-white" aria-labelledby={`${formId}-title`}>
       {/* Screen reader announcer for live updates */}
-      <div 
+      <div
         ref={announcerRef}
-        className="sr-only" 
-        role="status" 
-        aria-live="polite" 
+        className="sr-only"
+        role="status"
+        aria-live="polite"
         aria-atomic="true"
       />
 
@@ -407,22 +419,22 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
             {isJa ? "ご予約前にお試しください。" : isDe ? "Teste uns, bevor du uns buchst." : "Test us before you book us."}
           </h2>
           <p className="text-zinc-500 fluid-lg">
-            {isJa 
+            {isJa
               ? "2分で無料デザイン案を入手。"
-              : isDe 
-              ? "In 2 Minuten zu deinem kostenlosen Design-Entwurf."
-              : "Get your free design draft in 2 minutes."}
+              : isDe
+                ? "In 2 Minuten zu deinem kostenlosen Design-Entwurf."
+                : "Get your free design draft in 2 minutes."}
           </p>
         </div>
 
         {/* Intro text */}
         <div className="bg-zinc-50 rounded-2xl p-6 mb-8 reveal delay-100">
           <p className="text-zinc-600 fluid-sm leading-relaxed">
-            {isJa 
+            {isJa
               ? "何が得られるかわからないまま92万円を支払う？私たちはそうしません。ご不安な場合は、無料のコンセプトをリクエストして、私たちが本当に実力があるかどうかをご確認いただけます。"
-              : isDe 
-              ? "5600€ ausgeben ohne zu wissen was du bekommst? Nicht mit uns. Wenn du unsicher bist, kannst du ein gratis Konzept anfragen um zu schauen, ob wir nur Mist erzählen, oder es wirklich drauf haben."
-              : "Spend €5,600 without knowing what you'll get? Not with us. If you're unsure, you can request a free concept to see if we're just talking or actually know our stuff."}
+              : isDe
+                ? "5600€ ausgeben ohne zu wissen was du bekommst? Nicht mit uns. Wenn du unsicher bist, kannst du ein gratis Konzept anfragen um zu schauen, ob wir nur Mist erzählen, oder es wirklich drauf haben."
+                : "Spend €5,600 without knowing what you'll get? Not with us. If you're unsure, you can request a free concept to see if we're just talking or actually know our stuff."}
           </p>
         </div>
 
@@ -434,20 +446,18 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
               const stepNum = i + 1;
               const isActive = stepNum === step;
               const isComplete = stepNum < step;
-              
+
               return (
-                <div 
-                  key={i} 
-                  className={`flex flex-col items-center gap-2 ${
-                    isActive ? 'text-sonic-orange' : isComplete ? 'text-sonic-orange' : 'text-zinc-300'
-                  }`}
+                <div
+                  key={i}
+                  className={`flex flex-col items-center gap-2 ${isActive ? 'text-sonic-orange' : isComplete ? 'text-sonic-orange' : 'text-zinc-300'
+                    }`}
                   aria-current={isActive ? 'step' : undefined}
                 >
-                  <div 
-                    className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-colors ${
-                      isActive ? 'border-sonic-orange bg-sonic-orange/10' : 
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-colors ${isActive ? 'border-sonic-orange bg-sonic-orange/10' :
                       isComplete ? 'border-sonic-orange bg-orange-50' : 'border-zinc-200 bg-white'
-                    }`}
+                      }`}
                     aria-hidden="true"
                   >
                     {isComplete ? (
@@ -472,7 +482,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
               );
             })}
           </div>
-          <div 
+          <div
             className="h-2 bg-zinc-100 rounded-full overflow-hidden"
             role="progressbar"
             aria-valuenow={step}
@@ -480,7 +490,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
             aria-valuemax={TOTAL_STEPS}
             aria-label={isJa ? `ステップ ${step} / ${TOTAL_STEPS}` : isDe ? `Schritt ${step} von ${TOTAL_STEPS}` : `Step ${step} of ${TOTAL_STEPS}`}
           >
-            <div 
+            <div
               className="h-full bg-sonic-orange transition-all duration-500"
               style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}
             />
@@ -488,7 +498,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
         </div>
 
         {/* Form Card */}
-        <form 
+        <form
           onKeyDown={handleKeyDown}
           onSubmit={(e) => e.preventDefault()}
           className="bg-white rounded-2xl border border-zinc-200 p-6 md:p-8 shadow-sm"
@@ -501,7 +511,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                 <legend id={`${formId}-step1-title`} className="fluid-xl font-bold text-zinc-900">
                   {isJa ? "基本情報" : isDe ? "Die Basis" : "The Basics"}
                 </legend>
-                
+
                 {/* Name Field */}
                 <div>
                   <label htmlFor={`${formId}-name`} className="block fluid-sm font-medium text-zinc-700 mb-2">
@@ -600,10 +610,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                   <span className="text-zinc-400 ml-1">({isJa ? "複数選択可" : isDe ? "Mehrere möglich" : "Multiple possible"})</span>
                   <span className="text-sonic-orange ml-1" aria-hidden="true">*</span>
                 </p>
-                
-                <div 
-                  className="space-y-3" 
-                  role="group" 
+
+                <div
+                  className="space-y-3"
+                  role="group"
                   aria-labelledby={`${formId}-step2-title`}
                   aria-describedby={`${formId}-goals-desc ${getFieldError('goals') ? `${formId}-goals-error` : ''}`}
                 >
@@ -612,11 +622,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                     return (
                       <label
                         key={option.value}
-                        className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
-                          isChecked
-                            ? 'border-sonic-orange bg-orange-50'
-                            : 'border-zinc-200 hover:border-zinc-300'
-                        }`}
+                        className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${isChecked
+                          ? 'border-sonic-orange bg-orange-50'
+                          : 'border-zinc-200 hover:border-zinc-300'
+                          }`}
                       >
                         <input
                           type="checkbox"
@@ -648,7 +657,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                 <p className="text-zinc-400 fluid-sm">
                   {isJa ? "(すべて任意)" : isDe ? "(Alle Felder optional)" : "(All fields optional)"}
                 </p>
-                
+
                 {/* Inspirations */}
                 <div>
                   <label htmlFor={`${formId}-inspirations`} className="block fluid-sm font-medium text-zinc-700 mb-2">
@@ -658,11 +667,11 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                     id={`${formId}-inspirations`}
                     value={formData.inspirations}
                     onChange={(e) => handleFieldChange('inspirations', e.target.value)}
-                    placeholder={isJa 
+                    placeholder={isJa
                       ? "好きなウェブサイトのリンク、またはデジタルで追い越したい競合他社のリンク。"
-                      : isDe 
-                      ? "Links von Websites die du feierst – oder von Konkurrenten, die du digital überholen willst."
-                      : "Links to websites you love – or competitors you want to outperform digitally."}
+                      : isDe
+                        ? "Links von Websites die du feierst – oder von Konkurrenten, die du digital überholen willst."
+                        : "Links to websites you love – or competitors you want to outperform digitally."}
                     rows={3}
                     className="w-full p-4 border border-zinc-200 rounded-xl focus:outline-none focus:border-sonic-orange focus:ring-2 focus:ring-sonic-orange/20 fluid-base resize-none"
                   />
@@ -673,9 +682,9 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                   <p id={`${formId}-features-label`} className="block fluid-sm font-medium text-zinc-700 mb-3">
                     {isJa ? "必ず含めたい機能は？" : isDe ? "Was muss unbedingt rein?" : "What must be included?"}
                   </p>
-                  <div 
-                    className="space-y-3" 
-                    role="group" 
+                  <div
+                    className="space-y-3"
+                    role="group"
                     aria-labelledby={`${formId}-features-label`}
                   >
                     {FEATURE_OPTIONS.map((option) => {
@@ -683,11 +692,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                       return (
                         <label
                           key={option.value}
-                          className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
-                            isChecked
-                              ? 'border-sonic-orange bg-orange-50'
-                              : 'border-zinc-200 hover:border-zinc-300'
-                          }`}
+                          className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${isChecked
+                            ? 'border-sonic-orange bg-orange-50'
+                            : 'border-zinc-200 hover:border-zinc-300'
+                            }`}
                         >
                           <input
                             type="checkbox"
@@ -711,27 +719,26 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                   {isJa ? "「所有権」について" : isDe ? "Die \"Eigentums-Frage\"" : "The \"Ownership Question\""}
                 </legend>
                 <p id={`${formId}-ownership-desc`} className="text-zinc-500 fluid-base">
-                  {isJa 
+                  {isJa
                     ? "サイトを本当に所有したいですか？それとも、所有していないシステムに毎月「家賃」を払い続けますか？"
-                    : isDe 
-                    ? "Willst du die Seite am Ende wirklich besitzen oder weiter monatlich \"Miete\" für ein System zahlen, das dir nicht gehört?"
-                    : "Do you want to truly own the site at the end or keep paying monthly \"rent\" for a system that doesn't belong to you?"}
+                    : isDe
+                      ? "Willst du die Seite am Ende wirklich besitzen oder weiter monatlich \"Miete\" für ein System zahlen, das dir nicht gehört?"
+                      : "Do you want to truly own the site at the end or keep paying monthly \"rent\" for a system that doesn't belong to you?"}
                   <span className="text-sonic-orange ml-1" aria-hidden="true">*</span>
                 </p>
-                
-                <div 
-                  className="space-y-3" 
-                  role="radiogroup" 
+
+                <div
+                  className="space-y-3"
+                  role="radiogroup"
                   aria-labelledby={`${formId}-step4-title`}
                   aria-describedby={`${formId}-ownership-desc ${getFieldError('ownership') ? `${formId}-ownership-error` : ''}`}
                   aria-required="true"
                 >
                   <label
-                    className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
-                      formData.ownership === 'full'
-                        ? 'border-sonic-orange bg-orange-50'
-                        : 'border-zinc-200 hover:border-zinc-300'
-                    }`}
+                    className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${formData.ownership === 'full'
+                      ? 'border-sonic-orange bg-orange-50'
+                      : 'border-zinc-200 hover:border-zinc-300'
+                      }`}
                   >
                     <input
                       type="radio"
@@ -747,11 +754,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                   </label>
 
                   <label
-                    className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
-                      formData.ownership === 'doesnt-matter'
-                        ? 'border-sonic-orange bg-orange-50'
-                        : 'border-zinc-200 hover:border-zinc-300'
-                    }`}
+                    className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${formData.ownership === 'doesnt-matter'
+                      ? 'border-sonic-orange bg-orange-50'
+                      : 'border-zinc-200 hover:border-zinc-300'
+                      }`}
                   >
                     <input
                       type="radio"
@@ -782,27 +788,26 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                   {isJa ? "「推薦」について" : isDe ? "Der \"Testimonial-Deal\"" : "The \"Testimonial Deal\""}
                 </legend>
                 <p id={`${formId}-testimonial-desc`} className="text-zinc-500 fluid-base">
-                  {isJa 
+                  {isJa
                     ? "正直に申し上げます：92万円という価格は、従来のマーケティングを省略しているからこそ実現できています。仕事に満足いただけた場合、公開後に短いビデオ推薦をいただけますか？"
-                    : isDe 
-                    ? "Hand aufs Herz: Unser Preis von 5.600 € ist nur machbar, weil wir auf klassisches Marketing verzichten. Bist du bereit, uns nach dem Launch ein kurzes Video-Testimonial zu geben, wenn du mit der Arbeit zufrieden bist?"
-                    : "Honestly: Our price of €5,600 is only possible because we skip traditional marketing. Are you willing to give us a short video testimonial after launch if you're happy with the work?"}
+                    : isDe
+                      ? "Hand aufs Herz: Unser Preis von 5.600 € ist nur machbar, weil wir auf klassisches Marketing verzichten. Bist du bereit, uns nach dem Launch ein kurzes Video-Testimonial zu geben, wenn du mit der Arbeit zufrieden bist?"
+                      : "Honestly: Our price of €5,600 is only possible because we skip traditional marketing. Are you willing to give us a short video testimonial after launch if you're happy with the work?"}
                   <span className="text-sonic-orange ml-1" aria-hidden="true">*</span>
                 </p>
-                
-                <div 
-                  className="space-y-3" 
-                  role="radiogroup" 
+
+                <div
+                  className="space-y-3"
+                  role="radiogroup"
                   aria-labelledby={`${formId}-step5-title`}
                   aria-describedby={`${formId}-testimonial-desc ${getFieldError('testimonial') ? `${formId}-testimonial-error` : ''}`}
                   aria-required="true"
                 >
                   <label
-                    className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
-                      formData.testimonial === 'yes'
-                        ? 'border-sonic-orange bg-orange-50'
-                        : 'border-zinc-200 hover:border-zinc-300'
-                    }`}
+                    className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${formData.testimonial === 'yes'
+                      ? 'border-sonic-orange bg-orange-50'
+                      : 'border-zinc-200 hover:border-zinc-300'
+                      }`}
                   >
                     <input
                       type="radio"
@@ -818,11 +823,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                   </label>
 
                   <label
-                    className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${
-                      formData.testimonial === 'discuss'
-                        ? 'border-sonic-orange bg-orange-50'
-                        : 'border-zinc-200 hover:border-zinc-300'
-                    }`}
+                    className={`flex items-center gap-4 p-4 border rounded-xl cursor-pointer transition-all ${formData.testimonial === 'discuss'
+                      ? 'border-sonic-orange bg-orange-50'
+                      : 'border-zinc-200 hover:border-zinc-300'
+                      }`}
                   >
                     <input
                       type="radio"
@@ -843,6 +847,41 @@ export const LeadForm: React.FC<LeadFormProps> = ({ lang }) => {
                     {getFieldError('testimonial')}
                   </p>
                 )}
+                {/* Consent Checkbox */}
+                <div className="pt-4 border-t border-zinc-100 mt-6">
+                  <label className="flex items-start gap-3 cursor-pointer group">
+                    <div className="relative flex items-center mt-1">
+                      <input
+                        type="checkbox"
+                        checked={formData.consent}
+                        onChange={(e) => handleFieldChange('consent', e.target.checked)}
+                        className="peer appearance-none w-5 h-5 border-2 border-zinc-300 rounded focus:outline-none focus:ring-2 focus:ring-sonic-orange focus:ring-offset-1 checked:bg-sonic-orange checked:border-sonic-orange transition-all"
+                      />
+                      <Check size={14} className="absolute inset-0 m-auto text-white opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" />
+                    </div>
+                    <span className="text-zinc-600 fluid-sm leading-relaxed">
+                      {isJa ? (
+                        <>
+                          同意して<a href="/ja/privacy" target="_blank" rel="noopener noreferrer" className="text-zinc-900 underline hover:text-sonic-orange">プライバシーポリシー</a>を確認しました。
+                        </>
+                      ) : isDe ? (
+                        <>
+                          Ich stimme der <a href="/de/datenschutz" target="_blank" rel="noopener noreferrer" className="text-zinc-900 underline hover:text-sonic-orange">Datenschutzerklärung</a> zu.
+                        </>
+                      ) : (
+                        <>
+                          I agree to the <a href="/en/privacy" target="_blank" rel="noopener noreferrer" className="text-zinc-900 underline hover:text-sonic-orange">privacy policy</a>.
+                        </>
+                      )}
+                    </span>
+                  </label>
+                  {getFieldError('consent') && (
+                    <p className="mt-2 text-red-600 fluid-sm flex items-center gap-1">
+                      <AlertCircle size={14} />
+                      {getFieldError('consent')}
+                    </p>
+                  )}
+                </div>
               </fieldset>
             )}
           </div>

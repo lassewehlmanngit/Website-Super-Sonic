@@ -17,6 +17,8 @@ const BusinessFacts = lazy(() => import('./pages/BusinessFacts').then(module => 
 const IndustryPage = lazy(() => import('./pages/IndustryPage').then(module => ({ default: module.IndustryPage })));
 const NotFound = lazy(() => import('./pages/NotFound').then(module => ({ default: module.NotFound })));
 
+import { CookieBanner } from './components/molecules/CookieBanner';
+
 // TinaCMS Dynamic Page (for CMS-managed content)
 // Uncomment when ready to migrate pages to CMS:
 const DynamicPage = lazy(() => import('./pages/DynamicPage').then(module => ({ default: module.DynamicPage })));
@@ -72,6 +74,7 @@ const Layout = () => {
           <Footer />
         </Suspense>
       </div>
+      <CookieBanner lang={isJa ? 'ja' : isDe ? 'de' : 'en'} />
     </div>
   );
 };
