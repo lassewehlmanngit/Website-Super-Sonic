@@ -14,6 +14,8 @@ const Impressum = lazy(() => import('./pages/Impressum').then(module => ({ defau
 const Privacy = lazy(() => import('./pages/Privacy').then(module => ({ default: module.Privacy })));
 const AGB = lazy(() => import('./pages/AGB').then(module => ({ default: module.AGB })));
 const BusinessFacts = lazy(() => import('./pages/BusinessFacts').then(module => ({ default: module.BusinessFacts })));
+const IndustryPage = lazy(() => import('./pages/IndustryPage').then(module => ({ default: module.IndustryPage })));
+const NotFound = lazy(() => import('./pages/NotFound').then(module => ({ default: module.NotFound })));
 
 // TinaCMS Dynamic Page (for CMS-managed content)
 // Uncomment when ready to migrate pages to CMS:
@@ -90,73 +92,82 @@ const App: React.FC = () => {
       <Route path="/de/terms" element={<Navigate to="/de/agb" replace />} />
       <Route path="/de/projects/:slug" element={<ProjectRedirect />} />
 
-        {/* TinaCMS Admin - Served automatically at /admin by tinacms dev */}
-        {/* No route needed here - Tina handles it */}
+      {/* TinaCMS Admin - Served automatically at /admin by tinacms dev */}
+      {/* No route needed here - Tina handles it */}
 
-        {/* Global Pages */}
-        <Route path="/business-facts" element={<Layout />}>
-           <Route index element={<BusinessFacts />} />
-        </Route>
+      {/* Global Pages */}
+      <Route path="/business-facts" element={<Layout />}>
+        <Route index element={<BusinessFacts />} />
+      </Route>
 
-        {/* German Routes */}
-        <Route path="/de" element={<Layout />}>
-          <Route index element={<LandingPage lang="de" />} />
-          <Route path="projekte" element={<ProjectsPage lang="de" />} />
-          <Route path="projekte/:slug" element={<CaseStudyPage lang="de" />} />
-          <Route path="impressum" element={<Impressum />} />
-          <Route path="datenschutz" element={<Privacy />} />
-          <Route path="agb" element={<AGB />} />
-          {/* CMS Pages */}
-          <Route path=":slug" element={<DynamicPage lang="de" />} />
-        </Route>
+      {/* German Routes */}
+      <Route path="/de" element={<Layout />}>
+        <Route index element={<LandingPage lang="de" />} />
+        <Route path="projekte" element={<ProjectsPage lang="de" />} />
+        <Route path="projekte/:slug" element={<CaseStudyPage lang="de" />} />
+        <Route path="impressum" element={<Impressum />} />
+        <Route path="datenschutz" element={<Privacy />} />
+        <Route path="agb" element={<AGB />} />
+        {/* Industry Pages */}
+        <Route path="handwerk/:slug" element={<IndustryPage />} />
+        {/* CMS Pages */}
+        <Route path=":slug" element={<DynamicPage lang="de" />} />
+        {/* 404 for /de/* */}
+        <Route path="*" element={<NotFound lang="de" />} />
+      </Route>
 
-        {/* English Routes */}
-        <Route path="/en" element={<Layout />}>
-          <Route index element={<LandingPage lang="en" />} />
-          <Route path="projects" element={<ProjectsPage lang="en" />} />
-          <Route path="projects/:slug" element={<CaseStudyPage lang="en" />} />
-          <Route path="impressum" element={<Impressum />} />
-          <Route path="privacy" element={<Privacy />} />
-          <Route path="terms" element={<AGB />} />
-          {/* CMS Pages */}
-          <Route path=":slug" element={<DynamicPage lang="en" />} />
-        </Route>
+      {/* English Routes */}
+      <Route path="/en" element={<Layout />}>
+        <Route index element={<LandingPage lang="en" />} />
+        <Route path="projects" element={<ProjectsPage lang="en" />} />
+        <Route path="projects/:slug" element={<CaseStudyPage lang="en" />} />
+        <Route path="impressum" element={<Impressum />} />
+        <Route path="privacy" element={<Privacy />} />
+        <Route path="terms" element={<AGB />} />
+        {/* CMS Pages */}
+        <Route path=":slug" element={<DynamicPage lang="en" />} />
+        {/* 404 for /en/* */}
+        <Route path="*" element={<NotFound lang="en" />} />
+      </Route>
 
-        {/* Japanese Routes */}
-        <Route path="/ja" element={<Layout />}>
-          <Route index element={<LandingPage lang="ja" />} />
-          <Route path="projects" element={<ProjectsPage lang="ja" />} />
-          <Route path="projects/:slug" element={<CaseStudyPage lang="ja" />} />
-          <Route path="tokushoho" element={<Impressum />} />
-          <Route path="privacy" element={<Privacy />} />
-          <Route path="terms" element={<AGB />} />
-          {/* CMS Pages */}
-          <Route path=":slug" element={<DynamicPage lang="ja" />} />
-        </Route>
+      {/* Japanese Routes */}
+      <Route path="/ja" element={<Layout />}>
+        <Route index element={<LandingPage lang="ja" />} />
+        <Route path="projects" element={<ProjectsPage lang="ja" />} />
+        <Route path="projects/:slug" element={<CaseStudyPage lang="ja" />} />
+        <Route path="tokushoho" element={<Impressum />} />
+        <Route path="privacy" element={<Privacy />} />
+        <Route path="terms" element={<AGB />} />
+        {/* CMS Pages */}
+        <Route path=":slug" element={<DynamicPage lang="ja" />} />
+        {/* 404 for /ja/* */}
+        <Route path="*" element={<NotFound lang="ja" />} />
+      </Route>
 
-        {/* Redirects for old routes */}
-        <Route path="/de/web-design" element={<Navigate to="/de#comparison" replace />} />
-        <Route path="/de/app-design" element={<Navigate to="/de#comparison" replace />} />
-        <Route path="/de/ux-design" element={<Navigate to="/de#comparison" replace />} />
-        <Route path="/de/work" element={<Navigate to="/de#case-studies" replace />} />
-        <Route path="/de/about" element={<Navigate to="/de#ceo-letter" replace />} />
-        <Route path="/de/start" element={<Navigate to="/de#form" replace />} />
-        <Route path="/en/web-design" element={<Navigate to="/en#comparison" replace />} />
-        <Route path="/en/app-design" element={<Navigate to="/en#comparison" replace />} />
-        <Route path="/en/ux-design" element={<Navigate to="/en#comparison" replace />} />
-        <Route path="/en/work" element={<Navigate to="/en#case-studies" replace />} />
-        <Route path="/en/about" element={<Navigate to="/en#ceo-letter" replace />} />
-        <Route path="/en/start" element={<Navigate to="/en#form" replace />} />
-        <Route path="/ja/web-design" element={<Navigate to="/ja#comparison" replace />} />
-        <Route path="/ja/app-design" element={<Navigate to="/ja#comparison" replace />} />
-        <Route path="/ja/ux-design" element={<Navigate to="/ja#comparison" replace />} />
-        <Route path="/ja/work" element={<Navigate to="/ja#case-studies" replace />} />
-        <Route path="/ja/about" element={<Navigate to="/ja#ceo-letter" replace />} />
-        <Route path="/ja/start" element={<Navigate to="/ja#form" replace />} />
+      {/* Redirects for old routes */}
+      <Route path="/de/web-design" element={<Navigate to="/de#comparison" replace />} />
+      <Route path="/de/app-design" element={<Navigate to="/de#comparison" replace />} />
+      <Route path="/de/ux-design" element={<Navigate to="/de#comparison" replace />} />
+      <Route path="/de/work" element={<Navigate to="/de#case-studies" replace />} />
+      <Route path="/de/about" element={<Navigate to="/de#ceo-letter" replace />} />
+      <Route path="/de/start" element={<Navigate to="/de#form" replace />} />
+      <Route path="/en/web-design" element={<Navigate to="/en#comparison" replace />} />
+      <Route path="/en/app-design" element={<Navigate to="/en#comparison" replace />} />
+      <Route path="/en/ux-design" element={<Navigate to="/en#comparison" replace />} />
+      <Route path="/en/work" element={<Navigate to="/en#case-studies" replace />} />
+      <Route path="/en/about" element={<Navigate to="/en#ceo-letter" replace />} />
+      <Route path="/en/start" element={<Navigate to="/en#form" replace />} />
+      <Route path="/ja/web-design" element={<Navigate to="/ja#comparison" replace />} />
+      <Route path="/ja/app-design" element={<Navigate to="/ja#comparison" replace />} />
+      <Route path="/ja/ux-design" element={<Navigate to="/ja#comparison" replace />} />
+      <Route path="/ja/work" element={<Navigate to="/ja#case-studies" replace />} />
+      <Route path="/ja/about" element={<Navigate to="/ja#ceo-letter" replace />} />
+      <Route path="/ja/start" element={<Navigate to="/ja#form" replace />} />
 
-        {/* Catch-all redirect */}
-        <Route path="*" element={<Navigate to="/de" replace />} />
-      </Routes>
+      {/* Catch-all redirect */}
+      {/* Catch-all redirect to 404 page (wrapped in layout for consistency) */}
+      <Route path="*" element={<Layout><NotFound lang="de" /></Layout>} />
+    </Routes>
   );
 };
 

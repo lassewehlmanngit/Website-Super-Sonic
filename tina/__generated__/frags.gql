@@ -146,3 +146,117 @@ fragment PrivacyParts on Privacy {
     description
   }
 }
+
+fragment IndustryParts on Industry {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    ogImage
+  }
+  hero {
+    __typename
+    kicker
+    headline
+    subheadline
+    primaryCta
+    secondaryCta
+    trustText
+    image
+    imageAlt
+  }
+  caseStudy {
+    __typename
+    kicker
+    headline
+    body
+    stats {
+      __typename
+      label
+      value
+    }
+    ctaText
+    quote
+    image
+    imageAlt
+  }
+  problem {
+    __typename
+    headline
+    body
+    callout
+  }
+  features {
+    __typename
+    headline
+    items {
+      __typename
+      title
+      description
+      icon
+    }
+  }
+  comparison {
+    __typename
+    headline
+    subline
+    rows {
+      __typename
+      feature
+      competitor
+      us
+    }
+    cta {
+      __typename
+      text
+      primaryBtn
+      secondaryBtn
+    }
+  }
+  process {
+    __typename
+    headline
+    steps {
+      __typename
+      title
+      description
+    }
+  }
+  about {
+    __typename
+    headline
+    body
+    credentials
+    image
+    imageAlt
+  }
+  faq {
+    __typename
+    items {
+      __typename
+      question
+      answer
+    }
+  }
+  form {
+    __typename
+    headline
+    subline
+    fields {
+      __typename
+      namePlaceholder
+      emailPlaceholder
+      websitePlaceholder
+      servicePlaceholder
+    }
+    trustText
+  }
+  finalCta {
+    __typename
+    headline
+    body
+    primaryBtn
+    secondaryBtn
+  }
+}

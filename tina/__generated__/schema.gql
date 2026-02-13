@@ -60,12 +60,15 @@ type Query {
   globalConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GlobalFilter): GlobalConnection!
   privacy(relativePath: String): Privacy!
   privacyConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PrivacyFilter): PrivacyConnection!
+  industry(relativePath: String): Industry!
+  industryConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: IndustryFilter): IndustryConnection!
 }
 
 input DocumentFilter {
   page: PageFilter
   global: GlobalFilter
   privacy: PrivacyFilter
+  industry: IndustryFilter
 }
 
 type DocumentConnectionEdges {
@@ -91,7 +94,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Page | Global | Privacy | Folder
+union DocumentNode = Page | Global | Privacy | Industry | Folder
 
 type PageSeo {
   title: String
@@ -495,6 +498,282 @@ type PrivacyConnection implements Connection {
   edges: [PrivacyConnectionEdges]
 }
 
+type IndustrySeo {
+  title: String
+  description: String
+  ogImage: String
+}
+
+type IndustryHero {
+  kicker: String
+  headline: String
+  subheadline: String
+  primaryCta: String
+  secondaryCta: String
+  trustText: String
+  image: String
+  imageAlt: String
+}
+
+type IndustryCaseStudyStats {
+  label: String
+  value: String
+}
+
+type IndustryCaseStudy {
+  kicker: String
+  headline: String
+  body: JSON
+  stats: [IndustryCaseStudyStats]
+  ctaText: String
+  quote: String
+  image: String
+  imageAlt: String
+}
+
+type IndustryProblem {
+  headline: String
+  body: JSON
+  callout: String
+}
+
+type IndustryFeaturesItems {
+  title: String
+  description: String
+  icon: String
+}
+
+type IndustryFeatures {
+  headline: String
+  items: [IndustryFeaturesItems]
+}
+
+type IndustryComparisonRows {
+  feature: String
+  competitor: String
+  us: String
+}
+
+type IndustryComparisonCta {
+  text: String
+  primaryBtn: String
+  secondaryBtn: String
+}
+
+type IndustryComparison {
+  headline: String
+  subline: String
+  rows: [IndustryComparisonRows]
+  cta: IndustryComparisonCta
+}
+
+type IndustryProcessSteps {
+  title: String
+  description: String
+}
+
+type IndustryProcess {
+  headline: String
+  steps: [IndustryProcessSteps]
+}
+
+type IndustryAbout {
+  headline: String
+  body: JSON
+  credentials: String
+  image: String
+  imageAlt: String
+}
+
+type IndustryFaqItems {
+  question: String
+  answer: JSON
+}
+
+type IndustryFaq {
+  items: [IndustryFaqItems]
+}
+
+type IndustryFormFields {
+  namePlaceholder: String
+  emailPlaceholder: String
+  websitePlaceholder: String
+  servicePlaceholder: String
+}
+
+type IndustryForm {
+  headline: String
+  subline: String
+  fields: IndustryFormFields
+  trustText: String
+}
+
+type IndustryFinalCta {
+  headline: String
+  body: String
+  primaryBtn: String
+  secondaryBtn: String
+}
+
+type Industry implements Node & Document {
+  seo: IndustrySeo
+  hero: IndustryHero
+  caseStudy: IndustryCaseStudy
+  problem: IndustryProblem
+  features: IndustryFeatures
+  comparison: IndustryComparison
+  process: IndustryProcess
+  about: IndustryAbout
+  faq: IndustryFaq
+  form: IndustryForm
+  finalCta: IndustryFinalCta
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input IndustrySeoFilter {
+  title: StringFilter
+  description: StringFilter
+  ogImage: ImageFilter
+}
+
+input IndustryHeroFilter {
+  kicker: StringFilter
+  headline: StringFilter
+  subheadline: StringFilter
+  primaryCta: StringFilter
+  secondaryCta: StringFilter
+  trustText: StringFilter
+  image: ImageFilter
+  imageAlt: StringFilter
+}
+
+input IndustryCaseStudyStatsFilter {
+  label: StringFilter
+  value: StringFilter
+}
+
+input IndustryCaseStudyFilter {
+  kicker: StringFilter
+  headline: StringFilter
+  body: RichTextFilter
+  stats: IndustryCaseStudyStatsFilter
+  ctaText: StringFilter
+  quote: StringFilter
+  image: ImageFilter
+  imageAlt: StringFilter
+}
+
+input IndustryProblemFilter {
+  headline: StringFilter
+  body: RichTextFilter
+  callout: StringFilter
+}
+
+input IndustryFeaturesItemsFilter {
+  title: StringFilter
+  description: StringFilter
+  icon: StringFilter
+}
+
+input IndustryFeaturesFilter {
+  headline: StringFilter
+  items: IndustryFeaturesItemsFilter
+}
+
+input IndustryComparisonRowsFilter {
+  feature: StringFilter
+  competitor: StringFilter
+  us: StringFilter
+}
+
+input IndustryComparisonCtaFilter {
+  text: StringFilter
+  primaryBtn: StringFilter
+  secondaryBtn: StringFilter
+}
+
+input IndustryComparisonFilter {
+  headline: StringFilter
+  subline: StringFilter
+  rows: IndustryComparisonRowsFilter
+  cta: IndustryComparisonCtaFilter
+}
+
+input IndustryProcessStepsFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input IndustryProcessFilter {
+  headline: StringFilter
+  steps: IndustryProcessStepsFilter
+}
+
+input IndustryAboutFilter {
+  headline: StringFilter
+  body: RichTextFilter
+  credentials: StringFilter
+  image: ImageFilter
+  imageAlt: StringFilter
+}
+
+input IndustryFaqItemsFilter {
+  question: StringFilter
+  answer: RichTextFilter
+}
+
+input IndustryFaqFilter {
+  items: IndustryFaqItemsFilter
+}
+
+input IndustryFormFieldsFilter {
+  namePlaceholder: StringFilter
+  emailPlaceholder: StringFilter
+  websitePlaceholder: StringFilter
+  servicePlaceholder: StringFilter
+}
+
+input IndustryFormFilter {
+  headline: StringFilter
+  subline: StringFilter
+  fields: IndustryFormFieldsFilter
+  trustText: StringFilter
+}
+
+input IndustryFinalCtaFilter {
+  headline: StringFilter
+  body: StringFilter
+  primaryBtn: StringFilter
+  secondaryBtn: StringFilter
+}
+
+input IndustryFilter {
+  seo: IndustrySeoFilter
+  hero: IndustryHeroFilter
+  caseStudy: IndustryCaseStudyFilter
+  problem: IndustryProblemFilter
+  features: IndustryFeaturesFilter
+  comparison: IndustryComparisonFilter
+  process: IndustryProcessFilter
+  about: IndustryAboutFilter
+  faq: IndustryFaqFilter
+  form: IndustryFormFilter
+  finalCta: IndustryFinalCtaFilter
+}
+
+type IndustryConnectionEdges {
+  cursor: String!
+  node: Industry
+}
+
+type IndustryConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [IndustryConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -507,12 +786,15 @@ type Mutation {
   createGlobal(relativePath: String!, params: GlobalMutation!): Global!
   updatePrivacy(relativePath: String!, params: PrivacyMutation!): Privacy!
   createPrivacy(relativePath: String!, params: PrivacyMutation!): Privacy!
+  updateIndustry(relativePath: String!, params: IndustryMutation!): Industry!
+  createIndustry(relativePath: String!, params: IndustryMutation!): Industry!
 }
 
 input DocumentUpdateMutation {
   page: PageMutation
   global: GlobalMutation
   privacy: PrivacyMutation
+  industry: IndustryMutation
   relativePath: String
 }
 
@@ -520,6 +802,7 @@ input DocumentMutation {
   page: PageMutation
   global: GlobalMutation
   privacy: PrivacyMutation
+  industry: IndustryMutation
 }
 
 input PageSeoMutation {
@@ -692,6 +975,137 @@ input PrivacyMutation {
   title: String
   sections: [PrivacySectionsMutation]
   seo: PrivacySeoMutation
+}
+
+input IndustrySeoMutation {
+  title: String
+  description: String
+  ogImage: String
+}
+
+input IndustryHeroMutation {
+  kicker: String
+  headline: String
+  subheadline: String
+  primaryCta: String
+  secondaryCta: String
+  trustText: String
+  image: String
+  imageAlt: String
+}
+
+input IndustryCaseStudyStatsMutation {
+  label: String
+  value: String
+}
+
+input IndustryCaseStudyMutation {
+  kicker: String
+  headline: String
+  body: JSON
+  stats: [IndustryCaseStudyStatsMutation]
+  ctaText: String
+  quote: String
+  image: String
+  imageAlt: String
+}
+
+input IndustryProblemMutation {
+  headline: String
+  body: JSON
+  callout: String
+}
+
+input IndustryFeaturesItemsMutation {
+  title: String
+  description: String
+  icon: String
+}
+
+input IndustryFeaturesMutation {
+  headline: String
+  items: [IndustryFeaturesItemsMutation]
+}
+
+input IndustryComparisonRowsMutation {
+  feature: String
+  competitor: String
+  us: String
+}
+
+input IndustryComparisonCtaMutation {
+  text: String
+  primaryBtn: String
+  secondaryBtn: String
+}
+
+input IndustryComparisonMutation {
+  headline: String
+  subline: String
+  rows: [IndustryComparisonRowsMutation]
+  cta: IndustryComparisonCtaMutation
+}
+
+input IndustryProcessStepsMutation {
+  title: String
+  description: String
+}
+
+input IndustryProcessMutation {
+  headline: String
+  steps: [IndustryProcessStepsMutation]
+}
+
+input IndustryAboutMutation {
+  headline: String
+  body: JSON
+  credentials: String
+  image: String
+  imageAlt: String
+}
+
+input IndustryFaqItemsMutation {
+  question: String
+  answer: JSON
+}
+
+input IndustryFaqMutation {
+  items: [IndustryFaqItemsMutation]
+}
+
+input IndustryFormFieldsMutation {
+  namePlaceholder: String
+  emailPlaceholder: String
+  websitePlaceholder: String
+  servicePlaceholder: String
+}
+
+input IndustryFormMutation {
+  headline: String
+  subline: String
+  fields: IndustryFormFieldsMutation
+  trustText: String
+}
+
+input IndustryFinalCtaMutation {
+  headline: String
+  body: String
+  primaryBtn: String
+  secondaryBtn: String
+}
+
+input IndustryMutation {
+  seo: IndustrySeoMutation
+  hero: IndustryHeroMutation
+  caseStudy: IndustryCaseStudyMutation
+  problem: IndustryProblemMutation
+  features: IndustryFeaturesMutation
+  comparison: IndustryComparisonMutation
+  process: IndustryProcessMutation
+  about: IndustryAboutMutation
+  faq: IndustryFaqMutation
+  form: IndustryFormMutation
+  finalCta: IndustryFinalCtaMutation
 }
 
 schema {

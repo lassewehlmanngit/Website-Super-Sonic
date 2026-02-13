@@ -88,6 +88,8 @@ export type Query = {
   globalConnection: GlobalConnection;
   privacy: Privacy;
   privacyConnection: PrivacyConnection;
+  industry: Industry;
+  industryConnection: IndustryConnection;
 };
 
 
@@ -156,10 +158,26 @@ export type QueryPrivacyConnectionArgs = {
   filter?: InputMaybe<PrivacyFilter>;
 };
 
+
+export type QueryIndustryArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryIndustryConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<IndustryFilter>;
+};
+
 export type DocumentFilter = {
   page?: InputMaybe<PageFilter>;
   global?: InputMaybe<GlobalFilter>;
   privacy?: InputMaybe<PrivacyFilter>;
+  industry?: InputMaybe<IndustryFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -199,7 +217,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Page | Global | Privacy | Folder;
+export type DocumentNode = Page | Global | Privacy | Industry | Folder;
 
 export type PageSeo = {
   __typename?: 'PageSeo';
@@ -634,6 +652,303 @@ export type PrivacyConnection = Connection & {
   edges?: Maybe<Array<Maybe<PrivacyConnectionEdges>>>;
 };
 
+export type IndustrySeo = {
+  __typename?: 'IndustrySeo';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  ogImage?: Maybe<Scalars['String']['output']>;
+};
+
+export type IndustryHero = {
+  __typename?: 'IndustryHero';
+  kicker?: Maybe<Scalars['String']['output']>;
+  headline?: Maybe<Scalars['String']['output']>;
+  subheadline?: Maybe<Scalars['String']['output']>;
+  primaryCta?: Maybe<Scalars['String']['output']>;
+  secondaryCta?: Maybe<Scalars['String']['output']>;
+  trustText?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  imageAlt?: Maybe<Scalars['String']['output']>;
+};
+
+export type IndustryCaseStudyStats = {
+  __typename?: 'IndustryCaseStudyStats';
+  label?: Maybe<Scalars['String']['output']>;
+  value?: Maybe<Scalars['String']['output']>;
+};
+
+export type IndustryCaseStudy = {
+  __typename?: 'IndustryCaseStudy';
+  kicker?: Maybe<Scalars['String']['output']>;
+  headline?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
+  stats?: Maybe<Array<Maybe<IndustryCaseStudyStats>>>;
+  ctaText?: Maybe<Scalars['String']['output']>;
+  quote?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  imageAlt?: Maybe<Scalars['String']['output']>;
+};
+
+export type IndustryProblem = {
+  __typename?: 'IndustryProblem';
+  headline?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
+  callout?: Maybe<Scalars['String']['output']>;
+};
+
+export type IndustryFeaturesItems = {
+  __typename?: 'IndustryFeaturesItems';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+};
+
+export type IndustryFeatures = {
+  __typename?: 'IndustryFeatures';
+  headline?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<IndustryFeaturesItems>>>;
+};
+
+export type IndustryComparisonRows = {
+  __typename?: 'IndustryComparisonRows';
+  feature?: Maybe<Scalars['String']['output']>;
+  competitor?: Maybe<Scalars['String']['output']>;
+  us?: Maybe<Scalars['String']['output']>;
+};
+
+export type IndustryComparisonCta = {
+  __typename?: 'IndustryComparisonCta';
+  text?: Maybe<Scalars['String']['output']>;
+  primaryBtn?: Maybe<Scalars['String']['output']>;
+  secondaryBtn?: Maybe<Scalars['String']['output']>;
+};
+
+export type IndustryComparison = {
+  __typename?: 'IndustryComparison';
+  headline?: Maybe<Scalars['String']['output']>;
+  subline?: Maybe<Scalars['String']['output']>;
+  rows?: Maybe<Array<Maybe<IndustryComparisonRows>>>;
+  cta?: Maybe<IndustryComparisonCta>;
+};
+
+export type IndustryProcessSteps = {
+  __typename?: 'IndustryProcessSteps';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type IndustryProcess = {
+  __typename?: 'IndustryProcess';
+  headline?: Maybe<Scalars['String']['output']>;
+  steps?: Maybe<Array<Maybe<IndustryProcessSteps>>>;
+};
+
+export type IndustryAbout = {
+  __typename?: 'IndustryAbout';
+  headline?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
+  credentials?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  imageAlt?: Maybe<Scalars['String']['output']>;
+};
+
+export type IndustryFaqItems = {
+  __typename?: 'IndustryFaqItems';
+  question?: Maybe<Scalars['String']['output']>;
+  answer?: Maybe<Scalars['JSON']['output']>;
+};
+
+export type IndustryFaq = {
+  __typename?: 'IndustryFaq';
+  items?: Maybe<Array<Maybe<IndustryFaqItems>>>;
+};
+
+export type IndustryFormFields = {
+  __typename?: 'IndustryFormFields';
+  namePlaceholder?: Maybe<Scalars['String']['output']>;
+  emailPlaceholder?: Maybe<Scalars['String']['output']>;
+  websitePlaceholder?: Maybe<Scalars['String']['output']>;
+  servicePlaceholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type IndustryForm = {
+  __typename?: 'IndustryForm';
+  headline?: Maybe<Scalars['String']['output']>;
+  subline?: Maybe<Scalars['String']['output']>;
+  fields?: Maybe<IndustryFormFields>;
+  trustText?: Maybe<Scalars['String']['output']>;
+};
+
+export type IndustryFinalCta = {
+  __typename?: 'IndustryFinalCta';
+  headline?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+  primaryBtn?: Maybe<Scalars['String']['output']>;
+  secondaryBtn?: Maybe<Scalars['String']['output']>;
+};
+
+export type Industry = Node & Document & {
+  __typename?: 'Industry';
+  seo?: Maybe<IndustrySeo>;
+  hero?: Maybe<IndustryHero>;
+  caseStudy?: Maybe<IndustryCaseStudy>;
+  problem?: Maybe<IndustryProblem>;
+  features?: Maybe<IndustryFeatures>;
+  comparison?: Maybe<IndustryComparison>;
+  process?: Maybe<IndustryProcess>;
+  about?: Maybe<IndustryAbout>;
+  faq?: Maybe<IndustryFaq>;
+  form?: Maybe<IndustryForm>;
+  finalCta?: Maybe<IndustryFinalCta>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type IndustrySeoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  ogImage?: InputMaybe<ImageFilter>;
+};
+
+export type IndustryHeroFilter = {
+  kicker?: InputMaybe<StringFilter>;
+  headline?: InputMaybe<StringFilter>;
+  subheadline?: InputMaybe<StringFilter>;
+  primaryCta?: InputMaybe<StringFilter>;
+  secondaryCta?: InputMaybe<StringFilter>;
+  trustText?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
+};
+
+export type IndustryCaseStudyStatsFilter = {
+  label?: InputMaybe<StringFilter>;
+  value?: InputMaybe<StringFilter>;
+};
+
+export type IndustryCaseStudyFilter = {
+  kicker?: InputMaybe<StringFilter>;
+  headline?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+  stats?: InputMaybe<IndustryCaseStudyStatsFilter>;
+  ctaText?: InputMaybe<StringFilter>;
+  quote?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
+};
+
+export type IndustryProblemFilter = {
+  headline?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+  callout?: InputMaybe<StringFilter>;
+};
+
+export type IndustryFeaturesItemsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+};
+
+export type IndustryFeaturesFilter = {
+  headline?: InputMaybe<StringFilter>;
+  items?: InputMaybe<IndustryFeaturesItemsFilter>;
+};
+
+export type IndustryComparisonRowsFilter = {
+  feature?: InputMaybe<StringFilter>;
+  competitor?: InputMaybe<StringFilter>;
+  us?: InputMaybe<StringFilter>;
+};
+
+export type IndustryComparisonCtaFilter = {
+  text?: InputMaybe<StringFilter>;
+  primaryBtn?: InputMaybe<StringFilter>;
+  secondaryBtn?: InputMaybe<StringFilter>;
+};
+
+export type IndustryComparisonFilter = {
+  headline?: InputMaybe<StringFilter>;
+  subline?: InputMaybe<StringFilter>;
+  rows?: InputMaybe<IndustryComparisonRowsFilter>;
+  cta?: InputMaybe<IndustryComparisonCtaFilter>;
+};
+
+export type IndustryProcessStepsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type IndustryProcessFilter = {
+  headline?: InputMaybe<StringFilter>;
+  steps?: InputMaybe<IndustryProcessStepsFilter>;
+};
+
+export type IndustryAboutFilter = {
+  headline?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+  credentials?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
+};
+
+export type IndustryFaqItemsFilter = {
+  question?: InputMaybe<StringFilter>;
+  answer?: InputMaybe<RichTextFilter>;
+};
+
+export type IndustryFaqFilter = {
+  items?: InputMaybe<IndustryFaqItemsFilter>;
+};
+
+export type IndustryFormFieldsFilter = {
+  namePlaceholder?: InputMaybe<StringFilter>;
+  emailPlaceholder?: InputMaybe<StringFilter>;
+  websitePlaceholder?: InputMaybe<StringFilter>;
+  servicePlaceholder?: InputMaybe<StringFilter>;
+};
+
+export type IndustryFormFilter = {
+  headline?: InputMaybe<StringFilter>;
+  subline?: InputMaybe<StringFilter>;
+  fields?: InputMaybe<IndustryFormFieldsFilter>;
+  trustText?: InputMaybe<StringFilter>;
+};
+
+export type IndustryFinalCtaFilter = {
+  headline?: InputMaybe<StringFilter>;
+  body?: InputMaybe<StringFilter>;
+  primaryBtn?: InputMaybe<StringFilter>;
+  secondaryBtn?: InputMaybe<StringFilter>;
+};
+
+export type IndustryFilter = {
+  seo?: InputMaybe<IndustrySeoFilter>;
+  hero?: InputMaybe<IndustryHeroFilter>;
+  caseStudy?: InputMaybe<IndustryCaseStudyFilter>;
+  problem?: InputMaybe<IndustryProblemFilter>;
+  features?: InputMaybe<IndustryFeaturesFilter>;
+  comparison?: InputMaybe<IndustryComparisonFilter>;
+  process?: InputMaybe<IndustryProcessFilter>;
+  about?: InputMaybe<IndustryAboutFilter>;
+  faq?: InputMaybe<IndustryFaqFilter>;
+  form?: InputMaybe<IndustryFormFilter>;
+  finalCta?: InputMaybe<IndustryFinalCtaFilter>;
+};
+
+export type IndustryConnectionEdges = {
+  __typename?: 'IndustryConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Industry>;
+};
+
+export type IndustryConnection = Connection & {
+  __typename?: 'IndustryConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<IndustryConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -647,6 +962,8 @@ export type Mutation = {
   createGlobal: Global;
   updatePrivacy: Privacy;
   createPrivacy: Privacy;
+  updateIndustry: Industry;
+  createIndustry: Industry;
 };
 
 
@@ -718,10 +1035,23 @@ export type MutationCreatePrivacyArgs = {
   params: PrivacyMutation;
 };
 
+
+export type MutationUpdateIndustryArgs = {
+  relativePath: Scalars['String']['input'];
+  params: IndustryMutation;
+};
+
+
+export type MutationCreateIndustryArgs = {
+  relativePath: Scalars['String']['input'];
+  params: IndustryMutation;
+};
+
 export type DocumentUpdateMutation = {
   page?: InputMaybe<PageMutation>;
   global?: InputMaybe<GlobalMutation>;
   privacy?: InputMaybe<PrivacyMutation>;
+  industry?: InputMaybe<IndustryMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -729,6 +1059,7 @@ export type DocumentMutation = {
   page?: InputMaybe<PageMutation>;
   global?: InputMaybe<GlobalMutation>;
   privacy?: InputMaybe<PrivacyMutation>;
+  industry?: InputMaybe<IndustryMutation>;
 };
 
 export type PageSeoMutation = {
@@ -903,11 +1234,144 @@ export type PrivacyMutation = {
   seo?: InputMaybe<PrivacySeoMutation>;
 };
 
+export type IndustrySeoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  ogImage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type IndustryHeroMutation = {
+  kicker?: InputMaybe<Scalars['String']['input']>;
+  headline?: InputMaybe<Scalars['String']['input']>;
+  subheadline?: InputMaybe<Scalars['String']['input']>;
+  primaryCta?: InputMaybe<Scalars['String']['input']>;
+  secondaryCta?: InputMaybe<Scalars['String']['input']>;
+  trustText?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type IndustryCaseStudyStatsMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type IndustryCaseStudyMutation = {
+  kicker?: InputMaybe<Scalars['String']['input']>;
+  headline?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+  stats?: InputMaybe<Array<InputMaybe<IndustryCaseStudyStatsMutation>>>;
+  ctaText?: InputMaybe<Scalars['String']['input']>;
+  quote?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type IndustryProblemMutation = {
+  headline?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+  callout?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type IndustryFeaturesItemsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type IndustryFeaturesMutation = {
+  headline?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<IndustryFeaturesItemsMutation>>>;
+};
+
+export type IndustryComparisonRowsMutation = {
+  feature?: InputMaybe<Scalars['String']['input']>;
+  competitor?: InputMaybe<Scalars['String']['input']>;
+  us?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type IndustryComparisonCtaMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  primaryBtn?: InputMaybe<Scalars['String']['input']>;
+  secondaryBtn?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type IndustryComparisonMutation = {
+  headline?: InputMaybe<Scalars['String']['input']>;
+  subline?: InputMaybe<Scalars['String']['input']>;
+  rows?: InputMaybe<Array<InputMaybe<IndustryComparisonRowsMutation>>>;
+  cta?: InputMaybe<IndustryComparisonCtaMutation>;
+};
+
+export type IndustryProcessStepsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type IndustryProcessMutation = {
+  headline?: InputMaybe<Scalars['String']['input']>;
+  steps?: InputMaybe<Array<InputMaybe<IndustryProcessStepsMutation>>>;
+};
+
+export type IndustryAboutMutation = {
+  headline?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+  credentials?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type IndustryFaqItemsMutation = {
+  question?: InputMaybe<Scalars['String']['input']>;
+  answer?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+export type IndustryFaqMutation = {
+  items?: InputMaybe<Array<InputMaybe<IndustryFaqItemsMutation>>>;
+};
+
+export type IndustryFormFieldsMutation = {
+  namePlaceholder?: InputMaybe<Scalars['String']['input']>;
+  emailPlaceholder?: InputMaybe<Scalars['String']['input']>;
+  websitePlaceholder?: InputMaybe<Scalars['String']['input']>;
+  servicePlaceholder?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type IndustryFormMutation = {
+  headline?: InputMaybe<Scalars['String']['input']>;
+  subline?: InputMaybe<Scalars['String']['input']>;
+  fields?: InputMaybe<IndustryFormFieldsMutation>;
+  trustText?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type IndustryFinalCtaMutation = {
+  headline?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  primaryBtn?: InputMaybe<Scalars['String']['input']>;
+  secondaryBtn?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type IndustryMutation = {
+  seo?: InputMaybe<IndustrySeoMutation>;
+  hero?: InputMaybe<IndustryHeroMutation>;
+  caseStudy?: InputMaybe<IndustryCaseStudyMutation>;
+  problem?: InputMaybe<IndustryProblemMutation>;
+  features?: InputMaybe<IndustryFeaturesMutation>;
+  comparison?: InputMaybe<IndustryComparisonMutation>;
+  process?: InputMaybe<IndustryProcessMutation>;
+  about?: InputMaybe<IndustryAboutMutation>;
+  faq?: InputMaybe<IndustryFaqMutation>;
+  form?: InputMaybe<IndustryFormMutation>;
+  finalCta?: InputMaybe<IndustryFinalCtaMutation>;
+};
+
 export type PagePartsFragment = { __typename: 'Page', seo?: { __typename: 'PageSeo', title?: string | null, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'PageBlocksHero', eyebrow?: string | null, headline?: string | null, subheadline?: string | null, body?: string | null, variant?: string | null, backgroundImage?: string | null, primaryCta?: { __typename: 'PageBlocksHeroPrimaryCta', label?: string | null, url?: string | null, style?: string | null } | null, secondaryCta?: { __typename: 'PageBlocksHeroSecondaryCta', label?: string | null, url?: string | null, style?: string | null } | null } | { __typename: 'PageBlocksFaq', headline?: string | null, subheadline?: string | null, variant?: string | null, items?: Array<{ __typename: 'PageBlocksFaqItems', question?: string | null, answer?: any | null, category?: string | null } | null> | null } | { __typename: 'PageBlocksCaseStudies', headline?: string | null, subheadline?: string | null, variant?: string | null, studies?: Array<{ __typename: 'PageBlocksCaseStudiesStudies', slug?: string | null, title?: string | null, client?: string | null, industry?: string | null, year?: string | null, heroImage?: string | null, color?: string | null, icon?: string | null, liveUrl?: string | null, preview?: { __typename: 'PageBlocksCaseStudiesStudiesPreview', problem?: string | null, solution?: string | null, result?: string | null, metric?: string | null, metricLabel?: string | null } | null, content?: { __typename: 'PageBlocksCaseStudiesStudiesContent', intro?: any | null, challenges?: Array<string | null> | null, approach?: Array<string | null> | null, results?: Array<string | null> | null, techStack?: Array<string | null> | null, conclusion?: any | null, story?: { __typename: 'PageBlocksCaseStudiesStudiesContentStory', hook?: string | null, turningPoint?: string | null, transformation?: string | null } | null, features?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentFeatures', title?: string | null, description?: string | null } | null> | null, metrics?: Array<{ __typename: 'PageBlocksCaseStudiesStudiesContentMetrics', label?: string | null, value?: string | null, comparison?: string | null } | null> | null } | null, seo?: { __typename: 'PageBlocksCaseStudiesStudiesSeo', title?: string | null, description?: string | null } | null } | null> | null } | null> | null };
 
 export type GlobalPartsFragment = { __typename: 'Global', theme?: { __typename: 'GlobalTheme', primaryColor?: string | null, secondaryColor?: string | null, backgroundColor?: string | null, fontHeading?: string | null, fontBody?: string | null } | null, navigation?: { __typename: 'GlobalNavigation', links?: Array<{ __typename: 'GlobalNavigationLinks', label?: string | null, url?: string | null } | null> | null, cta?: { __typename: 'GlobalNavigationCta', label?: string | null, url?: string | null } | null } | null, footer?: { __typename: 'GlobalFooter', copyright?: string | null, socialLinks?: Array<{ __typename: 'GlobalFooterSocialLinks', platform?: string | null, url?: string | null } | null> | null } | null };
 
 export type PrivacyPartsFragment = { __typename: 'Privacy', title: string, sections?: Array<{ __typename: 'PrivacySections', title?: string | null, content?: any | null } | null> | null, seo?: { __typename: 'PrivacySeo', title?: string | null, description?: string | null } | null };
+
+export type IndustryPartsFragment = { __typename: 'Industry', seo?: { __typename: 'IndustrySeo', title?: string | null, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'IndustryHero', kicker?: string | null, headline?: string | null, subheadline?: string | null, primaryCta?: string | null, secondaryCta?: string | null, trustText?: string | null, image?: string | null, imageAlt?: string | null } | null, caseStudy?: { __typename: 'IndustryCaseStudy', kicker?: string | null, headline?: string | null, body?: any | null, ctaText?: string | null, quote?: string | null, image?: string | null, imageAlt?: string | null, stats?: Array<{ __typename: 'IndustryCaseStudyStats', label?: string | null, value?: string | null } | null> | null } | null, problem?: { __typename: 'IndustryProblem', headline?: string | null, body?: any | null, callout?: string | null } | null, features?: { __typename: 'IndustryFeatures', headline?: string | null, items?: Array<{ __typename: 'IndustryFeaturesItems', title?: string | null, description?: string | null, icon?: string | null } | null> | null } | null, comparison?: { __typename: 'IndustryComparison', headline?: string | null, subline?: string | null, rows?: Array<{ __typename: 'IndustryComparisonRows', feature?: string | null, competitor?: string | null, us?: string | null } | null> | null, cta?: { __typename: 'IndustryComparisonCta', text?: string | null, primaryBtn?: string | null, secondaryBtn?: string | null } | null } | null, process?: { __typename: 'IndustryProcess', headline?: string | null, steps?: Array<{ __typename: 'IndustryProcessSteps', title?: string | null, description?: string | null } | null> | null } | null, about?: { __typename: 'IndustryAbout', headline?: string | null, body?: any | null, credentials?: string | null, image?: string | null, imageAlt?: string | null } | null, faq?: { __typename: 'IndustryFaq', items?: Array<{ __typename: 'IndustryFaqItems', question?: string | null, answer?: any | null } | null> | null } | null, form?: { __typename: 'IndustryForm', headline?: string | null, subline?: string | null, trustText?: string | null, fields?: { __typename: 'IndustryFormFields', namePlaceholder?: string | null, emailPlaceholder?: string | null, websitePlaceholder?: string | null, servicePlaceholder?: string | null } | null } | null, finalCta?: { __typename: 'IndustryFinalCta', headline?: string | null, body?: string | null, primaryBtn?: string | null, secondaryBtn?: string | null } | null };
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -965,6 +1429,25 @@ export type PrivacyConnectionQueryVariables = Exact<{
 
 
 export type PrivacyConnectionQuery = { __typename?: 'Query', privacyConnection: { __typename?: 'PrivacyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PrivacyConnectionEdges', cursor: string, node?: { __typename: 'Privacy', id: string, title: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'PrivacySections', title?: string | null, content?: any | null } | null> | null, seo?: { __typename: 'PrivacySeo', title?: string | null, description?: string | null } | null } | null } | null> | null } };
+
+export type IndustryQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type IndustryQuery = { __typename?: 'Query', industry: { __typename: 'Industry', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'IndustrySeo', title?: string | null, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'IndustryHero', kicker?: string | null, headline?: string | null, subheadline?: string | null, primaryCta?: string | null, secondaryCta?: string | null, trustText?: string | null, image?: string | null, imageAlt?: string | null } | null, caseStudy?: { __typename: 'IndustryCaseStudy', kicker?: string | null, headline?: string | null, body?: any | null, ctaText?: string | null, quote?: string | null, image?: string | null, imageAlt?: string | null, stats?: Array<{ __typename: 'IndustryCaseStudyStats', label?: string | null, value?: string | null } | null> | null } | null, problem?: { __typename: 'IndustryProblem', headline?: string | null, body?: any | null, callout?: string | null } | null, features?: { __typename: 'IndustryFeatures', headline?: string | null, items?: Array<{ __typename: 'IndustryFeaturesItems', title?: string | null, description?: string | null, icon?: string | null } | null> | null } | null, comparison?: { __typename: 'IndustryComparison', headline?: string | null, subline?: string | null, rows?: Array<{ __typename: 'IndustryComparisonRows', feature?: string | null, competitor?: string | null, us?: string | null } | null> | null, cta?: { __typename: 'IndustryComparisonCta', text?: string | null, primaryBtn?: string | null, secondaryBtn?: string | null } | null } | null, process?: { __typename: 'IndustryProcess', headline?: string | null, steps?: Array<{ __typename: 'IndustryProcessSteps', title?: string | null, description?: string | null } | null> | null } | null, about?: { __typename: 'IndustryAbout', headline?: string | null, body?: any | null, credentials?: string | null, image?: string | null, imageAlt?: string | null } | null, faq?: { __typename: 'IndustryFaq', items?: Array<{ __typename: 'IndustryFaqItems', question?: string | null, answer?: any | null } | null> | null } | null, form?: { __typename: 'IndustryForm', headline?: string | null, subline?: string | null, trustText?: string | null, fields?: { __typename: 'IndustryFormFields', namePlaceholder?: string | null, emailPlaceholder?: string | null, websitePlaceholder?: string | null, servicePlaceholder?: string | null } | null } | null, finalCta?: { __typename: 'IndustryFinalCta', headline?: string | null, body?: string | null, primaryBtn?: string | null, secondaryBtn?: string | null } | null } };
+
+export type IndustryConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<IndustryFilter>;
+}>;
+
+
+export type IndustryConnectionQuery = { __typename?: 'Query', industryConnection: { __typename?: 'IndustryConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'IndustryConnectionEdges', cursor: string, node?: { __typename: 'Industry', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'IndustrySeo', title?: string | null, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'IndustryHero', kicker?: string | null, headline?: string | null, subheadline?: string | null, primaryCta?: string | null, secondaryCta?: string | null, trustText?: string | null, image?: string | null, imageAlt?: string | null } | null, caseStudy?: { __typename: 'IndustryCaseStudy', kicker?: string | null, headline?: string | null, body?: any | null, ctaText?: string | null, quote?: string | null, image?: string | null, imageAlt?: string | null, stats?: Array<{ __typename: 'IndustryCaseStudyStats', label?: string | null, value?: string | null } | null> | null } | null, problem?: { __typename: 'IndustryProblem', headline?: string | null, body?: any | null, callout?: string | null } | null, features?: { __typename: 'IndustryFeatures', headline?: string | null, items?: Array<{ __typename: 'IndustryFeaturesItems', title?: string | null, description?: string | null, icon?: string | null } | null> | null } | null, comparison?: { __typename: 'IndustryComparison', headline?: string | null, subline?: string | null, rows?: Array<{ __typename: 'IndustryComparisonRows', feature?: string | null, competitor?: string | null, us?: string | null } | null> | null, cta?: { __typename: 'IndustryComparisonCta', text?: string | null, primaryBtn?: string | null, secondaryBtn?: string | null } | null } | null, process?: { __typename: 'IndustryProcess', headline?: string | null, steps?: Array<{ __typename: 'IndustryProcessSteps', title?: string | null, description?: string | null } | null> | null } | null, about?: { __typename: 'IndustryAbout', headline?: string | null, body?: any | null, credentials?: string | null, image?: string | null, imageAlt?: string | null } | null, faq?: { __typename: 'IndustryFaq', items?: Array<{ __typename: 'IndustryFaqItems', question?: string | null, answer?: any | null } | null> | null } | null, form?: { __typename: 'IndustryForm', headline?: string | null, subline?: string | null, trustText?: string | null, fields?: { __typename: 'IndustryFormFields', namePlaceholder?: string | null, emailPlaceholder?: string | null, websitePlaceholder?: string | null, servicePlaceholder?: string | null } | null } | null, finalCta?: { __typename: 'IndustryFinalCta', headline?: string | null, body?: string | null, primaryBtn?: string | null, secondaryBtn?: string | null } | null } | null } | null> | null } };
 
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
@@ -1115,6 +1598,121 @@ export const PrivacyPartsFragmentDoc = gql`
     __typename
     title
     description
+  }
+}
+    `;
+export const IndustryPartsFragmentDoc = gql`
+    fragment IndustryParts on Industry {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    ogImage
+  }
+  hero {
+    __typename
+    kicker
+    headline
+    subheadline
+    primaryCta
+    secondaryCta
+    trustText
+    image
+    imageAlt
+  }
+  caseStudy {
+    __typename
+    kicker
+    headline
+    body
+    stats {
+      __typename
+      label
+      value
+    }
+    ctaText
+    quote
+    image
+    imageAlt
+  }
+  problem {
+    __typename
+    headline
+    body
+    callout
+  }
+  features {
+    __typename
+    headline
+    items {
+      __typename
+      title
+      description
+      icon
+    }
+  }
+  comparison {
+    __typename
+    headline
+    subline
+    rows {
+      __typename
+      feature
+      competitor
+      us
+    }
+    cta {
+      __typename
+      text
+      primaryBtn
+      secondaryBtn
+    }
+  }
+  process {
+    __typename
+    headline
+    steps {
+      __typename
+      title
+      description
+    }
+  }
+  about {
+    __typename
+    headline
+    body
+    credentials
+    image
+    imageAlt
+  }
+  faq {
+    __typename
+    items {
+      __typename
+      question
+      answer
+    }
+  }
+  form {
+    __typename
+    headline
+    subline
+    fields {
+      __typename
+      namePlaceholder
+      emailPlaceholder
+      websitePlaceholder
+      servicePlaceholder
+    }
+    trustText
+  }
+  finalCta {
+    __typename
+    headline
+    body
+    primaryBtn
+    secondaryBtn
   }
 }
     `;
@@ -1289,6 +1887,63 @@ export const PrivacyConnectionDocument = gql`
   }
 }
     ${PrivacyPartsFragmentDoc}`;
+export const IndustryDocument = gql`
+    query industry($relativePath: String!) {
+  industry(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...IndustryParts
+  }
+}
+    ${IndustryPartsFragmentDoc}`;
+export const IndustryConnectionDocument = gql`
+    query industryConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: IndustryFilter) {
+  industryConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...IndustryParts
+      }
+    }
+  }
+}
+    ${IndustryPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -1309,6 +1964,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     privacyConnection(variables?: PrivacyConnectionQueryVariables, options?: C): Promise<{data: PrivacyConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PrivacyConnectionQueryVariables, query: string}> {
         return requester<{data: PrivacyConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PrivacyConnectionQueryVariables, query: string}, PrivacyConnectionQueryVariables>(PrivacyConnectionDocument, variables, options);
+      },
+    industry(variables: IndustryQueryVariables, options?: C): Promise<{data: IndustryQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: IndustryQueryVariables, query: string}> {
+        return requester<{data: IndustryQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: IndustryQueryVariables, query: string}, IndustryQueryVariables>(IndustryDocument, variables, options);
+      },
+    industryConnection(variables?: IndustryConnectionQueryVariables, options?: C): Promise<{data: IndustryConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: IndustryConnectionQueryVariables, query: string}> {
+        return requester<{data: IndustryConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: IndustryConnectionQueryVariables, query: string}, IndustryConnectionQueryVariables>(IndustryConnectionDocument, variables, options);
       }
     };
   }

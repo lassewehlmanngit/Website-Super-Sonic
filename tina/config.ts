@@ -2,6 +2,7 @@ import { defineConfig } from "tinacms";
 import { pageCollection } from "./collections/page";
 import { globalCollection } from "./collections/global";
 import { privacyCollection } from "./collections/privacy";
+import { industryCollection } from "./collections/industry";
 
 // Re-export helpers for convenience (they're defined in helpers.ts)
 export { listItemProps, buttonField } from "./helpers";
@@ -30,28 +31,29 @@ const branch = process.env.TINA_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || p
 
 export default defineConfig({
   branch,
-  
+
   // Tina Cloud credentials (optional for local dev)
   clientId: process.env.TINA_PUBLIC_CLIENT_ID,
   token: process.env.TINA_TOKEN,
-  
+
   build: {
     outputFolder: "admin",
     publicFolder: "public",
   },
-  
+
   media: {
-    tina: { 
-      mediaRoot: "uploads", 
-      publicFolder: "public" 
+    tina: {
+      mediaRoot: "uploads",
+      publicFolder: "public"
     },
   },
-  
+
   schema: {
     collections: [
       pageCollection,
       globalCollection,
       privacyCollection,
+      industryCollection,
     ],
   },
 });

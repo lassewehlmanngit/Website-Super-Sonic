@@ -188,6 +188,7 @@ export const caseStudies: LocalizedCaseStudies = {
       },
       color: '#E30613',
       icon: 'building',
+      liveUrl: 'https://website-ivangs-bedachungen.onrender.com',
       preview: {
         problem: 'Fachliche Exzellenz nicht digital sichtbar.',
         solution: 'Moderne Web-Plattform mit Fokus auf Kundenanfragen und Recruiting.',
@@ -368,6 +369,7 @@ export const caseStudies: LocalizedCaseStudies = {
       },
       color: '#E30613',
       icon: 'building',
+      liveUrl: 'https://website-ivangs-bedachungen.onrender.com',
       preview: {
         problem: 'Fachliche Exzellenz nicht digital sichtbar.',
         solution: 'Moderne Web-Plattform mit Fokus auf Kundenanfragen und Recruiting.',
@@ -548,6 +550,7 @@ export const caseStudies: LocalizedCaseStudies = {
       },
       color: '#E30613',
       icon: 'building',
+      liveUrl: 'https://website-ivangs-bedachungen.onrender.com',
       preview: {
         problem: 'Fachliche Exzellenz nicht digital sichtbar.',
         solution: 'Moderne Web-Plattform mit Fokus auf Kundenanfragen und Recruiting.',

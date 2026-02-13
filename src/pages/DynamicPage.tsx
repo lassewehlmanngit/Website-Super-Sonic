@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { useTina } from "tinacms/dist/react";
 import { SEO } from "../components/SEO";
 import { BlockRenderer } from "../components/blocks/BlockRenderer";
+import { client } from "../../tina/__generated__/client";
+import { NotFound } from "./NotFound";
 
 interface DynamicPageProps {
   lang: 'de' | 'en' | 'ja';
@@ -22,7 +24,7 @@ export const DynamicPage: React.FC<DynamicPageProps> = ({ lang }) => {
   const { slug } = useParams();
   const pageName = slug || "home";
   const relativePath = `${pageName}-${lang}.json`;
-  
+
   // We need to fetch the initial data for useTina
   // In a real Next.js/SSG app this would be getStaticProps
   // Here we do it client-side for the SPA
@@ -34,17 +36,17 @@ export const DynamicPage: React.FC<DynamicPageProps> = ({ lang }) => {
     const fetchPage = async () => {
       setIsLoading(true);
       setError(null);
-      
+
       try {
         // Try to import the JSON file directly (works in development)
         const response = await fetch(`/content/pages/${relativePath}`);
-        
+
         if (!response.ok) {
           throw new Error(`Page not found: ${relativePath}`);
         }
-        
+
         const data = await response.json();
-        
+
         // Wrap in the structure useTina expects
         // This mimics the GraphQL response structure
         setInitialData({
@@ -60,7 +62,7 @@ export const DynamicPage: React.FC<DynamicPageProps> = ({ lang }) => {
         setIsLoading(false);
       }
     };
-    
+
     fetchPage();
   }, [relativePath]);
 
@@ -99,34 +101,26 @@ export const DynamicPage: React.FC<DynamicPageProps> = ({ lang }) => {
 
   // Error state
   if (error && !page?.blocks) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[var(--color-bg,#0a0a0a)] text-white">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-zinc-400 mb-2">
-          {lang === 'de' ? 'Seite nicht gefunden' : 'Page not found'}
-        </p>
-        <p className="text-zinc-500 text-sm font-mono">{relativePath}</p>
-      </div>
-    );
+    return <NotFound />;
   }
 
   return (
     <>
       {/* SEO */}
       {page?.seo && (
-        <SEO 
-          title={page.seo.title || ''} 
-          description={page.seo.description || ''} 
+        <SEO
+          title={page.seo.title || ''}
+          description={page.seo.description || ''}
           lang={lang}
         />
       )}
-      
+
       {/* Page Blocks */}
       <main>
         {page?.blocks?.map((block: any, index: number) => (
-          <BlockRenderer 
-            key={index} 
-            block={block} 
+          <BlockRenderer
+            key={index}
+            block={block}
             lang={lang}
           />
         ))}

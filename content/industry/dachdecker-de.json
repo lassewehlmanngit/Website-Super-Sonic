@@ -1,0 +1,333 @@
+{
+    "seo": {
+        "title": "Website für Dachdecker | 14 Tage, Festpreis, 100% dein Eigentum | Norddorf",
+        "description": "Professionelle Webseiten für Dachdeckerbetriebe. Fertig in 14 Tagen. 5.600€ Festpreis. Keine monatlichen Kosten. Inkl. Schnellanfrage-Formular & Google-Optimierung. Gratis Entwurf in 72h."
+    },
+    "hero": {
+        "kicker": "Webseiten für Dachdeckerbetriebe",
+        "headline": "Deine Baustellen sind voll.\nDeine Website sollte es auch sein.",
+        "subheadline": "Wir bauen Webseiten für Dachdecker und Handwerksbetriebe. Fertig in 14 Tagen. 5.600€ Festpreis. Mit Schnellanfrage-Formular, das Aufträge direkt in dein Postfach bringt.",
+        "primaryCta": "Gratis-Entwurf in 72h",
+        "secondaryCta": "Live-Beispiel ansehen",
+        "trustText": "✓ Kein Abo  ✓ 100% dein Eigentum  ✓ DSGVO-konform",
+        "image": "/uploads/ivangs-preview.jpg",
+        "imageAlt": "Ivangs Bedachungen Website Preview auf Laptop"
+    },
+    "caseStudy": {
+        "kicker": "LIVE-PROJEKT",
+        "headline": "Ivangs Bedachungen — Meisterbetrieb seit 1996.",
+        "body": {
+            "type": "root",
+            "children": [
+                {
+                    "type": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "text": "28 Experten. Eigener Kran. 400m² Lagerfläche. Und eine Website, die dem Betrieb endlich gerecht wird."
+                        }
+                    ]
+                },
+                {
+                    "type": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "text": "Wir haben für Ivangs Bedachungen eine komplette Webseite mit Schnellanfrage-Formular, Karriere-Seite und Leistungsübersicht gebaut — in unter 14 Tagen."
+                        }
+                    ]
+                }
+            ]
+        },
+        "stats": [
+            {
+                "label": "Fertig in",
+                "value": "12 Tagen"
+            },
+            {
+                "label": "Schnellanfrage",
+                "value": "Live am Tag 1"
+            },
+            {
+                "label": "Google-sichtbar",
+                "value": "Ja, indexiert"
+            },
+            {
+                "label": "Kosten danach",
+                "value": "0€ / Monat"
+            }
+        ],
+        "ctaText": "Live-Website ansehen",
+        "quote": "Schnell, unkompliziert, sieht super aus.",
+        "image": "/uploads/ivangs-case-study.jpg",
+        "imageAlt": "Dachdecker Website Case Study Screenshot"
+    },
+    "problem": {
+        "headline": "Kennst du das?",
+        "body": {
+            "type": "root",
+            "children": [
+                {
+                    "type": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "text": "Du bist Dachdeckermeister, kein Webdesigner. Trotzdem hast du irgendwann mal eine Website gebastelt — oder basteln lassen. Vielleicht mit Jimdo, vielleicht mit einer Agentur für 12.000€, die danach nie wieder erreichbar war."
+                        }
+                    ]
+                },
+                {
+                    "type": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "text": "Das Ergebnis: Die Seite sieht auf dem Handy furchtbar aus. Google kennt sie nicht. Und Kunden rufen an, weil sie deine Nummer über einen Kumpel haben — nicht weil sie dich online gefunden haben."
+                        }
+                    ]
+                },
+                {
+                    "type": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "text": "Dabei suchen jeden Tag Hausbesitzer in deiner Region nach \"Dachdecker in der Nähe\". Wenn du dort nicht auftauchst, bekommt den Auftrag jemand anderes."
+                        }
+                    ]
+                }
+            ]
+        },
+        "callout": "Du brauchst keine Raketenwissenschaft. Du brauchst eine Website, die bei Google auftaucht, auf dem Handy funktioniert und Anfragen reinholt."
+    },
+    "features": {
+        "headline": "Alles, was ein Dachdeckerbetrieb online braucht.",
+        "items": [
+            {
+                "title": "Schnellanfrage-Formular",
+                "description": "Kunden können direkt über die Website anfragen. Name, Telefon, was gebraucht wird — landet in deinem Postfach.",
+                "icon": "FileText"
+            },
+            {
+                "title": "Google-Sichtbarkeit",
+                "description": "Lokale SEO, damit du bei \"Dachdecker [deine Stadt]\" gefunden wirst. Inkl. Schema-Markup für Google.",
+                "icon": "Search"
+            },
+            {
+                "title": "Leistungsübersicht",
+                "description": "Steildach, Flachdach, Solar & PV, Fenster, Sanierung — klar strukturiert, damit Kunden sofort sehen, was du anbietest.",
+                "icon": "Layout"
+            },
+            {
+                "title": "Karriere-Seite",
+                "description": "Fachkräftemangel? Zeig, warum dein Betrieb ein guter Arbeitgeber ist. Mit Bewerbungsformular.",
+                "icon": "UserPlus"
+            },
+            {
+                "title": "Handy-optimiert",
+                "description": "Über 70% deiner Besucher kommen vom Smartphone. Deine Seite sieht auf jedem Gerät perfekt aus.",
+                "icon": "Smartphone"
+            },
+            {
+                "title": "DSGVO & Impressum",
+                "description": "Alles rechtskonform. Hosted in Frankfurt. Keine US-Cloud, keine Tracking-Cookies ohne Einwilligung.",
+                "icon": "ShieldCheck"
+            }
+        ]
+    },
+    "comparison": {
+        "headline": "Was kostet eine Dachdecker-Website wirklich?",
+        "subline": "Ein ehrlicher Vergleich.",
+        "rows": [
+            {
+                "feature": "Zeitaufwand für dich",
+                "competitor": "20+ Abende (Selber machen)",
+                "us": "1 Formular, fertig"
+            },
+            {
+                "feature": "Kosten",
+                "competitor": "8.000-15.000€ (Agentur)",
+                "us": "5.600€ Festpreis"
+            },
+            {
+                "feature": "Monatliche Kosten",
+                "competitor": "100-200€/Monat",
+                "us": "0-7€/Monat"
+            },
+            {
+                "feature": "Fertig in",
+                "competitor": "3-6 Monate",
+                "us": "14 Tage (garantiert)"
+            },
+            {
+                "feature": "Eigentum",
+                "competitor": "Meist an Agentur gebunden",
+                "us": "100% dein Code"
+            },
+            {
+                "feature": "Google-optimiert?",
+                "competitor": "Gegen Aufpreis",
+                "us": "Inklusive"
+            }
+        ],
+        "cta": {
+            "text": "Genug verglichen?\nDu weißt jetzt: Selber machen kostet Abende. Die Agentur kostet ein halbes Dach.\nWir kosten dich nichts — bis du das Design liebst.",
+            "primaryBtn": "Gratis-Entwurf anfordern",
+            "secondaryBtn": "15-Min Call buchen"
+        }
+    },
+    "process": {
+        "headline": "In 4 Schritten zur fertigen Website.",
+        "steps": [
+            {
+                "title": "Gratis-Entwurf",
+                "description": "Du füllst ein kurzes Formular aus. Wir erstellen einen kostenlosen Entwurf für deine Website. Innerhalb von 72 Stunden. Ohne Verpflichtung."
+            },
+            {
+                "title": "Feedback & Zahlung",
+                "description": "Dir gefällt der Entwurf? Dann gibst du uns dein Feedback, zahlst den Festpreis, und wir legen los."
+            },
+            {
+                "title": "Website in 14 Tagen",
+                "description": "Wir bauen die komplette Seite. Du bekommst einen Link zum Anschauen und kannst Änderungen anfordern."
+            },
+            {
+                "title": "Launch",
+                "description": "Die Website geht live. Du bekommst alles: Login, CMS-Zugang, Anleitung. Fertig."
+            }
+        ]
+    },
+    "about": {
+        "headline": "Wer steckt hinter Norddorf?",
+        "body": {
+            "type": "root",
+            "children": [
+                {
+                    "type": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "text": "Hey, ich bin Lasse. Nach 10 Jahren in der Software-Entwicklung für Unternehmen wie VW und Allianz habe ich Norddorf gegründet, weil ich gesehen habe, wie viel Geld Mittelständler für Websites ausgeben — und wie wenig sie dafür bekommen."
+                        }
+                    ]
+                },
+                {
+                    "type": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "text": "Ich baue Webseiten, die funktionieren. Keine Spielerei. Kein Agentur-Bullshit. Einfach eine professionelle Seite, die Aufträge bringt."
+                        }
+                    ]
+                }
+            ]
+        },
+        "credentials": "Vorher: Software-Entwicklung bei VW, Allianz, SinnerSchrader",
+        "image": "/uploads/lasse-portrait.jpg",
+        "imageAlt": "Lasse - Founder Norddorf"
+    },
+    "faq": {
+        "items": [
+            {
+                "question": "Muss ich irgendwas vorbereiten?",
+                "answer": {
+                    "type": "root",
+                    "children": [
+                        {
+                            "type": "p",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "Nur das Formular ausfüllen. Fotos von Baustellen oder euren Fahrzeugen sind hilfreich, aber kein Muss. Wir können auch mit dem arbeiten, was da ist."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "question": "Kann ich Texte selbst ändern?",
+                "answer": {
+                    "type": "root",
+                    "children": [
+                        {
+                            "type": "p",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "Ja. Du bekommst ein einfaches CMS. Neue Leistung hinzufügen oder einen Mitarbeiter auf die Karriere-Seite setzen? Geht in 5 Minuten. Wir zeigen dir alles in einem kurzen Video-Guide."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "question": "Was, wenn ich nach dem Launch etwas ändern will?",
+                "answer": {
+                    "type": "root",
+                    "children": [
+                        {
+                            "type": "p",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "Nach dem Launch hast du 14 Tage für eine kostenlose Änderung. Danach können wir Anpassungen gegen eine faire Gebühr machen. Oder du beauftragst jeden anderen Entwickler — der Code gehört dir."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "question": "Finden mich Kunden dann wirklich bei Google?",
+                "answer": {
+                    "type": "root",
+                    "children": [
+                        {
+                            "type": "p",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "Wir optimieren die Seite für lokale Suchbegriffe wie \"Dachdecker [deine Stadt]\". Dazu richten wir Schema-Markup ein und sorgen dafür, dass Google deine Seite richtig liest. Für maximale Sichtbarkeit empfehlen wir zusätzlich ein Google-Unternehmensprofil — dabei helfen wir dir gerne."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "question": "Ist die Website DSGVO-konform?",
+                "answer": {
+                    "type": "root",
+                    "children": [
+                        {
+                            "type": "p",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "text": "Ja. Hosting in Frankfurt, Deutschland. Keine US-Cloud, keine Tracking-Cookies ohne Einwilligung. Impressum und Datenschutz sind inklusive."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "form": {
+        "headline": "Gratis-Entwurf für deinen Dachdeckerbetrieb.",
+        "subline": "5.600€ ausgeben, ohne zu wissen, was du bekommst? Nicht mit uns. Sieh erstmal, was wir können.",
+        "fields": {
+            "namePlaceholder": "z.B. Max Müller, Müller Bedachungen GmbH",
+            "emailPlaceholder": "max@mueller-bedachungen.de",
+            "websitePlaceholder": "https://deine-aktuelle-seite.de",
+            "servicePlaceholder": "z.B. Steildach, Flachdach, Solar, Sanierung..."
+        },
+        "trustText": "✓ Keine Kreditkarte  ✓ Kein Druck  ✓ Antwort in 48-72h"
+    },
+    "finalCta": {
+        "headline": "Nur 3 Projekte pro Woche.",
+        "body": "Damit wir die 14-Tage-Garantie halten können, nehmen wir maximal 3 Projekte gleichzeitig an.",
+        "primaryBtn": "Gratis-Entwurf anfordern",
+        "secondaryBtn": "15-Min Call buchen"
+    }
+}
