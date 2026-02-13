@@ -269,6 +269,99 @@ export const caseStudies: LocalizedCaseStudies = {
         description: 'Relaunch der Website für Ivangs Bedachungen. Fokus auf Kundenanfragen, Recruiting und einfache Pflege mit TinaCMS. Modernes Handwerker-Marketing.',
       },
     },
+    {
+      slug: 'novartum',
+      title: 'Novartum Redesign & Tools',
+      client: 'Novartum',
+      industry: 'IT & Software Asset Management',
+      year: '2024',
+      heroImage: '/images/Novartum/novartum-hero.png',
+      heroImageWidth: 1920,
+      heroImageHeight: 1080,
+      images: {
+        hero: '/images/Novartum/novartum-hero.png',
+        samCalculator: '/images/Novartum/novartum-sam-calculator.png',
+        exitPopup: '/images/Novartum/novartum-exit-popup.png',
+      },
+      color: '#4B5563', // Neutral/Technical grey
+      icon: 'server',
+      liveUrl: 'https://novartum.com',
+      preview: {
+        problem: 'Hoher Wartungsaufwand, verstreuter Content, fehlende Lead-Gen-Tools.',
+        solution: 'Redesign mit TinaCMS, SAM-Calculator und kontext-basierten Popups.',
+        result: 'Effiziente Content-Verwaltung und höhere Engagement-Rate durch Free-Tools.',
+        metric: 'Tool',
+        metricLabel: 'SAM-Calculator',
+      },
+      content: {
+        intro: 'Novartum ist ein Komplettanbieter für Software, SAM, Einkauf und ITSM. Das Ziel war ein modernes Redesign, das nicht nur gut aussieht, sondern echte Mehrwerte durch Tools und KI-basierte Suche bietet – bei minimalem Pflegeaufwand.',
+        story: {
+          hook: 'Novartum wollte weg von klassischen "Stock-Photo-Webseiten". Der Fokus sollte auf Content und Tools liegen, ohne dass die Pflege zur Last wird. Die Herausforderung: Ein komplexes Portfolio (Software, SAM, Consulting) verständlich und international (DE/EN) darzustellen.',
+          turningPoint: 'Statt nur Text, haben wir Tools entwickelt. Der "SAM-Calculator" erlaubt Nutzern, ihren Health-Score in Compliance, Effizienz und Sicherheit zu berechnen – direkt auf der Seite, ohne Absprung. Dazu kamen "Exit-Intent Popups", die erkennen, auf welcher Fachseite der Nutzer ist, und den passenden Experten vorschlagen.',
+          transformation: 'Mit TinaCMS kann Novartum nun Texte, Cookie-Einstellungen und Blog-Artikel ("KI", "FinOps") selbst pflegen. Die Seite ist "AI-Search-Ready" durch spezielle Schemas und hostet sich kostengünstig selbst, was laufende Gebühren minimiert.',
+        },
+        challenge: [
+          'Komplettes Service-Spektrum (Software, SAM, ITSM, Automation) integrieren',
+          'Internationalisierung (Deutsch & Englisch)',
+          'Lead-Generierung ohne störende Popups',
+          'Pflegeleichtigkeit für unregelmäßige Updates',
+          'Auffindbarkeit in AI-Suchmaschinen (ChatGPT, Perplexity)',
+        ],
+        approach: [
+          'TinaCMS Implementierung für vollständige "Code Sovereignty" und einfache Pflege',
+          'Entwicklung interaktiver Tools (SAM Calculator) statt statischem Content',
+          'Kontext-sensitive Exit-Intents (passender Experte je nach Unterseite)',
+          'AI-Search Optimierung durch detaillierte Schema-Markups für FAQs und Services',
+          'Datenschutz-First: Eigenentwickelter Cookie-Banner & Umami Analytics (kein Google Tracking)',
+        ],
+        features: [
+          {
+            title: 'SAM Calculator',
+            description: 'Ein interaktives Tool, das Compliance, Sicherheit und Effizienz bewertet und einen dynamischen Report mit Ampelsystem generiert.',
+          },
+          {
+            title: 'Context-Aware Exit Intent',
+            description: 'Popups erscheinen nur, wenn der Nutzer die Seite verlässt – und zeigen genau den Experten, der zum gelesenen Thema passt.',
+          },
+          {
+            title: 'AI Search Optimization',
+            description: 'Spezielle Schemas für Services und FAQs, damit KI-Suchmaschinen (ChatGPT, Claude) die Inhalte optimal auslesen können.',
+          },
+          {
+            title: 'Custom Privacy Stack',
+            description: 'Selbstgehostetes Umami Analytics und eigener Cookie-Banner für maximale Datensicherheit ohne Drittanbieter-Abhängigkeit.',
+          },
+        ],
+        results: [
+          'Deutliche Reduktion der Hosting- und Maintenance-Kosten (Self-Hosted)',
+          'Hohe Nutzerinteraktion durch den SAM Calculator',
+          'Unabhängigkeit durch Open-Source CMS (Tina)',
+          'Zukunftssicherheit durch AI-optimierte Struktur',
+        ],
+        techStack: ['TinaCMS', 'React', 'TypeScript', 'AI Search Schema', 'Umami Analytics'],
+        metrics: [
+          { label: 'Tool', value: 'SAM', comparison: 'Calculator' },
+          { label: 'CMS', value: 'Tina', comparison: 'Open Source' },
+          { label: 'Privacy', value: '100%', comparison: 'Self-Hosted' },
+          { label: 'Search', value: 'AI', comparison: 'Optimized' },
+        ],
+        conclusion: 'Das Novartum Redesign zeigt, wie B2B-Webseiten heute funktionieren müssen: Nicht als statische Broschüre, sondern als interaktive Plattform mit echten Tools, maximaler Automatisierung und voller Datenhoheit.',
+      },
+      faqs: [
+        {
+          question: 'Warum TinaCMS?',
+          answer: 'Weil es Novartum erlaubt, Inhalte direkt auf der Seite zu editieren, ohne technisches Wissen – und dabei die volle Kontrolle über den Code behält.',
+        },
+        {
+          question: 'Was bringt AI Search Optimization?',
+          answer: 'Tools wie ChatGPT oder Perplexity werden immer wichtiger. Durch unsere Schemas verstehen diese KIs genau, was Novartum anbietet und können präzise Antworten an Nutzer liefern.',
+        },
+      ],
+      seo: {
+        title: 'Novartum Redesign & SAM Tool | Case Study | Norddorf',
+        description: 'Redesign für Novartum: TinaCMS, interaktiver SAM-Calculator und AI-Search Optimierung. Moderne B2B-Website mit Fokus auf Tools und Content.',
+      },
+    },
   ],
   en: [
     {
@@ -448,6 +541,99 @@ export const caseStudies: LocalizedCaseStudies = {
       seo: {
         title: 'Ivangs Bedachungen Website Relaunch | Case Study | Norddorf',
         description: 'Website relaunch for Ivangs Bedachungen. Focus on customer inquiries, recruiting, and easy maintenance with TinaCMS. Modern craftsman marketing.',
+      },
+    },
+    {
+      slug: 'novartum',
+      title: 'Novartum Redesign & Tools',
+      client: 'Novartum',
+      industry: 'IT & Software Asset Management',
+      year: '2024',
+      heroImage: '/images/Novartum/novartum-hero.png',
+      heroImageWidth: 1920,
+      heroImageHeight: 1080,
+      images: {
+        hero: '/images/Novartum/novartum-hero.png',
+        samCalculator: '/images/Novartum/novartum-sam-calculator.png',
+        exitPopup: '/images/Novartum/novartum-exit-popup.png',
+      },
+      color: '#4B5563',
+      icon: 'server',
+      liveUrl: 'https://novartum.com',
+      preview: {
+        problem: 'High maintenance effort, scattered content, lack of lead gen tools.',
+        solution: 'Redesign with TinaCMS, SAM Calculator, and context-aware popups.',
+        result: 'Efficient content management and higher engagement via free tools.',
+        metric: 'Tool',
+        metricLabel: 'SAM Calculator',
+      },
+      content: {
+        intro: 'Novartum provides comprehensive services for Software, SAM, Purchasing, and ITSM. The goal was a modern redesign that offers real value through tools and AI-based search optimization—with minimal maintenance effort.',
+        story: {
+          hook: 'Novartum wanted to move away from generic "stock photo websites." The focus had to be on content and tools, without maintenance becoming a burden. The challenge: Presenting a complex portfolio (Software, SAM, Consulting) clearly and internationally (DE/EN).',
+          turningPoint: 'Instead of just text, we built tools. The "SAM Calculator" allows users to calculate their Health Score in Compliance, Efficiency, and Security—directly on the page. We also added "Exit Intent Popups" that recognize which expert topic the user is reading and suggest the matching contact person.',
+          transformation: 'With TinaCMS, Novartum can now manage texts, cookie settings, and blog articles ("AI", "FinOps") independently. The site is "AI-Search-Ready" through special schemas and is self-hosted cost-effectively, minimizing ongoing fees.',
+        },
+        challenge: [
+          'Integrate complete service spectrum (Software, SAM, ITSM, Automation)',
+          'Internationalization (German & English)',
+          'Lead generation without annoying popups',
+          'Ease of maintenance for irregular updates',
+          'Discoverability in AI search engines (ChatGPT, Perplexity)',
+        ],
+        approach: [
+          'TinaCMS implementation for full "Code Sovereignty" and easy maintenance',
+          'Development of interactive tools (SAM Calculator) instead of static content',
+          'Context-sensitive Exit Intents (matching expert per sub-page)',
+          'AI Search Optimization through detailed schema markups for FAQs and Services',
+          'Privacy-First: Custom Cookie Banner & Umami Analytics (no Google Tracking)',
+        ],
+        features: [
+          {
+            title: 'SAM Calculator',
+            description: 'An interactive tool that evaluates compliance, security, and efficiency, generating a dynamic report with a traffic light system.',
+          },
+          {
+            title: 'Context-Aware Exit Intent',
+            description: 'Popups only appear when the user leaves the page—and show exactly the expert matching the topic read.',
+          },
+          {
+            title: 'AI Search Optimization',
+            description: 'Special schemas for services and FAQs so AI search engines (ChatGPT, Claude) can optimally read and attribute content.',
+          },
+          {
+            title: 'Custom Privacy Stack',
+            description: 'Self-hosted Umami Analytics and custom cookie banner for maximum data security without third-party dependencies.',
+          },
+        ],
+        results: [
+          'Significant reduction in hosting and maintenance costs (Self-Hosted)',
+          'High user interaction through the SAM Calculator',
+          'Independence through Open Source CMS (Tina)',
+          'Future-proof through AI-optimized structure',
+        ],
+        techStack: ['TinaCMS', 'React', 'TypeScript', 'AI Search Schema', 'Umami Analytics'],
+        metrics: [
+          { label: 'Tool', value: 'SAM', comparison: 'Calculator' },
+          { label: 'CMS', value: 'Tina', comparison: 'Open Source' },
+          { label: 'Privacy', value: '100%', comparison: 'Self-Hosted' },
+          { label: 'Search', value: 'AI', comparison: 'Optimized' },
+        ],
+        conclusion: 'The Novartum redesign shows how B2B websites must work today: Not as a static brochure, but as an interactive platform with real tools, maximum automation, and full data sovereignty.',
+      },
+      faqs: [
+        {
+          question: 'Why TinaCMS?',
+          answer: 'Because it allows Novartum to edit content directly on the page without technical knowledge—while retaining full control over the code.',
+        },
+        {
+          question: 'What is AI Search Optimization?',
+          answer: 'Tools like ChatGPT or Perplexity are becoming increasingly important. Through our schemas, these AIs understand exactly what Novartum offers and can deliver precise answers to users.',
+        },
+      ],
+      seo: {
+        title: 'Novartum Redesign & SAM Tool | Case Study | Norddorf',
+        description: 'Redesign for Novartum: TinaCMS, interactive SAM Calculator, and AI Search Optimization. Modern B2B website focused on tools and content.',
       },
     },
   ],
