@@ -10,7 +10,7 @@ export const businessConfig = {
     countryCode: "SG"
   },
   contact: {
-    email: "hello@norddorf.com",
+    email: "hey@norddorf.com",
     phone: "[Ihre Telefonnummer]",
     website: "[Ihre Website-URL]"
   },

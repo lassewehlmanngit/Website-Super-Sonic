@@ -42,44 +42,44 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-void text-white pb-20 pt-10 border-t border-zinc-800 relative z-20">
       <Container>
-        
+
         {/* Trust Badges Row */}
         <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 sm:gap-4 md:gap-6 mb-12 border-b border-zinc-800 pb-12" role="list">
-            <div className="flex items-center gap-3 bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 text-xs md:text-sm text-zinc-400" role="listitem">
-                <Server size={14} className="text-green-500" aria-hidden="true" />
-                <span>{isJa ? "フランクフルトでホスト 🇩🇪" : "Hosted in Frankfurt 🇩🇪"}</span>
-            </div>
-            <div className="flex items-center gap-3 bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 text-xs md:text-sm text-zinc-400" role="listitem">
-                <Leaf size={14} className="text-green-500" aria-hidden="true" />
-                <span>{isJa ? "100% グリーンエネルギー" : "100% Green Energy"}</span>
-            </div>
-            <div className="flex items-center gap-3 bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 text-xs md:text-sm text-zinc-400" role="listitem">
-                <ShieldCheck size={14} className="text-blue-500" aria-hidden="true" />
-                <span>{isJa ? "100% 個人情報保護法準拠" : "100% DSGVO / GDPR"}</span>
-            </div>
-             <div className="flex items-center gap-3 bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 text-xs md:text-sm text-zinc-400" role="listitem">
-                <span>{isJa ? "トラッキングCookieなし" : "No Tracking Cookies"}</span>
-            </div>
+          <div className="flex items-center gap-3 bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 text-xs md:text-sm text-zinc-400" role="listitem">
+            <Server size={14} className="text-green-500" aria-hidden="true" />
+            <span>{isJa ? "フランクフルトでホスト 🇩🇪" : "Hosted in Frankfurt 🇩🇪"}</span>
+          </div>
+          <div className="flex items-center gap-3 bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 text-xs md:text-sm text-zinc-400" role="listitem">
+            <Leaf size={14} className="text-green-500" aria-hidden="true" />
+            <span>{isJa ? "100% グリーンエネルギー" : "100% Green Energy"}</span>
+          </div>
+          <div className="flex items-center gap-3 bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 text-xs md:text-sm text-zinc-400" role="listitem">
+            <ShieldCheck size={14} className="text-blue-500" aria-hidden="true" />
+            <span>{isJa ? "100% 個人情報保護法準拠" : "100% DSGVO / GDPR"}</span>
+          </div>
+          <div className="flex items-center gap-3 bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 text-xs md:text-sm text-zinc-400" role="listitem">
+            <span>{isJa ? "トラッキングCookieなし" : "No Tracking Cookies"}</span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-12">
           {/* Brand */}
           <div>
-             <div className="text-2xl font-bold tracking-tighter mb-4">Norddorf<span className="text-sonic-orange">.</span></div>
-             <div className="text-zinc-300 text-sm max-w-xs leading-relaxed mb-4">
-               {isJa 
-                 ? "中小企業向けウェブサイト。14日間納期、固定価格、100%所有。"
-                 : isDe 
-                 ? "Webseiten für den Mittelstand. 14 Tage Lieferzeit, Festpreis, 100% Eigentum."
-                 : "Websites for SMBs. 14 days delivery, fixed price, 100% ownership."}
-             </div>
-             <a 
-               href="mailto:hello@norddorf.com" 
-               className="inline-flex items-center gap-2 text-sonic-orange hover:underline text-sm"
-             >
-               <Mail size={14} aria-hidden="true" />
-               hello@norddorf.com
-             </a>
+            <div className="text-2xl font-bold tracking-tighter mb-4">Norddorf<span className="text-sonic-orange">.</span></div>
+            <div className="text-zinc-300 text-sm max-w-xs leading-relaxed mb-4">
+              {isJa
+                ? "中小企業向けウェブサイト。14日間納期、固定価格、100%所有。"
+                : isDe
+                  ? "Webseiten für den Mittelstand. 14 Tage Lieferzeit, Festpreis, 100% Eigentum."
+                  : "Websites for SMBs. 14 days delivery, fixed price, 100% ownership."}
+            </div>
+            <a
+              href="mailto:hey@norddorf.com"
+              className="inline-flex items-center gap-2 text-sonic-orange hover:underline text-sm"
+            >
+              <Mail size={14} aria-hidden="true" />
+              hey@norddorf.com
+            </a>
           </div>
 
           {/* Navigation */}
@@ -107,17 +107,17 @@ export const Footer: React.FC = () => {
             <ul className="flex flex-col gap-2 list-none p-0 m-0">
               <li>
                 <Link to={`/${currentLang}/${isJa ? 'tokushoho' : 'impressum'}`} variant="footer">
-                    {isJa ? '特定商取引法に基づく表記' : isDe ? 'Impressum' : 'Imprint'}
+                  {isJa ? '特定商取引法に基づく表記' : isDe ? 'Impressum' : 'Imprint'}
                 </Link>
               </li>
               <li>
                 <Link to={`/${currentLang}/${isJa ? 'privacy' : isDe ? 'datenschutz' : 'privacy'}`} variant="footer">
-                    {isJa ? 'プライバシーポリシー' : isDe ? 'Datenschutz' : 'Privacy'}
+                  {isJa ? 'プライバシーポリシー' : isDe ? 'Datenschutz' : 'Privacy'}
                 </Link>
               </li>
               <li>
                 <Link to={`/${currentLang}/${isJa ? 'terms' : isDe ? 'agb' : 'terms'}`} variant="footer">
-                    {isJa ? '利用規約' : isDe ? 'AGB' : 'Terms & Conditions'}
+                  {isJa ? '利用規約' : isDe ? 'AGB' : 'Terms & Conditions'}
                 </Link>
               </li>
             </ul>

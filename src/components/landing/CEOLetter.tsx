@@ -14,9 +14,9 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
       <div className="container-responsive max-w-4xl mx-auto">
         <div className="reveal">
           <div className="flex items-center gap-4 mb-8">
-            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-4 border-sonic-orange/20 bg-zinc-200">
-              <img 
-                src="/images/founder-photo.jpg" 
+            <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-sonic-orange/20 bg-zinc-200">
+              <img
+                src="/images/lasse-ceo.jpg"
                 alt="Lasse"
                 className="w-full h-full object-cover"
                 onError={(e) => {
@@ -37,12 +37,12 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
 
         <div className="bg-zinc-50 rounded-2xl p-8 md:p-12 border border-zinc-100 reveal delay-100">
           <Quote className="text-sonic-orange/20 mb-6" size={48} />
-          
+
           <div className="space-y-6 fluid-body text-zinc-700 leading-relaxed">
             <p>
               {isJa ? "はじめまして、Lasseと申します。" : isDe ? "Hey, ich bin Lasse." : "Hey, I'm Lasse."}
             </p>
-            
+
             <p>
               {isJa ? (
                 <>
@@ -92,11 +92,11 @@ export const CEOLetter: React.FC<CEOLetterProps> = ({ lang }) => {
             </p>
 
             <p className="text-zinc-900 font-medium border-l-4 border-sonic-orange pl-6">
-              {isJa 
+              {isJa
                 ? "お客様のものとなる、高速で、見栄えの良いウェブサイトをお届けします。業界用語の羅列ではなく、実際の成果を。"
-                : isDe 
-                ? "Wir liefern dir eine Website, die dir gehört, die schnell ist und verdammt gut aussieht. Ohne Bullshit-Bingo."
-                : "We deliver a website that belongs to you, that's fast and looks damn good. No buzzword bingo."}
+                : isDe
+                  ? "Wir liefern dir eine Website, die dir gehört, die schnell ist und verdammt gut aussieht. Ohne Bullshit-Bingo."
+                  : "We deliver a website that belongs to you, that's fast and looks damn good. No buzzword bingo."}
             </p>
           </div>
 

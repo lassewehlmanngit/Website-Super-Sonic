@@ -46,11 +46,11 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ lang, onScrollToForm }) => {
           </h2>
 
           <p className="fluid-body text-zinc-300 leading-relaxed mb-8 max-w-2xl mx-auto">
-            {isJa 
+            {isJa
               ? "14日間の納期を守るため、キャパシティを制限しています。"
-              : isDe 
-              ? "Damit wir die 14 Tage halten können, ist unsere Kapazität begrenzt."
-              : "To keep our 14-day promise, our capacity is limited."}
+              : isDe
+                ? "Damit wir die 14 Tage halten können, ist unsere Kapazität begrenzt."
+                : "To keep our 14-day promise, our capacity is limited."}
           </p>
 
           {/* Testimonial request note */}
@@ -78,25 +78,27 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ lang, onScrollToForm }) => {
               onClick={onScrollToForm}
               className="inline-flex items-center justify-center gap-2 bg-sonic-orange text-white font-semibold px-8 py-4 rounded-full hover:bg-[#E64500] transition-colors group fluid-base"
             >
-              {isJa 
+              {isJa
                 ? "無料ウェブサイトを入手"
-                : isDe 
-                ? "Hol dir deine gratis Webseite"
-                : "Get your free website"}
+                : isDe
+                  ? "Hol dir deine gratis Webseite"
+                  : "Get your free website"}
               <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
             </button>
 
-            <button
-              onClick={handleBookCall}
+            <a
+              href="https://calendly.com/lasse-norddorf/30min"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 border border-zinc-700 text-zinc-300 font-semibold px-8 py-4 rounded-full hover:border-zinc-500 hover:text-white transition-colors fluid-base"
             >
               <Calendar size={18} />
-              {isJa 
+              {isJa
                 ? "15分の通話を予約"
-                : isDe 
-                ? "15-Min Call buchen"
-                : "Book 15-min call"}
-            </button>
+                : isDe
+                  ? "15-Min Call buchen"
+                  : "Book 15-min call"}
+            </a>
           </div>
         </div>
       </div>
