@@ -46,7 +46,7 @@ export const Legal: React.FC<Props> = ({ lang, type }) => {
             <h2 className="text-xl font-bold text-zinc-900 mb-2">1. Datenschutz auf einen Blick</h2>
             <p>
               <strong>Allgemeine Hinweise</strong><br />
-              Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.
+              Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.
             </p>
             <p className="mt-2">
               <strong>Datenerfassung auf dieser Website</strong><br />
@@ -60,14 +60,19 @@ export const Legal: React.FC<Props> = ({ lang, type }) => {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-zinc-900 mb-2">2. Hosting und Content Delivery Networks (CDN)</h2>
+            <h2 className="text-xl font-bold text-zinc-900 mb-2">2. Hosting (Render)</h2>
             <p>
-              Wir hosten die Inhalte unserer Website bei folgenden Anbietern:
+              Wir hosten die Inhalte unserer Website bei folgendem Anbieter:
             </p>
             <p className="mt-2">
-              <strong>Vercel / Netlify / Render (Beispiel)</strong><br />
-              Anbieter ist ... [Hier spezifischen Hoster eintragen]<br />
-              Detaillierte Informationen entnehmen Sie bitte der Datenschutzerklärung des Anbieters.
+              <strong>Render</strong><br />
+              Anbieter ist die Render Services Inc., 525 Brannan St Ste 300, San Francisco, CA 94107, USA (nachfolgend Render).<br />
+              Wenn Sie unsere Website besuchen, erfasst Render verschiedene Logfiles inklusive Ihrer IP-Adressen.<br />
+              Render verwendet Serverstandorte weltweit, unter anderem auch in den USA. Die Datenübertragung in die USA wird auf die Standardvertragsklauseln der EU-Kommission gestützt. Details finden Sie hier: <a href="https://render.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-sonic-orange">https://render.com/privacy</a>.
+            </p>
+            <p className="mt-2">
+              <strong>Auftragsverarbeitung</strong><br />
+              Wir haben einen Vertrag über Auftragsverarbeitung (AVV) mit dem oben genannten Anbieter geschlossen. Hierbei handelt es sich um einen datenschutzrechtlich vorgeschriebenen Vertrag, der gewährleistet, dass dieser die personenbezogenen Daten unserer Websitebesucher nur nach unseren Weisungen und unter Einhaltung der DSGVO verarbeitet.
             </p>
           </section>
 
@@ -86,11 +91,33 @@ export const Legal: React.FC<Props> = ({ lang, type }) => {
           <section>
             <h2 className="text-xl font-bold text-zinc-900 mb-2">4. Datenerfassung auf dieser Website</h2>
             <p>
-              <strong>Kontaktformular</strong><br />
-              Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+              <strong>Kontaktformular via submit-form.com</strong><br />
+              Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.
+              Die Datenübertragung erfolgt über den Dienstleister <strong>submit-form.com</strong>. Wir weisen darauf hin, dass die Datenverarbeitung hierbei auch auf Servern außerhalb der EU stattfinden kann.
+              Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist.
             </p>
-            <p className="mt-2 text-sm italic">
-              Hinweis: Diese Datenschutzerklärung ist ein Muster und muss an die tatsächlichen Gegebenheiten (verwendete Tools, Hosting, etc.) angepasst werden.
+            <p className="mt-4">
+              <strong>Anfrage per E-Mail oder Telefon</strong><br />
+              Wenn Sie uns per E-Mail, Telefon oder Telefax kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-zinc-900 mb-2">5. Analyse-Tools und Werbung</h2>
+            <p>
+              <strong>Umami Analytics</strong><br />
+              Diese Website nutzt den Open-Source-Webanalysedienst Umami. Umami verwendet keine Cookies und speichert keine personenbezogenen Daten (IP-Adressen werden anonymisiert). Die Analyse des Nutzerverhaltens erfolgt anonymisiert, um unser Webangebot zu optimieren.<br />
+              Da Umami keine Cookies setzt und keine personenbezogenen Daten speichert, bedarf es hierfür keiner Einwilligung über den Cookie-Banner. Die Nutzung erfolgt auf Grundlage unseres berechtigten Interesses an der Analyse des Nutzerverhaltens zur Optimierung unseres Webangebots (Art. 6 Abs. 1 lit. f DSGVO).
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-bold text-zinc-900 mb-2">6. Plugins und Tools</h2>
+            <p>
+              <strong>Calendly</strong><br />
+              Auf unserer Website haben Sie die Möglichkeit, Termine mit uns zu vereinbaren. Wir nutzen hierfür das Tool "Calendly". Anbieter ist die Calendly LLC, 271 17th St NW, 10th Floor, Atlanta, Georgia 30363, USA.<br />
+              Zum Zweck der Terminvereinbarung geben Sie die gewünschten Daten und den Termin in die Maske ein. Die eingegebenen Daten werden für die Planung, Durchführung und ggf. für die Nachbereitung des Termins verwendet. Die Termindaten werden auf den Servern von Calendly gespeichert, deren Standort sich auch in den USA befinden kann.<br />
+              Die Datenübertragung in die USA wird auf die Standardvertragsklauseln der EU-Kommission gestützt. Details entnehmen Sie der Datenschutzerklärung von Calendly: <a href="https://calendly.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-sonic-orange">https://calendly.com/privacy</a>.
             </p>
           </section>
         </div>
